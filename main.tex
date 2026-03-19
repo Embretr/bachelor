@@ -1,0 +1,117 @@
+\documentclass[12pt, a4paper]{report}
+
+% ─── Encoding & Language ─────────────────────────────────────────────────────
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+
+% ─── Typography ───────────────────────────────────────────────────────────────
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{setspace}
+\onehalfspacing
+
+% ─── Page Layout ─────────────────────────────────────────────────────────────
+\usepackage[a4paper, margin=2.5cm]{geometry}
+
+% ─── Math ────────────────────────────────────────────────────────────────────
+\usepackage{amsmath, amssymb}
+
+% ─── Tables ──────────────────────────────────────────────────────────────────
+\usepackage{booktabs}
+\usepackage{tabularx}
+
+% ─── Figures ─────────────────────────────────────────────────────────────────
+\usepackage{graphicx}
+\graphicspath{{figures/}}
+
+% ─── Code Listings ───────────────────────────────────────────────────────────
+\usepackage{listings}
+\usepackage{xcolor}
+\lstset{
+  basicstyle=\ttfamily\small,
+  breaklines=true,
+  frame=single,
+  numbers=left,
+  numberstyle=\tiny,
+  keywordstyle=\color{blue},
+  commentstyle=\color{gray},
+  stringstyle=\color{red!60!black},
+}
+
+% ─── References (APA 7) ──────────────────────────────────────────────────────
+\usepackage[
+  backend=biber,
+  style=apa,
+  sortcites=true,
+  sorting=nyt,
+]{biblatex}
+\addbibresource{bibtex/referanser.bib}
+
+% ─── Hyperlinks ──────────────────────────────────────────────────────────────
+\usepackage[hidelinks]{hyperref}
+\usepackage{cleveref}
+
+% ─── Header / Footer ─────────────────────────────────────────────────────────
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\leftmark}
+\fancyhead[R]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% ─── Metadata ────────────────────────────────────────────────────────────────
+\title{
+  \vspace{2cm}
+  {\Large Bachelor Thesis}\\[0.5em]
+  {\LARGE \textbf{[THESIS TITLE]}}\\[1em]
+  {\large [SUBTITLE IF ANY]}
+}
+\author{
+  [Author 1 Name]\\
+  [Author 2 Name]\\[0.5em]
+  \small Department of Computer Science\\
+  \small NTNU Gløshaugen
+}
+\date{
+  \small Supervisor: [Supervisor Name]\\[0.3em]
+  \small Spring 2026
+}
+
+% ─────────────────────────────────────────────────────────────────────────────
+
+\begin{document}
+
+% Title page
+\maketitle
+\thispagestyle{empty}
+\newpage
+
+% Abstract
+\begin{abstract}
+  \noindent
+  [Write abstract here — typically 150–250 words summarising background,
+  method, findings, and conclusion.]
+\end{abstract}
+\newpage
+
+% Table of Contents
+\tableofcontents
+\newpage
+
+% List of Figures (optional — remove if not needed)
+\listoffigures
+\newpage
+
+% ─── Chapters ────────────────────────────────────────────────────────────────
+\input{kapitler/kap1-innledning}
+\input{kapitler/kap2-teori}
+\input{kapitler/kap3-metode}
+\input{kapitler/kap4-funn}
+\input{kapitler/kap5-diskusjon}
+\input{kapitler/kap6-konklusjon}
+
+% ─── References ──────────────────────────────────────────────────────────────
+\printbibliography[heading=bibintoc, title={References}]
+
+\end{document}
