@@ -18,7 +18,7 @@ Lag en tabell som dette per kriterium:
 - [ ] Korrekt akademisk engelsk
 - [ ] Ingen ufunderte påstander
 - [ ] Alle påstander har kildehenvisning eller er dokumentert i egne data
-- [ ] Konsekvent bruk av terminologi fra ordliste.md
+- [ ] Konsekvent bruk av terminologi fra glossary.md
 - [ ] Korrekt APA 7 format (`\parencite{}` / `\textcite{}`)
 
 ### Kapittel 1 — Innledning

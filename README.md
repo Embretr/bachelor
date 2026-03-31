@@ -41,9 +41,9 @@ make clean  # remove build artefacts
 ## Workflow
 
 1. Fill in `context/context.md` with your thesis title, research question, and scope
-2. Update `context/disposisjon.md` with your planned chapter structure
+2. Update `context/outline.md` with your planned chapter structure
 3. Open a Claude Code session — it reads `CLAUDE.md` automatically
-4. Write chapters in `kapitler/` and references in `bibtex/referanser.bib`
+4. Write chapters in `result/chapters/` and references in `result/references.bib`
 5. Commit and push — your partner pulls and continues
 
 ---
@@ -56,7 +56,7 @@ bachelor/
 ├── Makefile                   ← run `make` to compile
 ├── main.tex                   ← root LaTeX file
 ├── context/                   ← paste context.md into new Claude chats
-├── kapitler/                  ← one .tex file per chapter
-├── bibtex/referanser.bib      ← all references (APA 7 / biblatex)
-└── kilder/                    ← raw source files (not tracked by git if PDF)
+├── result/chapters/           ← chN/chN-*.tex per chapter (+ notes.md)
+├── result/references.bib      ← all references (APA 7 / biblatex)
+└── sources/                   ← raw source files (not tracked by git if PDF)
 ```

@@ -108,9 +108,9 @@ See `context/scope.md` for the full list.
 
 ## What Claude Must NOT Do
 
-- Invent references or citations — only use sources from `metode/litteraturliste.md`
+- Invent references or citations — only use sources from `context/docs/method/literature-list.md`
 - Claim the system has features not listed in `context/scope.md`
 - Rephrase or alter the research question — use it verbatim from this file
 - Use "we believe" or "we think" — use impersonal academic constructions
-- Assume something has been tested unless it appears in `krav/kravsporing.md`
+- Assume something has been tested unless it appears in `context/docs/requirements/requirements-traceability.md`
 - Write content for the other author's chapter without being explicitly asked
