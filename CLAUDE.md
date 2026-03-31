@@ -21,12 +21,13 @@ can review, adjust, and approve the plan via the platform.
 
 ---
 
-## Before Writing Anything — Always Read These First
+## Before Writing Anything — Always Read in This Order
 
-1. `context/context.md` — thesis title, research question, scope, chapter status
-2. `context/disposisjon.md` — what each chapter should contain
-3. `context/ordliste.md` — domain terminology used consistently throughout the thesis
-4. The target chapter file in `kapitler/`
+1. `context/context.md` — thesis identity, research question, scope, chapter status
+2. `context/thesis-spine.md` — the argument thread connecting all chapters
+3. `context/disposisjon.md` — what each chapter and section should contain
+4. `context/ordliste.md` — domain terminology; use these terms consistently
+5. The target chapter file in `kapitler/`
 
 ---
 
@@ -40,6 +41,7 @@ can review, adjust, and approve the plan via the platform.
 - **Never invent citations, facts, or data** — ask the user to provide sources if needed
 - Stay strictly within the scope defined in `context/scope.md`
 - Use the exact terminology defined in `context/ordliste.md`
+- Write one section at a time — do not jump ahead
 
 ---
 
@@ -47,41 +49,57 @@ can review, adjust, and approve the plan via the platform.
 
 ```
 bachelor/
-├── CLAUDE.md                     ← you are here — read first
-├── Makefile                      ← run `make` to compile PDF
-├── main.tex                      ← root LaTeX file
+├── CLAUDE.md                        ← you are here — read first
+├── STATUS.md                        ← current writing progress — check before starting
+├── Makefile                         ← run `make` to compile PDF
+├── main.tex                         ← root LaTeX file
 │
-├── context/
-│   ├── context.md                ← START HERE — thesis identity, scope, status
-│   ├── disposisjon.md            ← chapter outlines with content notes
-│   ├── ordliste.md               ← domain glossary — use these terms consistently
-│   ├── scope.md                  ← explicit in-scope / out-of-scope list
-│   ├── intervju-funn.md          ← distilled interview findings (7 interviews)
-│   └── fitgap-sammendrag.md      ← fit/gap analysis from user research
+├── context/                         ← ALWAYS READ BEFORE WRITING
+│   ├── context.md                   ← thesis identity, RQ, stack, chapter status
+│   ├── thesis-spine.md              ← one-sentence argument per chapter — the backbone
+│   ├── disposisjon.md               ← section-level outlines for all chapters
+│   ├── ordliste.md                  ← domain glossary
+│   ├── scope.md                     ← explicit in/out of scope
+│   ├── interviews-summary.md        ← distilled findings from 7 interviews
+│   └── fitgap-sammendrag.md         ← fit/gap analysis
 │
-├── tech/
-│   ├── algoritme.md              ← optimisation algorithm: input, output, constraints
-│   ├── arkitektur.md             ← system architecture overview
-│   ├── datamodell.md             ← database schema and entity relationships
-│   ├── api-oversikt.md           ← API endpoints
-│   └── tech-stack.md             ← technology choices with justifications
+├── prompts/                         ← reusable prompt templates per agent role
+│   ├── writer.md                    ← how to use Claude as writer agent
+│   ├── redtrad.md                   ← how to use Claude as red-thread checker
+│   ├── kvalitet.md                  ← how to use Claude as quality/sensor checker
+│   └── context-gather.md           ← which context files to load per chapter
 │
-├── krav/
-│   ├── funksjonelle-krav.md      ← functional requirements with MoSCoW priority
-│   ├── ikke-funksjonelle-krav.md ← non-functional requirements
-│   └── kravsporing.md            ← requirements traceability matrix
+├── vurdering/                       ← grading criteria — AI checks output against these
+│   ├── sensurveiledning.md          ← sensor guidelines (fill in from PDF)
+│   └── vurderingskriterier.md       ← distilled grading criteria in plain text
 │
-├── metode/
-│   ├── forskningsdesign.md       ← research method and justification
-│   ├── teoriramme.md             ← theoretical framework (VRP, scheduling, etc.)
-│   └── litteraturliste.md        ← actual sources read (feeds bibtex/referanser.bib)
+├── review/                          ← output from red-thread and quality agents
+│   ├── redtrad-kap1.md              ← created after chapter 1 is drafted
+│   └── kvalitet-kap1.md             ← created after chapter 1 is drafted
 │
-├── prosjekt/
-│   ├── beslutningslogg.md        ← log of key technical/design decisions
-│   ├── sprint-logg.md            ← weekly progress log
-│   └── endringslogg.md           ← changes from early MVP to current version
+├── tech/                            ← Embret owns these files
+│   ├── algoritme.md                 ← algorithm: input, output, constraints, method
+│   ├── arkitektur.md                ← system architecture
+│   ├── datamodell.md                ← database schema and entity relations
+│   ├── api-oversikt.md              ← API endpoints
+│   └── tech-stack.md                ← technology choices with justifications
 │
-├── kapitler/
+├── krav/                            ← requirements
+│   ├── funksjonelle-krav.md         ← functional requirements (MoSCoW + source)
+│   ├── ikke-funksjonelle-krav.md    ← non-functional requirements
+│   └── kravsporing.md               ← traceability: implemented + tested
+│
+├── metode/                          ← research method context
+│   ├── forskningsdesign.md          ← chosen method and justification
+│   ├── teoriramme.md                ← theoretical framework
+│   └── litteraturliste.md           ← actual sources read (feeds referanser.bib)
+│
+├── prosjekt/                        ← project history
+│   ├── beslutningslogg.md           ← key decisions: what, why, alternatives
+│   ├── sprint-logg.md               ← weekly progress log
+│   └── endringslogg.md              ← changes from early MVP to now
+│
+├── kapitler/                        ← LaTeX chapter files — the actual thesis
 │   ├── kap1-innledning.tex
 │   ├── kap2-teori.tex
 │   ├── kap3-metode.tex
@@ -90,20 +108,24 @@ bachelor/
 │   └── kap6-konklusjon.tex
 │
 ├── bibtex/
-│   └── referanser.bib
+│   └── referanser.bib               ← all references (APA 7 / biblatex)
 │
-└── kilder/                       ← raw PDFs, interview notes (not tracked by git)
+└── kilder/                          ← raw PDFs, interview notes (not tracked by git)
 ```
 
 ---
 
-## Workflow for Writing a Chapter
+## Writing Workflow (per chapter)
 
-1. Read `context/context.md` → `context/disposisjon.md` → `context/ordliste.md`
-2. Read any relevant context files (e.g. `context/intervju-funn.md` for Chapters 3–4)
-3. Read the existing content of the target chapter file in `kapitler/`
-4. Write or continue the chapter in LaTeX
-5. Run `make` to verify compilation
+1. Check `STATUS.md` — what is done, what needs writing
+2. Read `context/context.md` + `thesis-spine.md` + `disposisjon.md`
+3. Load chapter-specific context from `prompts/context-gather.md`
+4. Use `prompts/writer.md` — write ONE section at a time
+5. After chapter is complete: run `prompts/redtrad.md`, save output to `review/`
+6. Run `prompts/kvalitet.md`, save output to `review/`
+7. Revise chapter based on review output
+8. Run `make` to verify LaTeX compilation
+9. Update `STATUS.md`
 
 ## LaTeX Conventions
 
