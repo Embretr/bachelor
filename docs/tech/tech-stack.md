@@ -1,4 +1,4 @@
-# Technology Stack — Cephalo
+# Technology Stack — Ressursplanlegger
 
 > **Owner: Embret** — fill in all choices.
 > Used directly in Chapter 4.4 and Chapter 5 (discussion of tech choices).

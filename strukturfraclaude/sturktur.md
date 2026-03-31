@@ -1,4 +1,4 @@
-# AI-skrivesystem — Cephalo Bachelor
+# AI-skrivesystem — Ressursplanlegger Bachelor
 
 ---
 
@@ -65,7 +65,7 @@ Kapittel 1: Etablerer at problemet er reelt og viktig.
 Kapittel 2: Viser at VRP-teori og human-in-the-loop er relevant ramme.
 Kapittel 3: Forklarer hvordan vi samlet data og bygde systemet.
 Kapittel 4: Presenterer hva vi fant og hva vi bygde.
-Kapittel 5: Argumenterer for at Cephalo delvis løser problemet, men med begrensninger.
+Kapittel 5: Argumenterer for at Ressursplanlegger delvis løser problemet, men med begrensninger.
 Kapittel 6: Konkluderer og peker på veien videre.
 ```
 
@@ -83,7 +83,7 @@ Før AI skriver noe, lager dere en **detaljert seksjonsplan** for kapitlet. Ikke
 ## 3.1 Research Design (ca. 400 ord)
 - Avsnitt 1: Definer Design Science Research (DSR), 1 setning
 - Avsnitt 2: Forklar hvorfor DSR passer et utviklingsprosjekt
-- Avsnitt 3: Koble til vårt prosjekt konkret — artefaktet er Cephalo
+- Avsnitt 3: Koble til vårt prosjekt konkret — artefaktet er Ressursplanlegger
 - Avsnitt 4: Begrensninger ved valget
 
 ## 3.2 Data Collection (ca. 600 ord)

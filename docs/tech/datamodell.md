@@ -1,4 +1,4 @@
-# Datamodell — Cephalo
+# Datamodell — Ressursplanlegger
 
 > **Owner: Embret** — fill in all sections.
 > Used when writing Chapter 4.4 (System Description).

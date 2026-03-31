@@ -1,4 +1,4 @@
-# Intervjusammendrag – Cephalo brukerundersøkelse
+# Intervjusammendrag – Ressursplanlegger brukerundersøkelse
 
 **Dato:** 4. mars 2026  
 **Antall intervjuer:** 7  

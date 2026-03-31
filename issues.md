@@ -1,4 +1,4 @@
-GitHub Issues — Cephalo Bachelor Repo
+GitHub Issues — Ressursplanlegger Bachelor Repo
 
 Copy each block below into a new GitHub Issue.
 Labels to create first: context, tech, rapport, Mikael, Embret, priority:high, priority:medium
@@ -167,7 +167,7 @@ Labels: context, Mikael, priority:medium
 Assignee: Mikael
 Fullfør context/fitgap-sammendrag.md:
 
- Beskriv hva som sammenlignes (Cephalo vs. eksisterende systemer / behov)
+ Beskriv hva som sammenlignes (Ressursplanlegger vs. eksisterende systemer / behov)
  Fyll inn Fit-tabellen — krav som dekkes
  Fyll inn Gap-tabellen — krav som ikke dekkes, med alvorlighetsgrad
  Skriv oppsummeringsavsnitt

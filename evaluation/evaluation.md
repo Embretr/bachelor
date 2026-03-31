@@ -24,7 +24,7 @@ Lag en tabell som dette per kriterium:
 ### Kapittel 1 — Innledning
 - [ ] Problemstillingen er klart formulert
 - [ ] Scope er presist avgrenset
-- [ ] Leser forstår hva Cephalo er etter å ha lest dette kapitlet
+- [ ] Leser forstår hva Ressursplanlegger er etter å ha lest dette kapitlet
 
 ### Kapittel 2 — Teori
 - [ ] VRP er introdusert og koblet til prosjektet

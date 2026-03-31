@@ -1,4 +1,4 @@
-# Kontekst-oversikt for Cephalo – Bachelor GitHub Repository
+# Kontekst-oversikt for Ressursplanlegger – Bachelor GitHub Repository
 
 > Denne filen beskriver all kontekst som skal ligge i repoet for at AI skal kunne hjelpe med rapportskriving og utvikling.
 > Filer merket ✅ er på plass. Filer merket ⬜ mangler eller må lages.
@@ -9,7 +9,7 @@
 
 ### ⬜ `context/master_context.md`
 Det viktigste enkeltdokumentet i repoet. Skal besvare:
-- Hva er Cephalo? (1–2 setninger, presis)
+- Hva er Ressursplanlegger? (1–2 setninger, presis)
 - Hvilket problem løser det? (for hvem, i hvilken kontekst)
 - Hvem er målgruppen? (trafikkleder, transportleder, admin)
 - Teknisk stack (frontend, backend, database, hosting)
@@ -261,7 +261,7 @@ Viktige kategorier å ha kilder på:
 
 ### ⬜ `metode/teoriramme.md`
 Hvilke teorier og konsepter støtter dere dere på, og hvordan kobler de til prosjektet?
-- **Vehicle Routing Problem (VRP):** hvordan er dette relevant for Cephalo
+- **Vehicle Routing Problem (VRP):** hvordan er dette relevant for Ressursplanlegger
 - **Resource scheduling:** generell teori om ressursplanlegging
 - **Human-in-the-loop:** begrunnelse for at trafikkleder alltid kan overstyre
 - **[andre teorier]**
@@ -332,7 +332,7 @@ Eksempel:
 |-------|----------------------------------------------------------|-----------|---------------|
 | FK-01 | Systemet skal vise alle oppdrag for valgt dag            | Must      | Alle intervjuer |
 | FK-02 | Trafikkleder skal kunne tildele oppdrag manuelt          | Must      | Alle intervjuer |
-| FK-03 | Algoritmen skal generere en optimalisert dagplan         | Must      | Cephalo-team  |
+| FK-03 | Algoritmen skal generere en optimalisert dagplan         | Must      | Ressursplanlegger-team  |
 | FK-04 | Trafikkleder skal kunne overstyre algoritmens forslag    | Must      | Ottem, Nordic Crane |
 | FK-05 | Systemet skal vise sjåførs kjøre-/hviletidsstatus        | Should    | Nordic Crane  |
 ```
@@ -419,7 +419,7 @@ Disse filene styrer hvordan AI-en oppfører seg i alle sesjoner. Legg dem i rotn
 Instruksjoner til AI-en om hvordan den skal bruke konteksten:
 
 ```markdown
-# Instruksjoner for AI-bruk i Cephalo-repoet
+# Instruksjoner for AI-bruk i Ressursplanlegger-repoet
 
 ## Prosjektkontekst
 - Les alltid `context/master_context.md` først
@@ -487,7 +487,7 @@ Eksplisitte forbud og begrensninger for AI-en:
 ## 📁 Anbefalt mappestruktur
 
 ```
-cephalo-bachelor/
+ressursplanlegger-bachelor/
 ├── PROMPT_GUIDE.md
 ├── STATUS.md
 ├── DONT.md

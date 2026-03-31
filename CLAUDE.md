@@ -1,8 +1,8 @@
-# Cephalo — Bachelor Thesis · Claude Instructions
+# Ressursplanlegger — Bachelor Thesis · Claude Instructions
 
 ## Project Overview
 
-Cephalo is a resource planning platform for traffic coordinators (trafikkledere) in Norwegian
+Ressursplanlegger is a resource planning platform for traffic coordinators (trafikkledere) in Norwegian
 transport companies. The system displays assignments, drivers, and vehicles, and uses an
 optimisation algorithm to automatically generate a daily/weekly plan. Traffic coordinators
 can review, adjust, and approve the plan via the platform.

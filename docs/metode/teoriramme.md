@@ -1,7 +1,7 @@
-# Theoretical Framework — Cephalo
+# Theoretical Framework — Ressursplanlegger
 
 > **Owner: Mikael** — fill in before writing Chapter 2.
-> For each theory: what is it, and how does it connect to Cephalo specifically.
+> For each theory: what is it, and how does it connect to Ressursplanlegger specifically.
 
 ---
 
@@ -13,12 +13,12 @@ customers, minimising total cost subject to constraints. First formulated by
 [Dantzig & Ramser, 1959].
 
 **Relevant variants:**
-- VRPTW (with time windows) — most relevant to Cephalo
+- VRPTW (with time windows) — most relevant to Ressursplanlegger
 - Multi-depot VRP — relevant if Norlog's multi-department structure is modelled
 - [FILL IN other variants if relevant]
 
-**How it connects to Cephalo:**
-[2–3 sentences — how does the assignment planning problem in Cephalo map to VRP?
+**How it connects to Ressursplanlegger:**
+[2–3 sentences — how does the assignment planning problem in Ressursplanlegger map to VRP?
 What are the "customers" (assignments), "vehicles" (drivers + trucks), and "cost" (billable hours)?]
 
 **Key sources to find:**
@@ -32,7 +32,7 @@ What are the "customers" (assignments), "vehicles" (drivers + trucks), and "cost
 **What it is:**
 [2–3 sentences — general definition of resource scheduling in operations research]
 
-**How it connects to Cephalo:**
+**How it connects to Ressursplanlegger:**
 [2 sentences — how is assigning drivers and vehicles a resource scheduling problem?]
 
 **Key sources to find:**
@@ -46,7 +46,7 @@ What are the "customers" (assignments), "vehicles" (drivers + trucks), and "cost
 Human-in-the-loop refers to systems where a human retains the ability to review,
 correct, or override automated decisions before they take effect.
 
-**Why it matters for Cephalo:**
+**Why it matters for Ressursplanlegger:**
 [2–3 sentences — connect to the interview finding that all coordinators want to
 maintain control, and to Ottem's explicit scepticism about full automation]
 
@@ -70,7 +70,7 @@ The system should present the algorithm's output as a suggestion, not a decision
 | Trimtex | Norlog Tana | Slow, limited features |
 | Opptur | Harlem Solutions | Primarily a billing tool |
 
-**Gap Cephalo addresses:**
+**Gap Ressursplanlegger addresses:**
 None of the above systems include optimisation-based plan generation or structured
 decision support for traffic coordinators.
 

@@ -1,4 +1,4 @@
-# Thesis Spine — Cephalo
+# Thesis Spine — Ressursplanlegger
 
 > This file is the backbone of the thesis.
 > Every agent reads this before writing or reviewing anything.
@@ -23,22 +23,22 @@ warrants a software solution.
 
 **Chapter 2 — Theory:**
 Vehicle Routing Problem theory, resource scheduling research, and human-in-the-loop
-design principles provide the conceptual foundation for Cephalo's approach.
+design principles provide the conceptual foundation for Ressursplanlegger's approach.
 
 **Chapter 3 — Methodology:**
 Semi-structured interviews with seven traffic coordinators, analysed thematically and
-combined with Design Science Research, produced the requirements and design for Cephalo.
+combined with Design Science Research, produced the requirements and design for Ressursplanlegger.
 
 **Chapter 4 — Findings:**
 Interviews revealed consistent pain points (slowness, tacit knowledge, manual dispatch),
-and Cephalo was built to address these through an algorithm-assisted planning interface.
+and Ressursplanlegger was built to address these through an algorithm-assisted planning interface.
 
 **Chapter 5 — Discussion:**
-Cephalo partially addresses the identified problems, but adoption barriers, algorithm
+Ressursplanlegger partially addresses the identified problems, but adoption barriers, algorithm
 limitations, and the irreducible need for human judgment constrain its impact.
 
 **Chapter 6 — Conclusion:**
-Cephalo demonstrates that algorithm-assisted resource planning can support traffic
+Ressursplanlegger demonstrates that algorithm-assisted resource planning can support traffic
 coordinators, but full automation is neither feasible nor desirable in this domain.
 
 ---

@@ -40,7 +40,7 @@ Disse filene bygger på det du allerede vet og har gjort.
 ### Prioritet 1 – må være på plass først (blokkerer begge)
 | Fil | Hva som skal inn | Estimert tid |
 |-----|-----------------|:------------:|
-| `context/master_context.md` | Hva er Cephalo, problem, målgruppe, stack-oversikt, status | 1–2t |
+| `context/master_context.md` | Hva er Ressursplanlegger, problem, målgruppe, stack-oversikt, status | 1–2t |
 | `context/scope.md` | Hva er i scope og hva er ikke i scope – konkret og presis | 0.5t |
 | `context/ordliste.md` | Alle sentrale begreper definert i vår kontekst | 0.5t |
 | `PROMPT_GUIDE.md` | Instruksjoner til AI om språk, stil, hvilke filer den skal lese | 0.5t |

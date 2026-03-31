@@ -1,4 +1,4 @@
-# Thesis Outline — Cephalo
+# Thesis Outline — Ressursplanlegger
 
 > Claude reads this before writing any chapter.
 > Contains section-level outlines with content notes and target lengths.
@@ -10,7 +10,7 @@
 **Owner:** Mikael | **Target:** 3–5 pages | **Status:** Not started
 
 **Purpose:** Orient the reader, establish that manual transport planning is a real problem,
-and state what Cephalo and this thesis contribute.
+and state what Ressursplanlegger and this thesis contribute.
 
 ### Sections and content
 
@@ -46,7 +46,7 @@ and state what Cephalo and this thesis contribute.
 **2.1 Vehicle Routing Problem (VRP)** (~3 pages)
 - Definition of VRP and its origin in operations research
 - Key VRP variants: CVRP, VRPTW, multi-depot VRP
-- How Cephalo's assignment problem maps to a VRP variant
+- How Ressursplanlegger's assignment problem maps to a VRP variant
 - Key constraints relevant to transport planning: time windows, capacity, driver availability
 - Source needed: Toth & Vigo (2002) or similar foundational VRP text
 
@@ -65,7 +65,7 @@ and state what Cephalo and this thesis contribute.
 **2.4 Related Work** (~2 pages)
 - Academic work on algorithm-assisted dispatching in transport
 - Studies on tacit knowledge in logistics operations
-- Position Cephalo relative to existing solutions
+- Position Ressursplanlegger relative to existing solutions
 
 ---
 
@@ -79,7 +79,7 @@ and state what Cephalo and this thesis contribute.
 **3.1 Research Design** (~1.5 pages)
 - Define Design Science Research (DSR) — one sentence
 - Explain why DSR fits a software development + user research project
-- Connect DSR to Cephalo explicitly: the artefact is the platform
+- Connect DSR to Ressursplanlegger explicitly: the artefact is the platform
 - Limitations of DSR for this project
 - Source needed: Hevner et al. (2004) or Peffers et al. (2007)
 
@@ -156,7 +156,7 @@ and state what Cephalo and this thesis contribute.
 
 ### Sections and content
 
-**5.1 Does Cephalo Address the Identified Pain Points?** (~2 pages)
+**5.1 Does Ressursplanlegger Address the Identified Pain Points?** (~2 pages)
 - Map interview findings (Chapter 4.1) to implemented features (Chapter 4.4)
 - What is solved, what is partially solved, what remains unaddressed
 - Connect to theory: does the system match what the VRP/scheduling literature suggests?
@@ -174,7 +174,7 @@ and state what Cephalo and this thesis contribute.
 - What would it take to deploy this in production?
 
 **5.4 Tacit Knowledge as a Design Challenge** (~1.5 pages)
-- How Cephalo attempts to formalise coordinator knowledge (licence, competence, experience)
+- How Ressursplanlegger attempts to formalise coordinator knowledge (licence, competence, experience)
 - What cannot be automated and why
 - Implications for future system design
 

@@ -1,4 +1,4 @@
-# Literature List — Cephalo
+# Literature List — Ressursplanlegger
 
 > **Owner: Mikael** — add sources here AS YOU READ THEM.
 > Claude will ONLY cite sources listed here — it will never invent references.
@@ -26,7 +26,7 @@
 
 ### ⬜ [FIND: VRPTW paper]
 **Search term:** "vehicle routing problem time windows survey"
-**Why needed:** Cephalo uses time windows — need a source for the VRPTW variant
+**Why needed:** Ressursplanlegger uses time windows — need a source for the VRPTW variant
 
 ---
 

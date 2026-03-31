@@ -1,4 +1,4 @@
-# Requirements Traceability — Cephalo
+# Requirements Traceability — Ressursplanlegger
 
 > **Owner: Embret** — update as features are implemented and tested.
 > Used in Chapter 4 (Findings) and Chapter 7 (Testing/Evaluation) if applicable.

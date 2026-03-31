@@ -1,11 +1,11 @@
-# API Overview — Cephalo
+# API Overview — Ressursplanlegger
 
 > **Owner: Embret** — fill in all endpoints.
 
 ---
 
 ## Base URL
-`[FILL IN — e.g. http://localhost:3000/api or https://api.cephalo.no/v1]`
+`[FILL IN — e.g. http://localhost:3000/api or https://api.ressursplanlegger.no/v1]`
 
 ## Authentication
 `[FILL IN — e.g. JWT Bearer token in Authorization header]`

@@ -1,4 +1,4 @@
-# Research Design — Cephalo
+# Research Design — Ressursplanlegger
 
 > **Owner: Mikael** — fill in before writing Chapter 3.
 
@@ -34,7 +34,7 @@ and evaluating it against real-world user needs]
 |--------------------------|-------------|
 | Problem identification | User interviews with 7 transport companies |
 | Define objectives | Requirements from interview findings + fit/gap analysis |
-| Design & development | Cephalo platform with optimisation algorithm |
+| Design & development | Ressursplanlegger platform with optimisation algorithm |
 | Demonstration | [FILL IN — how was the system demonstrated?] |
 | Evaluation | [FILL IN — how was the system evaluated?] |
 | Communication | This thesis |

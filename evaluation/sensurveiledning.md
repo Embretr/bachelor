@@ -1,4 +1,4 @@
-# Sensurveiledning — Cephalo Bachelor
+# Sensurveiledning — Ressursplanlegger Bachelor
 
 > Fyll inn fra den offisielle PDF-en (maler/14_sensurveiledning.pdf).
 > Dette er filen kvalitetsagenten leser når den vurderer kapitler.

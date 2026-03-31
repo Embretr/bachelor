@@ -1,4 +1,4 @@
-# Decision Log — Cephalo
+# Decision Log — Ressursplanlegger
 
 > **Owner: Embret** — document decisions as they happen or reconstruct from memory.
 > Used in Chapter 5 (Discussion) and Chapter 3.4 (Development Process).

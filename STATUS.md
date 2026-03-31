@@ -1,4 +1,4 @@
-# Rapportstatus — Cephalo
+# Rapportstatus — Ressursplanlegger
 
 > Oppdater denne filen etter hver skriveøkt.
 > Claude leser denne før den starter på noe.

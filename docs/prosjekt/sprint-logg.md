@@ -1,4 +1,4 @@
-# Sprint Log — Cephalo
+# Sprint Log — Ressursplanlegger
 
 > **Owner: Mikael** — fill in retroactively from memory, then keep updated.
 > Used directly in Chapter 3.4 (System Development Process).

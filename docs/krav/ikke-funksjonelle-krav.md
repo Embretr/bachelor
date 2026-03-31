@@ -1,4 +1,4 @@
-# Non-Functional Requirements — Cephalo
+# Non-Functional Requirements — Ressursplanlegger
 
 > **Owner: Embret** — fill in realistic values based on the system.
 

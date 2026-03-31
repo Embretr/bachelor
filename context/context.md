@@ -1,4 +1,4 @@
-# Thesis Context — Cephalo
+# Thesis Context — Ressursplanlegger
 
 > **IMPORTANT:** Keep this file up to date. Both authors and Claude rely on it.
 > Paste this file at the start of every new Claude chat session.
@@ -22,20 +22,20 @@
 
 ---
 
-## The System — What is Cephalo?
+## The System — What is Ressursplanlegger?
 
-Cephalo is a web-based resource planning platform developed for traffic coordinators
+Ressursplanlegger is a web-based resource planning platform developed for traffic coordinators
 (trafikkledere) in Norwegian transport companies. The platform displays assignments,
 drivers, and vehicles in a unified interface. A scheduling optimisation algorithm
 automatically generates a daily plan, which the traffic coordinator can review, manually
 adjust, and approve. The goal is to replace manual, error-prone planning processes and
 improve the utilisation of drivers and vehicles.
 
-**The core problem Cephalo solves:**
+**The core problem Ressursplanlegger solves:**
 Traffic coordinators in Norwegian transport companies currently assign jobs to drivers
 manually, relying heavily on personal knowledge (tacit knowledge) about driver competence,
 licence classes, working hours, and route familiarity. Existing systems (Timpex, Trimtex)
-are slow, lack optimisation, and do not support capacity overviews. Cephalo automates
+are slow, lack optimisation, and do not support capacity overviews. Ressursplanlegger automates
 initial plan generation and provides the coordinator with tools to refine it.
 
 ---

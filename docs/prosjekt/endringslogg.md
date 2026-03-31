@@ -1,4 +1,4 @@
-# Change Log — Cephalo
+# Change Log — Ressursplanlegger
 
 > **Owner: Embret** — document significant changes from early design to current version.
 > Used in Chapter 5.1 (Discussion) when explaining what was adjusted and why.
