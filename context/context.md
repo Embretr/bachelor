@@ -57,11 +57,11 @@ Sub-questions:
 
 | Layer | Technology |
 |---|---|
-| Frontend | [FILL IN] |
-| Backend | [FILL IN] |
-| Database | [FILL IN] |
-| Algorithm | [FILL IN] |
-| Hosting | [FILL IN] |
+| Frontend | Next.js 15 (App Router) + React 19 + TypeScript + Tailwind CSS v4 + shadcn/ui |
+| Backend | Next.js API routes + tRPC 11 (type-safe RPC; no separate backend service) |
+| Database | PostgreSQL (Docker locally; cloud in production) + Prisma ORM 7 |
+| Algorithm | Python greedy solver; Google OR-Tools CP-SAT (Python); Timefold Solver (Java) — invoked as subprocesses |
+| Hosting | Vercel (frontend + API); PostgreSQL on cloud provider |
 
 ---
 
