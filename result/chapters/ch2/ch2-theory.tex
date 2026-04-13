@@ -1,17 +1,96 @@
 \chapter{Theory}
 \label{chap:theory}
 
-% TODO: Present the theoretical foundation. Use \parencite{key} for (Author, Year)
-% and \textcite{key} for Author (Year) in-text citations.
+% ─── Chapter 2 — Theory ──────────────────────────────────────────────────────
+% Pipeline: /write-section 2.X to populate each section.
+% Writing order: 2.1 → 2.2 → 2.3 → 2.4
 
 
-\section{[Topic Area 1]}
-\label{sec:topic1}
+\section{Resource Scheduling}
+\label{sec:resource-scheduling-theory}
+
+Transport scheduling and nurse rostering look different on the surface but are
+structurally the same problem: assigning limited resources to tasks under
+constraints. \textcite{pinedo2016scheduling} formalise this as the resource
+scheduling problem. The structure that unifies these domains is a finite set of
+resources, a finite set of tasks, and a set of rules governing which resource can
+perform which task and when.
+
+Ressursplanlegger's planning problem is a multi-resource scheduling problem. Each
+assignment requires both a driver and a vehicle. The algorithm must identify, for
+every assignment in the planning date, which employee and which vehicle to assign,
+such that all constraints are satisfied and the result is as good as possible by
+a defined objective. The combinatorial space grows rapidly: with $n$ assignments,
+$m$ employees, and $v$ vehicles, the number of possible assignment triples is
+$n \times m \times v$. Multi-resource scheduling is structurally harder than
+single-resource scheduling because constraints on the two resource dimensions
+interact: a driver may be available for a time slot, but if no compatible vehicle
+is free, the pair cannot be assigned \parencite{pinedo2016scheduling}. Even modest
+fleet sizes produce instances that cannot be solved by enumeration.
+
+A feasible plan satisfies all hard constraints. \textcite{rossi2006handbook}
+distinguish between constraints that must be satisfied and constraints that should
+be satisfied where possible. In Ressursplanlegger, hard constraints are
+non-negotiable: the employee must hold all competencies required by the
+assignment, be available and not already assigned to a concurrent task; the
+vehicle must be active, of the required type, and not double-booked. Any solution
+that violates these is infeasible. Soft constraints represent preferences the
+algorithm tries to honour subject to feasibility. These include preferring to
+assign an employee their designated vehicle, balancing workload evenly across the
+workforce, and scheduling high-priority assignments before lower-priority ones.
+Each soft constraint carries a configurable constraint weight; the algorithm
+maximises the weighted sum of satisfied soft constraints over all feasible
+solutions. This allows the traffic coordinator to adjust what the algorithm
+prioritises without modifying the algorithm itself.
+
+Resource scheduling at realistic fleet sizes is NP-hard: no known algorithm can
+guarantee an optimal solution in polynomial time \parencite{pinedo2016scheduling}.
+This property is shared by the Vehicle Routing Problem (VRP), first formalised by
+\textcite{dantzig1959truck} as the Truck Dispatching Problem and developed into a
+comprehensive research field by \textcite{toth2014vrp}. The VRP and its variants,
+including the VRP with Time Windows (VRPTW), share structural features with
+Ressursplanlegger's problem: a fleet of vehicles, tasks with temporal constraints,
+and combinatorial complexity that grows with instance size. The key difference is
+that VRP is a sequencing problem, concerned with the order in which locations are
+visited, while Ressursplanlegger's assignments have fixed times and fixed
+locations. The algorithm assigns resources; it does not sequence stops. The system
+is therefore best characterised as a resource-constrained assignment problem, a
+subclass of resource scheduling in which tasks have fixed time windows and the
+decision variable is the resource-to-task pairing rather than the ordering of
+tasks \parencite{pinedo2016scheduling}. NP-hardness holds regardless of this
+distinction and motivates heuristic methods rather than exact search.
+
+Ressursplanlegger uses three solvers, selectable at runtime. The greedy solver
+picks assignments in priority order and selects the first feasible
+employee-vehicle pair, running in $O(n \times m)$ time with no optimality
+guarantee. It responds instantly, which is useful during a coordinator session.
+The CP-SAT solver from Google OR-Tools formulates the problem as a Boolean
+satisfiability instance with an objective function and applies guided local search
+with conflict-driven clause learning \parencite{rossi2006handbook}, a technique
+that avoids re-exploring infeasible regions by recording violated constraints as
+learned clauses. It returns near-optimal solutions for instances of typical daily
+planning scale within a configurable time limit, typically 60 seconds. The
+Timefold Solver applies metaheuristic search, including tabu search, simulated
+annealing, and late-acceptance hill climbing \parencite{pinedo2016scheduling}, and
+targets large instances or multi-day planning horizons where the CP-SAT time limit
+becomes a practical constraint. Running all three solvers on the same benchmark
+instances allows direct comparison of solver behaviour, which the evaluation in
+\Cref{chap:findings} exploits.
 
 
-\section{[Topic Area 2]}
-\label{sec:topic2}
+\section{Human-in-the-Loop Automation}
+\label{sec:hitl}
+
+% [Section 2.2 — not yet written]
 
 
-\section{Related Work}
-\label{sec:related-work}
+\section{Transport Management Systems}
+\label{sec:tms}
+
+% [Section 2.3 — not yet written]
+
+
+\section{Design Science Research}
+\label{sec:dsr}
+
+% [Section 2.4 — not yet written]

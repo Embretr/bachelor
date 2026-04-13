@@ -79,7 +79,7 @@ Pipeline: `/write-section X.Y` → `/review-chapter N` → human approval.
 ### Chapter 2 — Theory
 | Section | Written | Checks | Coherence | Quality | Naturalness | Status |
 |---------|:-------:|:------:|:---------:|:-------:|:-----------:|--------|
-| 2.1 | ⬜ | — | — | — | — | not started |
+| 2.1 | ✅ | PASS | revised-round2 | revised-round2 | revised-round2 | drafted-revised |
 | 2.2 | ⬜ | — | — | — | — | not started |
 | 2.3 | ⬜ | — | — | — | — | not started |
 | 2.4 | ⬜ | — | — | — | — | not started |

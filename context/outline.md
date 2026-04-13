@@ -48,21 +48,21 @@ and state what Ressursplanlegger and this thesis contribute.
 
 ### Sections and content
 
-**2.1 Vehicle Routing Problem (VRP)** (~3 pages)
+**2.1 Resource Scheduling** (~2.5 pages)
 
-- ¶1: Define the VRP — combinatorial optimisation problem, set of customers to serve, fleet of vehicles, minimise cost. Origin: Dantzig & Ramser (1959). Cite `\textcite{dantzig1959truck}`.
-- ¶2: VRP variants relevant to this project — CVRP (capacity), VRPTW (time windows), heterogeneous fleet (different vehicle types), multi-depot (multiple departments). Cite `\textcite{toth2014vrp}`.
-- ¶3: How Ressursplanlegger's problem maps to VRP — assignments = customers, driver+vehicle = vehicles, objective = coverage + balance. But note the distinction: Ressursplanlegger focuses on *assignment* (who does what) rather than *routing* (in which order). The problem is more precisely a resource-constrained scheduling problem with VRP-like constraints.
-- ¶4: NP-hardness and practical implications — exact solutions infeasible for real fleet sizes, heuristics and metaheuristics needed. This motivates the multi-engine approach (greedy, CP-SAT, Timefold).
-- ¶5: Constraint types — hard constraints (must satisfy: competencies, availability, no double-booking) vs. soft constraints (optimise: workload balance, preferences). Link to the system's actual constraint model from `context/docs/tech/algorithm.md`.
+- ¶1: Define resource scheduling — assigning a set of limited resources (people, vehicles) to tasks over time, subject to constraints on availability, task requirements, and temporal dependencies. Cite `\textcite{pinedo2016scheduling}`. Note analogous domains: nurse scheduling, crew scheduling, driver scheduling — all share the structure of matching resources to tasks under constraints.
+- ¶2: Multi-resource scheduling — Ressursplanlegger assigns *both* an employee and a vehicle to each assignment. This increases combinatorial complexity compared to single-resource problems. The Ressursplanlegger problem: assignments = tasks with fixed time windows and resource requirements; drivers + vehicles = resources with competency, availability, and capacity constraints; objective = maximise coverage + balance soft constraints.
+- ¶3: Hard and soft constraints — hard constraints must be satisfied for a plan to be feasible (competencies, availability, no double-booking, vehicle type). Soft constraints define preferences optimised by the algorithm (workload balance, driver preferences, priority). Each soft constraint carries a configurable weight. Cite `\textcite{rossi2006handbook}`. Link to the system's actual constraint model from `context/docs/tech/algorithm.md`.
+- ¶4: NP-hardness and the multi-engine approach — resource scheduling at real fleet sizes is NP-hard; exact methods become infeasible as instance size grows. This motivates heuristics: greedy (instant baseline), CP-SAT (near-optimal within time limit), Timefold (metaheuristic for large instances). The Vehicle Routing Problem (VRP) is an adjacent theoretical area with similar structure — cite `\textcite{dantzig1959truck}` and `\textcite{toth2014vrp}` — but Ressursplanlegger's problem diverges from VRP in a key way: assignments have fixed times and locations, so the algorithm decides *who* does what, not *in which order*. Sequencing is not part of the problem.
+- ¶5: Solver comparison — greedy O(n × m), no optimality guarantee; CP-SAT complete solver with configurable time limit, near-optimal for ≤500 assignments; Timefold metaheuristic (tabu search, simulated annealing) for large or multi-day instances. Each occupies a different point on the speed-quality tradeoff. Cite `\textcite{rossi2006handbook}` for constraint programming foundations.
 
-**2.2 Resource Scheduling and Human-in-the-Loop** (~3 pages)
+**2.2 Human-in-the-Loop Automation** (~2.5 pages)
 
-- ¶1: Define resource scheduling broadly — assigning limited resources to tasks over time, subject to constraints. Cite `\textcite{pinedo2016scheduling}`. Mention analogous domains: nurse scheduling, crew scheduling.
-- ¶2: Multi-resource scheduling — Ressursplanlegger assigns *both* an employee and a vehicle to each assignment. This increases combinatorial complexity compared to single-resource problems.
-- ¶3: Human-in-the-loop (HITL) automation — define the concept. Cite `\textcite{parasuraman2000automation}` and their 10-level automation scale. Position Ressursplanlegger at level 5–6 (system suggests, human approves).
-- ¶4: Why HITL is necessary in this domain — unpredictability (weather, cancellations, sick leave), tacit knowledge (driver preferences, customer relationships, route knowledge), trust (coordinators won't use a system they can't override). Ground in interview findings implicitly — detailed evidence in Ch 4.
-- ¶5: The "suggest + override" design pattern — algorithm does heavy lifting, coordinator applies judgment. This is Ressursplanlegger's core interaction model.
+- ¶1: Define human-in-the-loop (HITL) automation — a design pattern where an automated process produces a recommendation or plan, but a human reviews, adjusts, and approves before it takes effect. Cite `\textcite{parasuraman2000automation}` and their 10-level automation scale. Position Ressursplanlegger at level 5–6 (system suggests, human approves).
+- ¶2: Why HITL is necessary in this domain — unpredictability (weather, cancellations, sick leave), tacit knowledge (driver preferences, customer relationships, route knowledge), trust (coordinators won't use a system they can't override). Ground in interview findings implicitly — detailed evidence in Ch 4.
+- ¶3: The "suggest + override" design pattern — algorithm does heavy lifting, coordinator applies judgment. This is Ressursplanlegger's core interaction model.
+- ¶4: Trust and adoption — coordinators will not rely on a system whose decisions they cannot understand and override. Cite `\textcite{lee2004trust}`. Connect to adoption barriers (developed in Ch 5.3).
+- ¶5: HITL as a design constraint — the system must expose its reasoning (conflict detection, scoring breakdown) so the coordinator can make informed corrections. This shapes the UI as much as the algorithm.
 
 **2.3 Transport Management Systems (TMS)** (~2 pages)
 
