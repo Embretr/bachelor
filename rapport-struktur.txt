@@ -1,0 +1,183 @@
+
+  RESSURSPLANLEGGER — Rapportstruktur
+  ====================================
+
+
+  Ch 1  INTRODUCTION                                          3-5 sider
+  -----------------------------------------------------------------------
+
+    1.1  Background and Motivation                            ~1.5 s
+         - Transportsektoren i Norge, digitalisering
+         - Trafikklederrollen og daglig planlegging
+         - Problemet: taus kunnskap, trege systemer, ingen planleggingsstotte
+         - Konsekvenser: ineffektivitet, nokkelpersonavhengighet, feilrisiko
+         - Hvorfor na: OR-Tools, Timefold, digital transformasjon
+         - Introduser Ressursplanlegger i ett avsnitt
+
+    1.2  Research Questions                                   ~0.5 s
+         - Hovedsporsmalet (verbatim)
+         - Tre delsporsmaal: problem -> losning -> evaluering
+
+    1.3  Scope and Delimitations                              ~0.5 s
+         - Hva systemet dekker
+         - Hva som er utenfor scope (og hvorfor)
+         - Arbeidsfordeling Mikael / Embret
+
+    1.4  Thesis Structure                                     ~0.5 s
+         - Narrativ kjede, ikke innholdsfortegnelse
+
+
+  Ch 2  THEORY                                                8-12 sider
+  -----------------------------------------------------------------------
+
+    2.1  Resource Scheduling                                  ~2.5 s
+         - Definisjon og analoge domener (Pinedo)
+         - Multi-ressurs: ansatt + kjoretoy
+         - Harde og myke begrensninger (Rossi) + systemets modell
+         - NP-hardhet, VRP-sammenligning (Dantzig, Toth)
+         - Tre solvere: greedy, CP-SAT, Timefold
+
+    2.2  Human-in-the-Loop Automation                         ~2.5 s
+         - Definisjon + Parasuraman 10-nivaa skala
+         - Hvorfor HITL er nodvendig i transport
+         - "Suggest + override" designmonster
+         - Tillit og adopsjon (Lee)
+         - HITL som designbegrensning
+
+    2.3  Transport Management Systems (TMS)                   ~2 s
+         - TMS som programvarekategori
+         - Norsk landskap: Timpex, Trimtex, Opptur
+         - Planleggingsgapet ingen systemer dekker
+
+    2.4  Design Science Research                              ~1.5 s
+         - DSR-definisjon (Hevner, Peffers)
+         - Hvorfor DSR passer dette prosjektet
+         - Validering vs. evaluering (Wieringa)
+
+
+  Ch 3  METHODOLOGY                                           5-8 sider
+  -----------------------------------------------------------------------
+
+    3.1  Research Design                                      ~1.5 s
+         - DSR som metode (Peffers 6 faser, Hevner)
+         - Hvorfor DSR passer
+         - DSR-faser mappt til prosjektet
+         - Validering vs. evaluering
+
+    3.2  Data Collection                                      ~2 s
+         - Semi-strukturerte intervjuer — begrunnelse
+         - Utvalg: 7 selskaper, variasjon i storrelse/system
+         - Intervjuguide: 5 temaer
+         - Gjennomforing: telefonintervju 4. mars 2026
+         - Transkripsjon: Sonix.ai + manuell korrigering
+
+    3.3  Data Analysis                                        ~1 s
+         - Tematisk analyse (Braun & Clarke)
+         - Fra temaer til krav (MoSCoW, fit/gap)
+         - Begrensninger
+
+    3.4  System Development Process                           ~1 s
+         - Smidig, iterativ utvikling
+         - Kobling mellom brukerundersokelse og utvikling
+         - Teknologivalg (kort)
+         - Tidslinje
+
+    3.5  Validity and Reliability                             ~1 s
+         - Malteruds fire kriterier
+         - Intervjuvaliditet
+         - Systemvaliditet
+         - Forskerbiasrisiko
+
+
+  Ch 4  FINDINGS                                              10-15 sider
+  -----------------------------------------------------------------------
+
+    4.1  Interview Findings                                   ~4 s
+         - Dagens planleggingsprosesser
+         - Smertepunkter: treghet, taus kunnskap, kapasitetsoversikt
+         - Sykefravaarshaandtering
+         - Holdninger til automatisering
+         - Tildelingskriterier — rangert liste
+
+    4.2  Requirements                                         ~2 s
+         - Funksjonelle krav (MoSCoW-tabell)
+         - Ikke-funksjonelle krav
+
+    4.3  Fit/Gap Analysis                                     ~1.5 s
+         - Hva eksisterende systemer gir vs. behov
+         - Fit-tabell og gap-tabell
+
+    4.4  System Description                                   ~3 s
+         - Arkitekturoversikt
+         - Nokkelfunksjoner: planvisning, manuell overstyring
+         - UI-flyt
+         - Teknologistakk med begrunnelse
+
+    4.5  Optimisation Algorithm                               ~3 s
+         - Problemformulering
+         - Valgt tilnaerming og begrunnelse
+         - Modellerte begrensninger (harde + myke)
+         - Maalfunksjon
+         - Kjente begrensninger
+
+
+  Ch 5  DISCUSSION                                            6-10 sider
+  -----------------------------------------------------------------------
+
+    5.1  Does Ressursplanlegger Address the Pain Points?      ~2 s
+         - Intervjufunn mappt til implementerte funksjoner
+         - Lost / delvis lost / uadressert
+         - Kobling til teori (scheduling + HITL)
+
+    5.2  Algorithm Performance and the Human-in-the-Loop      ~2 s
+         - Algoritmens haandtering av begrensninger
+         - Hvor manuell overstyring fortsatt trengs
+         - Kobling til HITL-teori (Parasuraman)
+         - Er "suggest + override" riktig monster?
+
+    5.3  Adoption Barriers                                    ~2 s
+         - Kost/nytte-terskel
+         - Brukervennlighet og tillit
+         - Integrasjon med faktureringssystemer
+         - Hva trengs for produksjonsdrift?
+
+    5.4  Tacit Knowledge as a Design Challenge                ~1.5 s
+         - Hvordan systemet formaliserer koordinatorkunnskap
+         - Hva som ikke kan automatiseres
+         - Implikasjoner for fremtidig design
+
+    5.5  Sustainability                                       ~1.5-2 s
+         - SusAF-rammeverk (Duboc)
+         - Barekraftseffekter-tabell
+         - Nokkeldilemmaer
+         - Mapping til FNs barekraftsmaal
+         - Begrensninger i analysen
+
+    5.6  Limitations of This Study                            ~1 s
+         - Lite intervjuutvalg (7)
+         - Ikke deployert i produksjon
+         - Utviklingsteam = forskere
+
+
+  Ch 6  CONCLUSION                                            2-4 sider
+  -----------------------------------------------------------------------
+
+    6.1  Summary                                              ~0.5 s
+         - Ett avsnitt per kapittel
+
+    6.2  Answers to Research Questions                        ~1 s
+         - Svar paa hovedsporsmalet
+         - Svar paa SQ1, SQ2, SQ3
+
+    6.3  Future Work                                          ~1 s
+         - Sjaforapp med push-varsler
+         - Fakturering/integrasjon
+         - Produksjonspilot
+         - Sanntidsomplanlegging ved sykefravaer
+         - Algoritmeforbedringer med storre datasett
+
+
+  =====================================================================
+                        Total: ca. 34-54 sider
+  =====================================================================
+
