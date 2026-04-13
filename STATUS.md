@@ -89,7 +89,7 @@ Pipeline: `/write-section X.Y` (auto-revise up to 3 rounds + polish) → `/revie
 ### Chapter 2 — Theory
 | Section | Written | Checks | Coherence | Quality | Naturalness | Status |
 |---------|:-------:|:------:|:---------:|:-------:|:-----------:|--------|
-| 2.1 | ⬜ | — | — | — | — | not started |
+| 2.1 | ✅ | PASS | PASS | A/genuine | 4/5 | drafted-reviewed |
 | 2.2 | ⬜ | — | — | — | — | not started |
 | 2.3 | ⬜ | — | — | — | — | not started |
 | 2.4 | ⬜ | — | — | — | — | not started |
