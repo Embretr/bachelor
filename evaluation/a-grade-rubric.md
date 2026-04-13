@@ -47,15 +47,15 @@
 
 **An A theory chapter:**
 - Every theory presented is directly connected to a specific design decision or finding in the thesis
-- VRP formulation is precise: which variant (VRPTW, CVRP, etc.) and why this variant maps to the problem
+- Resource scheduling formulation is precise: problem structure (multi-resource assignment with constraints), why this characterisation fits the domain, and how it differs from adjacent problems (e.g., VRP focuses on sequencing, not assignment)
 - Human-in-the-loop is not just defined — it is argued as necessary for this domain with evidence
-- Related work section positions Ressursplanlegger relative to existing approaches — what it adds, not just what others did
+- Existing systems (TMS) are positioned against Ressursplanlegger — what they do, what they lack
 - No theory is presented for its own sake — if it does not appear in Ch 4 or Ch 5, it should not be in Ch 2
 - Primary sources are cited — textbooks for foundational theory, peer-reviewed papers for specific claims
 
 **Red flags that signal B or lower:**
 - Theory is a literature review with no connection to the system
-- VRP is defined but the specific variant used is not identified
+- Scheduling problem is described generically without connecting to the specific constraints in Ressursplanlegger
 - Related work describes other systems but does not compare them to Ressursplanlegger
 - Human-in-the-loop is mentioned in theory but never referenced in Discussion
 
@@ -111,7 +111,7 @@
 
 **Red flags that signal B or lower:**
 - Discussion section re-describes findings instead of interpreting them
-- Connections to theory are vague: "relates to the VRP literature" without specifics
+- Connections to theory are vague: "relates to the scheduling literature" without specifics
 - Limitations are listed but their impact on conclusions is not discussed
 - Research question is not explicitly referenced until the Conclusion
 

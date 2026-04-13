@@ -20,7 +20,7 @@ A chapter number like `2`. Derive:
 Read STATUS.md. Find the section tracking table for Chapter {N}.
 ALL sections must have status `drafted-reviewed`.
 
-If any section is `drafted-needs-revision` or `not started`:
+If any section is `drafted-needs-revision`, `drafted-needs-manual-fix`, or `not started`:
 → **STOP**: "Cannot review Chapter {N}. These sections are not ready: {list}. Run /write-section for each first."
 
 Read the .tex file. Verify every `\section{...}` has real content (≥150 words, not just comments).

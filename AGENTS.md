@@ -95,11 +95,11 @@ If a finished chapter shifts the argument even slightly, update `context/thesis-
 
 ### When using `/write-section` (automated pipeline)
 
-The pipeline handles quality ranking, checks, and review automatically.
+The pipeline handles quality ranking, checks, review, and auto-revision automatically.
 After the pipeline reports:
 
-1. **If `drafted-needs-revision`** — fix issues and re-run `/write-section X.Y` (revise mode)
-2. **If `drafted-reviewed`** — move to the next section
+1. **If `drafted-reviewed`** — move to the next section
+2. **If `drafted-needs-manual-fix`** — pipeline exhausted auto-fix attempts (max 3 rounds). Fix issues manually and re-run `/write-section X.Y`
 
 ### After completing a chapter (all sections `drafted-reviewed`)
 

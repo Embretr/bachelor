@@ -113,7 +113,7 @@
 ## Cross-Chapter Checks (run after all chapters are drafted)
 
 - [ ] **Red thread:** Does the argument flow logically from Ch 1 → 6? Does every chapter serve its spine sentence?
-- [ ] **No orphaned theory:** Is every concept from Ch 2 referenced in Ch 4 or 5?
+- [ ] **No orphaned theory:** Is every concept from Ch 2 referenced in Ch 4 or 5? Check `evaluation/theory-usage.md` for tracking.
 - [ ] **No unsupported claims in Ch 5:** Is every discussion point grounded in a finding from Ch 4?
 - [ ] **Consistent terminology:** Are the same terms used throughout? (Check glossary)
 - [ ] **Citation balance:** Are there chapters with suspiciously few or many citations?

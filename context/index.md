@@ -68,6 +68,7 @@
 | `evaluation/grading-guidelines.md` | Official sensor guidelines | When doing quality check |
 | `evaluation/workflow-improvements.md` | Log of proposed and applied workflow changes | After every task |
 | `evaluation/formal-requirements.md` | Deliverables, deadlines, AI policy, contribution attribution | Final submission checklist only — not loaded during writing |
+| `evaluation/theory-usage.md` | Theory tracking matrix — which theories from Ch 2 are used where | Red-thread/quality checks for Ch 5+ |
 
 ---
 

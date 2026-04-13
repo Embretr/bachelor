@@ -121,6 +121,7 @@
 |------|-----|
 | `context/thesis-spine.md` | The coherence standard |
 | `context/context.md` | The research question |
+| `evaluation/theory-usage.md` | Theory tracking — flag orphaned theories (Ch 5+) |
 | All completed chapters in order | The full argument chain |
 | The chapter being reviewed | The subject of review |
 
@@ -132,6 +133,7 @@
 |------|-----|
 | `evaluation/a-grade-rubric.md` | Primary grading standard |
 | `evaluation/grading-guidelines.md` | Official sensor criteria |
+| `evaluation/theory-usage.md` | Theory tracking — verify connections |
 | `context/thesis-spine.md` | Coherence context |
 | `context/context.md` | Thesis identity and RQ |
 | All completed chapters | Full thesis context |

@@ -106,6 +106,23 @@ Examples:
 
 ---
 
+## Own contribution — distinguish origin clearly
+
+Every section must make clear what is the authors' contribution vs. what comes from literature:
+
+- **From interviews:** "The interviews indicate...", "Respondents described..."
+- **From the system:** "The implemented artefact...", "The system addresses this by..."
+- **From analysis:** "The analysis suggests...", "The requirements derived from..."
+- **From literature:** "Previous research shows...", "\textcite{author} argues..."
+
+Never use "we found", "we believe", "our findings".
+
+## Evidence marker satisfaction
+
+All MUST markers (MUST CITE, MUST EVIDENCE, MUST ANCHOR, MUST TRACE, MUST GROUND) in outline.md for this section must be satisfied. Missing marker satisfaction is a review issue.
+
+---
+
 ## Self-evaluation before outputting
 
 Before you output the section, check:
@@ -114,6 +131,8 @@ Before you output the section, check:
 3. Does this section serve the chapter's thesis-spine.md sentence?
 4. Is there a sentence that could be cut without losing meaning?
 5. Would an external examiner understand this section without reading the rest of the thesis?
+6. Is the origin of each claim clear (literature, interviews, system, analysis)?
+7. Are all MUST markers from the outline satisfied?
 
 If any answer is no — revise before outputting.
 ```

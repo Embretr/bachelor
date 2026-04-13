@@ -74,7 +74,17 @@
 
 ## Chapter Writing Progress
 
-Pipeline: `/write-section X.Y` → `/review-chapter N` → human approval.
+Pipeline: `/write-section X.Y` (auto-revise up to 3 rounds + polish) → `/review-chapter N` → human approval.
+
+### Status Legend
+| Status | Meaning |
+|--------|---------|
+| `not started` | Section has no content |
+| `drafted-needs-revision` | In progress — auto-revise is handling this |
+| `drafted-needs-manual-fix` | Pipeline exhausted auto-fix (3 rounds or no fixable issues). Human must intervene. |
+| `drafted-reviewed` | All gates passed. Ready for next section or chapter review. |
+| `candidate-approved` | Chapter-level review passed. Awaiting human approval. |
+| `approved` | Human approved. |
 
 ### Chapter 2 — Theory
 | Section | Written | Checks | Coherence | Quality | Naturalness | Status |
