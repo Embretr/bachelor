@@ -49,40 +49,54 @@
 | `context/docs/method/research-design.md` | Research method documentation |
 | `context/docs/project/sprint-log.md` | Development process for section 3.4 |
 | `context/interviews-summary.md` | Interview process details for sections 3.2–3.3 |
+| `context/docs/method/academic-writing-guide.md` | Writing rules — load when writing any chapter |
+| `context/docs/method/sustainability-analysis.md` | Load when writing Ch 5.5 (Sustainability) |
 | `result/chapters/ch2/ch2-theory.tex` | Continuity |
 
 ---
 
 ## Chapter 4 — Findings
 
+### Always load for any Ch 4 section
 | File | Why |
 |------|-----|
 | `context/outline.md` — Ch 4 section | Section plan |
 | `context/glossary.md` | Terminology |
-| `context/interviews-summary.md` | Source for sections 4.1 |
-| `context/fitgap-summary.md` | Source for section 4.3 |
-| `context/docs/requirements/functional-requirements.md` | Source for section 4.2 |
-| `context/docs/requirements/non-functional-requirements.md` | Source for section 4.2 |
-| `context/docs/tech/architecture.md` | Source for section 4.4 |
-| `context/docs/tech/algorithm.md` | Source for section 4.5 — Embret must fill this first |
-| `context/docs/tech/tech-stack.md` | Supporting context for section 4.4 |
-| `context/docs/tech/data-model.md` | Supporting context for section 4.4 |
 | `result/chapters/ch3/ch3-method.tex` | Continuity |
+
+### Section-specific critical context
+
+| Section | Critical files | Optional files |
+|---------|---------------|----------------|
+| **4.1** Interview Findings | `context/interviews-summary.md`, `context/intervju/*.md` (individual transcripts) | — |
+| **4.2** Requirements | `context/docs/requirements/functional-requirements.md`, `context/docs/requirements/non-functional-requirements.md` | `context/docs/requirements/requirements-traceability.md` |
+| **4.3** Fit/Gap | `context/fitgap-summary.md`, `context/interviews-summary.md` | — |
+| **4.4** System Description | `context/docs/tech/architecture.md`, `context/docs/tech/tech-stack.md`, `context/docs/tech/data-model.md` | `context/docs/tech/api-overview.md`, `context/docs/tech/codebase-overview.md`, `context/docs/user-research/ui-flow.md`, `context/docs/tech/flow-diagrams.md` |
+| **4.5** Algorithm | `context/docs/tech/algorithm.md` | — |
 
 ---
 
 ## Chapter 5 — Discussion
 
+### Always load for any Ch 5 section
 | File | Why |
 |------|-----|
 | `context/outline.md` — Ch 5 section | Section plan |
 | `context/glossary.md` | Terminology |
-| `result/chapters/ch1/ch1-introduction.tex` | Research question and motivation |
 | `result/chapters/ch2/ch2-theory.tex` | Theory to connect findings back to |
-| `result/chapters/ch3/ch3-method.tex` | Method limitations for section 5.5 |
 | `result/chapters/ch4/ch4-findings.tex` | The findings being interpreted |
 | `evaluation/a-grade-rubric.md` — Ch 5 section | A criteria for discussion |
-| `evaluation/grading-guidelines.md` | Ensure discussion meets grading criteria |
+
+### Section-specific critical context
+
+| Section | Critical files | Optional files |
+|---------|---------------|----------------|
+| **5.1** Pain Points | `context/interviews-summary.md`, `context/fitgap-summary.md` | — |
+| **5.2** Algorithm & HITL | `context/docs/tech/algorithm.md` | — |
+| **5.3** Adoption Barriers | `context/interviews-summary.md` | `context/docs/user-research/user-tests.md` |
+| **5.4** Tacit Knowledge | `context/interviews-summary.md` | — |
+| **5.5** Sustainability | `context/docs/method/sustainability-analysis.md` | — |
+| **5.6** Limitations | `context/docs/method/research-design.md`, `context/docs/project/risk-log.md` | `result/chapters/ch3/ch3-method.tex` |
 
 ---
 

@@ -90,9 +90,54 @@ Software used by transport companies to manage operations, dispatch, and in some
 
 ---
 
+## Algorithm and Solver Terms
+
+**Hard constraint**
+A constraint that must be satisfied for a solution to be feasible. Violations make the plan invalid (e.g., assigning a driver who lacks the required licence). Hard constraints cannot be relaxed.
+
+**Soft constraint**
+A constraint that should be satisfied but can be violated at a cost. Violations reduce the solution quality score but do not make the plan infeasible (e.g., uneven workload distribution). Soft constraints have configurable weights.
+
+**Constraint weight**
+A numeric value assigned to a soft constraint that determines how much its violation affects the total solution score. Higher weight means the algorithm tries harder to satisfy that constraint. Configurable by the traffic coordinator.
+
+**Greedy solver**
+A fast, heuristic assignment algorithm that processes assignments in priority order and assigns the first feasible driver/vehicle combination found. Provides instant results but no optimality guarantee.
+
+**CP-SAT (Constraint Programming — Satisfiability)**
+A complete solver from Google OR-Tools that models the assignment problem as Boolean satisfiability with an objective function. Finds near-optimal solutions within a configurable time limit.
+
+**Timefold Solver**
+A Java-based metaheuristic optimisation engine using tabu search, simulated annealing, and late-acceptance hill climbing. Suitable for large-scale instances.
+
+**Solution score**
+A composite metric evaluating plan quality: hard score (constraint violations — must be zero for feasibility) and soft score (weighted sum of soft constraint satisfaction).
+
+---
+
+## System Terms
+
+**Deviation (Avvik)**
+A scheduling conflict or violation detected by the system after plan generation. Examples: overbooking, overtime, missing competence, expired certification. Displayed as warnings to the coordinator.
+
+**Team**
+A group of employees and/or vehicles that are assigned together. Can be fixed (permanent crew) or variable (assembled per assignment).
+
+**Time-off (Fravær)**
+A period when an employee is unavailable — vacation, sick leave, or other absence. Registered in the system and enforced as a hard constraint during planning.
+
+**Work schedule (Arbeidsplan)**
+A per-employee weekly schedule defining which days and hours the employee is available. Used by the algorithm to determine availability.
+
+**Company (Bedrift)**
+The organisational unit in Ressursplanlegger's multi-tenant architecture. All data — employees, vehicles, assignments — is scoped to a company. Users belong to exactly one company.
+
+**Invitation (Invitasjon)**
+A token-based mechanism for adding new users to a company. The inviter sets a role (owner, admin, member); the invitee accepts via a unique link.
+
+---
+
 ## Terms to Add
 
 > Add terms here as they are introduced in writing.
 > Format: **Term** — definition in the context of this project.
-
-[FILL IN: Any additional domain terms from interviews or technical documentation]

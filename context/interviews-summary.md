@@ -8,15 +8,15 @@
 
 ## Intervjuoversikt
 
-| Bedrift | System i dag | Skala | Automatisering |
-|--------|-------------|-------|---------------|
-| Bergen Bulk Transport | Ingen (manuelt) | 8–20 sjåfører | Skeptisk pga. kostnad |
-| Harlem Solutions | Opptur | Ukjent | Skeptisk – variabilitet |
-| Norlog Lakselv | Timpex | Middels | Positiv for faste ruter |
-| Norlog Mo i Rana | Timpex + Admin | Middels | Positiv |
-| Norlog Tana | Trimtex | Liten (nord) | Positiv |
-| Ottem | Eget ordresystem | ~45 biler, 3 avd. | Skeptisk – vil ha manuell kontroll |
-| Nordic Crane (Svein) | Eget ordresystem | Kran + transport | Delvis positiv |
+| Bedrift | System i dag | Flåte / skala | Ruter/dag | Planhorisont | Automatisering |
+|--------|-------------|--------------|:---------:|-------------|---------------|
+| Bergen Bulk Transport | Ingen (manuelt, telefon, hukommelse) | 8–20 sjåfører | Ukjent | Dag-til-dag | Skeptisk pga. kostnad; mener TMS blir relevant ved 15–20+ biler |
+| Harlem Solutions | Opptur + kundeintegrasjoner | Ukjent | Standardruter, 1 ordre/dag auto-generert | Varierer | Skeptisk – kundeordrer varierer daglig, ingen dager er like |
+| Norlog Lakselv | Timpex (kan auto-generere faste turer) | Middels | Ukjent | Faste + variable | Positiv for faste ruter; jobber med Timpex–Admin-integrasjon |
+| Norlog Mo i Rana | Timpex + Admin + (Admit nevnt) | Middels | Ukjent | Ukjent | Positiv; minimerer gule lapper, alt i system |
+| Norlog Tana | Trimtex | Liten (~5 ruter/dag, 7–20 mil) | ~5 | Dag-til-dag | Positiv; men sykdom er daglig problemløsning |
+| Ottem | Eget ordresystem | ~45 biler, 3 avdelinger | Ukjent | ~1 min per oppdrag | Skeptisk – ordrer kanselleres, ting skjer fort |
+| Nordic Crane (Svein) | Eget ordresystem (planlegger systembytte) | Kran + transport | 3–4 per sjåfør | 5 timer – 2 måneder | Delvis positiv; vil ha auto-distribusjon 18–24t før utførelse |
 
 ---
 
@@ -26,7 +26,7 @@
 Ingen av respondentene har full automatisk tildeling. Selv bedrifter med systemer (Timpex, Opptur) gjør selve sjåfør-tildelingen manuelt. Det er dette produktet primært skal løse.
 
 ### 2. Treghet er det største problemet med eksisterende systemer
-Timpex og Trimtex beskrives gjennomgående som **ekstremt trege**, spesielt med mange samtidige brukere. Dette er en klar mulighet for et moderne alternativ.
+Timpex og Trimtex beskrives gjennomgående som **ekstremt trege**, spesielt med mange samtidige brukere. Norlog Mo i Rana beskriver det som "ekstremt tregt" med "gammelt grensesnitt" og sier hastighet er "100 prosent" det viktigste å forbedre. Norlog Lakselv bekrefter at ytelsen faller dramatisk med flere brukere på serveren samtidig. Dette er en klar mulighet for et moderne alternativ.
 
 ### 3. Kritisk kunnskap sitter i operatørens hode
 Alle respondenter har kunnskap som ikke er formalisert:
@@ -38,9 +38,10 @@ Alle respondenter har kunnskap som ikke er formalisert:
 Et godt system må gjøre det mulig å **digitalisere og bruke denne kunnskapen ved tildeling**.
 
 ### 4. Sykdomshåndtering varierer mye
-- Noen synes det er enkelt (2–3 tastetrykk / 27 sekunder)
-- Andre (særlig Norlog Tana) beskriver det som daglig, krevende problemløsning
-- Avhenger sterkt av antall tilgjengelige sjåfører og rutefleksibilitet
+- Noen synes det er enkelt: Norlog Lakselv ("2–3 tastetrykk"), Nordic Crane ("27 sekunder")
+- Norlog Tana beskriver det som **daglig, krevende problemløsning**: "jeg sitter jo egentlig med den problemløsningen hver eneste dag" — hyppige sykefravær krever korsruter og rollebytter
+- Ottem peker på at ordrer kanselleres uforutsigbart, noe som krever lignende omrokkeringsevne
+- Avhenger sterkt av antall tilgjengelige sjåfører, rutefleksibilitet, og om rutene krever spesialkompetanse (f.eks. scanning hos Norlog Tana)
 
 ### 5. Fakturering er tett koblet til planlegging
 Timpex og Opptur brukes til fakturering. Et nytt system **må enten integrere mot eksisterende faktureringssystem eller ha egne faktureringsfunksjoner**.
@@ -50,7 +51,9 @@ Timpex og Opptur brukes til fakturering. Et nytt system **må enten integrere mo
 - **Skeptiske:** Harlem Solutions, Ottem, Bergen Bulk Transport
 - **Delvis positive:** Nordic Crane
 
-Skeptikerne peker på uforutsigbarhet i transport og behovet for menneskelig kontroll. Konsensus: systemet bør **foreslå en plan som operatøren kan korrigere** – ikke erstatte operatøren fullstendig.
+Skeptikerne peker på uforutsigbarhet i transport og behovet for menneskelig kontroll. Ottem: "i transport skjer ting fryktelig fort... sitter på et oppdrag, og så ble det kansellert." Men selv skeptikerne aksepterer forslag: "det må være noen som sitter og tenker bak meg da." Konsensus: systemet bør **foreslå en plan som operatøren kan korrigere** – ikke erstatte operatøren fullstendig.
+
+Nordic Crane ønsker spesifikt automatisk distribusjon **18–24 timer før oppdraget** — ikke sanntid, men planleggingshorisont. De planlegger systembytte i år og håper det nye systemet har denne funksjonen.
 
 ---
 
@@ -70,9 +73,22 @@ Rangert etter hyppighet nevnt på tvers av intervjuer:
 
 ## Kommunikasjon med sjåfører
 
-- Primært via **app/telefon med push-varsler** (Timpex Confirm, ordreapp)
-- Noen bruker **telefon direkte** (Norlog Tana)
+- Primært via **app med push-varsler** (Timpex Confirm hos Norlog Lakselv/Mo i Rana; ordreapp hos Harlem/Opptur)
+- **Telefon direkte** brukes av Norlog Tana og Bergen Bulk Transport
+- Nordic Crane: sjåfører har 3–4 oppdrag per dag, kommuniserer kun ved avvik
 - Kommunikasjon skjer helst kun ved avvik/problemer underveis
+
+## Operasjonelle detaljer per bedrift
+
+| Bedrift | Særtrekk fra intervju |
+|---------|----------------------|
+| Bergen Bulk | Helt manuelt; vurderer TMS først ved 15–20+ biler; "gamlemåten" |
+| Harlem | Noen kunder auto-integrert med ordresystem → ordrer flyter inn automatisk |
+| Norlog Lakselv | Timpex kan auto-generere faste turer/oppdrag; jobber med Admin-integrasjon |
+| Norlog Mo i Rana | Bruker 3 systemer (Admin + Timpex + Admit); minimerer gule lapper; hastighet = #1 prioritet |
+| Norlog Tana | ~5 ruter/dag, 7–20 mil; matvarer/temperaturkontrollert; scanning-krevende ruter; sykdom er daglig utfordring |
+| Ottem | 45 biler, 3 avdelinger; ~1 min per oppdrag; ordrer kanselleres uforutsigbart; vil ha notifikasjon før auto-tildeling |
+| Nordic Crane | Kran + transport; transport "mye mer krevende"; alle sjåfører har like sertifikater → erfaring avgjør; planhorisont 5t–2mnd |
 
 ---
 

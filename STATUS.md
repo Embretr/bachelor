@@ -2,131 +2,154 @@
 
 > Update this file after every writing session.
 > Claude reads this at the start of every session.
-> Last updated: [DATE]
+> Last updated: 2026-04-09
 
 ---
 
-## Context Files — Must Be Filled Before Writing Starts
+## Context Files — Fill Status
 
 | File | Owner | Status | Blocks |
 |------|-------|--------|--------|
-| `context/context.md` — research question | Mikael | ⬜ Placeholder | All chapters |
-| `context/context.md` — tech stack | Embret | ⬜ Missing | Ch 4 |
-| `context/glossary.md` | Mikael | ⬜ Unknown | All chapters |
-| `context/scope.md` | Mikael | ⬜ Unknown | All chapters |
-| `context/fitgap-summary.md` | Mikael | ⬜ Unknown | Ch 4.3 |
-| `context/docs/tech/algorithm.md` | Embret | ⬜ Missing | Ch 4.5 |
-| `context/docs/tech/architecture.md` | Embret | ⬜ Missing | Ch 4.4 |
-| `context/docs/tech/data-model.md` | Embret | ⬜ Missing | Ch 4.4 |
-| `context/docs/tech/api-overview.md` | Embret | ⬜ Missing | Ch 4.4 |
-| `context/docs/tech/tech-stack.md` | Embret | ⬜ Missing | Ch 4.4 |
-| `context/docs/requirements/functional-requirements.md` | Mikael | ⬜ Missing | Ch 4.2 |
-| `context/docs/requirements/non-functional-requirements.md` | Embret | ⬜ Missing | Ch 4.2 |
-| `context/docs/requirements/requirements-traceability.md` | Embret | ⬜ Missing | Ch 4.2 |
-| `context/docs/method/research-design.md` | Mikael | ⬜ Missing | Ch 3.1 |
-| `context/docs/method/theoretical-framework.md` | Mikael | ⬜ Missing | Ch 2 |
-| `context/docs/method/literature-list.md` | Mikael | ⬜ Missing | Ch 2, 3 |
-| `context/docs/project/sprint-log.md` | Both | ⬜ Missing | Ch 3.4 |
-| `context/docs/project/decision-log.md` | Both | ⬜ Missing | Ch 3, 5 |
-| `context/docs/tech/codebase-overview.md` | Embret | ⬜ Template only | Ch 4.4 |
-| `context/docs/tech/flow-diagrams.md` | Embret | ⬜ Draft — verify | Ch 4.4 |
-| `context/docs/user-research/personas.md` | Mikael | ⬜ Template only | Ch 4.1 |
-| `context/docs/user-research/user-tests.md` | Mikael | ⬜ Template only | Ch 5.3, 5.5 |
-| `context/docs/user-research/ui-flow.md` | Embret | ⬜ Template only | Ch 4.4 |
-| `context/docs/project/risk-log.md` | Both | ⬜ Draft — verify | Ch 3.5, 5.5 |
-| `context/glossary.md` | Mikael | ⬜ Template ready — fill | All chapters |
-| `context/scope.md` | Mikael+Embret | ⬜ Template ready — fill | All chapters |
-| `context/writing-style-examples.md` | Both | ⬜ Fill after first session | All chapters |
-| `evaluation/grading-guidelines.md` | Mikael | ⬜ Empty | Quality checks |
+| `context/context.md` (master context) | Mikael | ✅ Complete | — |
+| `context/context.md` — research question | Mikael | ✅ RQ + 3 sub-questions finalised | — |
+| `context/thesis-spine.md` | Mikael | ✅ Approved draft — review after Ch 4 | — |
+| `context/outline.md` | Mikael | ✅ Complete | — |
+| `context/glossary.md` | Mikael | ✅ Filled | Add terms as needed |
+| `context/scope.md` | Mikael | ✅ Filled | Confirm with Embret |
+| `context/interviews-summary.md` | Mikael | ✅ Complete | — |
+| `context/writing-style-examples.md` | Both | ⬜ Empty | Fill after first good section |
+| `context/fitgap-summary.md` | Mikael | ✅ Filled (14 gaps, 5 fits, coverage matrix) | — |
+| `context/docs/user-research/personas.md` | Mikael | ✅ Filled | — |
+| `context/docs/user-research/user-tests.md` | Mikael | ⬜ Template only | Blocks Ch 5.3 |
+| `context/docs/user-research/ui-flow.md` | Embret | ⬜ Template only | Blocks Ch 4.4 |
+| `context/docs/requirements/functional-requirements.md` | Mikael | ✅ Filled (42 requirements) | — |
+| `context/docs/requirements/non-functional-requirements.md` | Embret | ✅ Filled | — |
+| `context/docs/requirements/requirements-traceability.md` | Embret | ✅ Filled | — |
+| `context/docs/method/research-design.md` | Mikael | ✅ Filled | Demo/eval phases still placeholder |
+| `context/docs/method/theoretical-framework.md` | Mikael | ✅ Filled | Sources need reading confirmation |
+| `context/docs/method/literature-list.md` | Mikael | ✅ Structured with sources | None marked as read yet |
+| `context/docs/tech/algorithm.md` | Embret | ✅ Filled | — |
+| `context/docs/tech/architecture.md` | Embret | ✅ Filled | — |
+| `context/docs/tech/data-model.md` | Embret | ✅ Filled | — |
+| `context/docs/tech/api-overview.md` | Embret | ⬜ Template only | Blocks Ch 4.4 |
+| `context/docs/tech/tech-stack.md` | Embret | ✅ Filled | — |
+| `context/docs/tech/codebase-overview.md` | Embret | ⬜ Template only | Blocks Ch 4.4 |
+| `context/docs/tech/flow-diagrams.md` | Embret | ⬜ Draft — verify | Blocks Ch 4.4 |
+| `context/docs/project/sprint-log.md` | Both | ⬜ Template only | Blocks Ch 3.4 |
+| `context/docs/project/decision-log.md` | Both | ⬜ Template only | Blocks Ch 3, 5 |
+| `context/docs/project/change-log.md` | Both | ⬜ Unknown | Blocks Ch 5, 6 |
+| `context/docs/project/risk-log.md` | Both | ✅ Filled (10 risks) | — |
+| `evaluation/a-grade-rubric.md` | Both | ✅ Complete | — |
+| `evaluation/grading-guidelines.md` | Mikael | ✅ Filled (NRT criteria + NTNU-specific) | — |
+| `evaluation/evaluation.md` | Both | ✅ Filled (chapter-level checklist) | — |
+
+---
+
+## Mikael's Remaining Tasks (context phase)
+
+| Task | Priority | Status |
+|------|:--------:|--------|
+| Fill `context/fitgap-summary.md` | High | ✅ Done |
+| Fill `evaluation/grading-guidelines.md` from PDF | High | ✅ Done |
+| Fill `context/docs/project/sprint-log.md` retroactively | Medium | ⬜ Not started |
+| Fill `context/docs/project/decision-log.md` | Medium | ⬜ Not started |
+| Fill `context/writing-style-examples.md` (after first section) | Low | ⬜ Blocked |
+| Fill `context/docs/user-research/user-tests.md` (if tests done) | Low | ⬜ Not started |
+| Finalise research sub-questions in `context/context.md` | High | ✅ Done (3 sub-questions) |
+| Read and confirm literature sources in `literature-list.md` | High | ⬜ Not started |
+| Confirm scope.md with Embret | Medium | ⬜ Not started |
+
+## Embret's Remaining Tasks (context phase)
+
+| Task | Priority | Status |
+|------|:--------:|--------|
+| Fill `context/docs/tech/api-overview.md` | Medium | ⬜ Not started |
+| Fill `context/docs/tech/codebase-overview.md` | Medium | ⬜ Not started |
+| Verify/update `context/docs/tech/flow-diagrams.md` | Medium | ⬜ Not started |
+| Fill `context/docs/user-research/ui-flow.md` | Medium | ⬜ Not started |
+| Fill `context/docs/requirements/non-functional-requirements.md` | High | ⬜ Not started |
+| Fill `context/docs/requirements/requirements-traceability.md` | High | ⬜ Not started |
 
 ---
 
 ## Chapter Writing Progress
 
-| Chapter | Sections | Drafted | Red-thread | Quality | Revised | Approved |
-|---------|----------|:-------:|:----------:|:-------:|:-------:|:--------:|
-| 1 — Introduction | 1.1, 1.2, 1.3, 1.4 | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
-| 2 — Theory | 2.1, 2.2, 2.3, 2.4 | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
-| 3 — Methodology | 3.1, 3.2, 3.3, 3.4, 3.5 | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
-| 4 — Findings | 4.1, 4.2, 4.3, 4.4, 4.5 | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
-| 5 — Discussion | 5.1, 5.2, 5.3, 5.4, 5.5 | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
-| 6 — Conclusion | 6.1, 6.2, 6.3 | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
-
----
-
-## Section-Level Detail
-
-### Chapter 1 — Introduction
-
-| Section | Status | Notes |
-|---------|--------|-------|
-| 1.1 Background and Motivation | ⬜ Not started | Blocks nothing |
-| 1.2 Research Questions | ⬜ Not started | Requires RQ from context.md |
-| 1.3 Scope and Delimitations | ⬜ Not started | Requires scope.md |
-| 1.4 Thesis Structure | ⬜ Not started | Write last — summarises whole thesis |
+Pipeline: `/write-section X.Y` → `/review-chapter N` → human approval.
 
 ### Chapter 2 — Theory
-
-| Section | Status | Notes |
-|---------|--------|-------|
-| 2.1 Vehicle Routing Problem | ⬜ Not started | Requires sources in references.bib |
-| 2.2 Resource Scheduling and Decision Support | ⬜ Not started | Requires sources |
-| 2.3 Transport Management Systems | ⬜ Not started | |
-| 2.4 Related Work | ⬜ Not started | Write after 2.1–2.3 |
+| Section | Written | Checks | Coherence | Quality | Naturalness | Status |
+|---------|:-------:|:------:|:---------:|:-------:|:-----------:|--------|
+| 2.1 | ⬜ | — | — | — | — | not started |
+| 2.2 | ⬜ | — | — | — | — | not started |
+| 2.3 | ⬜ | — | — | — | — | not started |
+| 2.4 | ⬜ | — | — | — | — | not started |
+Chapter integration: not started
 
 ### Chapter 3 — Methodology
-
-| Section | Status | Notes |
-|---------|--------|-------|
-| 3.1 Research Design | ⬜ Not started | Requires research-design.md |
-| 3.2 Data Collection | ⬜ Not started | Requires interviews-summary.md |
-| 3.3 Data Analysis | ⬜ Not started | |
-| 3.4 System Development Process | ⬜ Not started | Requires sprint-log.md |
-| 3.5 Validity and Reliability | ⬜ Not started | Write last in ch3 |
+| Section | Written | Checks | Coherence | Quality | Naturalness | Status |
+|---------|:-------:|:------:|:---------:|:-------:|:-----------:|--------|
+| 3.1 | ⬜ | — | — | — | — | not started |
+| 3.2 | ⬜ | — | — | — | — | not started |
+| 3.3 | ⬜ | — | — | — | — | not started |
+| 3.4 | ⬜ | — | — | — | — | not started |
+| 3.5 | ⬜ | — | — | — | — | not started |
+Chapter integration: not started
 
 ### Chapter 4 — Findings
-
-| Section | Status | Notes |
-|---------|--------|-------|
-| 4.1 Interview Findings | ⬜ Not started | Requires interviews-summary.md |
-| 4.2 Requirements | ⬜ Not started | Requires functional-requirements.md |
-| 4.3 Fit/Gap Analysis | ⬜ Not started | Requires fitgap-summary.md |
-| 4.4 System Description | ⬜ Not started | Requires architecture.md, tech-stack.md |
-| 4.5 Optimisation Algorithm | ⬜ Not started | Requires algorithm.md — Embret must fill first |
+| Section | Written | Checks | Coherence | Quality | Naturalness | Status |
+|---------|:-------:|:------:|:---------:|:-------:|:-----------:|--------|
+| 4.1 | ⬜ | — | — | — | — | not started |
+| 4.2 | ⬜ | — | — | — | — | not started |
+| 4.3 | ⬜ | — | — | — | — | not started |
+| 4.4 | ⬜ | — | — | — | — | not started |
+| 4.5 | ⬜ | — | — | — | — | not started |
+Chapter integration: not started
 
 ### Chapter 5 — Discussion
+| Section | Written | Checks | Coherence | Quality | Naturalness | Status |
+|---------|:-------:|:------:|:---------:|:-------:|:-----------:|--------|
+| 5.1 | ⬜ | — | — | — | — | not started |
+| 5.2 | ⬜ | — | — | — | — | not started |
+| 5.3 | ⬜ | — | — | — | — | not started |
+| 5.4 | ⬜ | — | — | — | — | not started |
+| 5.5 | ⬜ | — | — | — | — | not started |
+| 5.6 | ⬜ | — | — | — | — | not started |
+Chapter integration: not started
 
-| Section | Status | Notes |
-|---------|--------|-------|
-| 5.1 Pain Points vs. Features | ⬜ Not started | Requires ch4 to be done |
-| 5.2 Algorithm and Human Override | ⬜ Not started | Requires ch4.5 done |
-| 5.3 Adoption Barriers | ⬜ Not started | |
-| 5.4 Tacit Knowledge | ⬜ Not started | |
-| 5.5 Limitations | ⬜ Not started | Write last in ch5 |
+### Chapter 1 — Introduction (write after Ch 2–5)
+| Section | Written | Checks | Coherence | Quality | Naturalness | Status |
+|---------|:-------:|:------:|:---------:|:-------:|:-----------:|--------|
+| 1.1 | ⬜ | — | — | — | — | not started |
+| 1.2 | ⬜ | — | — | — | — | not started |
+| 1.3 | ⬜ | — | — | — | — | not started |
+| 1.4 | ⬜ | — | — | — | — | not started |
+Chapter integration: not started
 
-### Chapter 6 — Conclusion
-
-| Section | Status | Notes |
-|---------|--------|-------|
-| 6.1 Summary | ⬜ Not started | Write after all other chapters |
-| 6.2 Answers to Research Questions | ⬜ Not started | RQ must be finalised |
-| 6.3 Future Work | ⬜ Not started | Grounded in ch5 limitations |
+### Chapter 6 — Conclusion (write last)
+| Section | Written | Checks | Coherence | Quality | Naturalness | Status |
+|---------|:-------:|:------:|:---------:|:-------:|:-----------:|--------|
+| 6.1 | ⬜ | — | — | — | — | not started |
+| 6.2 | ⬜ | — | — | — | — | not started |
+| 6.3 | ⬜ | — | — | — | — | not started |
+Chapter integration: not started
 
 ---
 
 ## Critical Path
 
-Fill these in this order before writing starts:
+Before writing starts, these must be done:
 
 ```
-1. context/context.md — RQ (Mikael)          → unblocks: all chapters
-2. context/glossary.md (Mikael)               → unblocks: all chapters
-3. context/scope.md (Mikael)                  → unblocks: ch1, ch4
-4. context/docs/tech/algorithm.md (Embret)    → unblocks: ch4.5, ch5.2
-5. context/docs/tech/architecture.md (Embret) → unblocks: ch4.4
-6. evaluation/grading-guidelines.md (Mikael)  → unblocks: quality checks
+✅ context/context.md — master context (Mikael)           → done
+✅ context/glossary.md (Mikael)                            → done
+✅ context/scope.md (Mikael)                               → done, needs Embret confirmation
+✅ context/docs/tech/algorithm.md (Embret)                 → done
+✅ context/docs/tech/architecture.md (Embret)              → done
+✅ evaluation/grading-guidelines.md (Mikael)               → done
+✅ context/fitgap-summary.md (Mikael)                      → done
+✅ context/docs/requirements/non-functional-requirements.md (Embret) → done
+✅ result/references.bib                                    → 16 entries
 ```
 
-Once 1–3 are done: start Chapter 1.
-Once 4–5 are done: start Chapter 4 (Embret sections).
-Start Chapter 2 in parallel with context work.
+Writing can start on Chapters 1, 2, 3, 4.1, 4.3, and 4.5 now — their context dependencies are met.
+Chapters 4.2 and 4.4 depend on Embret's remaining tech files (api-overview, codebase-overview, ui-flow).

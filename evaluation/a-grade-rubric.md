@@ -5,7 +5,7 @@
 > If a section does not meet A criteria, revise it before outputting.
 >
 > Source: NTNU data engineering bachelor grading standards (general).
-> Update with specific sensor criteria once evaluation/grading-guidelines.md is filled.
+> Complemented by evaluation/grading-guidelines.md (official NRT sensor criteria, now filled).
 
 ---
 

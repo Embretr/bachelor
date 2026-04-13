@@ -1,8 +1,8 @@
-# Ressursplanlegger — Bachelor Thesis · Claude Instructions
+# Ressursplanlegger — Bachelor Thesis · Codex Instructions
 
 ## The Mandate
 
-This thesis must receive an A. Every word Claude produces is evaluated against that standard before it is written. If a change does not move the thesis closer to an A, it is not made.
+This thesis must receive an A. Every word Codex produces is evaluated against that standard before it is written. If a change does not move the thesis closer to an A, it is not made.
 
 ---
 
@@ -41,23 +41,15 @@ Do not skip any of these. If a file is missing, note it and continue with what e
 
 ### Writing a new section
 
-Use the automated pipeline:
+Use the automated pipeline (works in both Claude Code and Codex):
 
 ```
 /write-section 2.1
 ```
 
-This single command:
-1. Validates prerequisites (outline plan, context files, glossary, references)
-2. Spawns a writer agent that reads its own context
-3. Saves output to the correct .tex file
-4. Runs deterministic checks (placeholders, forbidden phrases, citation keys, compilation)
-5. Spawns 3 review agents (coherence, quality, naturalness) with JSON gates
-6. Reports pass/fail status and updates STATUS.md
-
-If the section already has content, you choose: **revise** (recommended) or **overwrite**.
-
+This single command validates, writes, checks, and reviews the section automatically.
 See `.claude/skills/write-section/SKILL.md` for the full pipeline specification.
+If section has existing content, choose: revise (recommended) or overwrite.
 
 ### Reviewing a completed chapter
 
@@ -67,9 +59,7 @@ After all sections in a chapter are `drafted-reviewed`:
 /review-chapter 2
 ```
 
-This runs 2 integration agents (red-thread + sensor) that assess the chapter as a whole.
-If it passes → `candidate-approved`. **You** make the final approval decision.
-
+Runs 2 integration agents (red-thread + sensor). Human makes final approval.
 See `.claude/skills/review-chapter/SKILL.md` for details.
 
 ### Writing order
@@ -80,9 +70,6 @@ See `.claude/skills/review-chapter/SKILL.md` for details.
 → 5.4 → 5.5 → 5.6 → 1.1 → 1.2 → 1.3 → 1.4 → 6.1 → 6.2 → 6.3
 → Abstract + Sammendrag (last)
 ```
-
-Ch 1 is written after Ch 2–5 (so the intro matches what was actually written).
-Ch 6 is written last.
 
 ---
 
@@ -96,7 +83,7 @@ The section plan (`context/outline.md`) is more important than the prompt itself
 
 ### 2. Writer and red-thread must never share a session
 
-The writer agent is set up to produce — it is not objective. The red-thread agent needs a clean slate without the preceding context to see flaws. Running both in the same session contaminates the review. **Always open a new, separate Claude session for red-thread and quality checks.** This is already stated in the workflow above, but it bears repeating: violating this rule invalidates the review.
+The writer agent is set up to produce — it is not objective. The red-thread agent needs a clean slate without the preceding context to see flaws. Running both in the same session contaminates the review. **Always open a new, separate Codex session for red-thread and quality checks.** This is already stated in the workflow above, but it bears repeating: violating this rule invalidates the review.
 
 ### 3. Update thesis-spine.md after every chapter
 
@@ -108,18 +95,17 @@ If a finished chapter shifts the argument even slightly, update `context/thesis-
 
 ### When using `/write-section` (automated pipeline)
 
-The pipeline handles quality ranking, deterministic checks, and review automatically.
-After the pipeline reports, the only manual steps are:
+The pipeline handles quality ranking, checks, and review automatically.
+After the pipeline reports:
 
-1. **Read the pipeline report** — check the status and any flagged issues
-2. **If `drafted-needs-revision`** — fix issues and re-run `/write-section X.Y` (revise mode)
-3. **If `drafted-reviewed`** — move to the next section
+1. **If `drafted-needs-revision`** — fix issues and re-run `/write-section X.Y` (revise mode)
+2. **If `drafted-reviewed`** — move to the next section
 
 ### After completing a chapter (all sections `drafted-reviewed`)
 
 1. Run `/review-chapter N` for integration check
-2. **Spine sync check:** Compare the chapter's actual argument against `context/thesis-spine.md`. If the chapter shifted the argument, update the spine **now** — before moving to the next chapter.
-3. **Human approval:** Review the chapter yourself. Mark as `approved` in STATUS.md only when you are satisfied.
+2. **Spine sync check:** Compare chapter argument against `context/thesis-spine.md`. Update if shifted.
+3. **Human approval:** Mark `approved` in STATUS.md only when you are satisfied.
 
 ### Step 2 — Workflow reflection
 
@@ -142,7 +128,7 @@ WORKFLOW UPDATE PROPOSED
 
 Triggered by:     [what happened — what was missing or unclear]
 Change type:      [new rule / updated rule / new context file / updated index entry]
-File to edit:     [CLAUDE.md / .claude/agents/X.md / context/index.md / evaluation/X.md]
+File to edit:     [AGENTS.md / .claude/agents/X.md / context/index.md / evaluation/X.md]
 
 Proposed change:
 [exact text to add or replace — quote the current text if modifying existing content]
@@ -163,7 +149,7 @@ Do not propose trivial changes (spelling, formatting) — only changes that affe
 
 ---
 
-## What Claude Must Never Do
+## What the AI Must Never Do
 
 - Invent references, citations, or data — use only sources in `result/references.bib`
 - Claim the system has features not in `context/scope.md`
@@ -180,7 +166,7 @@ Do not propose trivial changes (spelling, formatting) — only changes that affe
 
 ```
 bachelor/
-├── CLAUDE.md                    ← you are here — read every session
+├── AGENTS.md                    ← you are here — read every session
 ├── STATUS.md                    ← progress tracker — read every session
 ├── Makefile                     ← run `make` to compile PDF
 ├── main.tex                     ← root LaTeX file
@@ -204,29 +190,21 @@ bachelor/
 │   ├── a-grade-rubric.md        ← detailed A criteria per chapter — primary quality gate
 │   ├── grading-guidelines.md    ← official sensor guidelines (fill from PDF)
 │   ├── evaluation.md            ← distilled chapter-level checklist
-│   └── review/                  ← output from review agents
-│       ├── sections/            ← per-section reviews (ch2-2.1-round1-*.md)
-│       ├── redthread-chN.md     ← chapter-level red thread
-│       └── quality-chN.md       ← chapter-level sensor
+│   └── review/                  ← output from red-thread and quality agents
+│       ├── redthread-chN.md
+│       └── quality-chN.md
 │
-├── .claude/                     ← Claude Code agent and skill definitions
-│   ├── commands/
-│   │   ├── write-section.md     ← /write-section 2.1 — entry point
-│   │   └── review-chapter.md    ← /review-chapter 2 — entry point
+├── .claude/                     ← Codex agent and skill definitions
 │   ├── agents/
-│   │   ├── writer.md            ← writer agent prompt template
-│   │   ├── red-thread.md        ← coherence review template
-│   │   ├── quality.md           ← sensor/grading review template
-│   │   └── naturalness.md       ← AI-detection review template
-│   ├── skills/
-│   │   ├── write-section/SKILL.md  ← full write+check+review pipeline
-│   │   ├── review-chapter/SKILL.md ← chapter integration check
-│   │   ├── session-start.md     ← ritual: what to load at session start
-│   │   └── context-gather.md    ← which files to load per chapter/section
-│   └── WRITING-WORKFLOW.md      ← complete workflow documentation
+│   │   ├── writer.md            ← writer agent template
+│   │   ├── red-thread.md        ← red-thread agent template
+│   │   └── quality.md           ← quality/examiner agent template
+│   └── skills/
+│       ├── session-start.md     ← ritual: what to load at session start
+│       └── context-gather.md    ← which files to load per chapter
 │
 └── result/                      ← the thesis
-    ├── notes.md                 ← working notes Claude maintains
+    ├── notes.md                 ← working notes Codex maintains
     ├── references.bib           ← all references (APA 7 / biblatex)
     └── chapters/
         ├── ch1/

@@ -10,8 +10,8 @@
 
 | File | Content | Status |
 |------|---------|--------|
-| `context/context.md` | Thesis identity, research question, tech stack, scope summary, chapter status | Partially filled — RQ still placeholder |
-| `context/thesis-spine.md` | One sentence per chapter describing its argument contribution | Draft — review after RQ is finalised |
+| `context/context.md` | Thesis identity, research question, tech stack, scope summary | ✅ Complete — RQ + 3 sub-questions |
+| `context/thesis-spine.md` | One sentence per chapter describing its argument contribution | ✅ Approved draft — review after Ch 4 |
 
 ---
 
@@ -48,10 +48,14 @@
 | `context/docs/tech/tech-stack.md` | Technology choices with justifications | Ch 4.4 |
 | `context/docs/tech/flow-diagrams.md` | Mermaid flow diagrams for key system flows | Ch 4.4 |
 | `context/docs/tech/codebase-overview.md` | Directory structure, key files, external dependencies | Ch 4.4 |
+| `context/intervju/` | Full interview transcriptions (7 files) + summary | Ch 4.1 — primary data source |
 | `context/docs/user-research/personas.md` | User roles: traffic coordinator, transport manager, driver | Ch 4.1, 4.4 |
-| `context/docs/user-research/user-tests.md` | User testing feedback (if conducted) | Ch 5.3, 5.5 |
+| `context/docs/user-research/user-tests.md` | User testing feedback (if conducted) | Ch 5.3 |
 | `context/docs/user-research/ui-flow.md` | Screen-by-screen UI walkthrough | Ch 4.4 |
-| `context/docs/project/risk-log.md` | Identified risks and mitigation | Ch 3.5, 5.5 |
+| `context/docs/project/risk-log.md` | Identified risks and mitigation | Ch 3.5, 5.6 |
+| `context/docs/method/sustainability-analysis.md` | SusAF analysis, SDG mapping, dilemmas, writing guide | Ch 5.5 |
+| `context/docs/method/academic-writing-guide.md` | Writing rules: paragraph structure, flow, action levels, language | All chapters |
+| `context/docs/method/academic-phrases.md` | Phrase bank for academic writing — transitions, hedging, argumentation, conclusions | Reference when writing — not loaded routinely |
 
 ---
 
@@ -63,6 +67,7 @@
 | `evaluation/evaluation.md` | Chapter-level checklist | Before every output |
 | `evaluation/grading-guidelines.md` | Official sensor guidelines | When doing quality check |
 | `evaluation/workflow-improvements.md` | Log of proposed and applied workflow changes | After every task |
+| `evaluation/formal-requirements.md` | Deliverables, deadlines, AI policy, contribution attribution | Final submission checklist only — not loaded during writing |
 
 ---
 
@@ -72,25 +77,34 @@ Files are filled in varying degrees. Use this to know what can be relied upon:
 
 | File | Fill Status | Notes |
 |------|------------|-------|
-| `context/context.md` | ~70% | RQ, tech stack, chapter status need filling |
-| `context/thesis-spine.md` | Draft | Review when RQ finalised |
-| `context/outline.md` | Complete | Detailed section plans ready for all 6 chapters |
-| `context/glossary.md` | Template ready | Fill in before writing starts |
-| `context/scope.md` | Template ready | Fill in before writing starts |
-| `context/writing-style-examples.md` | Empty | Fill after first good section is written |
-| `context/interviews-summary.md` | Complete | 7 interviews distilled |
-| `context/fitgap-summary.md` | Unknown | Check before writing ch4 |
-| `context/docs/requirements/functional-requirements.md` | Empty template | Mikael to fill from interviews |
-| `context/docs/tech/algorithm.md` | Empty template | Embret to fill — blocks ch4.5 |
-| `context/docs/tech/architecture.md` | Empty template | Embret to fill — blocks ch4.4 |
-| `context/docs/tech/codebase-overview.md` | Empty template | Embret to fill |
-| `context/docs/tech/flow-diagrams.md` | Draft diagrams | Embret to verify/update |
-| `context/docs/user-research/personas.md` | Empty template | Mikael to fill from interviews |
-| `context/docs/user-research/user-tests.md` | Empty template | Mikael to fill |
-| `context/docs/user-research/ui-flow.md` | Empty template | Embret to fill |
-| `context/docs/project/risk-log.md` | Draft entries | Both to verify and extend |
-| `evaluation/grading-guidelines.md` | Empty | Mikael to fill from PDF |
-| `evaluation/a-grade-rubric.md` | Complete | General NTNU A criteria — use until PDF is filled |
+| `context/context.md` | ✅ Complete | RQ + 3 sub-questions, tech stack, system description |
+| `context/thesis-spine.md` | ✅ Approved draft | Review after Ch 4 is drafted |
+| `context/outline.md` | ✅ Complete | Paragraph-level plans for Ch 1–3; section-level for Ch 4–6 |
+| `context/glossary.md` | ✅ Filled | Core terms + algorithm + system terms |
+| `context/scope.md` | ✅ Filled | Needs Embret confirmation |
+| `context/writing-style-examples.md` | ⬜ Empty | Fill after first good section is written |
+| `context/interviews-summary.md` | ✅ Complete | 7 interviews distilled + per-company operational details |
+| `context/fitgap-summary.md` | ✅ Filled | 14 gaps, 5 fits, coverage matrix |
+| `context/docs/requirements/functional-requirements.md` | ✅ Filled | 42 requirements with MoSCoW and implementation status |
+| `context/docs/requirements/non-functional-requirements.md` | ✅ Filled | Embret — 9+ NFRs with targets |
+| `context/docs/requirements/requirements-traceability.md` | ✅ Filled | Embret — implementation + test status |
+| `context/docs/tech/algorithm.md` | ✅ Filled | Embret — 3 solvers, constraints, scoring |
+| `context/docs/tech/architecture.md` | ✅ Filled | Embret — full architecture with diagrams |
+| `context/docs/tech/tech-stack.md` | ✅ Filled | Embret — all layers with justification |
+| `context/docs/tech/data-model.md` | ✅ Filled | Embret — entity relationships |
+| `context/docs/tech/codebase-overview.md` | ⚠️ Check | Embret — may be filled |
+| `context/docs/tech/flow-diagrams.md` | ⚠️ Draft | Embret to verify/update |
+| `context/docs/tech/api-overview.md` | ⬜ Template | Embret — blocks ch4.4 |
+| `context/docs/user-research/personas.md` | ✅ Filled | 4 user roles from interviews |
+| `context/docs/user-research/user-tests.md` | ⬜ Template | Fill if user tests are conducted |
+| `context/docs/user-research/ui-flow.md` | ⬜ Template | Embret — blocks ch4.4 |
+| `context/docs/project/risk-log.md` | ✅ Filled | 10 risks |
+| `context/docs/project/sprint-log.md` | ⬜ Template | Both — fill retroactively for Ch 3.4 |
+| `context/docs/project/decision-log.md` | ⬜ Template | Both — fill for Ch 3 |
+| `evaluation/grading-guidelines.md` | ✅ Filled | NRT criteria + NTNU-specific + weighting |
+| `evaluation/a-grade-rubric.md` | ✅ Complete | A criteria per chapter |
+| `evaluation/evaluation.md` | ✅ Filled | Chapter-level checklist with sensor questions |
+| `evaluation/formal-requirements.md` | ✅ Filled | Deliverables, deadlines, documentation |
 
 ---
 

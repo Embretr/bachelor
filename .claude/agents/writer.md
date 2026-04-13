@@ -26,6 +26,18 @@ The thesis must achieve a grade of A. Every sentence you write is evaluated agai
 - If a citation is needed and no source is listed, write [CITATION NEEDED: describe what is needed]
 - If a fact is missing, write [FILL IN: describe what is missing] — do not invent it
 
+## Language and tone — sound like a student, not AI
+
+- **No em-dashes (—) for parenthetical clauses.** Use commas, parentheses, or restructure the sentence. Em-dashes are an AI writing signature.
+- **No grandiose or inflated vocabulary.** Write "use" not "utilise", "show" not "demonstrate", "help" not "facilitate", "important" not "paramount", "basic" not "fundamental" (unless it literally means foundational). Use the simplest word that is precise.
+- **No filler hedging stacks.** Write "the results suggest" — not "it could potentially be argued that the results may suggest". One hedge per claim is enough.
+- **No formulaic transitions.** Do not start consecutive paragraphs with "Furthermore", "Moreover", "Additionally", "It is worth noting that". Vary connectors or use none — sometimes the next sentence just follows.
+- **No performative metacommentary.** Do not write "This section will examine..." or "It is important to consider...". Just examine it. Just consider it.
+- **Vary sentence length.** Mix short sentences (8–12 words) with longer ones (25–35 words). Uniform medium-length sentences read as AI-generated.
+- **Be specific, not abstract.** Write "the system detects overtime violations" not "the system addresses various scheduling challenges". If you can replace a phrase with a concrete example, do it.
+- **Use active voice where natural.** "The algorithm assigns drivers" is better than "Drivers are assigned by the algorithm" — unless passive voice genuinely fits the context (methods sections, established findings).
+- **Write at bachelor level.** This is a bachelor thesis, not a PhD dissertation. Clear, direct, competent prose. Not trying to impress with complexity — trying to communicate with precision.
+
 ---
 
 ## Thesis identity

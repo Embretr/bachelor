@@ -2,88 +2,153 @@
 
 > **Owner: Mikael** — fill in before writing Chapter 2.
 > For each theory: what is it, and how does it connect to Ressursplanlegger specifically.
+> This file provides the raw material for Chapter 2 (Theory). The thesis text should
+> expand on these summaries with proper citations and deeper analysis.
 
 ---
 
 ## Vehicle Routing Problem (VRP)
 
 **What it is:**
-The VRP is an optimisation problem in which a set of vehicles must serve a set of
-customers, minimising total cost subject to constraints. First formulated by
-[Dantzig & Ramser, 1959].
+The Vehicle Routing Problem is a combinatorial optimisation problem in operations research. Given a set of customers (each with a demand) and a fleet of vehicles based at one or more depots, the objective is to find a set of routes that serves all customers while minimising total cost — typically distance, time, or number of vehicles used. First formulated by Dantzig and Ramser (1959) as a generalisation of the Travelling Salesman Problem.
 
 **Relevant variants:**
-- VRPTW (with time windows) — most relevant to Ressursplanlegger
-- Multi-depot VRP — relevant if Norlog's multi-department structure is modelled
-- [FILL IN other variants if relevant]
+- **VRPTW (VRP with Time Windows)** — each customer must be visited within a defined time window. Most directly relevant to Ressursplanlegger, where assignments have start and end times.
+- **CVRP (Capacitated VRP)** — vehicles have a maximum capacity. Relevant when vehicle type and load requirements constrain assignment.
+- **Multi-depot VRP** — vehicles are based at multiple depots. Relevant for companies with multiple departments (e.g., Ottem with 3 divisions).
+- **Heterogeneous fleet VRP** — vehicles have different capabilities. Maps to the real-world constraint that different vehicle types (truck, van, crane) are suited to different assignments.
 
 **How it connects to Ressursplanlegger:**
-[2–3 sentences — how does the assignment planning problem in Ressursplanlegger map to VRP?
-What are the "customers" (assignments), "vehicles" (drivers + trucks), and "cost" (billable hours)?]
+The daily planning problem in Ressursplanlegger can be formulated as a variant of the VRP. "Customers" are assignments that need to be served; "vehicles" are the combination of a driver and a physical vehicle; the "cost" is a composite function balancing workload, priority coverage, and constraint satisfaction. However, Ressursplanlegger's problem is not a pure VRP — it focuses on resource assignment (who does what) rather than route sequencing (in which order), since individual assignments have fixed locations and times. The problem is more precisely a resource-constrained scheduling problem with VRP-like constraints.
 
-**Key sources to find:**
-- Toth, P., & Vigo, D. (Eds.). (2002). *The Vehicle Routing Problem*. SIAM.
-- [FILL IN — add to referanser.bib once found]
+**Key sources:**
+- Dantzig, G. B., & Ramser, J. H. (1959). The Truck Dispatching Problem. *Management Science*, 6(1), 80–91.
+- Toth, P., & Vigo, D. (Eds.). (2014). *Vehicle Routing: Problems, Methods, and Applications* (2nd ed.). SIAM.
+- [FILL IN — additional VRP sources as found during literature review]
+
+> Ensure all sources are in `result/references.bib`.
 
 ---
 
 ## Resource Scheduling
 
 **What it is:**
-[2–3 sentences — general definition of resource scheduling in operations research]
+Resource scheduling is the problem of assigning a set of limited resources (people, machines, vehicles) to a set of tasks over time, subject to constraints on resource availability, task requirements, and temporal dependencies. It is a fundamental problem in operations research, manufacturing, project management, and logistics. The field encompasses job-shop scheduling, nurse scheduling, crew scheduling, and vehicle/driver assignment — all of which share the structure of matching resources to tasks under constraints.
 
 **How it connects to Ressursplanlegger:**
-[2 sentences — how is assigning drivers and vehicles a resource scheduling problem?]
+The core function of Ressursplanlegger is resource scheduling: assigning employees (drivers) and vehicles to assignments (transport jobs) for a given day. The problem involves:
+- **Resource constraints:** driver competencies, licence classes, availability, working hours
+- **Task requirements:** vehicle type, required competencies, time window, priority
+- **Objective:** maximise coverage and balance while respecting all hard constraints
+- **Temporal dimension:** assignments have fixed time slots; drivers cannot be double-booked
 
-**Key sources to find:**
-- [FILL IN]
+This is a multi-resource scheduling problem (each assignment requires both an employee and a vehicle), which increases combinatorial complexity compared to single-resource scheduling.
+
+**Key sources:**
+- Pinedo, M. L. (2016). *Scheduling: Theory, Algorithms, and Systems* (5th ed.). Springer.
+- [FILL IN — crew scheduling / driver scheduling literature]
+- [FILL IN — nurse scheduling as analogous domain (relevant for constraint handling)]
 
 ---
 
 ## Human-in-the-Loop (HITL) Automation
 
 **What it is:**
-Human-in-the-loop refers to systems where a human retains the ability to review,
-correct, or override automated decisions before they take effect.
+Human-in-the-loop refers to a system design pattern where an automated process produces a recommendation or plan, but a human reviews, adjusts, and approves the output before it takes effect. The human retains decision authority; the algorithm serves as decision support, not decision maker. HITL systems occupy the middle ground between fully manual processes and full automation.
 
 **Why it matters for Ressursplanlegger:**
-[2–3 sentences — connect to the interview finding that all coordinators want to
-maintain control, and to Ottem's explicit scepticism about full automation]
+Interview findings show a clear consensus: traffic coordinators do not want full automation of the assignment process. Even the most positive respondents (Norlog Lakselv, Mo i Rana, Tana) want the ability to review and correct the algorithm's output. Sceptical respondents (Ottem, Bergen Bulk Transport) explicitly require full manual control as a precondition for adoption. The reasons are rooted in the nature of transport operations:
+- **Unpredictability:** Weather, road conditions, last-minute cancellations, and customer preferences create situations the algorithm cannot anticipate.
+- **Tacit knowledge:** Coordinators know things that are difficult to formalise — which drivers work well with which customers, which routes are problematic in winter, which drivers prefer certain schedules.
+- **Trust:** Coordinators will not adopt a system whose decisions they cannot understand, verify, and override.
 
 **Design implication:**
-The system should present the algorithm's output as a suggestion, not a decision.
+Ressursplanlegger implements HITL as its core interaction pattern: the algorithm generates a suggested plan, the coordinator reviews it (with conflicts highlighted), makes manual adjustments, and approves the final version. This is the "suggest + override" pattern — the algorithm does the heavy lifting, the human applies judgment.
 
-**Key sources to find:**
-- [FILL IN — search "human-in-the-loop decision support systems" or similar]
+**Levels of automation (Sheridan & Verplank, 1978):**
+Ressursplanlegger operates at approximately level 5–6 on Sheridan and Verplank's 10-level automation scale: the system generates a plan and presents it for approval, but the coordinator can modify any part before execution.
+
+**Key sources:**
+- Sheridan, T. B., & Verplank, W. L. (1978). *Human and Computer Control of Undersea Teleoperators*. MIT Man-Machine Systems Laboratory.
+- Parasuraman, R., Sheridan, T. B., & Wickens, C. D. (2000). A model for types and levels of human interaction with automation. *IEEE Transactions on Systems, Man, and Cybernetics — Part A*, 30(3), 286–297.
+- [FILL IN — decision support systems literature]
+- [FILL IN — trust in automation literature, relevant to adoption barriers]
 
 ---
 
 ## Transport Management Systems (TMS)
 
 **What it is:**
-[2 sentences — definition of TMS as a software category]
+A Transport Management System is software used by logistics and transport companies to plan, execute, and monitor the movement of goods. TMS functionality typically includes order management, route planning, carrier management, freight billing, and reporting. In practice, many TMS solutions focus on order/invoice management rather than on the operational planning of who drives what.
 
 **Existing systems in the Norwegian context:**
-| System | Used by | Key limitation |
-|--------|---------|---------------|
-| Timpex | Norlog (Lakselv, Mo i Rana) | Very slow with many users |
-| Trimtex | Norlog Tana | Slow, limited features |
-| Opptur | Harlem Solutions | Primarily a billing tool |
+
+| System | Used by | Strengths | Key limitations |
+|--------|---------|-----------|-----------------|
+| Timpex | Norlog Lakselv, Norlog Mo i Rana | Established, handles invoicing, driver notification via Timpex Confirm app | Extremely slow with concurrent users; no optimisation; no capacity overview |
+| Trimtex | Norlog Tana | Handles basic order management | Slow; limited features; no planning support |
+| Opptur | Harlem Solutions | Order and invoicing | Primarily a billing tool, not a planning tool |
+| Custom systems | Ottem, Nordic Crane | Tailored to own operations | No standardisation; difficult to maintain; no optimisation |
+| None | Bergen Bulk Transport | — | Fully manual — phone calls, memory, no system at all |
 
 **Gap Ressursplanlegger addresses:**
-None of the above systems include optimisation-based plan generation or structured
-decision support for traffic coordinators.
+None of the systems above include optimisation-based plan generation, structured decision support for driver assignment, or automated conflict detection. They are containers for orders and invoices — the actual assignment of drivers to jobs is always a manual, knowledge-dependent process performed by the traffic coordinator. Ressursplanlegger targets precisely this gap: the space between "order exists" and "driver is assigned."
 
-**Key sources to find:**
-- [FILL IN — look for TMS industry overviews or academic reviews]
+**Key sources:**
+- [FILL IN — TMS industry overview or academic review]
+- [FILL IN — literature on digitalisation in Norwegian transport/logistics, if available]
+
+---
+
+## Constraint Programming and Optimisation Solvers
+
+**What it is:**
+Constraint Programming (CP) is a paradigm for solving combinatorial problems by defining variables, domains, and constraints, then using a solver to find assignments that satisfy all constraints while optimising an objective function. CP-SAT (Constraint Programming with Boolean Satisfiability) combines constraint propagation with SAT-solving techniques, enabling efficient solutions to problems with thousands of variables.
+
+**How it connects to Ressursplanlegger:**
+Ressursplanlegger uses three solver approaches that represent different points on the speed–quality tradeoff:
+
+| Solver | Technique | Speed | Quality | Use case |
+|--------|-----------|-------|---------|----------|
+| Greedy | Priority-sorted first-fit | Instant | No optimality guarantee | Real-time feedback, demos |
+| OR-Tools CP-SAT | Constraint programming with SAT | Seconds–minutes | Near-optimal | Standard daily planning |
+| Timefold | Metaheuristic (tabu search, simulated annealing) | Minutes–hours | High quality for large instances | Large fleets, multi-day |
+
+This multi-engine approach is itself a design contribution — it allows benchmarking and comparison, and gives the coordinator a choice between speed and solution quality.
+
+**Key sources:**
+- Rossi, F., van Beek, P., & Walsh, T. (Eds.). (2006). *Handbook of Constraint Programming*. Elsevier.
+- Google OR-Tools documentation: [reference as software, not academic source]
+- Timefold Solver documentation: [reference as software]
+- [FILL IN — CP-SAT specific papers if needed for depth]
 
 ---
 
 ## Design Science Research (DSR)
 
 **What it is:**
-[2 sentences — connect to context/docs/method/research-design.md]
+Design Science Research is a research methodology in information systems that focuses on creating and evaluating artefacts (systems, models, methods) to address practical problems. The research contribution is dual: the artefact itself and the design knowledge generated through building and evaluating it. DSR provides a structured process from problem identification through evaluation and communication.
 
-**Key source:**
-- Hevner, A. R., March, S. T., Park, J., & Ram, S. (2004). Design science in
-  information systems research. *MIS Quarterly*, 28(1), 75–105.
+**How it connects to this thesis:**
+Ressursplanlegger is the artefact. The research question asks whether an algorithm-driven platform can support traffic coordinators — answering this requires building the platform (design) and evaluating it against real-world needs (evaluation). DSR provides the methodological framework for treating this build-and-evaluate process as rigorous research.
+
+See `context/docs/method/research-design.md` for the detailed application of DSR phases to this project.
+
+**Key sources:**
+- Hevner, A. R., March, S. T., Park, J., & Ram, S. (2004). Design Science in Information Systems Research. *MIS Quarterly*, 28(1), 75–105.
+- Peffers, K., Tuunanen, T., Rothenberger, M. A., & Chatterjee, S. (2007). A Design Science Research Methodology for Information Systems Research. *Journal of Management Information Systems*, 24(3), 45–77.
+
+---
+
+## Summary: How the Theories Connect
+
+```
+Problem domain                    Solution domain
+─────────────────                 ─────────────────
+VRP / Resource Scheduling    →    Algorithm design (greedy, CP-SAT, Timefold)
+Human-in-the-Loop            →    Suggest + override interaction pattern
+TMS landscape gaps           →    Ressursplanlegger as a new category of tool
+DSR methodology              →    Framework for building and evaluating the artefact
+```
+
+The theoretical framework positions Ressursplanlegger at the intersection of operations research (VRP, scheduling), human-computer interaction (HITL automation), and information systems (TMS, DSR). The system is theoretically grounded in optimisation but practically designed around the finding that human judgment remains essential in transport planning.

@@ -1,48 +1,155 @@
 % ─── References — APA 7 via biblatex-apa ────────────────────────────────────
 %
-% Add entries here. Common types:
-%
-% @article{key,
-%   author  = {Last, First and Last2, First2},
-%   title   = {Title of the Article},
-%   journal = {Journal Name},
-%   year    = {2024},
-%   volume  = {1},
-%   number  = {1},
-%   pages   = {1--10},
-%   doi     = {10.xxxx/xxxxx},
-% }
-%
-% @book{key,
-%   author    = {Last, First},
-%   title     = {Book Title},
-%   publisher = {Publisher},
-%   address   = {City},
-%   year      = {2024},
-% }
-%
-% @inproceedings{key,
-%   author    = {Last, First},
-%   title     = {Paper Title},
-%   booktitle = {Conference Name},
-%   year      = {2024},
-%   pages     = {1--10},
-% }
-%
-% @misc{key,
-%   author  = {Last, First},
-%   title   = {Title},
-%   year    = {2024},
-%   url     = {https://...},
-%   urldate = {2026-01-01},
-% }
+% Status: Sources from context/docs/method/literature-list.md
+% Mark sources as read in literature-list.md when confirmed.
+% Add new sources here AND in literature-list.md.
 
-% ─── Example entry (delete when you add real references) ─────────────────────
+% ─── Vehicle Routing Problem ────────────────────────────────────────────────
 
-@misc{example2024,
-  author  = {Example, Author},
-  title   = {Example Reference — Replace This},
-  year    = {2024},
-  url     = {https://example.com},
-  urldate = {2026-01-01},
+@article{dantzig1959truck,
+  author  = {Dantzig, George B. and Ramser, John H.},
+  title   = {The Truck Dispatching Problem},
+  journal = {Management Science},
+  year    = {1959},
+  volume  = {6},
+  number  = {1},
+  pages   = {80--91},
+}
+
+@book{toth2014vrp,
+  editor    = {Toth, Paolo and Vigo, Daniele},
+  title     = {Vehicle Routing: Problems, Methods, and Applications},
+  edition   = {2},
+  publisher = {Society for Industrial and Applied Mathematics},
+  address   = {Philadelphia},
+  year      = {2014},
+}
+
+% ─── Research Methodology ───────────────────────────────────────────────────
+
+@article{hevner2004dsr,
+  author  = {Hevner, Alan R. and March, Salvatore T. and Park, Jinsoo and Ram, Sudha},
+  title   = {Design Science in Information Systems Research},
+  journal = {MIS Quarterly},
+  year    = {2004},
+  volume  = {28},
+  number  = {1},
+  pages   = {75--105},
+}
+
+@article{hevner2007threecycle,
+  author  = {Hevner, Alan R.},
+  title   = {A Three Cycle View of Design Science Research},
+  journal = {Scandinavian Journal of Information Systems},
+  year    = {2007},
+  volume  = {19},
+  number  = {2},
+  pages   = {87--92},
+}
+
+@article{peffers2007dsr,
+  author  = {Peffers, Ken and Tuunanen, Tuure and Rothenberger, Marcus A. and Chatterjee, Samir},
+  title   = {A Design Science Research Methodology for Information Systems Research},
+  journal = {Journal of Management Information Systems},
+  year    = {2007},
+  volume  = {24},
+  number  = {3},
+  pages   = {45--77},
+}
+
+@book{wieringa2014dsr,
+  author    = {Wieringa, Roel J.},
+  title     = {Design Science Methodology for Information Systems and Software Engineering},
+  publisher = {Springer},
+  year      = {2014},
+}
+
+@article{braun2006qualitative,
+  author  = {Braun, Virginia and Clarke, Victoria},
+  title   = {Using Thematic Analysis in Psychology},
+  journal = {Qualitative Research in Psychology},
+  year    = {2006},
+  volume  = {3},
+  number  = {2},
+  pages   = {77--101},
+}
+
+@book{malterud2003kvalitative,
+  author    = {Malterud, Kirsti},
+  title     = {Kvalitative metoder i medisinsk forskning},
+  edition   = {2},
+  publisher = {Universitetsforlaget},
+  year      = {2003},
+}
+
+% ─── Human-in-the-Loop and Automation ───────────────────────────────────────
+
+@article{parasuraman2000automation,
+  author  = {Parasuraman, Raja and Sheridan, Thomas B. and Wickens, Christopher D.},
+  title   = {A Model for Types and Levels of Human Interaction with Automation},
+  journal = {IEEE Transactions on Systems, Man, and Cybernetics --- Part A: Systems and Humans},
+  year    = {2000},
+  volume  = {30},
+  number  = {3},
+  pages   = {286--297},
+}
+
+% ─── Resource Scheduling ───────────────────────────────────────────────────
+
+@book{pinedo2016scheduling,
+  author    = {Pinedo, Michael L.},
+  title     = {Scheduling: Theory, Algorithms, and Systems},
+  edition   = {5},
+  publisher = {Springer},
+  year      = {2016},
+}
+
+% ─── Sustainability ────────────────────────────────────────────────────────
+
+@misc{brundtland1987common,
+  author      = {{World Commission on Environment and Development}},
+  title       = {Our Common Future},
+  year        = {1987},
+  publisher   = {United Nations},
+}
+
+@misc{un2015sdg,
+  author      = {{United Nations General Assembly}},
+  title       = {Transforming Our World: The 2030 Agenda for Sustainable Development},
+  year        = {2015},
+  note        = {A/RES/70/1},
+}
+
+@misc{becker2015karlskrona,
+  author  = {Becker, Christoph and Chitchyan, Ruzanna and Duboc, Leticia and Easterbrook, Steve and Penzenstadler, Birgit and Seyff, Norbert and Venters, Colin C.},
+  title   = {The Karlskrona Manifesto for Sustainability Design},
+  year    = {2015},
+  eprint  = {1410.6968},
+  archiveprefix = {arXiv},
+}
+
+@article{duboc2020susaf,
+  author  = {Duboc, Leticia and Penzenstadler, Birgit and Porras, Jari and Chitchyan, Ruzanna and Betz, Stefanie and Seyff, Norbert and Venters, Colin C. and Brooks, Ian and Becker, Christoph},
+  title   = {Do We Really Know What We Are Building? Raising Awareness of Potential Sustainability Effects of Software Systems in Requirements Engineering},
+  journal = {Journal of Systems and Software},
+  year    = {2020},
+  volume  = {165},
+  pages   = {110570},
+}
+
+@inproceedings{seyff2022susafsdg,
+  author    = {Seyff, Norbert and Betz, Stefanie and Lammert, Dominic and Porras, Jari and Duboc, Leticia and Brooks, Ian and Chitchyan, Ruzanna and Venters, Colin C. and Penzenstadler, Birgit},
+  title     = {Transforming Our World through Software: Mapping the Sustainability Awareness Framework to the {UN} Sustainable Development Goals},
+  booktitle = {Proceedings of the 17th International Conference on Evaluation of Novel Approaches to Software Engineering (ENASE 2022)},
+  year      = {2022},
+  pages     = {417--425},
+}
+
+% ─── Research Methods (general) ─────────────────────────────────────────────
+
+@book{oates2022researching,
+  author    = {Oates, Briony J. and Griffiths, Marie and McLean, Rachel},
+  title     = {Researching Information Systems and Computing},
+  publisher = {SAGE},
+  year      = {2022},
 }

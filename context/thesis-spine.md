@@ -15,31 +15,37 @@ software that is too slow and provides no decision support.
 
 ---
 
+## The Research Question
+
+> How can an algorithm-driven resource planning platform support traffic coordinators in Norwegian transport companies in assigning drivers and vehicles to assignments more efficiently than current manual processes?
+
+### Sub-questions the thesis must answer
+
+1. What are the current practices, pain points, and needs of traffic coordinators in Norwegian transport companies when assigning drivers and vehicles to assignments? → Ch 4.1, 4.3
+2. How should an algorithm-assisted planning system be designed to balance automated optimisation with the coordinator's need for manual control and oversight? → Ch 2, 4.4, 4.5
+3. To what extent does the proposed system address the identified needs, and what are its limitations? → Ch 5, 6
+
+---
+
 ## The Argument — One Sentence Per Chapter
 
 **Chapter 1 — Introduction:**
-Manual resource planning in transport companies is a real, widespread problem that
-warrants a software solution.
+Manual resource planning in Norwegian transport is inefficient, error-prone, and dependent on individual coordinators' tacit knowledge — a problem that warrants a structured, algorithm-assisted solution.
 
 **Chapter 2 — Theory:**
-Vehicle Routing Problem theory, resource scheduling research, and human-in-the-loop
-design principles provide the conceptual foundation for Ressursplanlegger's approach.
+Vehicle routing theory, resource scheduling, and human-in-the-loop design principles provide the theoretical foundation for a system that automates plan generation while preserving coordinator control.
 
 **Chapter 3 — Methodology:**
-Semi-structured interviews with seven traffic coordinators, analysed thematically and
-combined with Design Science Research, produced the requirements and design for Ressursplanlegger.
+Design Science Research structures the project: semi-structured interviews with seven traffic coordinators identified the problem and requirements, iterative development produced the artefact, and validation through benchmarking and requirements traceability assessed its quality.
 
 **Chapter 4 — Findings:**
-Interviews revealed consistent pain points (slowness, tacit knowledge, manual dispatch),
-and Ressursplanlegger was built to address these through an algorithm-assisted planning interface.
+Interviews revealed universal pain points (slow systems, tacit knowledge dependency, no planning support), and Ressursplanlegger was built to address these through a multi-engine optimisation algorithm, conflict detection, and a human-in-the-loop planning interface.
 
 **Chapter 5 — Discussion:**
-Ressursplanlegger partially addresses the identified problems, but adoption barriers, algorithm
-limitations, and the irreducible need for human judgment constrain its impact.
+Ressursplanlegger addresses the core planning gap that no existing system fills, but adoption depends on invoicing integration, system performance, and coordinator trust — and the irreducible role of tacit knowledge means full automation is neither feasible nor desirable.
 
 **Chapter 6 — Conclusion:**
-Ressursplanlegger demonstrates that algorithm-assisted resource planning can support traffic
-coordinators, but full automation is neither feasible nor desirable in this domain.
+Algorithm-assisted resource planning can meaningfully support traffic coordinators, but the system complements rather than replaces human judgment; production deployment and invoicing integration are essential next steps.
 
 ---
 
@@ -51,5 +57,7 @@ coordinators, but full automation is neither feasible nor desirable in this doma
 
 ---
 
-> ⚠️ FILL IN: Review and adjust the sentences above once the research question
-> and conclusions are finalised. The sentences above are a starting point.
+## Spine Status: APPROVED DRAFT
+
+Last revised: 2026-04-12. Based on finalised sub-questions and complete context files.
+Review again after Chapter 4 is drafted — if findings shift the argument, update the spine before writing Chapter 5.
