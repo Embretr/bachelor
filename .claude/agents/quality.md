@@ -63,10 +63,35 @@ For each criterion:
 - Weakness: [quote a specific passage or describe a specific gap]
 - One fix: [one concrete action that would move this from its current grade to A]
 
+**Source integration check** — for each major citation in the chapter:
+1. Is the cited claim specific (page/chapter reference) or generic ("Author (Year) says X")?
+2. Does the sentence BEFORE or AFTER the citation connect it to the thesis argument?
+3. Could the citation be removed without weakening the paragraph? If yes, it's name-dropped.
+
+Classify overall source integration as: "integrated" / "mixed" / "name-dropped"
+
+**Depth assessment** — classify as "genuine" or "surface":
+
+Signs of A-level depth (genuine):
+- Claims are qualified with conditions ("This applies when X, but not when Y")
+- Multiple perspectives are presented before the author's position is stated
+- Limitations of the cited theory/method are acknowledged
+- Specific examples from the project illustrate abstract concepts
+- The paragraph could NOT be written by someone who only read the abstract of the cited source
+
+Signs of B-level depth (surface):
+- Claims are stated without qualification
+- Only one perspective is presented
+- Theory is summarised but not applied
+- Examples are generic, not project-specific
+- The paragraph reads like a textbook summary
+
 After all criteria:
 
 **Overall assessment:**
 - Estimated grade for this chapter: [A / B / C]
+- Depth assessment: [genuine / surface]
+- Source integration: [integrated / mixed / name-dropped]
 - Single most important fix before submission: [one sentence]
 - Does this chapter, as written, pull the thesis grade up or down?
 
