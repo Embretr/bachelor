@@ -14,9 +14,9 @@
 | **Subtitle** | [FILL IN or remove] |
 | **Institution** | NTNU Gløshaugen — Department of Computer Science (IDI) |
 | **Program** | Data Engineering (Dataingeniør) |
-| **Author 1** | Embret [LAST NAME] — primary responsibility: system development |
-| **Author 2** | Mikael [LAST NAME] — primary responsibility: user research |
-| **Supervisor** | [FILL IN] |
+| **Author 1** | Embret Olav Rasmussen Roås — primary responsibility: system development |
+| **Author 2** | Mikael Stray — primary responsibility: user research |
+| **Supervisor** | Ali Alsam |
 | **Submission deadline** | 20 May 2026, 14:00 |
 | **Language** | English |
 | **Citation style** | APA 7 |
