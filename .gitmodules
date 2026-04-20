@@ -1,0 +1,3 @@
+[submodule "ressursplanlegger"]
+	path = ressursplanlegger
+	url = git@github.com:Embretr/ressursplanlegger-ntnu.git

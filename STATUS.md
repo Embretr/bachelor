@@ -90,20 +90,20 @@ Pipeline: `/write-section X.Y` (auto-revise up to 3 rounds + polish) → `/revie
 | Section | Written | Checks | Coherence | Quality | Naturalness | Status |
 |---------|:-------:|:------:|:---------:|:-------:|:-----------:|--------|
 | 2.1 | ✅ | PASS | PASS | A/genuine | 4/5 | drafted-reviewed |
-| 2.2 | ⬜ | — | — | — | — | not started |
-| 2.3 | ⬜ | — | — | — | — | not started |
-| 2.4 | ⬜ | — | — | — | — | not started |
-Chapter integration: not started
+| 2.2 | ✅ | PASS | PASS | A/genuine | 4/5 | drafted-reviewed |
+| 2.3 | ✅ | PASS | PASS | A/genuine | 4/5 | drafted-reviewed |
+| 2.4 | ✅ | PASS | PASS | A/genuine | 4/5 | drafted-reviewed |
+Chapter integration: not started (Wieringa duplication removed from §2.4 — re-run /review-chapter 2 when ready)
 
 ### Chapter 3 — Methodology
 | Section | Written | Checks | Coherence | Quality | Naturalness | Status |
 |---------|:-------:|:------:|:---------:|:-------:|:-----------:|--------|
-| 3.1 | ⬜ | — | — | — | — | not started |
-| 3.2 | ⬜ | — | — | — | — | not started |
-| 3.3 | ⬜ | — | — | — | — | not started |
-| 3.4 | ⬜ | — | — | — | — | not started |
-| 3.5 | ⬜ | — | — | — | — | not started |
-Chapter integration: not started
+| 3.1 | ✅ | PASS | PASS | A/genuine | 4/5 | drafted-reviewed |
+| 3.2 | ✅ | PASS | PASS | A/genuine | 5/5 | drafted-reviewed |
+| 3.3 | ✅ | PASS | PASS | A/genuine | 4/5 | drafted-reviewed |
+| 3.4 | ✅ | PASS | PASS | A/genuine | 4/5 | drafted-reviewed |
+| 3.5 | ✅ | PASS | PASS | A/genuine | 4/5 | drafted-reviewed |
+Chapter integration: candidate-approved
 
 ### Chapter 4 — Findings
 | Section | Written | Checks | Coherence | Quality | Naturalness | Status |
