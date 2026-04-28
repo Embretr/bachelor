@@ -45,22 +45,26 @@ For each critical file: Read it. If it contains mainly `[FILL IN]` placeholders 
 
 ### 1c. Section readiness gate
 
-Run this gate before writing. It catches missing evidence before a writer can produce generic text or cite sources that have not been approved.
+Run this gate before writing. It catches missing evidence before a writer can produce generic text or cite sources without verified content.
 
 Read the paragraph plan for section `{X.Y}` in `context/outline.md`. Extract every `MUST CITE`, `MUST EVIDENCE`, `MUST GROUND`, `MUST ANCHOR`, and `MUST TRACE` marker for that section.
-Read `evaluation/source-requests.md` and `context/docs/method/literature-list.md` before applying the citation gate.
-
-**Source request readiness — hard stop if any fail:**
-1. If `evaluation/source-requests.md` contains any request for section `{X.Y}` with status `needed`, `candidate`, or `agent-reviewed`, **STOP**: "Section {X.Y} has unresolved source request(s): {SRC ids}. Resolve them before writing. A source is usable only after human `approved-read` status in literature-list.md and BibTeX confirmation in references.bib."
-2. If the section plan contains a claim that clearly needs scholarly support but has no `MUST CITE`, **STOP** and report it as a source need: "Section {X.Y}, paragraph {¶}: {claim}. Create or update a `SRC-xxx` entry in evaluation/source-requests.md before writing."
 
 **Citation readiness — hard stop if any fail:**
 1. Every `MUST CITE` marker must contain concrete BibTeX key(s), such as `\textcite{key}` or `\parencite{key}`.
-2. If a `MUST CITE` marker is generic (for example "trust source", "agile/iterative methodology source", "OR-Tools/solver literature", "UN SDG targets" without a key), **STOP**: "Section {X.Y} has a generic MUST CITE marker in paragraph {¶}. Create or update a `SRC-xxx` entry in evaluation/source-requests.md with the claim that needs support. Do not write this section until a concrete source is approved-read and added to outline.md."
+2. If a `MUST CITE` marker is generic (e.g. "trust source", "agile/iterative methodology source", "OR-Tools/solver literature" without a key), **STOP**: "Section {X.Y} has a generic MUST CITE marker in paragraph {¶}. Replace with a concrete bibkey in outline.md before writing."
 3. Every required citation key must exist in `result/references.bib`.
-4. Every required citation key must appear in `context/docs/method/literature-list.md` with status `approved-read` and `In .bib? = ✅`. If it is missing from the literature list entirely, **STOP** and ask the user to add it as a controlled source entry.
-5. A source with status `candidate` or `agent-reviewed` is not usable. **STOP** if any required key has either status.
-6. Do not add sources automatically and do not cite sources that are not both `approved-read` in the literature list and present in `result/references.bib`.
+4. Every required citation key must have a verified source notes file at `context/docs/method/sources/raw/extracted/{bibkey}.md`. The file must:
+   - Exist
+   - Be ≥500 bytes (not template-only)
+   - Contain "Notes generated from raw" in the Status block
+   If any are missing or unfilled, **STOP** and list which keys lack source notes. Tell the user: "Source notes incomplete for: {keys}. Run extraction (see `.claude/agents/source-extractor.md`) before writing this section."
+5. The source notes file is the ground truth. Do not invent passages or cite a source whose notes are missing.
+
+**Evidence readiness — hard stop if any fail:**
+1. Every `MUST EVIDENCE` / `MUST GROUND` source file must exist and contain section-specific evidence, not only generic background.
+2. A required evidence file is not ready if it is <50 words, mostly comments/templates, or contains unresolved placeholders needed by this section (`[FILL IN]`, `[CITATION NEEDED]`, `TODO`, or template-only rows).
+3. If evidence is missing, **STOP** and list exactly what information must be filled before writing.
+4. Do not write around missing support by weakening the claim, deleting the claim, or inserting `[CITATION NEEDED]`.
 
 **Evidence readiness — hard stop if any fail:**
 1. Every `MUST EVIDENCE` / `MUST GROUND` source file must exist and contain section-specific evidence, not only generic background.
@@ -106,14 +110,13 @@ REQUIRED FILES — read ALL of these before writing:
 - context/outline.md — find section {X.Y}, follow the ¶-plan EXACTLY
 - context/glossary.md — use ONLY these terms, no synonyms
 - result/references.bib — cite ONLY sources listed here
-- context/docs/method/literature-list.md — cite ONLY sources with status `approved-read`
-- evaluation/source-requests.md — unresolved requests for this section are blockers
+- context/docs/method/sources/raw/extracted/{bibkey}.md — for each MUST CITE key in this section, read the verified source notes
 {FOR EACH chapter-specific file from context-gather.md:}
 - {file path} — {why it's needed}
 
 EVIDENCE MARKERS:
 All MUST markers (MUST CITE, MUST EVIDENCE, MUST ANCHOR, MUST TRACE, MUST GROUND) in outline.md for this section must be satisfied. Missing marker satisfaction is a review issue.
-If a planned claim lacks an approved-read source, STOP and report the claim as a source request need with section and paragraph. Do not write around the gap and do not insert `[CITATION NEEDED]`.
+If a planned claim lacks a source with verified notes, STOP and report the gap with section and paragraph. Do not write around it and do not insert `[CITATION NEEDED]`.
 
 CONTINUITY:
 Read `{TEX_FILE}` to see what's already written in this chapter.
@@ -164,7 +167,7 @@ Check the section content (between its `\section{}` and the next) for:
 2. **Forbidden voice**: Grep for `we believe`, `we think`, `we found` (case-insensitive)
 3. **Citation keys**: Extract all `\parencite` and `\textcite` commands. For each, extract the citation key(s). Verify each key exists in `result/references.bib`.
    Handle: `\parencite{key}`, `\parencite{key1,key2}`, `\parencite[see][p.~12]{key}`, `\textcite{key}`
-4. **Source approval**: For every extracted citation key, verify that `context/docs/method/literature-list.md` contains the key with status `approved-read` and `In .bib? = ✅`. Treat `candidate`, `agent-reviewed`, missing rows, or rejected sources as hard fails.
+4. **Source notes**: For every extracted citation key, verify that `context/docs/method/sources/raw/extracted/{bibkey}.md` exists and is filled (≥500 bytes, contains "Notes generated from raw"). Missing or unfilled notes are hard fails.
 5. **Compilation**: Run `make` via Bash. Check exit code.
    - If `latexmk` or `pdflatex` is not installed: report as **WARNING** ("LaTeX not installed — compile check skipped"), NOT as hard fail. The section can still proceed to review.
    - If LaTeX IS installed and `make` fails: that IS a hard fail.
@@ -191,7 +194,7 @@ Write check results to `evaluation/review/sections/ch{N}-{X.Y}-round{R}-checks.m
 - Placeholders: {PASS/FAIL — details}
 - Forbidden voice: {PASS/FAIL — details}
 - Citation keys: {PASS/FAIL — missing keys listed}
-- Source approval: {PASS/FAIL — unapproved keys listed with literature-list status}
+- Source notes: {PASS/FAIL — keys missing source notes listed}
 - Compilation: {PASS/FAIL/WARNING}
 
 ## Warnings
@@ -226,7 +229,7 @@ FOR EACH hard fail:
   - Invalid citation key: CANNOT auto-fix → STOPP.
     (Do NOT auto-add entries to references.bib — academic integrity.)
   - Unapproved citation source: CANNOT auto-fix → STOPP.
-    Report the key, current literature-list status, and the section/paragraph claim that needs human source approval.
+    Report the key, the missing source notes file path, and the section/paragraph claim that needs source notes.
   - Compilation fail: CANNOT auto-fix → STOPP.
 
 After auto-fix: re-run Step 4 checks for SAME round.
@@ -246,7 +249,7 @@ Spawn three agents as independent tasks. Run in parallel if supported; sequentia
 **All reviewers share this rule:**
 > If `pass: false`, at least one item in `issues[]` MUST have `severity: "critical"`. If the issue cannot be fixed automatically, set `fixable: false`.
 > Check that all MUST markers from the outline ¶-plan for this section are satisfied. If a required source or anchor is missing, report it as a critical issue.
-> If a claim needs a source that is missing, weak, mismatched, or not `approved-read`, report the claim as a source need with section and paragraph. Do not suggest writing around the missing source.
+> If a claim needs a source whose notes are missing, weak, or mismatched, report the claim as a source need with section and paragraph. Do not suggest writing around the missing source.
 
 ### Agent 1 — Section Coherence
 
@@ -257,14 +260,14 @@ Read the section from `{TEX_FILE}` — only the content under \section{...} for 
 Read `context/thesis-spine.md` — find the sentence for Chapter {N}.
 Read `context/context.md` — find the Research Question and sub-questions.
 Read `context/outline.md` — find the ¶-plan for section {X.Y}. Use this for outline compliance.
-Read `context/docs/method/literature-list.md` and `evaluation/source-requests.md` for source approval and unresolved source needs.
+For each cite key used in the section, read `context/docs/method/sources/raw/extracted/{bibkey}.md` to verify the cited claim matches what the source actually says.
 If there are previous sections in this chapter (before {X.Y}), read them too for continuity.
 
 Answer these questions with specific evidence:
 1. Does this section follow logically from the previous section (or chapter opening)?
 2. Does every factual claim have a citation (\parencite or \textcite) or reference to primary data?
 3. Does this section serve the chapter's one-sentence spine purpose?
-4. Are there concepts or terms used that haven't been introduced in this or a previous section? (VRP, CP-SAT, tacit knowledge, etc. must be defined BEFORE first use.)
+4. Are there concepts or terms used that haven't been introduced in this or a previous section? (HITL, CP-SAT, tacit knowledge, etc. must be defined BEFORE first use.)
 
 OUTLINE COMPLIANCE (reviewer judgment):
 5. Does each paragraph cover the topic specified in its ¶-plan from outline.md?
@@ -335,7 +338,7 @@ Read `evaluation/evaluation.md` — find the checklist for Chapter {N}.
 Read `evaluation/a-grade-rubric.md` — what separates A from B.
 Read `context/docs/method/academic-writing-guide.md` — the "Writing Action Levels" section.
 Read `context/outline.md` — find MUST markers for this section.
-Read `context/docs/method/literature-list.md` and `evaluation/source-requests.md` for source status and unresolved source requests.
+For each cite key used in the section, verify against `context/docs/method/sources/raw/extracted/{bibkey}.md` that the cited claim matches the verified source notes.
 
 IMPORTANT — respect the chapter's writing action level:
 - Chapter 1 (Intro): EXPLAIN. Clear motivation, precise RQ, scope.
@@ -357,7 +360,7 @@ Assess:
    b. claims supported by weak, wrong, or only tangentially relevant sources,
    c. paragraphs that make source-dependent claims without a necessary source,
    d. too many citations without analysis or connection to the thesis argument,
-   e. any source used without status `approved-read` in `context/docs/method/literature-list.md`.
+   e. any source cited where the source notes file at `context/docs/method/sources/raw/extracted/{bibkey}.md` is missing or unfilled, or where the cited claim does not match the documented passages.
 4. Does it meet the relevant checklist items from evaluation.md?
 5. **Evidence marker check** — are all MUST markers from outline satisfied?
 6. If a claim needs a new or better source, report it as a source request need with section, paragraph, claim, and desired source type.
@@ -490,11 +493,11 @@ Print summary:
 IF status == "drafted-needs-revision" AND round < 3:
   1. Collect all issues where severity == "critical" AND fixable == true
      from coherence, quality, and naturalness JSON.
-     Source approval failures, missing sources, generic MUST CITE markers, and weak/wrong source fit are NOT fixable automatically unless the approved-read replacement source already exists in both `literature-list.md` and `references.bib`.
+     Missing source notes, generic MUST CITE markers, and weak/wrong source fit are NOT fixable automatically unless a replacement source with verified notes already exists.
 
   2. IF no fixable critical issues exist:
        Status: "drafted-needs-manual-fix"
-       Report: "Review failed but no fixable critical issues. Manual intervention required." If the blocker is source-related, list the required `SRC-xxx` update or the new request to create in `evaluation/source-requests.md`.
+       Report: "Review failed but no fixable critical issues. Manual intervention required." If the blocker is source-related, list the required source notes file that needs to be created or updated.
        Update STATUS.md. STOP.
 
   3. Set next_round = round + 1 BEFORE spawning writer.

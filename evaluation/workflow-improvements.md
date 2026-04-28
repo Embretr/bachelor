@@ -97,6 +97,33 @@ The rewrite of Ch 2 and future chapters will fail the same way unless the pipeli
 
 ---
 
+## 2026-04-28 — Proposal #5
+
+**Triggered by:** Supervisor meeting (2026-04-28) on the first draft of Ch 2.1 (Resource Scheduling). The meeting surfaced refinements that the existing rules from Proposal #4 had not made sharp enough: definitions still padded rather than trimmed to a short direct core; sources still cited generically without checking actual relevance to the surrounding claim; the trafikkoordinator buried at the end of theory sections instead of grounding the reader from the start; multi-resource, single-resource, and valid-driver collapsed into one paragraph rather than progressing one concept layer at a time; an opening that jumped to abstract definition with no story or human anchor; "employee" and "driver" mixing in the same paragraph; sources used as buckets rather than tools (extracting only the relevant slice).
+**Type:** updated rule / updated agents / updated template
+**Applied changes to:** `.claude/agents/writer.md`, `.claude/agents/source-extractor.md`, `.claude/agents/red-thread.md`, `.claude/agents/quality.md`, `.claude/agents/naturalness.md`, `context/docs/method/sources/_template.md`
+
+**Change:**
+- writer.md — strengthened six rules in "Structure and paragraph discipline":
+  - "Paragraph = one idea (a paragraph is an info box)" — added the info-box framing and three canonical anti-examples that must each be split into separate paragraphs.
+  - "Order: orientation before detail" — added "never narrow → wide" and an explicit "concept progression — one layer per paragraph" rule (simpler textbook case → general definition → our case → specific constraints), referencing the supervisor's flag of the diffuse 2.1 draft.
+  - "Narrative framing comes early" — added "know the story before you write" and an explicit "trafikkoordinator (or equivalent human actor) appears early, not late" rule for Ch 2 theory sections.
+  - "Definitions: short, direct, correct" — added "trim to the core" sub-rule and the replicability test.
+  - "Terminology consistency" — added the "reader must never speculate" framing with concrete drift examples (employee/driver, machine/resource/vehicle, planner/dispatcher/trafikkoordinator) and a source-vocabulary translation rule.
+  - "Use sources selectively" — added that a listed source may not be relevant and force-fitting is worse than `[CITATION NEEDED]`.
+- source-extractor.md — Step 6 Definisjoner: extract the short core sentence verbatim, not surrounding elaboration; writer agent uses the table as drop-ins.
+- _template.md — added a one-line guidance above the Definisjoner table mirroring the source-extractor rule.
+- red-thread.md — section 6 (PARAGRAPH DISCIPLINE AND ORDERING) extended with an actor-placement check and a concept-progression check.
+- quality.md — "Orientation before detail" extended with actor-placement and concept-progression checks; "Definition quality" extended with a trim-to-core criterion; "Source selectivity" extended with a force-fit flag.
+- naturalness.md — added patterns 18 (actor introduced too late), 19 (concept-stuffed paragraph), 20 (padded definition).
+
+**Why this improves output:**
+The first 2.1 draft showed that Proposal #4's rules existed but were not sharp enough at the points the supervisor most cared about. These refinements make the failures explicit: the writer cannot bury the actor late, cannot pad a definition, cannot collapse concept layers, and cannot force-fit a citation; the reviewers will flag each of these by name.
+
+**Status:** ✅ Applied
+
+---
+
 ## 2026-04-14 — Proposal #3
 
 **Triggered by:** User requested a controlled source workflow that separates source discovery and agent assessment from human approval and thesis citation use.

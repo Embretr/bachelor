@@ -3,47 +3,98 @@
 ## Status
 - [ ] Notes generated from raw (Claude, YYYY-MM-DD)
 - [ ] Verified by human (Mikael, YYYY-MM-DD)
-- [ ] Coverage complete — all CITATIONS.md claims for this source dekket
+- [ ] Coverage assessment: SUFFICIENT / INSUFFICIENT
+  - **Reasoning:** [why this extraction is enough — or not — to write the cited sections]
+  - **Gaps not investigated:** [chapters/sections not read and why]
 
 ## Source metadata
 - **BibTeX key:** `{bibkey}`
 - **Reference (APA 7):** [paste from references.bib]
 - **Tilgang:** open / paywalled / NTNU Oria / PDF
-- **Raw source:** `raw/{bibkey}.md`
+- **Raw source:** `../{bibkey}.{pdf,md}`
 - **Coverage in raw:** hvilke kapittel/seksjoner/sider raw-filen dekker
 
 ## Sammendrag (2–3 setninger)
 Hva argumenterer kilden for? Hva er kjernekonseptet?
 
-## Claims-mapping (per CITATIONS.md)
+## Areas of interest investigated
 
-For hver claim i CITATIONS.md som denne kilden skal støtte, dokumenter den eksakte passasjen.
+Fra outline.md og thesis-spine.md, hvilke områder ble vurdert for denne kilden:
 
-### Claim: "[claim text fra CITATIONS.md]" (Ch X.Y ¶Z)
-- **Sted i kilden:** kapittel/seksjon, side
-- **Direkte sitat:** "..."
+| Område | Bidrag |
+|---|---|
+| Ch X.Y (topic) | covered / outside scope / partial |
+
+## Claims this source supports
+
+Hvert claim er en påstand kilden eksplisitt gjør, som er relevant for thesis-områder. Sortert etter relevans (mest sentrale først).
+
+### Claim: "[claim som kilden gjør]"
+- **Suggested for:** Ch X.Y ¶Z (basert på outline-tema-match — én eller flere ¶, rangert)
+- **Direkte sitat:** "..." (s. N)
 - **Parafrase:** ...
 - **Forbehold:** scope eller limitations som påvirker bruken
+- **Anvendelse på vårt case:** Én konkret setning om hvordan dette claimet anvendes på Ressursplanlegger / norske trafikkoordinatorer.
 
-### Claim: "..." (Ch X.Y ¶Z)
+### Claim: "..."
+- ...
+
+## Application to our domain — terminology mapping
+
+| Kildens term | Vårt domene-ekvivalent | Notat |
+|---|---|---|
+| | | |
+
+## Forbehold og begrensninger
+
+Slått sammen: hva kilden *ikke* dekker, og hva i kildens kontekst som gjør den ikke direkte overførbar til vårt case. Brukes for å unngå misattribusjon og over-applikasjon.
+
 - ...
 
 ## Definisjoner gitt av kilden
 
-| Term | Definisjon | Side |
+> Hold definisjonene **korte, direkte og riktige**. Hent den presise kjernesetningen verbatim. Maks 3–5 entries — bare termer som faktisk er sentrale i thesis-spine eller som direkte støtter en claim.
+
+| Term | Definisjon (verbatim) | Side |
 |---|---|---|
 | | | |
 
-## Nyttige sitater (sortert etter relevans)
+## Rammeverk og modeller
 
-| Sitat | Side | Egnet til |
+For strukturerte rammeverk kilden presenterer (10-nivå-skala, X dimensjoner, Y-fase prosess, etc.). Tom seksjon hvis kilden ikke har slike rammeverk.
+
+### [Rammeverk-navn] (s. X)
+
+| Komponent | Hva det er | Eksempel kilden gir | Side |
+|---|---|---|---|
+| | | | |
+
+## Key arguments / lines of reasoning
+
+Kildens egne resonnementer — ikke isolerte claims, men HVORDAN den argumenterer. Bruk når writer-agent skal bygge en paragraf rundt et claim.
+
+### Argument: [kort tittel]
+- **Premiss(er):** ...
+- **Konklusjon:** ...
+- **Sted:** (s. N)
+- **Hvilke claims dette støtter:** Ch X.Y ¶Z
+
+## Examples / case studies kilden bruker
+
+Konkrete eksempler eller cases — nyttig hvis writer trenger å illustrere et konsept. Tom seksjon hvis kilden ikke har relevante eksempler.
+
+| Eksempel | Hva det illustrerer | Side |
 |---|---|---|
 | | | |
 
-## Hva kilden IKKE sier
-For å unngå misattribusjon, dokumenter hva denne kilden *ikke* dekker selv om temaet er relatert.
+## Data og statistikk
 
-- ...
+(Bare for rapporter / empiriske kilder. Tom seksjon hvis kilden ikke har statistikk.)
+
+| Tall/data | Enhet | År/scope | Side |
+|---|---|---|---|
+| | | | |
 
 ## Forfatter-perspektiv / metodologi
-Kort om kildens metodikk eller posisjon (hvis relevant for hvordan vi bruker den).
+
+Kort om kildens metodikk eller posisjon (hvis relevant for hvordan vi bruker den). 1–2 setninger.

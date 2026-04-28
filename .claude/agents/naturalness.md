@@ -64,9 +64,15 @@ AI-generated text has these patterns. Flag any passage that matches:
 
 15. **Terminology drift:** Two different words used for the same concept within the same chapter ("driver" and "employee", "planner" and "dispatcher", "solver" and "engine") without a glossary-based distinction. Flag every drift.
 
-16. **Concept used before introduction:** A term like "VRP" or "constraint programming" appears in a paragraph before it has been introduced in this or an earlier section. Flag the first use and point to where the introduction should be.
+16. **Concept used before introduction:** A term like "CP-SAT" or "constraint programming" appears in a paragraph before it has been introduced in this or an earlier section. Flag the first use and point to where the introduction should be.
 
 17. **Description without rationale:** A built-system or methodology decision is described without saying why it was made ("the system lets the planner set a time limit" — but no sentence explains why this choice was made). Flag decisions stated without reasons.
+
+18. **Actor introduced too late:** In Ch 2 theory sections, the human role this theory serves (trafikkoordinator for scheduling/TMS, operator for HITL automation, planner for fit/gap) is buried near the end instead of grounding the section from the start. A real student writing for a sensor anchors the theory to the actor up front; AI-style theory sections often present the abstraction first and reveal the actor only as a closing punchline. Flag any Ch 2 section where the human actor first appears after the formal theoretical exposition.
+
+19. **Concept-stuffed paragraph:** A single paragraph collapses two or more concept layers that should each have their own paragraph (e.g. multi-resource + single-resource + valid-driver in one block; NP-hard + heuristics + solver-engine choice in one block). Real student prose treats each layer as its own info box. Flag the paragraph and propose the split.
+
+20. **Padded definition:** A definition is padded with surrounding scaffolding instead of the precise core sentence. AI tends to wrap a definition in qualifiers and elaboration; a student trims to the cleanest statement and puts the elaboration in the next paragraph. Flag definitions that exceed one tight sentence without justification.
 
 ---
 

@@ -193,7 +193,7 @@ These rules are specific to the Ressursplanlegger thesis and supplement the gene
 6. **Start every paragraph with a topic sentence** that states what the paragraph is about
 7. **Use transition words** to create flow between paragraphs
 8. **Be consistent in tense** — this is critical:
-   - **Present tense:** general claims, established theory, definitions ("The VRP is a combinatorial optimisation problem")
+   - **Present tense:** general claims, established theory, definitions ("Constraint programming is a paradigm for solving combinatorial problems")
    - **Past tense:** what was done in this study ("Seven interviews were conducted", "The algorithm generated a plan")
    - **Present perfect:** connecting past actions to current relevance ("Previous research has shown that...")
    - Never mix tenses within the same paragraph without a clear reason

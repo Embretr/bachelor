@@ -75,10 +75,10 @@ and state what Ressursplanlegger and this thesis contribute.
 - ¶2: Multi-resource scheduling — Ressursplanlegger assigns *both* an employee and a vehicle to each assignment. This increases combinatorial complexity compared to single-resource problems. The Ressursplanlegger problem: assignments = tasks with fixed time windows and resource requirements; drivers + vehicles = resources with competency, availability, and capacity constraints; objective = maximise coverage + balance soft constraints.
 - ¶3: Hard and soft constraints — hard constraints must be satisfied for a plan to be feasible (competencies, availability, no double-booking, vehicle type). Soft constraints define preferences optimised by the algorithm (workload balance, driver preferences, priority). Each soft constraint carries a configurable weight. Cite `\textcite{rossi2006constraint}`. Link to the system's actual constraint model from `context/docs/tech/algorithm.md`.
   MUST CITE: \textcite{rossi2006constraint}; MUST EVIDENCE: context/docs/tech/algorithm.md
-- ¶4: NP-hardness and the multi-engine approach — resource scheduling at real fleet sizes is NP-hard; exact methods become infeasible as instance size grows. This motivates heuristics: greedy (instant baseline), CP-SAT (near-optimal within time limit), Timefold (metaheuristic for large instances). The Vehicle Routing Problem (VRP) is an adjacent theoretical area with similar structure — cite `\textcite{dantzig1959truck}` and `\textcite{braekers2016vrp}` — but Ressursplanlegger's problem diverges from VRP in a key way: assignments have fixed times and locations, so the algorithm decides *who* does what, not *in which order*. Sequencing is not part of the problem.
+- ¶4: NP-hardness and the multi-engine approach — resource scheduling at real fleet sizes is NP-hard; exact methods become infeasible as instance size grows. This motivates heuristics: greedy (instant baseline), CP-SAT (near-optimal within time limit), Timefold (metaheuristic for large instances). The Vehicle Routing Problem (VRP) is an adjacent theoretical area with similar structure — cite `\textcite{braekers2016vrp}` — but Ressursplanlegger's problem diverges from VRP in a key way: assignments have fixed times and locations, so the algorithm decides *who* does what, not *in which order*. Sequencing is not part of the problem.
   MUST CITE: \textcite{pinedo2016scheduling}
-- ¶5: Solver comparison — greedy O(n × m), no optimality guarantee; CP-SAT complete solver with configurable time limit, near-optimal for ≤500 assignments; Timefold metaheuristic (tabu search, simulated annealing) for large or multi-day instances. Each occupies a different point on the speed-quality tradeoff. Cite `\textcite{rossi2006constraint}` for constraint programming foundations.
-  MUST CITE: \textcite{rossi2006constraint}
+- ¶5: Solver comparison — greedy O(n × m), no optimality guarantee; CP-SAT complete solver with configurable time limit, near-optimal for ≤500 assignments; Timefold metaheuristic (tabu search, simulated annealing) for large or multi-day instances. Each occupies a different point on the speed-quality tradeoff. Cite `\textcite{rossi2006constraint}` for constraint programming foundations and `\textcite{glover1986future}` for the tabu-search metaheuristic concept.
+  MUST CITE: \textcite{rossi2006constraint}, \textcite{glover1986future}
 
 **2.2 Human-in-the-Loop Automation** (~2.5 pages)
 
@@ -94,7 +94,7 @@ and state what Ressursplanlegger and this thesis contribute.
 
 **2.3 Transport Management Systems (TMS)** (~1.5 pages)
 
-- ¶1: Define TMS as a software category — order management, route planning, carrier management, freight billing. Cite industry source if available (check literature-list).
+- ¶1: Define TMS as a software category — order management, route planning, carrier management, freight billing.
   MUST CITE: \textcite{griffis2007tms}, \textcite{heinbach2022datadriven}
 - ¶2: TMS landscape in Norway — Timpex, Trimtex, Opptur. Describe what they do well (invoicing, order tracking) and what they lack (planning, optimisation). Keep factual — detailed gap analysis is in Ch 4.3.
   MUST EVIDENCE: interviews-summary.md (system usage per company); fitgap-summary.md

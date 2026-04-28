@@ -106,7 +106,7 @@ This distinction is critical for how the thesis frames its results:
 
 **Reference:** Wieringa, R. J. (2014). *Design Science Methodology for Information Systems and Software Engineering*. Springer.
 
-> Add this reference to `result/references.bib` and `context/docs/method/literature-list.md`.
+> The reference (`wieringa2014dsm`) is in `result/references.bib`. Generate source notes via `.claude/agents/source-extractor.md` before citing.
 
 ---
 

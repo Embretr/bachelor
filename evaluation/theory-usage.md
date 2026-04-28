@@ -8,7 +8,7 @@
 | Concept | Introduced in | Used in | Status |
 |---------|:------------:|:-------:|--------|
 | Resource scheduling (multi-resource assignment) | 2.1 | 4.5, 5.1, 5.2 | planned |
-| VRP (as reference/positioning, not own topic) | 2.1 ¶4 | — | reference only |
+| VRP (brief delimitation only — not engaged with as theory) | 2.1 ¶4 | — | delimitation only |
 | Human-in-the-loop / Parasuraman | 2.2 | 4.4, 5.2 | planned |
 | Trust in automation / Lee & See | 2.2 | 5.3 | planned |
 | Tacit knowledge | 2.2 | 4.1, 5.4 | planned |

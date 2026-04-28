@@ -54,8 +54,8 @@ Deres versjon av innholdsfortegnelsen – ikke bare malen, men med stikkord på 
    - Avgrensninger
 
 2. Teori
-   - Vehicle Routing Problem (VRP)
    - Resource scheduling
+   - Constraint programming og solvere
    - Human-in-the-loop automation
    - Relevant TMS-litteratur
 
@@ -201,7 +201,7 @@ Overordnet beskrivelse av systemarkitekturen:
 
 ### ⬜ `tech/algoritme.md`
 Dokumentasjon av optimaliseringsalgoritmen – dette er et eget kapittel i rapporten.
-- **Problem som løses:** hvilken variant av ressursplanlegging / VRP
+- **Problem som løses:** hvilken variant av ressursplanlegging
 - **Input:** hva sendes inn (oppdrag, sjåfører, kjøretøy, constraints)
 - **Output:** hva returneres (plan, score, alternativer)
 - **Constraints:** kjøre-/hviletid, førerkort, tilgjengelighet, kjøretøytype
@@ -253,7 +253,7 @@ Format (BibTeX anbefales hvis dere bruker LaTeX, ellers enkel liste):
 ```
 
 Viktige kategorier å ha kilder på:
-- Vehicle Routing Problem (VRP) / ressursplanlegging
+- Resource scheduling / ressursplanlegging
 - Transport Management Systems (TMS)
 - Human-in-the-loop automation
 - Algoritmer (den typen dere bruker)
@@ -261,8 +261,8 @@ Viktige kategorier å ha kilder på:
 
 ### ⬜ `metode/teoriramme.md`
 Hvilke teorier og konsepter støtter dere dere på, og hvordan kobler de til prosjektet?
-- **Vehicle Routing Problem (VRP):** hvordan er dette relevant for Cephalo
-- **Resource scheduling:** generell teori om ressursplanlegging
+- **Resource scheduling:** generell teori om ressursplanlegging og hvordan den kobler til Cephalo
+- **Constraint programming:** harde og myke begrensninger, solvere
 - **Human-in-the-loop:** begrunnelse for at trafikkleder alltid kan overstyre
 - **[andre teorier]**
 

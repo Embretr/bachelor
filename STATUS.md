@@ -27,7 +27,7 @@
 | `context/docs/requirements/requirements-traceability.md` | Embret | ✅ Filled | — |
 | `context/docs/method/research-design.md` | Mikael | ✅ Filled | Demo/eval phases still placeholder |
 | `context/docs/method/theoretical-framework.md` | Mikael | ✅ Filled | Sources need reading confirmation |
-| `context/docs/method/literature-list.md` | Mikael | ✅ 48 sources `approved-read` (2026-04-23) | — |
+| `context/docs/method/sources/raw/extracted/` | Mikael + agent | ⬜ 0 of 48 source notes generated | Each cite key needs verified notes before its section can be written |
 | `context/docs/tech/algorithm.md` | Embret | ✅ Filled | — |
 | `context/docs/tech/architecture.md` | Embret | ✅ Filled | — |
 | `context/docs/tech/data-model.md` | Embret | ✅ Filled | — |
@@ -43,7 +43,7 @@
 | `evaluation/a-grade-rubric.md` | Both | ✅ Complete | — |
 | `evaluation/grading-guidelines.md` | Mikael | ✅ Filled (NRT criteria + NTNU-specific) | — |
 | `evaluation/evaluation.md` | Both | ✅ Filled (chapter-level checklist) | — |
-| `evaluation/source-requests.md` | Both | ✅ Active source queue | Resolve matching `SRC-xxx` requests before writing affected sections |
+| `context/docs/method/CITATIONS.md` | Mikael | ⬜ Empty during extraction phase | Will be assembled from extracted source notes after all 48 sources done |
 
 ---
 
@@ -58,8 +58,7 @@
 | Fill `context/writing-style-examples.md` (after first section) | Low | ⬜ Blocked |
 | Fill `context/docs/user-research/user-tests.md` (if tests done) | Low | ⬜ Not started |
 | Finalise research sub-questions in `context/context.md` | High | ✅ Done (3 sub-questions) |
-| Read and confirm literature sources in `literature-list.md` | High | ✅ Done (48 approved 2026-04-23) |
-| Resolve source requests for next section | High | ✅ Active queue empty |
+| Generate source notes via `/source-extractor` for each of 48 sources | High | ⬜ 0 of 48 done |
 | Fill research ethics details in `context/docs/method/research-design.md` | High | ⬜ Not started |
 | Confirm scope.md with Embret | Medium | ⬜ Not started |
 
@@ -81,7 +80,7 @@
 
 Pipeline: `/write-section X.Y` (auto-revise up to 3 rounds + polish) → `/review-chapter N` → human approval.
 
-Fixed pre-write activity: before any `/write-section`, resolve source requests for the next section in `evaluation/source-requests.md` and confirm all required citation keys are `approved-read` in `context/docs/method/literature-list.md` and present in `result/references.bib`.
+Fixed pre-write activity: before any `/write-section`, confirm that every required citation key in the section has a verified source notes file at `context/docs/method/sources/raw/extracted/{bibkey}.md` and is present in `result/references.bib`.
 
 ### Status Legend
 | Status | Meaning |
@@ -165,9 +164,9 @@ Before writing starts, these must be done:
 ✅ evaluation/grading-guidelines.md (Mikael)               → done
 ✅ context/fitgap-summary.md (Mikael)                      → done
 ✅ context/docs/requirements/non-functional-requirements.md (Embret) → done
-✅ result/references.bib                                    → 17 entries
-✅ evaluation/source-requests.md                            → SRC-001 to SRC-005 resolved; active queue empty
-✅ context/docs/method/literature-list.md                    → 48 sources approved-read (2026-04-23)
+✅ result/references.bib                                    → 48 entries
+⬜ context/docs/method/CITATIONS.md                          → empty; assembled from source notes after all extractions
+⬜ context/docs/method/sources/raw/extracted/                → 0 of 48 source notes generated
 ⬜ context/docs/tech/benchmark-results.md                    → blocks Ch 4.5 and Ch 5.2
 ⬜ context/docs/method/research-design.md ethics/duration    → blocks Ch 3.2
 ⬜ context/docs/project/sprint-log.md                        → blocks Ch 3.4
@@ -175,14 +174,9 @@ Before writing starts, these must be done:
 ⬜ context/docs/project/change-log.md                        → blocks Ch 5 and Ch 6
 ```
 
-With the strengthened readiness gate, writing can only start when each section's MUST markers have concrete, `approved-read` citation keys and filled evidence files.
+With the strengthened readiness gate, writing can only start when each section's MUST CITE keys have verified source notes in `sources/raw/extracted/` and evidence files are filled.
 Immediate known blockers:
-- Ch 2 source readiness is blocked until required theory/HITL/TMS sources are `approved-read`.
-- Ch 3.2 source readiness is blocked until qualitative interview methodology sources are `approved-read`.
-- Ch 3.4 source readiness is blocked until agile/iterative development sources are `approved-read`.
-- Ch 4.5 source readiness is blocked until solver/OR-Tools/constraint programming sources are `approved-read`.
-- Ch 5.5 source readiness is blocked until sustainability/SusAF/SDG sources are `approved-read`.
-- Ch 2.2, 2.3, 3.4, and 4.5 need concrete source keys with `approved-read` status before writing.
+- All chapters source readiness is blocked until source notes are generated for the relevant cite keys.
 - Ch 3.2 needs interview duration and research ethics details.
 - Ch 3.4 needs sprint-log/decision-log context.
 - Ch 4.2 needs requirement-ID consistency between requirements and traceability.

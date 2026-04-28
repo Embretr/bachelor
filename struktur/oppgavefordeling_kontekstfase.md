@@ -56,7 +56,7 @@ Disse filene bygger på det du allerede vet og har gjort.
 | `brukerinnsikt/brukertester.md` | Tilbakemeldinger fra trafikkledere underveis | 1t |
 | `krav/funksjonelle_krav.md` | Kravliste med ID, beskrivelse, prioritet, kilde (fra intervjuer) | 1–2t |
 | `metode/forskningsdesign.md` | Valgt metode med begrunnelse | 1t |
-| `metode/teoriramme.md` | VRP, resource scheduling, human-in-the-loop – kort beskrivelse | 1–2t |
+| `metode/teoriramme.md` | Resource scheduling, constraint programming, human-in-the-loop – kort beskrivelse | 1–2t |
 | `metode/litteraturliste.md` | Faktiske kilder dere har lest – BibTeX eller enkel liste | 2–3t |
 | `prosjekt/sprint_logg.md` | Kort per sprint / uke bakover i tid | 1–2t |
 | `prosjekt/risikologg.md` | Risikoer, sannsynlighet, konsekvens, tiltak | 0.5t |

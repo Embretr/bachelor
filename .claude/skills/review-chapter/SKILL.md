@@ -39,17 +39,16 @@ If reviewing Chapter 5 or later, read `evaluation/theory-usage.md`. Check whethe
 For Chapter 5, unresolved orphaned theories are a review issue and must be included in the report.
 
 ### Chapter-level source audit
-Read `context/docs/method/literature-list.md`, `evaluation/source-requests.md`, and `result/references.bib`.
+Read `result/references.bib` and verify each cited key has a filled source notes file at `context/docs/method/sources/raw/extracted/{bibkey}.md`.
 
 Check:
 - citation density by section, and flag suspiciously low or suspiciously high citation density,
 - orphan sources: sources cited in the chapter but not clearly used to support a claim,
-- any citation key that is not `approved-read` in `literature-list.md`,
-- unresolved `SRC-xxx` requests that apply to the chapter,
-- theories or frameworks used without an approved source.
+- any citation key that lacks a filled source notes file,
+- theories or frameworks used without verified source notes,
+- claims in the text that drift from what the source notes documented.
 
-Unapproved sources and unresolved source requests are review issues. This pipeline
-never promotes a source to `approved-read`.
+Missing or unverified source notes are review issues. This pipeline never marks a source notes file as verified — that is human-only.
 
 ## Step 2: Spawn 2 Review Agents
 
@@ -67,7 +66,7 @@ The thesis backbone: read `context/thesis-spine.md`
 The research question: read `context/context.md` — Research Question section.
 Previous chapters: read `result/chapters/ch{1..N-1}/*.tex` files that have real content.
 Read `context/outline.md` for the chapter target length and section plan.
-Read `context/docs/method/literature-list.md`, `evaluation/source-requests.md`, and `result/references.bib` for source approval and source-request status.
+For each cite key in the chapter, verify against `context/docs/method/sources/raw/extracted/{bibkey}.md` that the cited claim matches the verified source notes.
 If reviewing Chapter 5 or later, read `evaluation/theory-usage.md` and check for orphaned theories.
 
 Focus on CHAPTER-LEVEL issues that section reviews cannot catch:
@@ -79,7 +78,7 @@ Focus on CHAPTER-LEVEL issues that section reviews cannot catch:
 6. Proportion — is the chapter length within the target range, or does imbalance weaken the argument?
 7. For Ch 5+: are all Chapter 2 theories used, marked as reference-only, or clearly flagged for removal?
 8. Source audit — are citation density, orphan sources, unresolved source requests, and unapproved citation keys acceptable?
-9. Concept placement across sections — is every technical term, acronym, or named concept introduced BEFORE its first use at the chapter level? A concept defined only in a later section is a placement bug that section reviews miss. Examples: VRP, CP-SAT, tacit knowledge, HITL. Quote each misplacement and state where the introduction should move to.
+9. Concept placement across sections — is every technical term, acronym, or named concept introduced BEFORE its first use at the chapter level? A concept defined only in a later section is a placement bug that section reviews miss. Examples: CP-SAT, tacit knowledge, HITL, DSR. Quote each misplacement and state where the introduction should move to.
 10. Terminology consistency across the chapter — list any pair of synonyms used across sections for the same concept ("driver"/"employee", "planner"/"dispatcher", "solver"/"engine"). Every drift is an issue.
 11. Ordering across sections — does the chapter move from concrete/broad to abstract/specific where appropriate (e.g. Ch 2 opens with examples of resource scheduling in other domains BEFORE the formal definition)? Does narrative framing (how the work is done today) appear early enough in the chapter? Flag misordering at the chapter level.
 
@@ -106,7 +105,7 @@ The chapter: read `{TEX_FILE}` — all sections as a whole.
 Context: read `context/context.md` and `context/thesis-spine.md`.
 Previous chapters: read completed `result/chapters/ch{1..N-1}/*.tex`.
 Read `context/outline.md` for target length and `evaluation/theory-usage.md` for theory tracking when reviewing Chapter 5 or later.
-Read `context/docs/method/literature-list.md`, `evaluation/source-requests.md`, and `result/references.bib` for source approval and source-request status.
+For each cite key in the chapter, verify against `context/docs/method/sources/raw/extracted/{bibkey}.md` that the cited claim matches the verified source notes.
 
 Grade the ENTIRE chapter against NRT criteria. Consider:
 - Does the chapter demonstrate the expected level of insight for its role?
@@ -115,7 +114,7 @@ Grade the ENTIRE chapter against NRT criteria. Consider:
 - Is the chapter proportionate to its role in the thesis (not too thin, not over-expanded)?
 - For Chapter 5 or later: does the discussion use the theories introduced in Chapter 2, or are there orphaned concepts?
 - Does the source use meet A-grade standards: claim coverage, source fit, authority, integration, reuse sanity, and no orphan sources?
-- Are any theories, frameworks, or empirical claims supported by citations that are not `approved-read`?
+- Are any theories, frameworks, or empirical claims supported by citations that lack filled source notes?
 
 For each NRT criterion relevant to this chapter: give a grade and one-sentence justification.
 
@@ -143,7 +142,7 @@ Parse JSON gates.
   SENSOR:      {PASS/FAIL} — grade: {A/B/C}, weakest: {criterion}
   LENGTH:      ~{words} words / ~{pages} pages — target: {range}, deviation: {OK/>20%}
   THEORY USE:  {OK/orphaned concepts listed/not applicable}
-  SOURCE USE:  {OK/issues listed} — density, orphan sources, approved-read status, unresolved SRC requests
+  SOURCE USE:  {OK/issues listed} — density, orphan sources, source notes status
 
   {If both pass:}
   ✅ Chapter {N} is CANDIDATE FOR HUMAN APPROVAL.

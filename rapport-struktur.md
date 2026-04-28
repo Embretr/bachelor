@@ -30,7 +30,7 @@ Rapportstruktur — Ressursplanlegger
   - Definisjon og analoge domener (Pinedo)
   - Multi-ressurs: ansatt + kjøretøy
   - Harde og myke begrensninger (Rossi) + systemets modell
-  - NP-hardhet, VRP-sammenligning (Dantzig, Toth)
+  - NP-hardhet og motivasjon for heuristikker
   - Tre solvere: greedy, CP-SAT, Timefold
 
 - 2.2 Menneske-i-løkka-automatisering

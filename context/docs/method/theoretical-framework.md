@@ -7,26 +7,6 @@
 
 ---
 
-## Vehicle Routing Problem (VRP)
-
-**What it is:**
-The Vehicle Routing Problem is a combinatorial optimisation problem in operations research. Given a set of customers (each with a demand) and a fleet of vehicles based at one or more depots, the objective is to find a set of routes that serves all customers while minimising total cost — typically distance, time, or number of vehicles used. First formulated by Dantzig and Ramser (1959) as a generalisation of the Travelling Salesman Problem.
-
-**Relevant variants:**
-- **VRPTW (VRP with Time Windows)** — each customer must be visited within a defined time window. Most directly relevant to Ressursplanlegger, where assignments have start and end times.
-- **CVRP (Capacitated VRP)** — vehicles have a maximum capacity. Relevant when vehicle type and load requirements constrain assignment.
-- **Multi-depot VRP** — vehicles are based at multiple depots. Relevant for companies with multiple departments (e.g., Ottem with 3 divisions).
-- **Heterogeneous fleet VRP** — vehicles have different capabilities. Maps to the real-world constraint that different vehicle types (truck, van, crane) are suited to different assignments.
-
-**How it connects to Ressursplanlegger:**
-The daily planning problem in Ressursplanlegger can be formulated as a variant of the VRP. "Customers" are assignments that need to be served; "vehicles" are the combination of a driver and a physical vehicle; the "cost" is a composite function balancing workload, priority coverage, and constraint satisfaction. However, Ressursplanlegger's problem is not a pure VRP — it focuses on resource assignment (who does what) rather than route sequencing (in which order), since individual assignments have fixed locations and times. The problem is more precisely a resource-constrained scheduling problem with VRP-like constraints.
-
-**Key sources (bibkeys, all `approved-read`):**
-- `dantzig1959truck` — Dantzig & Ramser (1959). The Truck Dispatching Problem. *Management Science*, 6(1), 80–91. (Kanonisk opphav.)
-- `braekers2016vrp` — Braekers, Ramaekers & Van Nieuwenhuyse (2016). The Vehicle Routing Problem: State of the Art Classification and Review. *Computers & Industrial Engineering*, 99, 300–313. (Moderne taxonomy for VRPTW, CVRP, heterogeneous fleet.)
-
----
-
 ## Resource Scheduling
 
 **What it is:**
@@ -65,7 +45,7 @@ Ressursplanlegger implements HITL as its core interaction pattern: the algorithm
 **Levels of automation (Parasuraman, Sheridan & Wickens, 2000):**
 Ressursplanlegger operates at approximately level 5–6 on the 10-level automation scale proposed by Parasuraman, Sheridan and Wickens (which extends and formalises the original Sheridan & Verplank 1978 scale): the system generates a plan and presents it for approval, but the coordinator can modify any part before execution.
 
-**Key sources (bibkeys, all `approved-read`):**
+**Key sources (bibkeys — verify against `context/docs/method/sources/raw/extracted/{bibkey}.md`):**
 - `parasuraman2000automation` — Parasuraman, Sheridan & Wickens (2000). A Model for Types and Levels of Human Interaction with Automation. *IEEE TSMC-A*, 30(3), 286–297. (Primær HITL-taxonomi.)
 - `lee2004trust` — Lee & See (2004). Trust in Automation: Designing for Appropriate Reliance. *Human Factors*, 46(1), 50–80. (Calibrated trust / appropriate reliance.)
 - `hoff2015trust` — Hoff & Bashir (2015). Trust in Automation: Integrating Empirical Evidence. *Human Factors*, 57(3), 407–434. (Moderne tillit-syntese.)
@@ -144,10 +124,10 @@ See `context/docs/method/research-design.md` for the detailed application of DSR
 ```
 Problem domain                    Solution domain
 ─────────────────                 ─────────────────
-VRP / Resource Scheduling    →    Algorithm design (greedy, CP-SAT, Timefold)
+Resource Scheduling          →    Algorithm design (greedy, CP-SAT, Timefold)
 Human-in-the-Loop            →    Suggest + override interaction pattern
 TMS landscape gaps           →    Ressursplanlegger as a new category of tool
 DSR methodology              →    Framework for building and evaluating the artefact
 ```
 
-The theoretical framework positions Ressursplanlegger at the intersection of operations research (VRP, scheduling), human-computer interaction (HITL automation), and information systems (TMS, DSR). The system is theoretically grounded in optimisation but practically designed around the finding that human judgment remains essential in transport planning.
+The theoretical framework positions Ressursplanlegger at the intersection of operations research (resource scheduling, constraint programming), human-computer interaction (HITL automation), and information systems (TMS, DSR). The system is theoretically grounded in optimisation but practically designed around the finding that human judgment remains essential in transport planning.

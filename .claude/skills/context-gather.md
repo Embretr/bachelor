@@ -34,7 +34,7 @@
 | `context/outline.md` — Ch 2 section | Section plan |
 | `context/glossary.md` | Terminology |
 | `context/docs/method/theoretical-framework.md` | Theory notes to expand into the chapter |
-| `context/docs/method/literature-list.md` | Sources available for citation |
+| `context/docs/method/sources/raw/extracted/{bibkey}.md` | For each cite key — verified passages and application notes |
 | `result/references.bib` | BibTeX keys for `\parencite{}` |
 | `result/chapters/ch1/ch1-introduction.tex` | Continuity — Ch 2 must build on Ch 1 |
 

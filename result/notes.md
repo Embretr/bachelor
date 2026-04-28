@@ -56,7 +56,7 @@ After every writing session, Claude adds an entry:
 | # | Question | Raised | Resolved |
 |---|----------|--------|---------|
 | 1 | What is the exact research question? | — | ⬜ |
-| 2 | Which VRP variant does the algorithm implement? | — | ⬜ |
+| 2 | What is the formal classification of the scheduling problem the algorithm solves? | — | ⬜ |
 | 3 | What technology is used for the frontend? | — | ⬜ |
 | 4 | What technology is used for the backend? | — | ⬜ |
 | 5 | What database is used? | — | ⬜ |

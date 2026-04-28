@@ -77,10 +77,7 @@ A third TMS mentioned by one interview participant (Harlem Solutions).
 ## Research Terms
 
 **Vehicle Routing Problem (VRP)**
-A combinatorial optimisation problem: given a set of locations to visit and a fleet of vehicles, find the optimal set of routes. The theoretical foundation for Ressursplanlegger's planning algorithm.
-
-**VRPTW (VRP with Time Windows)**
-A VRP variant where each location must be visited within a specified time window. The most relevant variant for transport assignment planning.
+A combinatorial optimisation problem in operations research focused on sequencing routes for a fleet of vehicles. Referenced in this thesis only to delimit Ressursplanlegger's problem from VRP — Ressursplanlegger is an assignment problem (who does what), not a sequencing problem.
 
 **Design Science Research (DSR)**
 The research methodology used in this thesis. Focuses on creating and evaluating an artefact (Ressursplanlegger) to address a practical problem.

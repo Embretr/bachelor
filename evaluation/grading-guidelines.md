@@ -108,7 +108,7 @@ What the sensor asks:
 - Does the work document good theoretical overview and specialisation in the engineering field?
 - Does it demonstrate knowledge of relevant research, development, methods, and working approaches?
 
-**Implication for Ressursplanlegger:** Chapter 2 must demonstrate real understanding of VRP theory, scheduling, HITL design, and DSR methodology — not just summaries but showing how the theories connect to and inform the system design.
+**Implication for Ressursplanlegger:** Chapter 2 must demonstrate real understanding of resource scheduling, constraint programming, HITL design, and DSR methodology — not just summaries but showing how the theories connect to and inform the system design.
 
 ### 4. Gjennomføring (Execution) — Weight: 15–25%
 

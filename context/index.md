@@ -36,8 +36,9 @@
 | `context/docs/requirements/non-functional-requirements.md` | Non-functional requirements | Ch 4.2 |
 | `context/docs/requirements/requirements-traceability.md` | Which requirements are implemented and tested | Ch 4.2, 5 |
 | `context/docs/method/research-design.md` | Chosen research method with justification | Ch 3.1 |
-| `context/docs/method/literature-list.md` | Sources read — feeds references.bib | Ch 2, 3 |
-| `context/docs/method/theoretical-framework.md` | VRP, human-in-the-loop, resource scheduling theory notes | Ch 2 |
+| `context/docs/method/CITATIONS.md` | Empty during extraction; populated from extracted source notes after all sources are done | After extractions |
+| `context/docs/method/sources/raw/extracted/{bibkey}.md` | Verified source notes — read for each cite key | All chapters |
+| `context/docs/method/theoretical-framework.md` | Resource scheduling, constraint programming, human-in-the-loop, TMS, DSR theory notes | Ch 2 |
 | `context/docs/project/sprint-log.md` | Weekly progress log | Ch 3.4 |
 | `context/docs/project/decision-log.md` | Key technical and methodological decisions | Ch 3, 5 |
 | `context/docs/project/change-log.md` | Evolution from early MVP to current system | Ch 5, 6 |
@@ -66,7 +67,6 @@
 |------|---------|------|
 | `evaluation/a-grade-rubric.md` | Detailed A criteria per chapter — primary quality gate | Before every output |
 | `evaluation/evaluation.md` | Chapter-level checklist | Before every output |
-| `evaluation/source-requests.md` | Queue of unresolved source needs and candidate source assessments | Before writing and during source audits |
 | `evaluation/grading-guidelines.md` | Official sensor guidelines | When doing quality check |
 | `evaluation/workflow-improvements.md` | Log of proposed and applied workflow changes | After every task |
 | `evaluation/formal-requirements.md` | Deliverables, deadlines, AI policy, contribution attribution | Final submission checklist only — not loaded during writing |
@@ -79,11 +79,10 @@
 Before `/write-section X.Y`, always:
 
 1. Confirm `context/outline.md` has a concrete paragraph-level plan for the section.
-2. Resolve source requests for the next section: check `evaluation/source-requests.md` for matching `SRC-xxx` entries.
-3. Confirm every required citation key is `approved-read` in `context/docs/method/literature-list.md` and exists in `result/references.bib`.
-4. Confirm section-specific evidence files are filled and not template-only.
+2. Confirm every required citation key has a verified source notes file at `context/docs/method/sources/raw/extracted/{bibkey}.md` and is present in `result/references.bib`.
+3. Confirm section-specific evidence files are filled and not template-only.
 
-Unresolved source requests, `candidate` sources, and `agent-reviewed` sources block thesis writing.
+Missing source notes block thesis writing.
 
 ---
 
@@ -104,7 +103,7 @@ Files are filled in varying degrees. Use this to know what can be relied upon:
 | `context/docs/requirements/functional-requirements.md` | ✅ Filled | 42 requirements with MoSCoW and implementation status |
 | `context/docs/requirements/non-functional-requirements.md` | ✅ Filled | Embret — 9+ NFRs with targets |
 | `context/docs/requirements/requirements-traceability.md` | ✅ Filled | Embret — implementation + test status |
-| `context/docs/method/literature-list.md` | ⚠️ Controlled source register | Blocks Ch 2, Ch 3.2, Ch 3.4, Ch 4.5, and Ch 5.5 until required sources are `approved-read` |
+| `context/docs/method/sources/raw/extracted/` | ⬜ 0 of 48 source notes generated | Each cite key needs verified notes before its section can be written |
 | `context/docs/tech/algorithm.md` | ✅ Filled | Embret — 3 solvers, constraints, scoring |
 | `context/docs/tech/architecture.md` | ✅ Filled | Embret — full architecture with diagrams |
 | `context/docs/tech/tech-stack.md` | ✅ Filled | Embret — all layers with justification |
@@ -123,7 +122,7 @@ Files are filled in varying degrees. Use this to know what can be relied upon:
 | `evaluation/grading-guidelines.md` | ✅ Filled | NRT criteria + NTNU-specific + weighting |
 | `evaluation/a-grade-rubric.md` | ✅ Complete | A criteria per chapter |
 | `evaluation/evaluation.md` | ✅ Filled | Chapter-level checklist with sensor questions |
-| `evaluation/source-requests.md` | ✅ Active | Source needs queue; resolve before writing affected sections |
+| `context/docs/method/CITATIONS.md` | ⬜ Empty during extraction phase | Will be assembled from extracted source notes after all 48 sources done; backup at `CITATIONS-pre-extraction-backup.md` |
 | `evaluation/formal-requirements.md` | ✅ Filled | Deliverables, deadlines, documentation |
 
 ---
@@ -136,13 +135,13 @@ Ch 1 — Introduction:
 
 Ch 2 — Theory:
   context.md + thesis-spine.md + outline.md + glossary.md
-  + docs/method/theoretical-framework.md + docs/method/literature-list.md
-  + evaluation/source-requests.md
+  + docs/method/theoretical-framework.md
+  + docs/method/sources/raw/extracted/{bibkey}.md (per cite key in section — once extracted)
 
 Ch 3 — Methodology:
   context.md + thesis-spine.md + outline.md + glossary.md
   + docs/method/research-design.md + docs/project/sprint-log.md + interviews-summary.md
-  + docs/method/literature-list.md + evaluation/source-requests.md
+  + docs/method/sources/raw/extracted/{bibkey}.md (per cite key — once extracted)
 
 Ch 4 — Findings:
   context.md + thesis-spine.md + outline.md + glossary.md
@@ -150,12 +149,12 @@ Ch 4 — Findings:
   + docs/requirements/functional-requirements.md + docs/requirements/non-functional-requirements.md
   + docs/tech/algorithm.md + docs/tech/benchmark-results.md
   + docs/tech/architecture.md + docs/tech/tech-stack.md
-  + docs/method/literature-list.md + evaluation/source-requests.md
+  + docs/method/sources/raw/extracted/{bibkey}.md (per cite key — once extracted)
 
 Ch 5 — Discussion:
   context.md + thesis-spine.md + outline.md + glossary.md
   + docs/tech/benchmark-results.md for 5.2
-  + docs/method/literature-list.md + evaluation/source-requests.md
+  + docs/method/sources/raw/extracted/{bibkey}.md (per cite key — once extracted)
   + All completed chapter .tex files
   + evaluation/a-grade-rubric.md + evaluation/grading-guidelines.md
 

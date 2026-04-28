@@ -33,7 +33,7 @@ software that is too slow and provides no decision support.
 Manual resource planning in Norwegian transport is inefficient, error-prone, and dependent on individual coordinators' tacit knowledge — a problem that warrants a structured, algorithm-assisted solution.
 
 **Chapter 2 — Theory:**
-Vehicle routing theory, resource scheduling, and human-in-the-loop design principles provide the theoretical foundation for a system that automates plan generation while preserving coordinator control.
+Resource scheduling, constraint programming, and human-in-the-loop design principles provide the theoretical foundation for a system that automates plan generation while preserving coordinator control; vehicle routing theory is referenced only to delimit the problem.
 
 **Chapter 3 — Methodology:**
 Design Science Research structures the project: semi-structured interviews with seven traffic coordinators identified the problem and requirements, iterative development produced the artefact, and validation through benchmarking and requirements traceability assessed its quality.

@@ -78,7 +78,7 @@ C) Not traceable — this chapter could be cut without affecting the RQ
 List every technical term, acronym, or named concept that is USED in Chapter [N] before it is INTRODUCED.
 For each: quote the first use, say where the introduction actually appears (or "never introduced"), and state where it should be moved to.
 
-Examples of the failure: "VRP" referenced in 2.3 but defined only in 2.4; "CP-SAT" mentioned without definition; "tacit knowledge" used before it is explained. A reader must never meet a concept they have no way to understand.
+Examples of the failure: "HITL" referenced in 2.3 but defined only in 2.4; "CP-SAT" mentioned without definition; "tacit knowledge" used before it is explained. A reader must never meet a concept they have no way to understand.
 
 ### 6. PARAGRAPH DISCIPLINE AND ORDERING
 Go through the chapter paragraph by paragraph.
@@ -90,8 +90,10 @@ For each paragraph:
 
 Then check ordering within sections:
 - When a section enumerates things (types of constraints, solver engines, automation levels), is the STRUCTURE presented first (as a sentence or a table) BEFORE the individual items are explained? Flag any section that explains items before the reader knows the taxonomy.
-- When a section introduces a theoretical concept (resource scheduling, VRP, DSR), does it ground the reader with examples/context BEFORE giving the formal definition? Flag any section that moves from abstract definition to concrete example instead of the reverse.
+- When a section introduces a theoretical concept (resource scheduling, HITL, DSR), does it ground the reader with examples/context BEFORE giving the formal definition? Flag any section that moves from abstract definition to concrete example instead of the reverse.
 - Does the section establish what the work/domain looks like early enough? Narrative framing (how planners work today, what the problem looks like) must come before theory that depends on it.
+- **Actor placement.** For Ch 2 theory sections: does the human actor for that theory (trafikkoordinator for scheduling/TMS, operator for HITL automation, planner for fit/gap) appear in the first paragraph or two? A theory section that buries the human actor at the end leaves the reader without an anchor for why the theory matters. Flag any Ch 2 section where the actor appears only after the theoretical exposition.
+- **Concept progression — one layer per paragraph.** When a section walks through a chain of concepts that build on each other (e.g. simpler textbook case → general definition → our case → specific constraints), check that each layer occupies its own paragraph in increasing-specificity order. Flag any paragraph that collapses two or more layers into one (the supervisor flagged this collapse — multi-resource + single-resource + valid-driver in one paragraph — as the diffuse, confusing failure mode in the first 2.1 draft).
 
 ### 7. TERMINOLOGY AND TRANSITIONS
 - List every pair of synonyms used for the same concept in this chapter (e.g. "driver"/"employee", "planner"/"dispatcher"). For each: pick the glossary term and say which occurrences must change.

@@ -12,7 +12,7 @@
 - [ ] Every claim has a citation or is grounded in own data
 - [ ] Consistent terminology from `context/glossary.md` — no synonyms introduced (no "driver"/"employee" drift, no "planner"/"dispatcher" drift)
 - [ ] Correct APA 7 citations (`\parencite{}` / `\textcite{}`)
-- [ ] All cited sources are `approved-read` in `context/docs/method/literature-list.md` and present in `result/references.bib`
+- [ ] Every cited source has a verified notes file at `context/docs/method/sources/raw/extracted/{bibkey}.md` and is present in `result/references.bib`
 - [ ] Every paragraph has a clear topic sentence
 - [ ] Transitions between paragraphs and sections are explicit (bridge ideas, not "Furthermore" filler)
 - [ ] Tense is consistent (present for theory, past for what was done)
@@ -34,7 +34,7 @@ These derive from advisor feedback on Ch 2. Violations are usually visible withi
 | [ ] | Robot-prompt precision | The reader never has to speculate about the meaning of a sentence. Adjectives are justified ("limited" — limited how, and according to whom?). Domain words taken from sources ("each machine") are translated to our terms (vehicles, drivers) or their mapping is stated. |
 | [ ] | Decisions have rationale | Every described decision (methodological, algorithmic, architectural, UI, scope) states the reason, not just the choice. "The system lets the planner set a time limit BECAUSE interviews showed..." — not just the first half. |
 | [ ] | Technical depth where required | For algorithm, constraints, solver choice, NP-hardness, architecture: the text goes beyond description (trade-offs, limitations, rejected alternatives). |
-| [ ] | Concept introduced before first use | No term or acronym (VRP, CP-SAT, tacit knowledge) appears before it is defined in this or an earlier section. |
+| [ ] | Concept introduced before first use | No term or acronym (CP-SAT, HITL, tacit knowledge) appears before it is defined in this or an earlier section. |
 | [ ] | Selective source use | Each citation supports the exact claim being made, not the source's general topic. Broad sources are not used as blanket coverage for narrow claims. |
 | [ ] | Interviews integrated | Where theory or discussion has an obvious interview connection, that connection is made explicit in the same paragraph or the next, not as a separate aside. |
 
@@ -50,7 +50,7 @@ These derive from advisor feedback on Ch 2. Violations are usually visible withi
 | [ ] | Integration | Citations are interpreted and connected to Ressursplanlegger; they are not name-dropped. |
 | [ ] | Reuse sanity | The same source is not used to support unrelated claims beyond its scope. |
 | [ ] | No orphan sources | Every cited source clearly supports a claim in the surrounding sentence or paragraph, and every bibliography/source-list entry planned for the chapter is either used, deferred, or removed. |
-| [ ] | Approval status | `candidate` and `agent-reviewed` sources are treated as unusable until manually marked `approved-read`. |
+| [ ] | Source notes status | A source is usable in thesis prose only when its notes file at `context/docs/method/sources/raw/extracted/{bibkey}.md` exists, is filled, and is verified by human. |
 
 ---
 
@@ -72,7 +72,7 @@ These derive from advisor feedback on Ch 2. Violations are usually visible withi
 
 | Check | What sensor looks for | How to verify |
 |:-----:|----------------------|---------------|
-| [ ] | VRP defined and connected to this project's problem | Not just textbook VRP — mapped to driver/vehicle assignment |
+| [ ] | Resource scheduling defined and connected to this project's problem | Multi-resource assignment with constraints — mapped to driver/vehicle assignment, not generic textbook scheduling |
 | [ ] | HITL/automation levels discussed with source | Parasuraman (2000), Sheridan & Verplank (1978) |
 | [ ] | TMS landscape described factually | Timpex, Trimtex, Opptur — what they do and don't do |
 | [ ] | DSR methodology introduced with citations | Hevner (2004), Peffers (2007), Wieringa (2014) |
@@ -119,7 +119,7 @@ These derive from advisor feedback on Ch 2. Violations are usually visible withi
 | Check | What sensor looks for | How to verify |
 |:-----:|----------------------|---------------|
 | [ ] | **Discusses, not just presents** — weighs multiple perspectives | Writing action level = "drøfte" — must argue, compare, evaluate |
-| [ ] | Findings connected back to theory from Ch 2 | VRP theory → algorithm results. HITL theory → override design. |
+| [ ] | Findings connected back to theory from Ch 2 | Resource scheduling / constraint programming theory → algorithm results. HITL theory → override design. |
 | [ ] | Algorithm performance discussion is grounded in benchmark evidence | Ch 5.2 uses Ch 4.5 + `benchmark-results.md`, not unsupported performance claims |
 | [ ] | Research question addressed — reader can see the answer forming | Each sub-question should be implicitly answered by the end of Ch 5 |
 | [ ] | Adoption barriers discussed honestly | Invoicing gap, trust, cost, training |

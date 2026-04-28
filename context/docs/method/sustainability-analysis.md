@@ -188,7 +188,7 @@ The Wedding Cake Model (Stockholm Resilience Centre) shows how the 17 SDGs relat
 - Brundtland definition: Brundtland, G. H. (1987). Report of the World Commission on Environment and Development: Our Common Future. United Nations.
 - Orders of effects: Betz, S., et al. (2015). [Original source for first/second/third order effects classification — verify exact reference]
 
-> Add all of these to `result/references.bib` and `context/docs/method/literature-list.md`.
+> All of these are in `result/references.bib`. Generate source notes via `.claude/agents/source-extractor.md` before citing.
 
 ---
 
