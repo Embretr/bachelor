@@ -42,6 +42,7 @@
 | `context/docs/project/decision-log.md` | Key technical and methodological decisions | Ch 3, 5 |
 | `context/docs/project/change-log.md` | Evolution from early MVP to current system | Ch 5, 6 |
 | `context/docs/tech/algorithm.md` | Algorithm: input, output, constraints, method, limitations | Ch 4.5, 5.2 |
+| `context/docs/tech/benchmark-results.md` | Solver benchmark datasets, runtime, solution quality, limitations | Ch 4.5, 5.2 |
 | `context/docs/tech/architecture.md` | System architecture: frontend, backend, database, hosting | Ch 4.4 |
 | `context/docs/tech/data-model.md` | Database schema and entity relations | Ch 4.4 |
 | `context/docs/tech/api-overview.md` | API endpoints | Ch 4.4 |
@@ -65,10 +66,24 @@
 |------|---------|------|
 | `evaluation/a-grade-rubric.md` | Detailed A criteria per chapter — primary quality gate | Before every output |
 | `evaluation/evaluation.md` | Chapter-level checklist | Before every output |
+| `evaluation/source-requests.md` | Queue of unresolved source needs and candidate source assessments | Before writing and during source audits |
 | `evaluation/grading-guidelines.md` | Official sensor guidelines | When doing quality check |
 | `evaluation/workflow-improvements.md` | Log of proposed and applied workflow changes | After every task |
 | `evaluation/formal-requirements.md` | Deliverables, deadlines, AI policy, contribution attribution | Final submission checklist only — not loaded during writing |
 | `evaluation/theory-usage.md` | Theory tracking matrix — which theories from Ch 2 are used where | Red-thread/quality checks for Ch 5+ |
+
+---
+
+## Fixed Pre-Write Activities
+
+Before `/write-section X.Y`, always:
+
+1. Confirm `context/outline.md` has a concrete paragraph-level plan for the section.
+2. Resolve source requests for the next section: check `evaluation/source-requests.md` for matching `SRC-xxx` entries.
+3. Confirm every required citation key is `approved-read` in `context/docs/method/literature-list.md` and exists in `result/references.bib`.
+4. Confirm section-specific evidence files are filled and not template-only.
+
+Unresolved source requests, `candidate` sources, and `agent-reviewed` sources block thesis writing.
 
 ---
 
@@ -80,7 +95,7 @@ Files are filled in varying degrees. Use this to know what can be relied upon:
 |------|------------|-------|
 | `context/context.md` | ✅ Complete | RQ + 3 sub-questions, tech stack, system description |
 | `context/thesis-spine.md` | ✅ Approved draft | Review after Ch 4 is drafted |
-| `context/outline.md` | ✅ Complete | Paragraph-level plans for Ch 1–3; section-level for Ch 4–6 |
+| `context/outline.md` | ✅ Complete | Paragraph-level plans for Ch 1–6; includes readiness markers |
 | `context/glossary.md` | ✅ Filled | Core terms + algorithm + system terms |
 | `context/scope.md` | ✅ Filled | Needs Embret confirmation |
 | `context/writing-style-examples.md` | ⬜ Empty | Fill after first good section is written |
@@ -89,22 +104,26 @@ Files are filled in varying degrees. Use this to know what can be relied upon:
 | `context/docs/requirements/functional-requirements.md` | ✅ Filled | 42 requirements with MoSCoW and implementation status |
 | `context/docs/requirements/non-functional-requirements.md` | ✅ Filled | Embret — 9+ NFRs with targets |
 | `context/docs/requirements/requirements-traceability.md` | ✅ Filled | Embret — implementation + test status |
+| `context/docs/method/literature-list.md` | ⚠️ Controlled source register | Blocks Ch 2, Ch 3.2, Ch 3.4, Ch 4.5, and Ch 5.5 until required sources are `approved-read` |
 | `context/docs/tech/algorithm.md` | ✅ Filled | Embret — 3 solvers, constraints, scoring |
 | `context/docs/tech/architecture.md` | ✅ Filled | Embret — full architecture with diagrams |
 | `context/docs/tech/tech-stack.md` | ✅ Filled | Embret — all layers with justification |
 | `context/docs/tech/data-model.md` | ✅ Filled | Embret — entity relationships |
-| `context/docs/tech/codebase-overview.md` | ⚠️ Check | Embret — may be filled |
-| `context/docs/tech/flow-diagrams.md` | ⚠️ Draft | Embret to verify/update |
-| `context/docs/tech/api-overview.md` | ⬜ Template | Embret — blocks ch4.4 |
+| `context/docs/tech/benchmark-results.md` | ⬜ Template | Blocks Ch 4.5 and Ch 5.2 until benchmark numbers are filled |
+| `context/docs/tech/codebase-overview.md` | ✅ Filled | Verify against actual codebase before Ch 4.4 |
+| `context/docs/tech/flow-diagrams.md` | ✅ Filled | Verify before converting diagrams to thesis figures |
+| `context/docs/tech/api-overview.md` | ✅ Filled | Verify procedure names before Ch 4.4 |
 | `context/docs/user-research/personas.md` | ✅ Filled | 4 user roles from interviews |
-| `context/docs/user-research/user-tests.md` | ⬜ Template | Fill if user tests are conducted |
-| `context/docs/user-research/ui-flow.md` | ⬜ Template | Embret — blocks ch4.4 |
+| `context/docs/user-research/user-tests.md` | ⬜ Optional template | Fill if user tests are conducted; if empty, Ch 5.6 must state this limitation |
+| `context/docs/user-research/ui-flow.md` | ✅ Filled | Verify against implemented UI and scope before Ch 4.4 |
 | `context/docs/project/risk-log.md` | ✅ Filled | 10 risks |
-| `context/docs/project/sprint-log.md` | ⬜ Template | Both — fill retroactively for Ch 3.4 |
-| `context/docs/project/decision-log.md` | ⬜ Template | Both — fill for Ch 3 |
+| `context/docs/project/sprint-log.md` | ⬜ Template | Both — fill retroactively; blocks Ch 3.4 |
+| `context/docs/project/decision-log.md` | ⬜ Template | Both — fill for Ch 3.4 and Ch 5 |
+| `context/docs/project/change-log.md` | ⬜ Template | Both — fill for Ch 5 and Ch 6 |
 | `evaluation/grading-guidelines.md` | ✅ Filled | NRT criteria + NTNU-specific + weighting |
 | `evaluation/a-grade-rubric.md` | ✅ Complete | A criteria per chapter |
 | `evaluation/evaluation.md` | ✅ Filled | Chapter-level checklist with sensor questions |
+| `evaluation/source-requests.md` | ✅ Active | Source needs queue; resolve before writing affected sections |
 | `evaluation/formal-requirements.md` | ✅ Filled | Deliverables, deadlines, documentation |
 
 ---
@@ -118,19 +137,25 @@ Ch 1 — Introduction:
 Ch 2 — Theory:
   context.md + thesis-spine.md + outline.md + glossary.md
   + docs/method/theoretical-framework.md + docs/method/literature-list.md
+  + evaluation/source-requests.md
 
 Ch 3 — Methodology:
   context.md + thesis-spine.md + outline.md + glossary.md
   + docs/method/research-design.md + docs/project/sprint-log.md + interviews-summary.md
+  + docs/method/literature-list.md + evaluation/source-requests.md
 
 Ch 4 — Findings:
   context.md + thesis-spine.md + outline.md + glossary.md
   + interviews-summary.md + fitgap-summary.md
   + docs/requirements/functional-requirements.md + docs/requirements/non-functional-requirements.md
-  + docs/tech/algorithm.md + docs/tech/architecture.md + docs/tech/tech-stack.md
+  + docs/tech/algorithm.md + docs/tech/benchmark-results.md
+  + docs/tech/architecture.md + docs/tech/tech-stack.md
+  + docs/method/literature-list.md + evaluation/source-requests.md
 
 Ch 5 — Discussion:
   context.md + thesis-spine.md + outline.md + glossary.md
+  + docs/tech/benchmark-results.md for 5.2
+  + docs/method/literature-list.md + evaluation/source-requests.md
   + All completed chapter .tex files
   + evaluation/a-grade-rubric.md + evaluation/grading-guidelines.md
 

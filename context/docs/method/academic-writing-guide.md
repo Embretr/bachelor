@@ -199,6 +199,7 @@ These rules are specific to the Ressursplanlegger thesis and supplement the gene
    - Never mix tenses within the same paragraph without a clear reason
 9. **Cite every claim** that is not common knowledge — use `\parencite{key}` or `\textcite{key}`
 10. **Do not overload with jargon** — use technical terms where appropriate, but the text should be readable by someone with a CS background who is not a domain expert
+11. **Use direct student-level English** — prefer short, clear words over advanced academic phrasing when the meaning is the same. Avoid unnecessary adverbs and vague intensifiers such as "widely", "clearly", "significantly", "particularly", "highly", and "effectively". Do not write phrases such as "widely used" unless the scope is specified, for example by naming the sector, source, country, or user group. The text should sound like precise academic writing by Norwegian bachelor students, not like inflated expert prose.
 
 ---
 

@@ -73,6 +73,18 @@ The DSR process follows the six-phase model from Peffers et al. (2007):
 
 ---
 
+## Research Ethics
+
+> Fill this before writing Section 3.2. Do not invent approval status in the thesis.
+
+- **Informed consent:** [FILL IN — how consent was obtained before recording/interviewing]
+- **Sikt/NSD status:** [FILL IN — whether the project was submitted, assessed as not requiring submission, or handled under supervisor/institution guidance]
+- **Anonymisation:** [FILL IN — whether individuals are anonymised, whether companies may be named, and why]
+- **Data storage:** [FILL IN — where recordings/transcripts were stored, who had access, and when data will be deleted]
+- **Use of transcription tools:** [FILL IN — how Sonix.ai use was handled in relation to consent and data protection]
+
+---
+
 ## System Development Approach
 
 - **Methodology:** Agile, iterative development with informal sprints.

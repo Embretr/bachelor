@@ -74,7 +74,36 @@ A) Clear and direct
 B) Implicit but traceable
 C) Not traceable — this chapter could be cut without affecting the RQ
 
-### 5. VERDICT
+### 5. CONCEPT PLACEMENT
+List every technical term, acronym, or named concept that is USED in Chapter [N] before it is INTRODUCED.
+For each: quote the first use, say where the introduction actually appears (or "never introduced"), and state where it should be moved to.
+
+Examples of the failure: "VRP" referenced in 2.3 but defined only in 2.4; "CP-SAT" mentioned without definition; "tacit knowledge" used before it is explained. A reader must never meet a concept they have no way to understand.
+
+### 6. PARAGRAPH DISCIPLINE AND ORDERING
+Go through the chapter paragraph by paragraph.
+
+For each paragraph:
+- State in one sentence what this paragraph is about. If that sentence needs "and", the paragraph is mixing concepts — flag it and suggest the split.
+- Check whether the paragraph's topic sentence matches what the paragraph actually does.
+- Flag any paragraph where three or more distinct concepts are discussed (e.g. multi-resource + single-resource + valid driver; NP-hard + heuristics + solver engines).
+
+Then check ordering within sections:
+- When a section enumerates things (types of constraints, solver engines, automation levels), is the STRUCTURE presented first (as a sentence or a table) BEFORE the individual items are explained? Flag any section that explains items before the reader knows the taxonomy.
+- When a section introduces a theoretical concept (resource scheduling, VRP, DSR), does it ground the reader with examples/context BEFORE giving the formal definition? Flag any section that moves from abstract definition to concrete example instead of the reverse.
+- Does the section establish what the work/domain looks like early enough? Narrative framing (how planners work today, what the problem looks like) must come before theory that depends on it.
+
+### 7. TERMINOLOGY AND TRANSITIONS
+- List every pair of synonyms used for the same concept in this chapter (e.g. "driver"/"employee", "planner"/"dispatcher"). For each: pick the glossary term and say which occurrences must change.
+- Identify every paragraph boundary where there is no explicit bridge from one paragraph to the next. Quote the boundary and suggest a one-sentence bridge OR a reordering.
+
+### 8. DECISIONS WITHOUT RATIONALE
+For Chapters 3, 4, and 5 especially: list every stated decision (methodological choice, algorithm choice, UI choice, scope cut) that is described without a reason. Quote the decision; say what rationale is missing and where it should come from (interviews, trade-off analysis, constraint, external requirement).
+
+### 9. SOURCE USE (relevance vs. dumping)
+For each citation: is only the RELEVANT part of the source being used, or has the author pulled in everything the source says? Flag citations where the source is broad but the claim is narrow, or where the source's content does not directly match the claim made.
+
+### 10. VERDICT
 Summarise in three sentences:
 - What is the strongest part of this chapter's argument?
 - What is the single biggest coherence problem?

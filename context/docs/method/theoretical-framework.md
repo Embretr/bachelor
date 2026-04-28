@@ -21,12 +21,9 @@ The Vehicle Routing Problem is a combinatorial optimisation problem in operation
 **How it connects to Ressursplanlegger:**
 The daily planning problem in Ressursplanlegger can be formulated as a variant of the VRP. "Customers" are assignments that need to be served; "vehicles" are the combination of a driver and a physical vehicle; the "cost" is a composite function balancing workload, priority coverage, and constraint satisfaction. However, Ressursplanlegger's problem is not a pure VRP — it focuses on resource assignment (who does what) rather than route sequencing (in which order), since individual assignments have fixed locations and times. The problem is more precisely a resource-constrained scheduling problem with VRP-like constraints.
 
-**Key sources:**
-- Dantzig, G. B., & Ramser, J. H. (1959). The Truck Dispatching Problem. *Management Science*, 6(1), 80–91.
-- Toth, P., & Vigo, D. (Eds.). (2014). *Vehicle Routing: Problems, Methods, and Applications* (2nd ed.). SIAM.
-- [FILL IN — additional VRP sources as found during literature review]
-
-> Ensure all sources are in `result/references.bib`.
+**Key sources (bibkeys, all `approved-read`):**
+- `dantzig1959truck` — Dantzig & Ramser (1959). The Truck Dispatching Problem. *Management Science*, 6(1), 80–91. (Kanonisk opphav.)
+- `braekers2016vrp` — Braekers, Ramaekers & Van Nieuwenhuyse (2016). The Vehicle Routing Problem: State of the Art Classification and Review. *Computers & Industrial Engineering*, 99, 300–313. (Moderne taxonomy for VRPTW, CVRP, heterogeneous fleet.)
 
 ---
 
@@ -65,14 +62,16 @@ Interview findings show a clear consensus: traffic coordinators do not want full
 **Design implication:**
 Ressursplanlegger implements HITL as its core interaction pattern: the algorithm generates a suggested plan, the coordinator reviews it (with conflicts highlighted), makes manual adjustments, and approves the final version. This is the "suggest + override" pattern — the algorithm does the heavy lifting, the human applies judgment.
 
-**Levels of automation (Sheridan & Verplank, 1978):**
-Ressursplanlegger operates at approximately level 5–6 on Sheridan and Verplank's 10-level automation scale: the system generates a plan and presents it for approval, but the coordinator can modify any part before execution.
+**Levels of automation (Parasuraman, Sheridan & Wickens, 2000):**
+Ressursplanlegger operates at approximately level 5–6 on the 10-level automation scale proposed by Parasuraman, Sheridan and Wickens (which extends and formalises the original Sheridan & Verplank 1978 scale): the system generates a plan and presents it for approval, but the coordinator can modify any part before execution.
 
-**Key sources:**
-- Sheridan, T. B., & Verplank, W. L. (1978). *Human and Computer Control of Undersea Teleoperators*. MIT Man-Machine Systems Laboratory.
-- Parasuraman, R., Sheridan, T. B., & Wickens, C. D. (2000). A model for types and levels of human interaction with automation. *IEEE Transactions on Systems, Man, and Cybernetics — Part A*, 30(3), 286–297.
-- [FILL IN — decision support systems literature]
-- [FILL IN — trust in automation literature, relevant to adoption barriers]
+**Key sources (bibkeys, all `approved-read`):**
+- `parasuraman2000automation` — Parasuraman, Sheridan & Wickens (2000). A Model for Types and Levels of Human Interaction with Automation. *IEEE TSMC-A*, 30(3), 286–297. (Primær HITL-taxonomi.)
+- `lee2004trust` — Lee & See (2004). Trust in Automation: Designing for Appropriate Reliance. *Human Factors*, 46(1), 50–80. (Calibrated trust / appropriate reliance.)
+- `hoff2015trust` — Hoff & Bashir (2015). Trust in Automation: Integrating Empirical Evidence. *Human Factors*, 57(3), 407–434. (Moderne tillit-syntese.)
+- `bainbridge1983ironies` — Bainbridge (1983). Ironies of Automation. *Automatica*, 19(6). (Deskilling / automation-paradoks.)
+- `amershi2019guidelines` — Amershi et al. (2019). Guidelines for Human-AI Interaction. *CHI 2019*. (Design-guidelines for suggest+override.)
+- `miller2019explanation` — Miller (2019). Explanation in AI. *Artificial Intelligence*, 267. (XAI-fundament.)
 
 ---
 

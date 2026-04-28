@@ -1,10 +1,102 @@
-% ─── References — APA 7 via biblatex-apa ────────────────────────────────────
-%
-% Status: Sources from context/docs/method/literature-list.md
-% Mark sources as read in literature-list.md when confirmed.
-% Add new sources here AND in literature-list.md.
+% =============================================================================
+% references.bib — Bacheloroppgave Ressursplanlegger, NTNU IDI
+% Konsolidert kildesett, verifisert 2026-04-23
+% Organisert per tema (A–J). biblatex-apa-kompatibel.
+% =============================================================================
 
-% ─── Vehicle Routing Problem ────────────────────────────────────────────────
+
+% =============================================================================
+% TEMA A — Scheduling, Constraint Programming, Solvers
+% =============================================================================
+
+@book{pinedo2016scheduling,
+  author    = {Pinedo, Michael L.},
+  title     = {Scheduling: Theory, Algorithms, and Systems},
+  edition   = {5},
+  publisher = {Springer},
+  address   = {Cham},
+  year      = {2016},
+  doi       = {10.1007/978-3-319-26580-3},
+  isbn      = {978-3-319-26578-0}
+}
+
+@book{rossi2006constraint,
+  editor    = {Rossi, Francesca and van Beek, Peter and Walsh, Toby},
+  title     = {Handbook of Constraint Programming},
+  publisher = {Elsevier},
+  address   = {Amsterdam},
+  year      = {2006},
+  series    = {Foundations of Artificial Intelligence},
+  volume    = {2},
+  isbn      = {978-0-444-52726-4}
+}
+
+@article{ernst2004staff,
+  author  = {Ernst, Andreas T. and Jiang, Houyuan and Krishnamoorthy, Mohan and Sier, David},
+  title   = {Staff Scheduling and Rostering: {A} Review of Applications, Methods and Models},
+  journal = {European Journal of Operational Research},
+  year    = {2004},
+  volume  = {153},
+  number  = {1},
+  pages   = {3--27},
+  doi     = {10.1016/S0377-2217(03)00095-X}
+}
+
+@article{glover1986future,
+  author  = {Glover, Fred},
+  title   = {Future Paths for Integer Programming and Links to Artificial Intelligence},
+  journal = {Computers \& Operations Research},
+  year    = {1986},
+  volume  = {13},
+  number  = {5},
+  pages   = {533--549},
+  doi     = {10.1016/0305-0548(86)90048-1}
+}
+
+@article{burke2017late,
+  author  = {Burke, Edmund K. and Bykov, Yuri},
+  title   = {The Late Acceptance Hill-Climbing Heuristic},
+  journal = {European Journal of Operational Research},
+  year    = {2017},
+  volume  = {258},
+  number  = {1},
+  pages   = {70--78},
+  doi     = {10.1016/j.ejor.2016.07.012}
+}
+
+@online{googleortools2026cpsat,
+  author  = {{Google OR-Tools}},
+  title   = {{CP-SAT} Solver},
+  year    = {2026},
+  url     = {https://developers.google.com/optimization/cp/cp_solver},
+  urldate = {2026-04-23}
+}
+
+@inproceedings{perron2023cpsatlp,
+  author    = {Perron, Laurent and Didier, Fr{\'e}d{\'e}ric and Gay, Steven},
+  title     = {The {CP-SAT-LP} Solver (Invited Talk)},
+  booktitle = {29th International Conference on Principles and Practice of Constraint Programming ({CP} 2023)},
+  editor    = {Yap, Roland H. C.},
+  series    = {Leibniz International Proceedings in Informatics (LIPIcs)},
+  volume    = {280},
+  pages     = {3:1--3:2},
+  publisher = {Schloss Dagstuhl -- Leibniz-Zentrum f{\"u}r Informatik},
+  year      = {2023},
+  doi       = {10.4230/LIPIcs.CP.2023.3}
+}
+
+@online{timefold2026solver,
+  author  = {{Timefold}},
+  title   = {Optimization Algorithms},
+  year    = {2026},
+  url     = {https://docs.timefold.ai/timefold-solver/latest/optimization-algorithms/overview},
+  urldate = {2026-04-23}
+}
+
+
+% =============================================================================
+% TEMA B — Vehicle Routing Problem
+% =============================================================================
 
 @article{dantzig1959truck,
   author  = {Dantzig, George B. and Ramser, John H.},
@@ -14,20 +106,215 @@
   volume  = {6},
   number  = {1},
   pages   = {80--91},
+  doi     = {10.1287/mnsc.6.1.80}
 }
 
-@book{toth2014vrp,
-  editor    = {Toth, Paolo and Vigo, Daniele},
-  title     = {Vehicle Routing: Problems, Methods, and Applications},
-  edition   = {2},
-  publisher = {Society for Industrial and Applied Mathematics},
-  address   = {Philadelphia},
-  year      = {2014},
+@article{braekers2016vrp,
+  author  = {Braekers, Kris and Ramaekers, Katrien and Van Nieuwenhuyse, Inneke},
+  title   = {The Vehicle Routing Problem: State of the Art Classification and Review},
+  journal = {Computers \& Industrial Engineering},
+  year    = {2016},
+  volume  = {99},
+  pages   = {300--313},
+  doi     = {10.1016/j.cie.2015.12.007}
 }
 
-% ─── Research Methodology ───────────────────────────────────────────────────
 
-@article{hevner2004dsr,
+% =============================================================================
+% TEMA C — Human-in-the-Loop, Trust, Automation
+% =============================================================================
+
+@article{parasuraman2000automation,
+  author  = {Parasuraman, Raja and Sheridan, Thomas B. and Wickens, Christopher D.},
+  title   = {A Model for Types and Levels of Human Interaction with Automation},
+  journal = {IEEE Transactions on Systems, Man, and Cybernetics---Part A: Systems and Humans},
+  year    = {2000},
+  volume  = {30},
+  number  = {3},
+  pages   = {286--297},
+  doi     = {10.1109/3468.844354}
+}
+
+@article{lee2004trust,
+  author  = {Lee, John D. and See, Katrina A.},
+  title   = {Trust in Automation: Designing for Appropriate Reliance},
+  journal = {Human Factors},
+  year    = {2004},
+  volume  = {46},
+  number  = {1},
+  pages   = {50--80},
+  doi     = {10.1518/hfes.46.1.50_30392}
+}
+
+@article{hoff2015trust,
+  author  = {Hoff, Kevin Anthony and Bashir, Masooda},
+  title   = {Trust in Automation: Integrating Empirical Evidence on Factors That Influence Trust},
+  journal = {Human Factors},
+  year    = {2015},
+  volume  = {57},
+  number  = {3},
+  pages   = {407--434},
+  doi     = {10.1177/0018720814547570}
+}
+
+@article{bainbridge1983ironies,
+  author  = {Bainbridge, Lisanne},
+  title   = {Ironies of Automation},
+  journal = {Automatica},
+  year    = {1983},
+  volume  = {19},
+  number  = {6},
+  pages   = {775--779},
+  doi     = {10.1016/0005-1098(83)90046-8}
+}
+
+@inproceedings{amershi2019guidelines,
+  author    = {Amershi, Saleema and Weld, Dan and Vorvoreanu, Mihaela and Fourney, Adam and Nushi, Besmira and Collisson, Penny and Suh, Jina and Iqbal, Shamsi and Bennett, Paul N. and Inkpen, Kori and Teevan, Jaime and Kikin-Gil, Ruth and Horvitz, Eric},
+  title     = {Guidelines for {Human-AI} Interaction},
+  booktitle = {Proceedings of the 2019 CHI Conference on Human Factors in Computing Systems},
+  year      = {2019},
+  pages     = {1--13},
+  publisher = {ACM},
+  address   = {New York, NY},
+  doi       = {10.1145/3290605.3300233}
+}
+
+@article{miller2019explanation,
+  author  = {Miller, Tim},
+  title   = {Explanation in Artificial Intelligence: Insights from the Social Sciences},
+  journal = {Artificial Intelligence},
+  year    = {2019},
+  volume  = {267},
+  pages   = {1--38},
+  doi     = {10.1016/j.artint.2018.07.007}
+}
+
+@book{nonaka1995knowledge,
+  author    = {Nonaka, Ikujiro and Takeuchi, Hirotaka},
+  title     = {The Knowledge-Creating Company: How {Japanese} Companies Create the Dynamics of Innovation},
+  publisher = {Oxford University Press},
+  address   = {New York, NY},
+  year      = {1995},
+  isbn      = {978-0-19-509269-1}
+}
+
+
+% =============================================================================
+% TEMA D — Transport Management Systems
+% =============================================================================
+
+@article{griffis2007tms,
+  author  = {Griffis, Stanley E. and Goldsby, Thomas J.},
+  title   = {Transportation Management Systems: {An} Exploration of Progress and Future Prospects},
+  journal = {Journal of Transportation Management},
+  year    = {2007},
+  volume  = {18},
+  number  = {1},
+  pages   = {18--32},
+  doi     = {10.22237/jotm/1175385780}
+}
+
+@article{heinbach2022datadriven,
+  author  = {Heinbach, Christoph and Beinke, Jan Heinrich and Kammler, Friedemann and Thomas, Oliver},
+  title   = {Data-Driven Forwarding: {A} Typology of Digital Platforms for Road Freight Transport Management},
+  journal = {Electronic Markets},
+  year    = {2022},
+  volume  = {32},
+  pages   = {807--828},
+  doi     = {10.1007/s12525-022-00540-4}
+}
+
+@article{cichosz2020digital,
+  author  = {Cichosz, Marzenna and Wallenburg, Carl Marcus and Knemeyer, A. Michael},
+  title   = {Digital Transformation at Logistics Service Providers: Barriers, Success Factors and Leading Practices},
+  journal = {The International Journal of Logistics Management},
+  year    = {2020},
+  volume  = {31},
+  number  = {2},
+  pages   = {209--238},
+  doi     = {10.1108/IJLM-08-2019-0229}
+}
+
+
+% =============================================================================
+% TEMA E — Norsk transport- og logistikkontekst
+% =============================================================================
+
+@online{ssb2026godstransport,
+  author  = {{Statistisk sentralbyr\aa}},
+  title   = {Godstransport med lastebil},
+  year    = {2026},
+  url     = {https://www.ssb.no/transport-og-reiseliv/landtransport/statistikk/godstransport-med-lastebil},
+  urldate = {2026-04-23}
+}
+
+@online{ssb2026naeringer,
+  author  = {{Statistisk sentralbyr\aa}},
+  title   = {N{\ae}ringenes {\o}konomiske utvikling},
+  year    = {2026},
+  url     = {https://www.ssb.no/virksomheter-foretak-og-regnskap/virksomheter-og-foretak/statistikk/naeringenes-okonomiske-utvikling},
+  urldate = {2026-04-23}
+}
+
+@online{ssb2026sysselsetting,
+  author  = {{Statistisk sentralbyr\aa}},
+  title   = {Sysselsetting, registerbasert},
+  year    = {2026},
+  url     = {https://www.ssb.no/arbeid-og-lonn/sysselsetting/statistikk/sysselsetting-registerbasert},
+  urldate = {2026-04-23}
+}
+
+@techreport{flotve2025transportytelser,
+  author      = {Flotve, Bj{\o}rg Langset},
+  title       = {Transportytelser i {Norge} 1946--2024},
+  institution = {Transport{\o}konomisk institutt},
+  type        = {T{\O}I-rapport},
+  number      = {2098/2025},
+  year        = {2025},
+  address     = {Oslo},
+  url         = {https://www.toi.no/getfile.php?mmfileid=79704}
+}
+
+@techreport{nav2025bedrift,
+  author      = {{Arbeids- og velferdsdirektoratet}},
+  title       = {Navs bedriftsunders{\o}kelse 2025: Stor mangel p{\aa} folk med fagbrev},
+  institution = {NAV},
+  type        = {Nav-rapport},
+  number      = {04/25},
+  year        = {2025},
+  address     = {Oslo},
+  url         = {https://www.nav.no/no/nav-og-samfunn/kunnskap/analyser-fra-nav/nyheter/bedriftsundersokelsen-2025-norske-virksomheter-mangler-39-000-personer}
+}
+
+@techreport{jensen2014norsktransport,
+  author      = {Jensen, Ragnhild Steen and Jordfald, B{\aa}rd and Br{\aa}ten, Mona},
+  title       = {Norsk transport --- veien videre},
+  institution = {Fafo},
+  type        = {Fafo-rapport},
+  number      = {2014:03},
+  year        = {2014},
+  address     = {Oslo},
+  isbn        = {978-82-324-0084-3},
+  url         = {https://www.fafo.no/zoo-publikasjoner/fafo-rapporter/norsk-transport-veien-videre}
+}
+
+@techreport{kristensen2021digital,
+  author      = {Kristensen, Niels Buus},
+  title       = {Samfunnsnytten av digital transportinfrastruktur --- verdsetting av {\o}kt bruk og deling av data},
+  institution = {Transport{\o}konomisk institutt},
+  type        = {T{\O}I-rapport},
+  number      = {1857/2021},
+  year        = {2021},
+  address     = {Oslo},
+  url         = {https://www.toi.no/getfile.php/1371678-1637221459/Publikasjoner/T%C3%98I%20rapporter/2021/1857-2021/1857-2021_Summary.pdf}
+}
+
+
+% =============================================================================
+% TEMA F — Design Science Research
+% =============================================================================
+
+@article{hevner2004design,
   author  = {Hevner, Alan R. and March, Salvatore T. and Park, Jinsoo and Ram, Sudha},
   title   = {Design Science in Information Systems Research},
   journal = {MIS Quarterly},
@@ -35,6 +322,28 @@
   volume  = {28},
   number  = {1},
   pages   = {75--105},
+  doi     = {10.2307/25148625}
+}
+
+@article{peffers2007dsrm,
+  author  = {Peffers, Ken and Tuunanen, Tuure and Rothenberger, Marcus A. and Chatterjee, Samir},
+  title   = {A Design Science Research Methodology for Information Systems Research},
+  journal = {Journal of Management Information Systems},
+  year    = {2007},
+  volume  = {24},
+  number  = {3},
+  pages   = {45--77},
+  doi     = {10.2753/MIS0742-1222240302}
+}
+
+@book{wieringa2014dsm,
+  author    = {Wieringa, Roel J.},
+  title     = {Design Science Methodology for Information Systems and Software Engineering},
+  publisher = {Springer},
+  address   = {Berlin},
+  year      = {2014},
+  doi       = {10.1007/978-3-662-43839-8},
+  isbn      = {978-3-662-43838-1}
 }
 
 @article{hevner2007threecycle,
@@ -45,26 +354,15 @@
   volume  = {19},
   number  = {2},
   pages   = {87--92},
+  url     = {https://aisel.aisnet.org/sjis/vol19/iss2/4/}
 }
 
-@article{peffers2007dsr,
-  author  = {Peffers, Ken and Tuunanen, Tuure and Rothenberger, Marcus A. and Chatterjee, Samir},
-  title   = {A Design Science Research Methodology for Information Systems Research},
-  journal = {Journal of Management Information Systems},
-  year    = {2007},
-  volume  = {24},
-  number  = {3},
-  pages   = {45--77},
-}
 
-@book{wieringa2014dsr,
-  author    = {Wieringa, Roel J.},
-  title     = {Design Science Methodology for Information Systems and Software Engineering},
-  publisher = {Springer},
-  year      = {2014},
-}
+% =============================================================================
+% TEMA G — Kvalitative metoder
+% =============================================================================
 
-@article{braun2006qualitative,
+@article{braun2006thematic,
   author  = {Braun, Virginia and Clarke, Victoria},
   title   = {Using Thematic Analysis in Psychology},
   journal = {Qualitative Research in Psychology},
@@ -72,115 +370,187 @@
   volume  = {3},
   number  = {2},
   pages   = {77--101},
+  doi     = {10.1191/1478088706qp063oa}
 }
 
-@book{malterud2003kvalitative,
+@book{kvale2015interview,
+  author    = {Kvale, Steinar and Brinkmann, Svend},
+  title     = {Det kvalitative forskningsintervju},
+  edition   = {3},
+  publisher = {Gyldendal Akademisk},
+  address   = {Oslo},
+  year      = {2015},
+  isbn      = {978-82-05-46354-7}
+}
+
+@book{malterud2017kvalitative,
   author    = {Malterud, Kirsti},
-  title     = {Kvalitative metoder i medisinsk forskning},
-  edition   = {2},
+  title     = {Kvalitative forskningsmetoder for medisin og helsefag},
+  edition   = {4},
   publisher = {Universitetsforlaget},
-  year      = {2003},
+  address   = {Oslo},
+  year      = {2017},
+  isbn      = {978-82-15-02828-6}
 }
-
-% ─── Human-in-the-Loop and Automation ───────────────────────────────────────
-
-@article{lee2004trust,
-  author  = {Lee, John D. and See, Katrina A.},
-  title   = {Trust in Automation: Designing for Appropriate Reliance},
-  journal = {Human Factors},
-  year    = {2004},
-  volume  = {46},
-  number  = {1},
-  pages   = {50--80},
-}
-
-@article{parasuraman2000automation,
-  author  = {Parasuraman, Raja and Sheridan, Thomas B. and Wickens, Christopher D.},
-  title   = {A Model for Types and Levels of Human Interaction with Automation},
-  journal = {IEEE Transactions on Systems, Man, and Cybernetics --- Part A: Systems and Humans},
-  year    = {2000},
-  volume  = {30},
-  number  = {3},
-  pages   = {286--297},
-}
-
-% ─── Resource Scheduling ───────────────────────────────────────────────────
-
-@book{pinedo2016scheduling,
-  author    = {Pinedo, Michael L.},
-  title     = {Scheduling: Theory, Algorithms, and Systems},
-  edition   = {5},
-  publisher = {Springer},
-  year      = {2016},
-}
-
-% ─── Constraint Programming ────────────────────────────────────────────────
-
-@book{rossi2006handbook,
-  editor    = {Rossi, Francesca and van Beek, Peter and Walsh, Toby},
-  title     = {Handbook of Constraint Programming},
-  series    = {Foundations of Artificial Intelligence},
-  volume    = {2},
-  publisher = {Elsevier},
-  address   = {Amsterdam},
-  year      = {2006},
-}
-
-% ─── Sustainability ────────────────────────────────────────────────────────
-
-@misc{brundtland1987common,
-  author      = {{World Commission on Environment and Development}},
-  title       = {Our Common Future},
-  year        = {1987},
-  publisher   = {United Nations},
-}
-
-@misc{un2015sdg,
-  author      = {{United Nations General Assembly}},
-  title       = {Transforming Our World: The 2030 Agenda for Sustainable Development},
-  year        = {2015},
-  note        = {A/RES/70/1},
-}
-
-@misc{becker2015karlskrona,
-  author  = {Becker, Christoph and Chitchyan, Ruzanna and Duboc, Leticia and Easterbrook, Steve and Penzenstadler, Birgit and Seyff, Norbert and Venters, Colin C.},
-  title   = {The Karlskrona Manifesto for Sustainability Design},
-  year    = {2015},
-  eprint  = {1410.6968},
-  archiveprefix = {arXiv},
-}
-
-@article{duboc2020susaf,
-  author  = {Duboc, Leticia and Penzenstadler, Birgit and Porras, Jari and Chitchyan, Ruzanna and Betz, Stefanie and Seyff, Norbert and Venters, Colin C. and Brooks, Ian and Becker, Christoph},
-  title   = {Do We Really Know What We Are Building? Raising Awareness of Potential Sustainability Effects of Software Systems in Requirements Engineering},
-  journal = {Journal of Systems and Software},
-  year    = {2020},
-  volume  = {165},
-  pages   = {110570},
-}
-
-@inproceedings{seyff2022susafsdg,
-  author    = {Seyff, Norbert and Betz, Stefanie and Lammert, Dominic and Porras, Jari and Duboc, Leticia and Brooks, Ian and Chitchyan, Ruzanna and Venters, Colin C. and Penzenstadler, Birgit},
-  title     = {Transforming Our World through Software: Mapping the Sustainability Awareness Framework to the {UN} Sustainable Development Goals},
-  booktitle = {Proceedings of the 17th International Conference on Evaluation of Novel Approaches to Software Engineering (ENASE 2022)},
-  year      = {2022},
-  pages     = {417--425},
-}
-
-% ─── Agile / Iterative Development ─────────────────────────────────────────
-
-@misc{beck2001agile,
-  author = {Beck, Kent and Beedle, Mike and van Bennekum, Arie and Cockburn, Alistair and Cunningham, Ward and Fowler, Martin and Grenning, James and Highsmith, Jim and Hunt, Andrew and Jeffries, Ron and Kern, Jon and Marick, Brian and Martin, Robert C. and Mellor, Steve and Schwaber, Ken and Sutherland, Jeff and Thomas, Dave},
-  title  = {Manifesto for Agile Software Development},
-  year   = {2001},
-  url    = {https://agilemanifesto.org},
-}
-
-% ─── Research Methods (general) ─────────────────────────────────────────────
 
 @book{oates2022researching,
   author    = {Oates, Briony J. and Griffiths, Marie and McLean, Rachel},
   title     = {Researching Information Systems and Computing},
+  edition   = {2},
   publisher = {SAGE},
+  address   = {London},
   year      = {2022},
+  doi       = {10.4135/9781529786927},
+  isbn      = {978-1-5297-2909-1}
 }
+
+
+% =============================================================================
+% TEMA H — Agile og iterativ utvikling
+% =============================================================================
+
+@article{larman2003iterative,
+  author  = {Larman, Craig and Basili, Victor R.},
+  title   = {Iterative and Incremental Development: {A} Brief History},
+  journal = {Computer},
+  year    = {2003},
+  volume  = {36},
+  number  = {6},
+  pages   = {47--56},
+  doi     = {10.1109/MC.2003.1204375}
+}
+
+@online{beck2001manifesto,
+  author  = {Beck, Kent and Beedle, Mike and van Bennekum, Arie and Cockburn, Alistair and Cunningham, Ward and Fowler, Martin and Grenning, James and Highsmith, Jim and Hunt, Andrew and Jeffries, Ron and Kern, Jon and Marick, Brian and Martin, Robert C. and Mellor, Steve and Schwaber, Ken and Sutherland, Jeff and Thomas, Dave},
+  title   = {Manifesto for Agile Software Development},
+  year    = {2001},
+  url     = {https://agilemanifesto.org/},
+  urldate = {2026-04-23}
+}
+
+
+% =============================================================================
+% TEMA I — Bærekraft (SusAF, SDG, Karlskrona)
+% =============================================================================
+
+@book{wced1987commonfuture,
+  author    = {{World Commission on Environment and Development}},
+  title     = {Our Common Future},
+  publisher = {Oxford University Press},
+  address   = {Oxford},
+  year      = {1987},
+  isbn      = {978-0-19-282080-8}
+}
+
+@misc{un2015agenda2030,
+  author       = {{United Nations General Assembly}},
+  title        = {Transforming Our World: The 2030 Agenda for Sustainable Development},
+  year         = {2015},
+  howpublished = {Resolution A/RES/70/1},
+  url          = {https://sdgs.un.org/2030agenda}
+}
+
+@inproceedings{becker2015karlskrona,
+  author    = {Becker, Christoph and Chitchyan, Ruzanna and Duboc, Leticia and Easterbrook, Steve and Penzenstadler, Birgit and Seyff, Norbert and Venters, Colin C.},
+  title     = {Sustainability Design and Software: The {Karlskrona} Manifesto},
+  booktitle = {Proceedings of the 37th International Conference on Software Engineering ({ICSE} 2015)},
+  year      = {2015},
+  volume    = {2},
+  pages     = {467--476},
+  publisher = {IEEE},
+  doi       = {10.1109/ICSE.2015.179}
+}
+
+@article{duboc2020requirements,
+  author  = {Duboc, Leticia and Penzenstadler, Birgit and Porras, Jari and Akinli Kocak, Sedef and Betz, Stefanie and Chitchyan, Ruzanna and Leifler, Ola and Seyff, Norbert and Venters, Colin C.},
+  title   = {Requirements Engineering for Sustainability: {An} Awareness Framework for Designing Software Systems for a Better Tomorrow},
+  journal = {Requirements Engineering},
+  year    = {2020},
+  volume  = {25},
+  number  = {4},
+  pages   = {469--492},
+  doi     = {10.1007/s00766-020-00336-y}
+}
+
+@incollection{hilty2015ict4s,
+  author    = {Hilty, Lorenz M. and Aebischer, Bernard},
+  title     = {{ICT} for Sustainability: An Emerging Research Field},
+  booktitle = {{ICT} Innovations for Sustainability},
+  editor    = {Hilty, Lorenz M. and Aebischer, Bernard},
+  series    = {Advances in Intelligent Systems and Computing},
+  volume    = {310},
+  pages     = {3--36},
+  publisher = {Springer},
+  address   = {Cham},
+  year      = {2015},
+  doi       = {10.1007/978-3-319-09228-7_1}
+}
+
+@inproceedings{seyff2022mapping,
+  author    = {Seyff, Norbert and Betz, Stefanie and Lammert, Dominic and Duboc, Leticia and Venters, Colin C. and Penzenstadler, Birgit},
+  title     = {Transforming Our World Through Software: {M}apping the Sustainability Awareness Framework to the {UN} Sustainable Development Goals},
+  booktitle = {Proceedings of the 17th International Conference on Evaluation of Novel Approaches to Software Engineering ({ENASE} 2022)},
+  year      = {2022},
+  pages     = {417--425},
+  publisher = {SciTePress},
+  doi       = {10.5220/0011063200003176}
+}
+
+
+% =============================================================================
+% TEMA J — Algoritmisk etikk
+% =============================================================================
+
+@article{mittelstadt2016algorithms,
+  author  = {Mittelstadt, Brent Daniel and Allo, Patrick and Taddeo, Mariarosaria and Wachter, Sandra and Floridi, Luciano},
+  title   = {The Ethics of Algorithms: {M}apping the Debate},
+  journal = {Big Data \& Society},
+  year    = {2016},
+  volume  = {3},
+  number  = {2},
+  pages   = {1--21},
+  doi     = {10.1177/2053951716679679}
+}
+
+@article{martin2019accountability,
+  author  = {Martin, Kirsten},
+  title   = {Ethical Implications and Accountability of Algorithms},
+  journal = {Journal of Business Ethics},
+  year    = {2019},
+  volume  = {160},
+  number  = {4},
+  pages   = {835--850},
+  doi     = {10.1007/s10551-018-3921-3}
+}
+
+@article{jobin2019landscape,
+  author  = {Jobin, Anna and Ienca, Marcello and Vayena, Effy},
+  title   = {The Global Landscape of {AI} Ethics Guidelines},
+  journal = {Nature Machine Intelligence},
+  year    = {2019},
+  volume  = {1},
+  number  = {9},
+  pages   = {389--399},
+  doi     = {10.1038/s42256-019-0088-2}
+}
+
+@misc{eu2024aiact,
+  author       = {{European Parliament and Council}},
+  title        = {Regulation ({EU}) 2024/1689 of 13 June 2024 Laying Down Harmonised Rules on Artificial Intelligence ({Artificial Intelligence Act})},
+  year         = {2024},
+  howpublished = {Official Journal of the European Union, L series, 12 July 2024},
+  note         = {In force from 1 August 2024},
+  url          = {https://eur-lex.europa.eu/eli/reg/2024/1689/oj}
+}
+
+@article{lee2018understanding,
+  author  = {Lee, Min Kyung},
+  title   = {Understanding Perception of Algorithmic Decisions: Fairness, Trust, and Emotion in Response to Algorithmic Management},
+  journal = {Big Data \& Society},
+  year    = {2018},
+  volume  = {5},
+  number  = {1},
+  pages   = {1--16},
+  doi     = {10.1177/2053951718756684}
+}
+

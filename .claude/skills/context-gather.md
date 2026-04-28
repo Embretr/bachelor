@@ -72,7 +72,7 @@
 | **4.2** Requirements | `context/docs/requirements/functional-requirements.md`, `context/docs/requirements/non-functional-requirements.md` | `context/docs/requirements/requirements-traceability.md` |
 | **4.3** Fit/Gap | `context/fitgap-summary.md`, `context/interviews-summary.md` | — |
 | **4.4** System Description | `context/docs/tech/architecture.md`, `context/docs/tech/tech-stack.md`, `context/docs/tech/data-model.md` | `context/docs/tech/api-overview.md`, `context/docs/tech/codebase-overview.md`, `context/docs/user-research/ui-flow.md`, `context/docs/tech/flow-diagrams.md` |
-| **4.5** Algorithm | `context/docs/tech/algorithm.md` | — |
+| **4.5** Algorithm | `context/docs/tech/algorithm.md`, `context/docs/tech/benchmark-results.md` | — |
 
 ---
 
@@ -92,7 +92,7 @@
 | Section | Critical files | Optional files |
 |---------|---------------|----------------|
 | **5.1** Pain Points | `context/interviews-summary.md`, `context/fitgap-summary.md` | — |
-| **5.2** Algorithm & HITL | `context/docs/tech/algorithm.md` | — |
+| **5.2** Algorithm & HITL | `context/docs/tech/algorithm.md`, `context/docs/tech/benchmark-results.md` | — |
 | **5.3** Adoption Barriers | `context/interviews-summary.md` | `context/docs/user-research/user-tests.md` |
 | **5.4** Tacit Knowledge | `context/interviews-summary.md` | — |
 | **5.5** Sustainability | `context/docs/method/sustainability-analysis.md` | — |

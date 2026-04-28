@@ -40,6 +40,70 @@ The thesis must achieve a grade of A. Every sentence you write is evaluated agai
 
 ---
 
+## Structure and paragraph discipline (non-negotiable)
+
+These rules exist because the first draft of Ch 2 failed on clarity: paragraphs mixed unrelated concepts, definitions came before examples, terminology drifted, and the reader had to guess. Do not repeat those mistakes.
+
+### Paragraph = one idea
+- **One paragraph handles ONE concept, ONE decision, or ONE comparison.** Not two, not three.
+- If you catch yourself putting "multi-resource", "single-resource", and "valid driver" in the same paragraph — split it. If NP-hard and heuristics are in the same paragraph — split it.
+- A paragraph should have a single-sentence answer to: "What is this paragraph about?" If the answer needs "and", split it.
+- Each paragraph needs a topic sentence that states the idea, then evidence/detail, then (if needed) a short bridge to the next paragraph.
+
+### Order: orientation before detail
+- **Present the structure BEFORE the explanation.** Example: if there are two types of constraints (hard and soft), state that fact first — preferably as a sentence or a table — then explain each. The reader must know the shape of what is coming before they read the details.
+- Use tables when content is enumerable (constraint types, solver engines, automation levels, requirement categories). Prose buried with lists-inside-sentences is harder to read than a clean table.
+- **Broad → specific when introducing a topic.** For Ch 2-style theory sections: start with concrete examples from adjacent domains (nurse rostering, airline crew scheduling), THEN give the formal definition. Not the reverse. The reader needs a mental hook before an abstraction.
+
+### Narrative framing comes early
+- The reader must understand what the work is about before reading abstract theory. If a chapter/section depends on knowing "how traffic planners do this today", that context belongs in the first paragraph(s), not halfway down.
+- Start sections with an opening that grounds the reader: a concrete situation, a specific contrast, a direct claim the reader can anchor to. Not a textbook definition as sentence one.
+
+### Precision (robot-prompt standard)
+- Write as if the reader is a careful robot doing an important job. The reader should not have to speculate about your meaning.
+- Justify adjectives. "Limited resources" — limited how, and according to whom? If the source says so, quote or paraphrase the source and cite it. If not, cut the adjective.
+- Be specific where the source is specific. If a source says "each machine", ask whether that applies to our domain — do not copy the word blindly. Translate it to what we mean (vehicles, drivers, assignments) or keep it and explain the mapping.
+
+### Definitions: short, direct, sourced
+- Definitions must be short, correct, and grounded in a cited source. Do not invent definitions. Do not over-explain.
+- When paraphrasing a definition, cite the source. When quoting, quote exactly and cite with page number where possible.
+- Do not decorate definitions with unnecessary qualifiers ("limited", "complex", "various"). The source usually did not use them.
+
+### Terminology consistency
+- Pick one term from `context/glossary.md` for each concept and stick to it in EVERY paragraph. "Driver" OR "employee" — never both, unless the glossary specifies a distinction.
+- Do not introduce synonyms for variety. Variety in wording kills precision in a technical text.
+
+### Transitions between paragraphs
+- Every paragraph must connect to the previous one explicitly. Not with a filler word ("Furthermore"), but with a bridging idea ("This distinction matters because...", "The same constraint appears in a different form when...").
+- If you cannot write the bridge, the paragraphs are probably in the wrong order or one of them does not belong in this section.
+
+### Decisions + rationale
+- When describing something the team built or chose, state the decision AND the reason. Not "the system allows the planner to choose a time limit", but "the system lets the planner choose a time limit because interviews showed that planners sometimes need a fast but rougher answer and sometimes a slow but more thorough one".
+- This applies to algorithm choices, architecture decisions, UI trade-offs, scope cuts. A reader grading the thesis wants to see judgement, not just description.
+
+### Technical depth
+- This is a technical engineering thesis. Go deeper on technical choices (three solver engines, NP-hard complexity, constraint modelling) than you would in a general-audience text.
+- Depth means: comparison, trade-offs, limitations of the approach, why the alternatives were rejected. Not just "we used X, X works".
+
+### Use sources selectively
+- A source is not a bucket to be emptied into the text. Use only the parts of a source that support the specific claim you are making in THIS paragraph.
+- Do not cite a broad reference for a narrow claim. If the source makes three points and you need only one, use that one.
+- Before writing a paragraph with a citation, ask: "What exactly from this source supports the exact claim I am making?" If you cannot name it, the citation is decorative.
+
+### Read source notes before citing
+- Before citing any key, read `context/docs/method/sources/{bibkey}.md` if it exists. This file contains verified passages, page numbers, and the exact claims this source supports.
+- Use only quotes, paraphrases, and claims documented in the source notes. Do not paraphrase from the source's title or your prior knowledge — that risks misattribution.
+- If a `MUST CITE` key has no notes file (or the notes are marked "Notes incomplete"), do not invent content. Either find a different approved source whose notes cover the claim, or report the gap as a source need with section, paragraph, and claim.
+- When a source note documents a "What this source does NOT say" entry, treat it as a hard constraint — do not use the source for those claims.
+
+### Integrate interviews
+- Interview findings are primary evidence. Weave them into the text where they belong — not as a separate aside. If a theory discussion has an obvious connection to what planners said in interviews, make that connection explicit in the same paragraph or the next one.
+
+### Concept placement
+- Do not use a concept before you (or an earlier section) have introduced it. If the paragraph relies on VRP, VRP must have been defined first in a dedicated place. If an acronym first appears in Ch 2.3 but is not defined until Ch 2.4, move the definition.
+
+---
+
 ## Thesis identity
 
 [PASTE context/context.md here — thesis title, RQ, system description, scope summary]
@@ -97,6 +161,12 @@ Examples:
 
 [PASTE the relevant BibTeX entries from result/references.bib]
 [or write: "No sources loaded yet — use [CITATION NEEDED] for all claims requiring support"]
+
+## Source notes (verified passages per cite key)
+
+For each cite key listed above, read `context/docs/method/sources/{bibkey}.md` if it exists. These notes contain the actual passages, page numbers, and claim-mappings. Use them as the ground truth for what each source supports — never paraphrase from your own knowledge or the BibTeX title.
+
+If a key has no notes file or notes are marked incomplete, flag it as a source readiness issue rather than writing around it.
 
 ---
 

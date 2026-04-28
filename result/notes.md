@@ -29,7 +29,23 @@ After every writing session, Claude adds an entry:
 
 ## Session Log
 
-*(No sessions yet — first entry will be added after the first writing session)*
+## 2026-04-14 — Session: readiness workflow strengthened
+
+**Written:** No thesis prose. Workflow and outline/context readiness were updated before further section writing.
+
+**Decisions made:**
+- `/write-section` now hard-stops on missing concrete citation keys, unread/unconfirmed sources, missing evidence context, Ch 5 anchors to unwritten sections, Ch 6 before Chapters 1–5 are drafted, Ch 4.2 requirement-ID mismatch, and technical/scope contradictions.
+- Benchmark results are now a required context source for Ch 4.5 and Ch 5.2.
+- Ch 3.2 now requires research ethics context; Ch 5.6 must state missing user testing as a limitation if no tests are conducted.
+- Ch 6 outline now has paragraph-level planning and SQ3 is mandatory.
+
+**Open questions / needs follow-up:**
+- Authors must add/read/confirm sources in `result/references.bib` and `context/docs/method/literature-list.md`.
+- Embret must fill `context/docs/tech/benchmark-results.md`.
+- Research ethics details, interview duration, sprint-log, decision-log, and change-log remain blockers.
+
+**Continuity notes for next session:**
+- Do not start affected sections until the new readiness gate passes. Missing local LaTeX tools still count as a compile warning, not a writing blocker.
 
 ---
 

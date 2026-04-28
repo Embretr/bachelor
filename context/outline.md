@@ -62,7 +62,7 @@ and state what Ressursplanlegger and this thesis contribute.
 ---
 
 ## Chapter 2 — Theory
-**Owner:** Mikael | **Target:** 8–12 pages | **Status:** Not started
+**Owner:** Mikael | **Target:** 8–9 pages | **Status:** Not started
 
 **Purpose:** Establish the theoretical foundation underpinning system design and research approach.
 
@@ -73,12 +73,12 @@ and state what Ressursplanlegger and this thesis contribute.
 - ¶1: Define resource scheduling — assigning a set of limited resources (people, vehicles) to tasks over time, subject to constraints on availability, task requirements, and temporal dependencies. Cite `\textcite{pinedo2016scheduling}`. Note analogous domains: nurse scheduling, crew scheduling, driver scheduling — all share the structure of matching resources to tasks under constraints.
   MUST CITE: \textcite{pinedo2016scheduling}
 - ¶2: Multi-resource scheduling — Ressursplanlegger assigns *both* an employee and a vehicle to each assignment. This increases combinatorial complexity compared to single-resource problems. The Ressursplanlegger problem: assignments = tasks with fixed time windows and resource requirements; drivers + vehicles = resources with competency, availability, and capacity constraints; objective = maximise coverage + balance soft constraints.
-- ¶3: Hard and soft constraints — hard constraints must be satisfied for a plan to be feasible (competencies, availability, no double-booking, vehicle type). Soft constraints define preferences optimised by the algorithm (workload balance, driver preferences, priority). Each soft constraint carries a configurable weight. Cite `\textcite{rossi2006handbook}`. Link to the system's actual constraint model from `context/docs/tech/algorithm.md`.
-  MUST CITE: \textcite{rossi2006handbook}; MUST EVIDENCE: context/docs/tech/algorithm.md
-- ¶4: NP-hardness and the multi-engine approach — resource scheduling at real fleet sizes is NP-hard; exact methods become infeasible as instance size grows. This motivates heuristics: greedy (instant baseline), CP-SAT (near-optimal within time limit), Timefold (metaheuristic for large instances). The Vehicle Routing Problem (VRP) is an adjacent theoretical area with similar structure — cite `\textcite{dantzig1959truck}` and `\textcite{toth2014vrp}` — but Ressursplanlegger's problem diverges from VRP in a key way: assignments have fixed times and locations, so the algorithm decides *who* does what, not *in which order*. Sequencing is not part of the problem.
+- ¶3: Hard and soft constraints — hard constraints must be satisfied for a plan to be feasible (competencies, availability, no double-booking, vehicle type). Soft constraints define preferences optimised by the algorithm (workload balance, driver preferences, priority). Each soft constraint carries a configurable weight. Cite `\textcite{rossi2006constraint}`. Link to the system's actual constraint model from `context/docs/tech/algorithm.md`.
+  MUST CITE: \textcite{rossi2006constraint}; MUST EVIDENCE: context/docs/tech/algorithm.md
+- ¶4: NP-hardness and the multi-engine approach — resource scheduling at real fleet sizes is NP-hard; exact methods become infeasible as instance size grows. This motivates heuristics: greedy (instant baseline), CP-SAT (near-optimal within time limit), Timefold (metaheuristic for large instances). The Vehicle Routing Problem (VRP) is an adjacent theoretical area with similar structure — cite `\textcite{dantzig1959truck}` and `\textcite{braekers2016vrp}` — but Ressursplanlegger's problem diverges from VRP in a key way: assignments have fixed times and locations, so the algorithm decides *who* does what, not *in which order*. Sequencing is not part of the problem.
   MUST CITE: \textcite{pinedo2016scheduling}
-- ¶5: Solver comparison — greedy O(n × m), no optimality guarantee; CP-SAT complete solver with configurable time limit, near-optimal for ≤500 assignments; Timefold metaheuristic (tabu search, simulated annealing) for large or multi-day instances. Each occupies a different point on the speed-quality tradeoff. Cite `\textcite{rossi2006handbook}` for constraint programming foundations.
-  MUST CITE: \textcite{rossi2006handbook}
+- ¶5: Solver comparison — greedy O(n × m), no optimality guarantee; CP-SAT complete solver with configurable time limit, near-optimal for ≤500 assignments; Timefold metaheuristic (tabu search, simulated annealing) for large or multi-day instances. Each occupies a different point on the speed-quality tradeoff. Cite `\textcite{rossi2006constraint}` for constraint programming foundations.
+  MUST CITE: \textcite{rossi2006constraint}
 
 **2.2 Human-in-the-Loop Automation** (~2.5 pages)
 
@@ -92,9 +92,10 @@ and state what Ressursplanlegger and this thesis contribute.
 - ¶5: HITL as a design constraint — the system must expose its reasoning (conflict detection, scoring breakdown) so the coordinator can make informed corrections. This shapes the UI as much as the algorithm.
   MUST EVIDENCE: context/docs/tech/architecture.md
 
-**2.3 Transport Management Systems (TMS)** (~2 pages)
+**2.3 Transport Management Systems (TMS)** (~1.5 pages)
 
 - ¶1: Define TMS as a software category — order management, route planning, carrier management, freight billing. Cite industry source if available (check literature-list).
+  MUST CITE: \textcite{griffis2007tms}, \textcite{heinbach2022datadriven}
 - ¶2: TMS landscape in Norway — Timpex, Trimtex, Opptur. Describe what they do well (invoicing, order tracking) and what they lack (planning, optimisation). Keep factual — detailed gap analysis is in Ch 4.3.
   MUST EVIDENCE: interviews-summary.md (system usage per company); fitgap-summary.md
 - ¶3: The planning gap — none of the existing systems address the space between "order exists" and "driver is assigned." This is where Ressursplanlegger fits. Bridge sentence to Chapter 4.
@@ -102,11 +103,12 @@ and state what Ressursplanlegger and this thesis contribute.
 
 **2.4 Design Science Research** (~1.5 pages)
 
-- ¶1: Define DSR — creating and evaluating artefacts to address practical problems. Cite `\textcite{hevner2004dsr}` and `\textcite{peffers2007dsr}`.
-  MUST CITE: \textcite{hevner2004dsr}, \textcite{peffers2007dsr}
+- ¶1: Define DSR — creating and evaluating artefacts to address practical problems. Cite `\textcite{hevner2004design}` and `\textcite{peffers2007dsrm}`.
+  MUST CITE: \textcite{hevner2004design}, \textcite{peffers2007dsrm}
 - ¶2: Why DSR fits this project — the contribution is both the artefact (Ressursplanlegger) and the knowledge gained through building and validating it. DSR structures the process from problem identification through evaluation.
-- ¶3: Validation vs evaluation — cite `\textcite{wieringa2014dsr}`. Explain that this thesis validates (predicts behaviour through benchmarking and requirements traceability) rather than evaluates (deploys in production). Bridge to Chapter 3 where the specific DSR application is detailed.
-  MUST CITE: \textcite{wieringa2014dsr}
+- ¶3: Validation vs evaluation — cite `\textcite{wieringa2014dsm}`. Explain that this thesis validates (predicts behaviour through benchmarking and requirements traceability) rather than evaluates (deploys in production). Bridge to Chapter 3 where the specific DSR application is detailed.
+  MUST CITE: \textcite{wieringa2014dsm}
+- ¶4: Bridge to methodology — make explicit that this section explains DSR as theory, while Chapter 3 applies the DSR phases to this specific project. This avoids repeating methodology content in the theory chapter.
 
 > **Note:** Section 2.4 was previously "Related Work." Moved DSR here because sensor criterion NRT3 (Theoretical Insight) explicitly covers "knowledge of relevant methods." Related work on algorithm-assisted dispatching is now woven into 2.1 and 2.2 rather than a separate section — avoiding a thin, disconnected related-work section.
 
@@ -122,32 +124,34 @@ and state what Ressursplanlegger and this thesis contribute.
 **3.1 Research Design** (~1.5 pages)
 
 - ¶1: State the methodology — Design Science Research (DSR). Cite Peffers (2007) for six-phase model and Hevner (2004) for the framework. One-sentence definition.
-  MUST CITE: \textcite{peffers2007dsr}, \textcite{hevner2004dsr}
+  MUST CITE: \textcite{peffers2007dsrm}, \textcite{hevner2004design}
 - ¶2: Why DSR fits — combines building a software artefact with investigating a real problem. Contrast briefly with pure case study (no artefact) and pure development (no research).
 - ¶3: DSR phases applied — table mapping Peffers' six phases to what was done in this project. Reference `context/docs/method/research-design.md`.
 - ¶4: Validation vs evaluation — cite Wieringa (2014). This thesis validates (benchmarking, requirements traceability) rather than evaluates (production deployment). Acknowledge as limitation.
-  MUST CITE: \textcite{wieringa2014dsr}
+  MUST CITE: \textcite{wieringa2014dsm}
 
 **3.2 Data Collection** (~2 pages)
 
 - ¶1: Semi-structured interviews — define and justify. Allows structured comparison while preserving space for unexpected findings. Cite Oates (2022) or Braun & Clarke (2006).
-  MUST CITE: qualitative methods source (Oates or Braun & Clarke)
+  MUST CITE: \textcite{kvale2015interview}, \textcite{oates2022researching}
 - ¶2: Participant selection — 7 coordinators/managers, varying company size (8–45 vehicles), varying system maturity (no system → Timpex → custom), geographic spread across Norway. Purposive sampling.
 - ¶3: Interview guide — five themes: current tools/workflow, assignment criteria, sick-leave handling, automation attitudes, adoption criteria. Open questions. Guide included as appendix.
 - ¶4: Process — phone interviews, 4 March 2026, recorded with consent. Duration [FILL IN]. All in Norwegian.
 - ¶5: Transcription — Sonix.ai automated + manual correction. Full transcripts in `context/intervju/`.
+- ¶6: Research ethics — describe informed consent, anonymisation/company naming decisions, data storage, and Sikt/NSD status. Do not invent approval status; use exactly what is documented in `context/docs/method/research-design.md`.
+  MUST EVIDENCE: context/docs/method/research-design.md (Research ethics section)
 
 **3.3 Data Analysis** (~1 page)
 
-- ¶1: Thematic analysis following Braun & Clarke (2006) — familiarisation, coding, theme generation, review, definition.
-  MUST CITE: Braun & Clarke (2006) thematic analysis
+- ¶1: Thematic analysis following Braun and Clarke (2006) — familiarisation, coding, theme generation, review, definition.
+  MUST CITE: \textcite{braun2006thematic}
 - ¶2: From themes to requirements — pain points translated into functional requirements (MoSCoW). Fit/gap analysis compared needs against existing systems.
 - ¶3: Limitations — 7 interviews: rich but not generalisable. Self-selection bias. Single-day collection, no longitudinal perspective.
 
 **3.4 System Development Process** (~1 page)
 
 - ¶1: Agile, iterative sprints. Embret as developer, Mikael providing requirements. Not formal Scrum.
-  MUST CITE: agile/iterative methodology source
+  MUST CITE: \textcite{larman2003iterative}
 - ¶2: Interleaving — user research fed directly into development priorities. Requirements refined as system took shape. Consistent with DSR's iterative design cycle.
 - ¶3: Tech decisions — brief reference to stack (Next.js, Prisma, PostgreSQL, Python/Java solvers). Multi-engine approach chosen for benchmarking. Detail in Ch 4.4.
 - ¶4: Timeline — reference sprint-log if filled, otherwise describe general progression (problem investigation → interviews → requirements → prototype → algorithm → refinement).
@@ -155,7 +159,7 @@ and state what Ressursplanlegger and this thesis contribute.
 **3.5 Validity and Reliability** (~1 page)
 
 - ¶1: Malterud's four criteria — systematic critical reflection, relevance, validity, reflexivity. Cite Malterud (2003).
-  MUST CITE: Malterud (2003) validity criteria
+  MUST CITE: \textcite{malterud2017kvalitative}
 - ¶2: Interview validity — purposive sample, 7 companies, consistent findings across interviews (triangulation). Not generalisable to entire sector.
 - ¶3: System validity — requirements traceability (features match needs?) + algorithm benchmarking (feasible quality plans?). Not production-evaluated — validation per Wieringa.
 - ¶4: Researcher bias — dev team = research team. Risk of confirmation bias. Mitigated by structured requirements, interview-grounded analysis, transparent limitations.
@@ -209,18 +213,20 @@ and state what Ressursplanlegger and this thesis contribute.
 - ¶4: Technology stack with brief justification.
   MUST EVIDENCE: context/docs/tech/tech-stack.md
 
-**4.5 Optimisation Algorithm** (~3 pages) — *Embret*
+**4.5 Optimisation Algorithm** (~3.5 pages) — *Embret*
 
 - ¶1: Problem formulation.
   MUST EVIDENCE: context/docs/tech/algorithm.md (problem definition)
 - ¶2: Chosen approach and justification.
-  MUST EVIDENCE: context/docs/tech/algorithm.md; MUST CITE: OR-Tools/solver literature
+  MUST EVIDENCE: context/docs/tech/algorithm.md; MUST CITE: \textcite{googleortools2026cpsat}, \textcite{perron2023cpsatlp}, \textcite{timefold2026solver}
 - ¶3: Constraints modelled (hard and soft).
   MUST EVIDENCE: context/docs/tech/algorithm.md (constraint list)
 - ¶4: Objective function.
   MUST EVIDENCE: context/docs/tech/algorithm.md
 - ¶5: Known limitations.
   MUST EVIDENCE: context/docs/tech/algorithm.md (limitations section)
+- ¶6: Solver benchmarking results — present dataset sizes, runtime, scheduled percentage, violation counts, and score comparison for greedy, OR-Tools, and Timefold where available. Clearly state if any solver was implemented but not fully benchmarked.
+  MUST EVIDENCE: context/docs/tech/benchmark-results.md
 
 ---
 
@@ -245,7 +251,7 @@ and state what Ressursplanlegger and this thesis contribute.
 **5.2 Algorithm Performance and the Human-in-the-Loop** (~2 pages)
 
 - ¶1: How well does the algorithm handle real-world constraints?
-  MUST ANCHOR: Ch 4.5 algorithm (constraints + limitations)
+  MUST ANCHOR: Ch 4.5 algorithm (constraints + limitations + benchmarking results)
 - ¶2: Where does human override remain necessary?
   MUST ANCHOR: Ch 4.4 system (manual override); Ch 4.1 interviews (tacit knowledge)
 - ¶3: Connect to HITL theory from Ch 2.2.
@@ -273,18 +279,20 @@ and state what Ressursplanlegger and this thesis contribute.
 - ¶3: Implications for future system design.
   MUST ANCHOR: Ch 2.2 theory; Ch 4.5 algorithm limitations
 
-**5.5 Sustainability** (~1.5–2 pages)
+**5.5 Sustainability and Ethical Considerations** (~1.5–2 pages)
 
 - ¶1: Introduce SusAF framework.
-  MUST CITE: Duboc et al. (2020)
+  MUST CITE: \textcite{duboc2020requirements}
   MUST EVIDENCE: context/docs/method/sustainability-analysis.md
 - ¶2: Present sustainability effects table.
   MUST EVIDENCE: context/docs/method/sustainability-analysis.md
 - ¶3: Discuss key dilemmas.
   MUST ANCHOR: Ch 4.4 system features; Ch 2.2 automation vs. autonomy
 - ¶4: Map effects to SDGs.
-  MUST CITE: UN SDG targets
-- ¶5: Limitations of sustainability analysis.
+  MUST CITE: \textcite{un2015agenda2030}
+- ¶5: Ethical considerations — discuss algorithmic fairness, accountability for errors, privacy/data handling, and health/working-condition effects as part of the sustainability analysis.
+  MUST EVIDENCE: context/docs/method/sustainability-analysis.md (Ethical Perspective)
+- ¶6: Limitations of sustainability analysis.
   MUST ANCHOR: Ch 5.6 limitations
 
 **5.6 Limitations of This Study** (~1 page)
@@ -295,6 +303,8 @@ and state what Ressursplanlegger and this thesis contribute.
   MUST ANCHOR: Ch 3.4 development process; Ch 4.5 algorithm (no production data)
 - ¶3: Development team = researchers (potential confirmation bias).
   MUST ANCHOR: Ch 3.5 validity (researcher roles)
+- ¶4: User testing status — if `context/docs/user-research/user-tests.md` is still empty or template-only, state explicitly that no formal user testing was conducted and explain how this limits claims about usability, trust, and adoption.
+  MUST ANCHOR: context/docs/user-research/user-tests.md if filled; otherwise explicit absence as limitation
 
 ---
 
@@ -307,19 +317,25 @@ and state what Ressursplanlegger and this thesis contribute.
 
 **6.1 Summary** (~0.5 pages)
 
-- ¶1: One paragraph per chapter — what each contributed.
-  MUST TRACE: each paragraph → corresponding chapter's thesis-spine.md sentence
+- ¶1: Summarise the problem and motivation from Chapter 1 in 2–3 sentences.
+  MUST TRACE: Chapter 1 thesis-spine.md sentence
+- ¶2: Summarise the theoretical foundation from Chapter 2 and the methodological approach from Chapter 3.
+  MUST TRACE: Chapter 2 and Chapter 3 thesis-spine.md sentences
+- ¶3: Summarise the findings, artefact, and discussion from Chapters 4 and 5, ending with the thesis's central qualification: the system supports but does not replace coordinator judgement.
+  MUST TRACE: Chapter 4 and Chapter 5 thesis-spine.md sentences
 
 **6.2 Answers to Research Questions** (~1 page)
 
-- ¶1: Answer the main research question directly.
+- ¶1: Restate the main research question verbatim and answer it directly with a qualified statement grounded in the findings and discussion.
   MUST TRACE: main RQ → Ch 4 findings → Ch 5 discussion
-- ¶2: Answer SQ1.
+- ¶2: Answer SQ1 explicitly: current practices, pain points, and needs of traffic coordinators.
   MUST TRACE: SQ1 → Ch 4.1 findings → Ch 5.1 discussion
-- ¶3: Answer SQ2.
+- ¶3: Answer SQ2 explicitly: how an algorithm-assisted planning system should balance optimisation with coordinator control.
   MUST TRACE: SQ2 → relevant Ch 4 findings → relevant Ch 5 discussion
-- ¶4: Answer SQ3 (if applicable).
+- ¶4: Answer SQ3 explicitly: the extent to which Ressursplanlegger addresses the identified needs and what its limitations are.
   MUST TRACE: SQ3 → relevant Ch 4 findings → relevant Ch 5 discussion
+- ¶5: State the contribution of the thesis: the artefact, the requirements/finding synthesis, and the validation-based knowledge about algorithm-assisted planning in this domain.
+  MUST TRACE: Ch 3 methodology → Ch 4 findings → Ch 5 discussion
 
 **6.3 Future Work** (~1 page)
 
@@ -333,3 +349,5 @@ and state what Ressursplanlegger and this thesis contribute.
   MUST TRACE: Ch 4.1 interviews (sick-leave handling); Ch 4.5 algorithm limitations
 - ¶5: Algorithm improvements with larger datasets.
   MUST TRACE: Ch 4.5 algorithm (known limitations); Ch 5.2 algorithm performance
+- ¶6: Close with one domain-level claim about algorithm-assisted planning in transport: it is most valuable when it turns tacit knowledge into structured decision support while preserving human responsibility.
+  MUST TRACE: thesis-spine.md Chapter 6 sentence

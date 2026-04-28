@@ -54,6 +54,20 @@ AI-generated text has these patterns. Flag any passage that matches:
 
 10. **Perfect parallelism:** Every paragraph follows exactly the same structure (topic sentence → evidence → interpretation → transition). Real writing varies paragraph structure.
 
+11. **Mixed-topic paragraph:** One paragraph handles two or three unrelated ideas (e.g. multi-resource + single-resource + valid driver in the same block; NP-hard + heuristics + solver choice). A real student writes one idea per paragraph. Flag any paragraph whose topic sentence needs an "and" to describe its contents.
+
+12. **Definition before hook:** Section opens with a formal definition or a broad abstract statement before the reader has any concrete anchor. A real student typically grounds the reader first — a specific example, a contrast, or a direct claim — and brings in the definition after. Flag any section opening that jumps straight to abstraction.
+
+13. **Invented or decorated definitions:** Definitions written in the author's own words without a source, OR definitions decorated with qualifiers the source did not use ("limited resources", "complex constraints", "various resources"). Flag any definition that (a) has no citation, or (b) adds adjectives that do not appear in the cited source.
+
+14. **Missing transitions:** Two consecutive paragraphs with no bridge between them — the second paragraph starts a new idea as if the first did not exist. A real student links paragraphs either with a bridging idea or by sequencing. Flag any paragraph boundary where the reader has to re-orient.
+
+15. **Terminology drift:** Two different words used for the same concept within the same chapter ("driver" and "employee", "planner" and "dispatcher", "solver" and "engine") without a glossary-based distinction. Flag every drift.
+
+16. **Concept used before introduction:** A term like "VRP" or "constraint programming" appears in a paragraph before it has been introduced in this or an earlier section. Flag the first use and point to where the introduction should be.
+
+17. **Description without rationale:** A built-system or methodology decision is described without saying why it was made ("the system lets the planner set a time limit" — but no sentence explains why this choice was made). Flag decisions stated without reasons.
+
 ---
 
 ## Your task
