@@ -20,6 +20,25 @@ All ¶-plans use these markers. The deterministic checker greps for them. Each m
 
 ---
 
+## Paragraph Intention Tags
+
+Every ¶ in every section plan declares one — and only one — argumentative intention. The tag is the paragraph's reason for existing in this chapter; if the intention cannot be named, the ¶ should not be in the plan. The writer agent reads `INTENT` before deciding the ¶'s opening sentence; the red-thread agent uses it to detect drift.
+
+| Tag | Meaning | When to use |
+|-----|---------|-------------|
+| `INTENT (DEFINE):` | Introduces a concept, term, or category for the first time | First mention of any technical or theoretical construct |
+| `INTENT (ARGUE):` | Advances a claim that requires justification | Any non-trivial assertion the reader could plausibly contest |
+| `INTENT (EVIDENCE):` | Supplies empirical, theoretical, or system support for a prior claim | After an `ARGUE` ¶ that needs grounding |
+| `INTENT (POSITION):` | Situates the project, system, or argument against an external category | When distinguishing Ressursplanlegger from neighbouring tools/theories |
+| `INTENT (DELIMIT):` | Marks what is in or out of scope for the current discussion | When closing a possible reader objection by ruling something out |
+| `INTENT (ILLUSTRATE):` | Gives a concrete example that makes an abstract claim graspable | Once per section maximum — not for filler |
+| `INTENT (QUALIFY):` | Hedges, scopes, or limits a previous claim | After a strong claim that would otherwise overreach |
+| `INTENT (TRANSITION):` | Bridges from this section's argument to the next | Closing ¶ of every section |
+
+**Two governing rules.** (1) Every ¶ plan opens with `INTENT (TAG):` on its own line, before the prose summary. (2) Every section's ¶ tags, read in order, must form a coherent argumentative arc — typically `DEFINE → ARGUE → EVIDENCE → (POSITION/ILLUSTRATE/QUALIFY) → TRANSITION`. If the arc is missing or repeats `DEFINE` three times in a row, the section needs restructuring, not more prose.
+
+---
+
 ## Chapter 1 — Introduction
 **Owner:** Mikael | **Target:** 3–5 pages | **Status:** Not started
 
@@ -66,49 +85,79 @@ and state what Ressursplanlegger and this thesis contribute.
 
 **Purpose:** Establish the theoretical foundation underpinning system design and research approach.
 
+### Chapter Red Thread
+
+The chapter advances a single claim: the design of Ressursplanlegger and the research that produced it cannot be assessed without four specific bodies of theory, presented in the order they are needed by later chapters.
+
+1. **2.1 Resource Scheduling** frames the *algorithmic problem class* — required so Chapter 4.5 (algorithm) and Chapter 5.2 (algorithm performance) can be read against an established standard rather than as an isolated engineering choice.
+2. **2.2 Human-in-the-Loop Automation** frames the *interaction model* — required so the "suggest + override" architecture in Chapter 4.4 and the discussion of automation limits in Chapter 5.2 and 5.4 are grounded, not stylistic.
+3. **2.3 Transport Management Systems** frames the *existing tool landscape* — required as the comparative baseline that Chapter 4.3 (fit/gap) and Chapter 5.3 (adoption barriers) extend with empirical detail.
+4. **2.4 Design Science Research** frames the *research stance* — required to legitimise a build-and-validate study before Chapter 3 applies its phases.
+
+The progression is problem class → interaction pattern → existing landscape → research stance. Two governing rules apply: no theory is included that is not invoked downstream, and no later claim about the system or the methodology is left ungrounded here. Vehicle routing theory appears once, in 2.1, only to delimit the problem from an adjacent class.
+
 ### Sections and content
 
 **2.1 Resource Scheduling** (~2.5 pages)
 
-- ¶1: Define resource scheduling — assigning a set of limited resources (people, vehicles) to tasks over time, subject to constraints on availability, task requirements, and temporal dependencies. Cite `\textcite{pinedo2016scheduling}`. Note analogous domains: nurse scheduling, crew scheduling, driver scheduling — all share the structure of matching resources to tasks under constraints.
+*Why this section is here:* defines the formal class of problem Ressursplanlegger solves (multi-resource scheduling under hard and soft constraints), justifies the multi-engine algorithm choice in terms of NP-hardness and the speed–quality tradeoff, and delimits the problem from the Vehicle Routing Problem. Without this section, the algorithmic decisions in Chapter 4.5 and the benchmarking in Chapter 5.2 have no theoretical reference point.
+
+- ¶1: INTENT (DEFINE): Define resource scheduling — assigning a set of limited resources (people, vehicles) to tasks over time, subject to constraints on availability, task requirements, and temporal dependencies. Cite `\textcite{pinedo2016scheduling}`. Note analogous domains: nurse scheduling, crew scheduling, driver scheduling — all share the structure of matching resources to tasks under constraints.
   MUST CITE: \textcite{pinedo2016scheduling}
-- ¶2: Multi-resource scheduling — Ressursplanlegger assigns *both* an employee and a vehicle to each assignment. This increases combinatorial complexity compared to single-resource problems. The Ressursplanlegger problem: assignments = tasks with fixed time windows and resource requirements; drivers + vehicles = resources with competency, availability, and capacity constraints; objective = maximise coverage + balance soft constraints.
-- ¶3: Hard and soft constraints — hard constraints must be satisfied for a plan to be feasible (competencies, availability, no double-booking, vehicle type). Soft constraints define preferences optimised by the algorithm (workload balance, driver preferences, priority). Each soft constraint carries a configurable weight. Cite `\textcite{rossi2006constraint}`. Link to the system's actual constraint model from `context/docs/tech/algorithm.md`.
+- ¶2: INTENT (POSITION): Multi-resource scheduling — Ressursplanlegger assigns *both* an employee and a vehicle to each assignment. This increases combinatorial complexity compared to single-resource problems. The Ressursplanlegger problem: assignments = tasks with fixed time windows and resource requirements; drivers + vehicles = resources with competency, availability, and capacity constraints; objective = maximise coverage + balance soft constraints.
+- ¶3: INTENT (DEFINE): Hard and soft constraints — hard constraints must be satisfied for a plan to be feasible (competencies, availability, no double-booking, vehicle type). Soft constraints define preferences optimised by the algorithm (workload balance, driver preferences, priority). Each soft constraint carries a configurable weight. Cite `\textcite{rossi2006constraint}`. Link to the system's actual constraint model from `context/docs/tech/algorithm.md`.
   MUST CITE: \textcite{rossi2006constraint}; MUST EVIDENCE: context/docs/tech/algorithm.md
-- ¶4: NP-hardness and the multi-engine approach — resource scheduling at real fleet sizes is NP-hard; exact methods become infeasible as instance size grows. This motivates heuristics: greedy (instant baseline), CP-SAT (near-optimal within time limit), Timefold (metaheuristic for large instances). The Vehicle Routing Problem (VRP) is an adjacent theoretical area with similar structure — cite `\textcite{braekers2016vrp}` — but Ressursplanlegger's problem diverges from VRP in a key way: assignments have fixed times and locations, so the algorithm decides *who* does what, not *in which order*. Sequencing is not part of the problem.
+- ¶4: INTENT (DELIMIT): NP-hardness and the multi-engine approach — resource scheduling at real fleet sizes is NP-hard; exact methods become infeasible as instance size grows. This motivates heuristics: greedy (instant baseline), CP-SAT (near-optimal within time limit), Timefold (metaheuristic for large instances). The Vehicle Routing Problem (VRP) is an adjacent theoretical area with similar structure — cite `\textcite{braekers2016vrp}` — but Ressursplanlegger's problem diverges from VRP in a key way: assignments have fixed times and locations, so the algorithm decides *who* does what, not *in which order*. Sequencing is not part of the problem.
   MUST CITE: \textcite{pinedo2016scheduling}
-- ¶5: Solver comparison — greedy O(n × m), no optimality guarantee; CP-SAT complete solver with configurable time limit, near-optimal for ≤500 assignments; Timefold metaheuristic (tabu search, simulated annealing) for large or multi-day instances. Each occupies a different point on the speed-quality tradeoff. Cite `\textcite{rossi2006constraint}` for constraint programming foundations and `\textcite{glover1986future}` for the tabu-search metaheuristic concept.
+- ¶5: INTENT (TRANSITION): Solver comparison — greedy O(n × m), no optimality guarantee; CP-SAT complete solver with configurable time limit, near-optimal for ≤500 assignments; Timefold metaheuristic (tabu search, simulated annealing) for large or multi-day instances. Each occupies a different point on the speed-quality tradeoff. Cite `\textcite{rossi2006constraint}` for constraint programming foundations and `\textcite{glover1986future}` for the tabu-search metaheuristic concept. Close with one bridging sentence: an optimal plan is not the same as an *acceptable* plan in this domain — which motivates the human-in-the-loop framing in Section 2.2.
   MUST CITE: \textcite{rossi2006constraint}, \textcite{glover1986future}
 
 **2.2 Human-in-the-Loop Automation** (~2.5 pages)
 
-- ¶1: Define human-in-the-loop (HITL) automation — a design pattern where an automated process produces a recommendation or plan, but a human reviews, adjusts, and approves before it takes effect. Cite `\textcite{parasuraman2000automation}` and their 10-level automation scale. Position Ressursplanlegger at level 5–6 (system suggests, human approves).
+*Why this section is here:* establishes that, in this domain, full automation is theoretically the wrong target even when the solver can produce an optimal plan; supplies the trust, control, and automation-level concepts that Chapter 4.4 (system design), Chapter 5.2 (algorithm vs. human override), and Chapter 5.4 (tacit knowledge) rely on. Without this section, "suggest + override" appears as a stylistic preference rather than a theoretically required pattern.
+
+- ¶1: INTENT (DEFINE): Define human-in-the-loop (HITL) automation — a design pattern where an automated process produces a recommendation or plan, but a human reviews, adjusts, and approves before it takes effect. Cite `\textcite{parasuraman2000automation}` and their 10-level automation scale. Position Ressursplanlegger at level 5–6 (system suggests, human approves).
   MUST CITE: \textcite{parasuraman2000automation}
-- ¶2: Why HITL is necessary in this domain — unpredictability (weather, cancellations, sick leave), tacit knowledge (driver preferences, customer relationships, route knowledge), trust (coordinators won't use a system they can't override). Ground in interview findings implicitly — detailed evidence in Ch 4.
-- ¶3: The "suggest + override" design pattern — algorithm does heavy lifting, coordinator applies judgment. This is Ressursplanlegger's core interaction model.
+- ¶2: INTENT (ARGUE): Why HITL is necessary in this domain — unpredictability (weather, cancellations, sick leave), tacit knowledge (driver preferences, customer relationships, route knowledge), trust (coordinators won't use a system they can't override). Ground in interview findings implicitly — detailed evidence in Ch 4.
+- ¶3: INTENT (POSITION): The "suggest + override" design pattern — algorithm does heavy lifting, coordinator applies judgment. This is Ressursplanlegger's core interaction model.
   MUST EVIDENCE: context/docs/tech/architecture.md
-- ¶4: Trust and adoption — coordinators will not rely on a system whose decisions they cannot understand and override. Cite `\textcite{lee2004trust}`. Connect to adoption barriers (developed in Ch 5.3).
+- ¶4: INTENT (EVIDENCE): Trust and adoption — coordinators will not rely on a system whose decisions they cannot understand and override. Cite `\textcite{lee2004trust}`. Connect to adoption barriers (developed in Ch 5.3).
   MUST CITE: \textcite{lee2004trust}
-- ¶5: HITL as a design constraint — the system must expose its reasoning (conflict detection, scoring breakdown) so the coordinator can make informed corrections. This shapes the UI as much as the algorithm.
+- ¶5: INTENT (TRANSITION): HITL as a design constraint — the system must expose its reasoning (conflict detection, scoring breakdown) so the coordinator can make informed corrections. This shapes the UI as much as the algorithm. Close with one bridging sentence: a theoretically grounded interaction pattern is necessary but not sufficient — the artefact also enters an existing tool landscape, surveyed in Section 2.3.
   MUST EVIDENCE: context/docs/tech/architecture.md
 
-**2.3 Transport Management Systems (TMS)** (~1.5 pages)
+**2.3 Transport Management Systems and the Manual-Planning Persistence** (~2 pages)
 
-- ¶1: Define TMS as a software category — order management, route planning, carrier management, freight billing.
+*Why this section is here:* names the existing software category Ressursplanlegger enters, shows that not every Norwegian transport company even uses one, and explains *why* coordinators continue to plan manually despite decades of TMS availability — supplying the category-level reference and the explanatory baseline that Chapter 4.3 (fit/gap) and Chapter 5.3 (adoption barriers) extend with empirical detail. Without this section, the fit/gap analysis has no comparator and the manual-work persistence reads as an accident rather than a structural fact.
+
+> **Section red thread.** TMS as a category is defined → its actual penetration in the Norwegian context is shown to be uneven → the persistent manual gap is explained, not merely observed → the reader is handed the comparison frame that Chapter 4.3 will fill in. The section answers one reader question: *if these tools have existed for years, why is the assignment problem still solved with phones, sticky notes, and one person's memory?*
+
+- ¶1: INTENT (DEFINE): Open from the conclusion of `\textcite{griffis2007tms}` — TMS as a category centred on order management, freight billing, and carrier management, *not* on the human assignment of resource to task. State the category boundary first, then the mechanics. Add one sentence on data-driven TMS evolution from `\textcite{heinbach2022datadriven}`. Frame the section so the reader knows it is about *systems and their absence*, not about interview findings — the empirical fit/gap comes in Chapter 4.3.
   MUST CITE: \textcite{griffis2007tms}, \textcite{heinbach2022datadriven}
-- ¶2: TMS landscape in Norway — Timpex, Trimtex, Opptur. Describe what they do well (invoicing, order tracking) and what they lack (planning, optimisation). Keep factual — detailed gap analysis is in Ch 4.3.
-  MUST EVIDENCE: interviews-summary.md (system usage per company); fitgap-summary.md
-- ¶3: The planning gap — none of the existing systems address the space between "order exists" and "driver is assigned." This is where Ressursplanlegger fits. Bridge sentence to Chapter 4.
+- ¶2: INTENT (POSITION): The Norwegian TMS picture is uneven. Open with "In Norway, transport SMEs split into three patterns: companies on a commercial TMS (Norlog companies on Timpex; Harlem Solutions on Opptur), companies on bespoke in-house systems (Ottem; Nordic Crane), and companies with no system at all (Bergen Bulk Transport)." Make explicit that not every coordinator has a TMS — the manual problem is not only a *TMS shortfall* problem, it is also a *no-TMS-at-all* problem. Smooth the transition from ¶1 with a single linking clause ("Within that category, the Norwegian market shows...") so the move from theory to local reality is gradual, not abrupt.
+  MUST EVIDENCE: interviews-summary.md (system usage per company)
+  VERIFY: meeting note "Trimtex finnes ikke" and "two systems, not three" — confirm the actual commercial TMS used at Norlog Tana before the writer agent runs; if Trimtex is a misattribution, drop it and reduce the count to two (Timpex, Opptur).
+- ¶3: INTENT (EVIDENCE): Replace the prose "what they do vs. what is missing" with a two-column comparison table: "What commercial TMS provide" (order capture, customer/contract management, invoicing, driver-app dispatch, basic reporting) vs. "What coordinators need but no TMS supplies" (constraint-aware plan generation, capacity overview, conflict detection, formalised tacit knowledge, sick-leave replanning). One sentence after the table defines fit/gap analysis briefly so the reader carries the concept into Chapter 4.3 — "a fit/gap analysis compares system capabilities against documented user needs to expose what an existing tool covers and what it does not." The needs column is labelled as derived from interview themes; full evidence is reserved for Chapter 4.
+  MUST EVIDENCE: fitgap-summary.md (capability columns); interviews-summary.md (themes 1, 2, 3, 5)
+- ¶4: INTENT (ARGUE): The substantive question — why do Norwegian traffic coordinators still plan manually despite the tools that do exist? Three structural reasons, each grounded: (a) *no commercial TMS does plan generation*; the assignment cognition has nowhere to go even when the surrounding system is modern; (b) *ease-of-use and trust barriers* — interviewees describe Timpex/Trimtex as extremely slow and unintuitive, which raises the cost of any new tool; (c) *job-protection concerns* — coordinators do not want to automate themselves out of work, and sceptical respondents (Ottem, Bergen Bulk Transport) condition adoption on retaining manual control. Add the historical anchor: Norway was an early adopter in adjacent transport-tech domains (e.g., maritime ship-control software) — so the persistence of manual planning is not a story about technological backwardness, it is about the *absence of a planning-specific tool category*. Frame it explicitly: coordinators plan manually not because they want to, but because no tool gives them an alternative that fits the work.
+  MUST CITE: \textcite{griffis2007tms}, \textcite{lee2004trust}
+  MUST EVIDENCE: interviews-summary.md (themes 2, 4, 6); fitgap-summary.md
+  VERIFY: meeting note "Norge var en av de første med ship control software" — confirm a citeable source before keeping the historical claim; if no source exists, drop the maritime anchor and rest the argument on (a)–(c) alone.
+- ¶5: INTENT (ILLUSTRATE): One short analogy to make the structural absence concrete — the meeting note pointed to wine and South America. Develop in two sentences: a global product category (mass-market wine; mass-market TMS) can dominate worldwide while leaving a local production pattern (terroir-driven Chilean/Argentinian wine; small-fleet Norwegian transport SMEs with mixed competence and short planning horizons) underserved, because the global category is not built for the local pattern. Apply: Norwegian transport planning is in this position — the global TMS category exists, but a planning-specific tool for the coordinator role does not. Use the analogy once and move on.
+  VERIFY: meeting note "wine and South America" — confirm with Mikael which specific case he had in mind so the analogy is precise rather than decorative; if it does not survive verification, replace with a domain example (e.g., nurse rostering tools fitting hospitals but not home-care agencies).
+- ¶6: INTENT (TRANSITION): The planning gap — none of the existing systems, and none of the structural reasons that perpetuate manual work, address the space between "an assignment exists in the database" and "a driver is assigned to it." That space is where Ressursplanlegger fits. Close with the bridging sentence: building a tool to occupy this gap, and treating that build as research, requires a methodological frame — Design Science Research, introduced as theory in Section 2.4 and applied in Chapter 3.
   MUST EVIDENCE: fitgap-summary.md (gap items)
 
 **2.4 Design Science Research** (~1.5 pages)
 
-- ¶1: Define DSR — creating and evaluating artefacts to address practical problems. Cite `\textcite{hevner2004design}` and `\textcite{peffers2007dsrm}`.
+*Why this section is here:* legitimises a build-and-validate study as research, distinguishes validation from evaluation, and supplies the framework that Chapter 3.1 applies and Chapter 3.5 invokes in the validity discussion. Without this section, the thesis would have no answer to the question "why is building a system research?" — and the validation choices in Chapter 3.5 would lack a recognised standard.
+
+- ¶1: INTENT (DEFINE): Define DSR — creating and evaluating artefacts to address practical problems. Cite `\textcite{hevner2004design}` and `\textcite{peffers2007dsrm}`.
   MUST CITE: \textcite{hevner2004design}, \textcite{peffers2007dsrm}
-- ¶2: Why DSR fits this project — the contribution is both the artefact (Ressursplanlegger) and the knowledge gained through building and validating it. DSR structures the process from problem identification through evaluation.
-- ¶3: Validation vs evaluation — cite `\textcite{wieringa2014dsm}`. Explain that this thesis validates (predicts behaviour through benchmarking and requirements traceability) rather than evaluates (deploys in production). Bridge to Chapter 3 where the specific DSR application is detailed.
+- ¶2: INTENT (ARGUE): Why DSR fits this project — the contribution is both the artefact (Ressursplanlegger) and the knowledge gained through building and validating it. DSR structures the process from problem identification through evaluation.
+- ¶3: INTENT (DELIMIT): Validation vs evaluation — cite `\textcite{wieringa2014dsm}`. Explain that this thesis validates (predicts behaviour through benchmarking and requirements traceability) rather than evaluates (deploys in production). Bridge to Chapter 3 where the specific DSR application is detailed.
   MUST CITE: \textcite{wieringa2014dsm}
-- ¶4: Bridge to methodology — make explicit that this section explains DSR as theory, while Chapter 3 applies the DSR phases to this specific project. This avoids repeating methodology content in the theory chapter.
+- ¶4: INTENT (TRANSITION): Bridge to methodology — make explicit that this section explains DSR as theory, while Chapter 3 applies the DSR phases to this specific project. This avoids repeating methodology content in the theory chapter.
 
 > **Note:** Section 2.4 was previously "Related Work." Moved DSR here because sensor criterion NRT3 (Theoretical Insight) explicitly covers "knowledge of relevant methods." Related work on algorithm-assisted dispatching is now woven into 2.1 and 2.2 rather than a separate section — avoiding a thin, disconnected related-work section.
 
