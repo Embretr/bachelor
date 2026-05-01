@@ -41,6 +41,7 @@
 | `context/docs/method/theoretical-framework.md` | Resource scheduling, constraint programming, human-in-the-loop, TMS, DSR theory notes | Ch 2 |
 | `context/docs/project/sprint-log.md` | Weekly progress log | Ch 3.4 |
 | `context/docs/project/decision-log.md` | Key technical and methodological decisions | Ch 3, 5 |
+| `context/docs/method/decision-making.md` | Decision-making framework, criteria, roles, trade-offs, threats | Ch 3.4, 3.5, 5 |
 | `context/docs/project/change-log.md` | Evolution from early MVP to current system | Ch 5, 6 |
 | `context/docs/tech/algorithm.md` | Algorithm: input, output, constraints, method, limitations | Ch 4.5, 5.2 |
 | `context/docs/tech/benchmark-results.md` | Solver benchmark datasets, runtime, solution quality, limitations | Ch 4.5, 5.2 |
@@ -116,8 +117,9 @@ Files are filled in varying degrees. Use this to know what can be relied upon:
 | `context/docs/user-research/user-tests.md` | ⬜ Optional template | Fill if user tests are conducted; if empty, Ch 5.6 must state this limitation |
 | `context/docs/user-research/ui-flow.md` | ✅ Filled | Verify against implemented UI and scope before Ch 4.4 |
 | `context/docs/project/risk-log.md` | ✅ Filled | 10 risks |
-| `context/docs/project/sprint-log.md` | ⬜ Template | Both — fill retroactively; blocks Ch 3.4 |
+| `context/docs/project/sprint-log.md` | ⬜ Template | Both — fill retroactively for Ch 3.4 |
 | `context/docs/project/decision-log.md` | ⬜ Template | Both — fill for Ch 3.4 and Ch 5 |
+| `context/docs/method/decision-making.md` | ✅ Filled (framework + threats) | Both — confirm cadence + add examples |
 | `context/docs/project/change-log.md` | ⬜ Template | Both — fill for Ch 5 and Ch 6 |
 | `evaluation/grading-guidelines.md` | ✅ Filled | NRT criteria + NTNU-specific + weighting |
 | `evaluation/a-grade-rubric.md` | ✅ Complete | A criteria per chapter |
@@ -140,7 +142,8 @@ Ch 2 — Theory:
 
 Ch 3 — Methodology:
   context.md + thesis-spine.md + outline.md + glossary.md
-  + docs/method/research-design.md + docs/project/sprint-log.md + interviews-summary.md
+  + docs/method/research-design.md + docs/method/decision-making.md
+  + docs/project/sprint-log.md + docs/project/decision-log.md + interviews-summary.md
   + docs/method/sources/raw/extracted/{bibkey}.md (per cite key — once extracted)
 
 Ch 4 — Findings:
