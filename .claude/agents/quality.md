@@ -21,6 +21,7 @@ B is solid but not exceptional. C is passing. You do not give undeserved praise.
 
 [PASTE evaluation/grading-guidelines.md here — official sensor guidelines]
 [PASTE evaluation/a-grade-rubric.md here — A-grade rubric]
+[PASTE evaluation/reference-thesis-analysis.md §7 here — transferable A-markers from ChatSSB 2025]
 
 ---
 
@@ -100,6 +101,44 @@ In addition to the grading criteria, run the following checks. Flag findings inl
 
 **Reader precision test**
 - Pick 3 paragraphs from the chapter at random. For each: would a careful reader be forced to speculate about what the author means? Flag any paragraph where the answer is yes and describe the ambiguity precisely.
+
+**Reference-thesis A-markers (locked patterns from ChatSSB 2025)**
+
+This thesis emulates structural patterns observed in a verified A-grade NTNU CS bachelor (`evaluation/reference-thesis-analysis.md` §7). For each pattern relevant to the chapter under review, score: **present / partial / absent / not-applicable-for-this-chapter**. Absences are evidence the chapter is not yet at A standard.
+
+Per chapter:
+- **Ch 1**: Three anchor concepts named verbatim in §1.2? RQ + SQs numbered and discrete? Visibility-gap opening (not generic preamble)?
+- **Ch 2**: Asymmetric depth (HITL section dominates given three-layer Bainbridge / Hoff & Bashir / Miller treatment)? Every theory introduced reappears in Ch 4 or Ch 5? §2.1 frames scheduling under utilization lens (overtime / idle time / load balance)?
+- **Ch 3**: Origin story §3.1 (Admmit task, team's own initiative, HITL as mandate)? DSRM applied step-by-step, one bullet per Peffers activity? Iterative Development §3.5 contains 4–6 named iterations with origin labels per §12.0.5? Evaluation Framework as a separate sub-section?
+- **Ch 4**: Findings split by category (interview / artefact / process)? DSR Artifacts mapping table present? §4.5 ¶1 explicitly frames multi-engine benchmark as a "How-not-Of" test (tests *how*, not *whether*)? Process Documentation in body?
+- **Ch 5**: Primary findings under three locked anchors (5.1.1 Effektivitet, 5.1.2 Tillit/kontroll, 5.1.3 Tilpasningsdyktighet)? Operator-vs-owner asymmetry framed inside §5.1.1 (not standalone)? Three-layer HITL applied in §5.1.2? §5.4 hierarchical L1–L12 with three named sub-subsections + L#-to-SQ mapping? §5.5 Deviations from Plan? §5.6 Methodology Reflection (self-critical)?
+- **Ch 6**: Each SQ quoted verbatim as block quote and answered discretely? Each SQ-answer names the anchor it serves? Each Future Work item cites a specific L#? Closing domain claim about algorithm-assisted planning under stakeholder asymmetry?
+
+Cross-chapter (relevant when reviewing Ch 5 or Ch 6):
+- Three anchors threaded Ch 1 → Ch 6 verbatim — any synonyms anywhere?
+- Forward references in Ch 1 paid off in target chapter? Backward references in Ch 5/6 closing loops opened in Ch 1 (visibility gap, asymmetry)?
+
+**Anchor name drift — CRITICAL**
+
+Every occurrence of the locked anchor names (Effektivitet, Tillit/kontroll, Tilpasningsdyktighet) must be verbatim. Flag any synonym drift as a critical issue:
+- "kontroll" alone or "Tillit" alone for Tillit/kontroll
+- "fleksibilitet" or "skalerbarhet" for Tilpasningsdyktighet
+- "human control", "menneskelig overstyring", "operator oversight", "trust calibration" used as a stand-in for Tillit/kontroll
+- Any English translation of an anchor ("Efficiency", "Trust/control", "Adaptability")
+
+This is a HARD CHECK. Even a single drift instance lowers the chapter's grade by one full step. The locked names are the spine of the thesis argument; reviewers who do not flag drift are themselves a defect.
+
+**"Accountable to coordinator" operationalisation**
+
+The locked RQ uses the phrase "remaining accountable to the traffic coordinator who operates it". Wherever this idea appears, it must be operationalised concretely as the four actions defined under Tillit/kontroll: **inspect, modify, accept, or reject any algorithm-generated assignment.** Vague control language ("human oversight", "operator supervision") is a flag.
+
+**Multi-engine "How-not-Of" framing**
+
+If the chapter discusses the multi-engine solver layer (Ch 4.5, Ch 5.1.1):
+- Is the benchmark explicitly framed as a methodologically independent test of *how* the constraint problem is best solved, not *whether* the artefact's claims about utilization are real?
+- Does the text avoid overclaiming that the benchmark validates the artefact's primary value claim? (It does not — interviews surface the visibility gap, Admmit mandates HITL, neither is tested by the benchmark.)
+
+Flag any over-extension of the benchmark's epistemic scope.
 
 After all criteria:
 

@@ -98,3 +98,13 @@ Konkrete eksempler eller cases — nyttig hvis writer trenger å illustrere et k
 ## Forfatter-perspektiv / metodologi
 
 Kort om kildens metodikk eller posisjon (hvis relevant for hvordan vi bruker den). 1–2 setninger.
+
+## Spot-check verification
+
+Obligatorisk per Step 10.5 i source-extractor.md. Minimum 3 sitater verifisert mot PDF via `pdftotext`. Hvis seksjonen mangler er ekstraksjonen ikke fullført.
+
+1. Quote "..." (s. N) — verified via `pdftotext -f N -l N raw/{bibkey}.pdf` — PASS / FAIL [+ correction made if FAIL]
+2. ...
+3. ...
+
+**Result:** M/M quotes verified, K corrections made.

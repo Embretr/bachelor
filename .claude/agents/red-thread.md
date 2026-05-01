@@ -105,7 +105,32 @@ For Chapters 3, 4, and 5 especially: list every stated decision (methodological 
 ### 9. SOURCE USE (relevance vs. dumping)
 For each citation: is only the RELEVANT part of the source being used, or has the author pulled in everything the source says? Flag citations where the source is broad but the claim is narrow, or where the source's content does not directly match the claim made.
 
-### 10. VERDICT
+### 10. ANCHOR COHERENCE (HARD CHECK — locked names verbatim)
+
+The three locked anchor concepts are **Effektivitet, Tillit/kontroll, Tilpasningsdyktighet**. They are Norwegian compound terms used as proper nouns in English prose — never translated, never split.
+
+For Chapter [N]:
+- Find every occurrence of any anchor name. Are they spelled verbatim? Flag any synonym drift: "kontroll" alone, "fleksibilitet", "skalerbarhet", "human control", "menneskelig overstyring", "operator oversight", "trust calibration" used as a stand-in for Tillit/kontroll, or any English translation of an anchor.
+- Find every concept that *should* trigger an anchor reference but does not. Specifically:
+  - Ch 1 §1.2: all three anchors must be defined verbatim. Any missing → flag.
+  - Ch 5 §5.1: every sub-section must be named after exactly one anchor. Any sub-section that mixes two anchors or uses none → flag.
+  - Ch 6 §6.2: each SQ-answer paragraph must name the anchor it serves. Any answer missing an anchor reference → flag.
+  - Other chapters: any paragraph discussing utilization (overtime, idle time, load balance) without naming Effektivitet; any paragraph discussing override/control without naming Tillit/kontroll; any paragraph discussing cross-company adaptability without naming Tilpasningsdyktighet → flag.
+- "Accountable to coordinator" check: any occurrence of "accountable", "oversight", "human control", "supervision" in connection with the system must be operationalised concretely as the four actions defined under Tillit/kontroll (inspect, modify, accept, reject). Flag vague control language.
+
+### 11. STRUCTURAL PATTERNS (named A-grade moves)
+
+Verify presence of structural patterns from `evaluation/reference-thesis-analysis.md` §7:
+
+- **Visibility-gap forward/backward references.** §1.1 introduces the visibility gap; §4.1 names it as an interview theme; §5.1.1 synthesises it. If reviewing a later chapter, verify the loop closes back to §1.1; if reviewing Ch 1, verify the forward reference will be paid off.
+- **Operator-vs-owner asymmetry.** Bainbridge framing introduced in §1.1 reappears in §5.1.1 (interpretation) and §6.2 (SQ1 answer).
+- **Hierarchical limitations (L1–L12).** If reviewing Ch 5, verify §5.4 contains three named sub-subsections (Empirical L1–L4, Validation L5–L9, Conceptual L10–L12), each L# a named paragraph or `\paragraph{}`. L#-to-SQ mapping at top.
+- **SQ block-quote pattern.** If reviewing Ch 6, verify §6.2 reproduces each SQ verbatim as a single-line block quote, then answers in one discrete paragraph with no new material.
+- **Limitation-grounded Future Work.** If reviewing Ch 6, verify each §6.3 item cites a specific L# from §5.4. Generic future-work items without a named limitation are flagged.
+- **Named iterations (Ch 3.5).** If reviewing Ch 3, verify the Iterative Development Process names at least four iterations, each with tried / why / what happened / learned / next, and an inline origin label per §12.0.5.
+- **Multi-engine "How-not-Of" framing.** Verify §4.5 ¶1 explicitly frames the multi-engine benchmark as a methodologically independent test of *how*, not *of*.
+
+### 12. VERDICT
 Summarise in three sentences:
 - What is the strongest part of this chapter's argument?
 - What is the single biggest coherence problem?

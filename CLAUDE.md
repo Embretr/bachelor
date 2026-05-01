@@ -102,6 +102,27 @@ The writer agent is set up to produce — it is not objective. The red-thread ag
 
 If a finished chapter shifts the argument even slightly, update `context/thesis-spine.md` immediately. The spine is the single source of truth for cross-chapter coherence. If it drifts out of sync with what was actually written, every subsequent chapter risks building on a stale foundation. **After completing any chapter draft, compare what was written against the spine and update if needed — before moving on.**
 
+### 4. Anchor Concept Coherence
+
+The three anchor concepts defined in `context/thesis-spine.md` and `context/glossary.md` are the spine of the thesis argument:
+
+- **Effektivitet** — improved resource utilization (overtime, idle time, load balance)
+- **Tillit/kontroll** — coordinator's ability to inspect, modify, accept, or reject any algorithm-generated assignment
+- **Tilpasningsdyktighet** — capacity to function meaningfully across companies with different operational rules
+
+These are **Norwegian compound terms used as proper nouns in English prose** — never translated, never split. Where the spine demands them:
+
+- **Ch 1 §1.2** MUST define all three verbatim
+- **Ch 5 §5.1** MUST organise its Primary Findings under them (one sub-section per anchor: 5.1.1 Effektivitet, 5.1.2 Tillit/kontroll, 5.1.3 Tilpasningsdyktighet)
+- **Ch 6 §6.2** MUST connect each SQ-answer paragraph to the anchor it serves
+- **Other chapters** MUST reference at least one anchor where structurally relevant
+
+**Drift from the locked names is a critical issue.** Synonyms — "kontroll" alone, "fleksibilitet", "skalerbarhet", "human control", "menneskelig overstyring", "operator oversight", "trust calibration", or any English translation — must be flagged by reviewers and refused by writers. The `/write-section` readiness gate (Step 1c in `.claude/skills/write-section/SKILL.md`) hard-fails on synonym drift in MUST ANCHOR markers.
+
+**The phrase "accountable to the traffic coordinator"** in the research question must always be operationalised in prose by the four concrete actions defined under Tillit/kontroll: inspect, modify, accept, or reject. Vague control language ("human oversight", "operator supervision") is forbidden.
+
+**Theoretical anchor for HITL**: Bainbridge (1983) *Ironies of Automation* (`bainbridge1983ironies`). Where Human-in-the-Loop is theorised or discussed, layer Bainbridge (operator-vs-owner asymmetry) with Hoff & Bashir 2015 (trust calibration) and Miller 2019 (explanation as interface).
+
 ---
 
 ## After Every Task — Required Post-Task Ritual
@@ -173,6 +194,8 @@ Do not propose trivial changes (spelling, formatting) — only changes that affe
 - Change the research question — use it verbatim from `context/context.md`
 - Run writer and red-thread in the same session — they require separate contexts
 - Make changes that do not improve the thesis grade
+- **Translate or split anchor names** — Effektivitet, Tillit/kontroll, Tilpasningsdyktighet are Norwegian proper-nouns in English prose. Never write "Efficiency", "Trust/control", "Adaptability", "kontroll" alone, "fleksibilitet", "skalerbarhet"
+- **Reference Trimtex or Opptur** as Norwegian transport management systems — they are factual errors. Only Timpex is a real Norwegian TMS named in the interview pool; other interviewed companies use internal/custom tools described generically
 
 ---
 

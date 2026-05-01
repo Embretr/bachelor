@@ -270,9 +270,9 @@ Structure: follow `_template.md` exactly.
 
 Status field: mark as `Notes generated from raw on {today's date}`. Set Coverage assessment per Step 9. Leave `Verified by human` unchecked — only Mikael can mark that.
 
-### Step 10.5 — Self-verification (MANDATORY)
+### Step 10.5 — Self-verification (MANDATORY — gated)
 
-Before finalising, verify your own extraction. This catches page-offset errors, misquotes, and wrong PDF sections — all of which would otherwise propagate into the thesis text.
+Before finalising, verify your own extraction. This catches page-offset errors, misquotes, and wrong PDF sections — all of which would otherwise propagate into the thesis text. **You may not skip this step. Skipping it silently is a workflow violation.** A previous Sonnet run on `miller2019explanation` skipped Step 10.5 and shipped a wrong page reference (Interpretability definition cited as p. 1, actually p. 8). The gate below exists to make that failure mode impossible to repeat.
 
 **Procedure:**
 
@@ -282,9 +282,26 @@ Before finalising, verify your own extraction. This catches page-offset errors, 
    - Search the surrounding pages (±2 pages) for the actual location.
    - Identify whether the error is a single offset (one quote on wrong page) or a systematic offset (a whole chapter's pages are shifted by N).
    - Fix all affected entries in the notes file. Update the page-mapping note in Source metadata if a systematic offset is found.
-4. Mention the verification in the final report (Step 11): "Spot-check: N claims verified, M corrections made".
 
-This step is not optional. The cost is small (a handful of Bash/Read calls) and it catches the error class human verification is slowest at.
+**Output gates (BOTH required — extraction is not complete until both are satisfied):**
+
+a. **Visible section in the notes file.** Add a `## Spot-check verification` section near the bottom of the output file listing each verified claim, the page checked, the `pdftotext` command used, and pass/fail. Format:
+   ```
+   ## Spot-check verification
+   1. Quote "..." (p. N) — verified via `pdftotext -f N -l N` — PASS / FAIL [+ correction made]
+   2. ...
+   Result: M/M quotes verified, K corrections made.
+   ```
+   This section MUST be present in every extraction output. A reviewer scanning the file should see it without reading the whole file.
+
+b. **Required line in the final report (Step 11).** The `Spot-check:` line is mandatory and must appear above `Issues / actions needed:`. If you produce a final report without that line, you have not finished the task.
+
+What this step does NOT cover (human still verifies):
+- Whether the claim attribution is conceptually correct (e.g. "did the source actually say what we think it said?")
+- Whether the application note matches Ressursplanlegger's actual case
+- Whether the suggested fit (Ch X.Y ¶Z) is the right place
+
+Page-and-quote integrity is the agent's responsibility. Conceptual fit is the human's.
 
 What this step does NOT cover (human still verifies):
 - Whether the claim attribution is conceptually correct (e.g. "did the source actually say what we think it said?")
@@ -299,8 +316,11 @@ After writing the file, output ONLY this minimal report:
 
 ```
 Done. Notes: context/docs/method/sources/raw/extracted/{bibkey}.md
+Spot-check: M/M quotes verified, K corrections made.
 Issues / actions needed: [list or "none"]
 ```
+
+The `Spot-check` line is mandatory (see Step 10.5). If it is missing from your report, you have skipped the gate.
 
 Do not output a summary of areas, claims, or work done — the notes file already contains all of that. Only output what the user must act on.
 

@@ -8,6 +8,8 @@
 
 ## All Chapters
 
+- [ ] **Anchor names verbatim:** Wherever Effektivitet, Tillit/kontroll, or Tilpasningsdyktighet appear, the locked Norwegian compound terms are used as proper nouns in English prose. **Synonym drift is critical:** "kontroll" alone, "fleksibilitet", "skalerbarhet", "human control", "menneskelig overstyring" — flag and reject.
+- [ ] **No Trimtex or Opptur references:** Only Timpex is named as a real Norwegian TMS. Other interviewed companies use internal/custom tools.
 - [ ] Formal, academic English — no filler words, no "we believe"
 - [ ] Every claim has a citation or is grounded in own data
 - [ ] Consistent terminology from `context/glossary.md` — no synonyms introduced (no "driver"/"employee" drift, no "planner"/"dispatcher" drift)
@@ -58,9 +60,12 @@ These derive from advisor feedback on Ch 2. Violations are usually visible withi
 
 | Check | What sensor looks for | How to verify |
 |:-----:|----------------------|---------------|
+| [ ] | **Visibility-gap opening** | First paragraph leads with a concrete Norwegian transport-sector fact and the resource-utilization visibility gap, not with "the transport sector's role in Norway" or "growing complexity" preamble. |
+| [ ] | **§1.2 Anchor Concepts present and verbatim** | Three anchor concepts (Effektivitet, Tillit/kontroll, Tilpasningsdyktighet) defined verbatim with brief definitions in §1.2. Names match `context/glossary.md`. |
+| [ ] | **Bainbridge framing** | Bainbridge (1983) referenced as the theoretical anchor for the operator-vs-owner asymmetry, somewhere in §1.1 or §1.3. |
 | [ ] | Problem is clearly motivated — reader understands *why* this matters | A non-expert should grasp the problem after reading 1.1 |
 | [ ] | Research question is stated precisely | Verbatim from `context/context.md` |
-| [ ] | Three sub-questions are listed with brief explanation | Match context.md |
+| [ ] | Three sub-questions listed; each is quotable as single-line block quote in Ch 6 | Match context.md and spine.md. Each SQ tied to one anchor. |
 | [ ] | Scope is precisely delimited — in/out is unambiguous | Cross-check with `context/scope.md` |
 | [ ] | Division of work stated (who did what) | Mikael: user research. Embret: development. |
 | [ ] | Reader guide matches thesis-spine | One sentence per chapter, consistent |
@@ -72,13 +77,15 @@ These derive from advisor feedback on Ch 2. Violations are usually visible withi
 
 | Check | What sensor looks for | How to verify |
 |:-----:|----------------------|---------------|
+| [ ] | **Asymmetric depth** | HITL section dominates (longest); secondary concepts get under one page. Most argument-load-bearing theory gets the most space. |
+| [ ] | **Three-layer HITL** | §2.2 layers Bainbridge (operator-vs-owner asymmetry) → Hoff & Bashir (trust calibration) → Miller (explanation), alongside Parasuraman taxonomy and Lee trust foundation. All three new sources cited. |
+| [ ] | **Utilization framing in §2.1** | Resource scheduling reframed under utilization lens (overtime, idle time, load balance), not just constraint satisfaction. Preloads Ch 5.1.1 vocabulary. |
 | [ ] | Resource scheduling defined and connected to this project's problem | Multi-resource assignment with constraints — mapped to driver/vehicle assignment, not generic textbook scheduling |
-| [ ] | HITL/automation levels discussed with source | Parasuraman (2000), Sheridan & Verplank (1978) |
-| [ ] | TMS landscape described factually | Timpex, Trimtex, Opptur — what they do and don't do |
+| [ ] | TMS as software category | Only Timpex named as a real Norwegian TMS; others described generically as internal/custom tools. No Trimtex or Opptur. |
 | [ ] | DSR methodology introduced with citations | Hevner (2004), Peffers (2007), Wieringa (2014) |
 | [ ] | **Every theory introduced is used later** in Ch 4 or Ch 5 | If a theory is not referenced again, remove it |
 | [ ] | Theory chapter is "pure" — no own empirical data mixed in | Findings belong in Ch 4, not here |
-| [ ] | Related work is woven into sections, not a thin standalone section | Integrated into 2.1 and 2.2 |
+| [ ] | VRP referenced only as one-paragraph delimit | §2.1 ¶4 — not expanded |
 
 ---
 
@@ -86,13 +93,16 @@ These derive from advisor feedback on Ch 2. Violations are usually visible withi
 
 | Check | What sensor looks for | How to verify |
 |:-----:|----------------------|---------------|
+| [ ] | **§3.1 Origin story** | Opens with paragraph naming Admmit's bachelor task offer, the team's own initiative in cold-contacting seven coordinators, HITL as Admmit mandate from project start (validated by interviews, not introduced by them). Reads as a story, not a specification. |
+| [ ] | **§3.2 DSRM applied step-by-step** | Each of Peffers' six DSRM activities gets one bullet (2–4 sentences) naming what was actually done in this project. Format per `evaluation/reference-thesis-analysis.md` §11.5. |
+| [ ] | **§3.5 Named iterations (4–6)** | Iterative Development Process contains at least four named iterations with descriptive titles. Each iteration follows: tried / why / what happened (positive AND limitations) / learned / next. Each carries an inline origin label per §12.0.5 (interview-driven / Admmit mandate / designer-technical). |
+| [ ] | **§3.6 Evaluation Framework** | Separate from §3.7 Validity. Describes how the artefact is tested. Multi-engine benchmark explicitly framed as a "How-not-Of" test per §12.0.5. |
 | [ ] | DSR choice is justified — not just stated | Why DSR and not case study? Why not pure quantitative? |
-| [ ] | DSR phases mapped to this project in a table | Peffers' six phases → what was done |
 | [ ] | Interview process documented precisely enough to reproduce | Who, when, how many, how long, what questions, how transcribed |
 | [ ] | Thematic analysis method described with citation | Braun & Clarke (2006) |
 | [ ] | Validation vs evaluation distinction made explicit | Wieringa (2014) — we validate, not evaluate |
 | [ ] | Malterud's four criteria addressed | Systematic reflection, relevance, validity, reflexivity |
-| [ ] | Researcher bias acknowledged and mitigated | Dev team = research team → confirmation bias risk |
+| [ ] | Researcher bias acknowledged and mitigated | Dev team = research team + author affiliation with Admmit → confirmation bias risk |
 | [ ] | Ethical considerations documented precisely | Consent, anonymisation/company naming, data storage, transcription-tool handling, Sikt/NSD status |
 | [ ] | Limitations stated honestly — not buried | Sample size, no production deployment, single-day interviews |
 
@@ -102,6 +112,11 @@ These derive from advisor feedback on Ch 2. Violations are usually visible withi
 
 | Check | What sensor looks for | How to verify |
 |:-----:|----------------------|---------------|
+| [ ] | **Category split** | Findings split by category — empirical interview synthesis / artefact (system + algorithm) / process documentation. No interpretation in any of them. |
+| [ ] | **DSR Artifacts mapping table** | Dedicated sub-section with table mapping each project artefact to its DSR category (Construct / Model / Method / Instantiation). |
+| [ ] | **§4.5 multi-engine "How-not-Of" framing** | First paragraph of §4.5 explicitly frames the multi-engine benchmark as a methodologically independent test of *how* the constraint problem is best solved, not *whether* the artefact's claims about utilization are real (per §12.0.5). |
+| [ ] | **Visibility-gap finding present in §4.1** | Resource-utilization visibility gap is named as an empirical theme, with operator-vs-owner asymmetry as a secondary finding. |
+| [ ] | **§4.7 Process Documentation** | Sprint log summary, key decisions, time tracking — present in body (not appendix) per ChatSSB pattern. |
 | [ ] | Interview findings presented thematically, not per-company | Themes across companies, not 7 separate summaries |
 | [ ] | Findings are *presented*, not *interpreted* | Interpretation belongs in Ch 5 |
 | [ ] | Requirements table with MoSCoW, source, and implementation status | Cross-check with `functional-requirements.md` |
@@ -118,16 +133,20 @@ These derive from advisor feedback on Ch 2. Violations are usually visible withi
 
 | Check | What sensor looks for | How to verify |
 |:-----:|----------------------|---------------|
+| [ ] | **§5.1 anchor-organised primary findings** | Three sub-sections, one per locked anchor: 5.1.1 Effektivitet, 5.1.2 Tillit/kontroll, 5.1.3 Tilpasningsdyktighet. Anchor names verbatim — no synonyms. Each sub-section has a `MUST ANCHOR` marker tied to exactly one anchor. |
+| [ ] | **§5.1.1 includes operator-vs-owner asymmetry** | Bainbridge framing applied here — visibility gap is the manifestation of asymmetry (owners demand, coordinators don't articulate). Not a standalone section. |
+| [ ] | **§5.1.2 three-layer HITL applied** | Bainbridge frames operator authority over override; Hoff & Bashir for trust calibration over use; Miller for explanation/transparency. Tacit-knowledge content absorbed here. |
+| [ ] | **§5.4 hierarchical limitations (L1–L12)** | Three named sub-subsections: 5.4.1 Empirical Foundation (L1, L2, L3, L4), 5.4.2 Validation and Artefact (L5–L9), 5.4.3 Conceptual and Methodological (L10, L11, L12). Each L# is a named paragraph or `\paragraph{}`, not a buried sentence. **L#-to-SQ mapping at top of §5.4.** |
+| [ ] | **L1–L12 each present and named** | Verify all twelve appear by name; none missing. Verify ordering matches §12.0.7. |
+| [ ] | **§5.5 Deviations from Plan** | Explicit named section acknowledging plan-vs-reality differences. |
+| [ ] | **§5.6 Methodology Reflection** | Self-critical paragraph naming an actual weak spot (small sample, synthetic-only validation, dev-team = research-team, or similar). Not a perfunctory acknowledgment. |
 | [ ] | **Discusses, not just presents** — weighs multiple perspectives | Writing action level = "drøfte" — must argue, compare, evaluate |
 | [ ] | Findings connected back to theory from Ch 2 | Resource scheduling / constraint programming theory → algorithm results. HITL theory → override design. |
-| [ ] | Algorithm performance discussion is grounded in benchmark evidence | Ch 5.2 uses Ch 4.5 + `benchmark-results.md`, not unsupported performance claims |
-| [ ] | Research question addressed — reader can see the answer forming | Each sub-question should be implicitly answered by the end of Ch 5 |
-| [ ] | Adoption barriers discussed honestly | Invoicing gap, trust, cost, training |
-| [ ] | Tacit knowledge dilemma explored | System captures some but not all — what are the implications? |
-| [ ] | Sustainability section uses SusAF framework | 5 dimensions, 3 effect levels, effects table, SDG mapping |
+| [ ] | Algorithm performance discussion is grounded in benchmark evidence | Ch 5.1.1 uses Ch 4.5 + `benchmark-results.md`, not unsupported performance claims |
+| [ ] | Adoption barriers discussed honestly | Invoicing gap, trust, cost, training. Now in §5.2 Adoption and Deployment Implications. |
+| [ ] | Sustainability section uses SusAF framework | §5.3 — 5 dimensions, 3 effect levels, effects table, SDG mapping |
 | [ ] | Sustainability dilemmas discussed — not just positive effects | Efficiency vs deskilling, automation vs autonomy |
 | [ ] | Ethical perspective included | Algorithmic fairness, accountability, privacy |
-| [ ] | Limitations are specific, not generic | Not "more interviews would be better" but *why* and *what it means* |
 | [ ] | Validation framing used — not evaluation claims | "The validation suggests..." not "The system proves..." |
 
 ---
@@ -136,19 +155,24 @@ These derive from advisor feedback on Ch 2. Violations are usually visible withi
 
 | Check | What sensor looks for | How to verify |
 |:-----:|----------------------|---------------|
+| [ ] | **§6.2 SQ block-quote pattern** | Each sub-question reproduced verbatim as a single-line block quote, then answered in one discrete paragraph with no new material. Three SQs → three paragraphs. |
+| [ ] | **Anchor-tied SQ answers** | Each SQ-answer paragraph carries a `MUST TRACE` to the originating Ch 5 sub-section AND names the anchor it serves. SQ1 → §5.1.1 Effektivitet; SQ2 → §5.1.2 Tillit/kontroll; SQ3 → §5.1.3 Tilpasningsdyktighet (and cross-anchor where relevant). |
+| [ ] | **Limitation-grounded Future Work** | Each Future Work item cites a specific named limitation from §5.4 (e.g., "addresses L8 — no user testing with coordinators"). Generic items without limitation grounding flagged. |
+| [ ] | **Closing domain claim** | Final sentence makes a claim about algorithm-assisted planning under stakeholder asymmetry in Norwegian transport — not just about the artefact. |
 | [ ] | Main RQ answered directly — one clear paragraph | Verbatim question, then answer |
-| [ ] | All three sub-questions answered explicitly | SQ1, SQ2, SQ3 — each addressed |
-| [ ] | SQ3 is treated as mandatory, not conditional | Must answer extent addressed + limitations |
 | [ ] | Mirrors the introduction — reader sees the full arc | Start broad in Ch 1, end broad in Ch 6 |
 | [ ] | No new information introduced | Conclusion summarises and concludes, nothing new |
 | [ ] | Contributions stated clearly | What does this thesis add? (artefact + knowledge) |
-| [ ] | Future work is concrete and reasoned | Not a wish list — specific next steps with justification |
 | [ ] | Tone is appropriately confident but not overstated | "The thesis demonstrates..." not "The thesis proves..." |
 
 ---
 
 ## Cross-Chapter Checks (run after all chapters are drafted)
 
+- [ ] **Anchor traceability:** Each of the three locked anchors (Effektivitet, Tillit/kontroll, Tilpasningsdyktighet) appears verbatim in: §1.2 (defined), §5.1 (one sub-section per anchor), §6.2 (each SQ-answer names the anchor it serves). No synonyms anywhere.
+- [ ] **Visibility-gap red thread:** The visibility-gap finding introduced in §1.1 is named again in §4.1 interview themes and synthesised in §5.1.1 Effektivitet. Loop closed.
+- [ ] **Operator-vs-owner asymmetry red thread:** The asymmetry framed in §1.1 (Bainbridge) reappears as a finding in §4.1, is interpreted in §5.1.1, and is named in §6.2 SQ1's answer.
+- [ ] **L1–L12 forward references in Future Work:** Each item in §6.3 cites a specific L# from §5.4.
 - [ ] **Red thread:** Does the argument flow logically from Ch 1 → 6? Does every chapter serve its spine sentence?
 - [ ] **No orphaned theory:** Is every concept from Ch 2 referenced in Ch 4 or 5? Check `evaluation/theory-usage.md` for tracking.
 - [ ] **Post-Ch 5 orphan check:** After Chapter 5, any theory still marked `planned` or unused in `evaluation/theory-usage.md` must be connected or removed.

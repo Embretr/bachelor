@@ -1,6 +1,6 @@
 ---
 name: write-section
-description: "Write one thesis section: auto context loading, deterministic checks, 3-agent review, auto-revision. Usage: /write-section 2.1"
+description: "Write one thesis section: auto context loading, deterministic checks, 2-agent review, auto-revision. Usage: /write-section 2.1"
 ---
 
 # Write Section Pipeline
@@ -17,7 +17,7 @@ A section number like `2.1`. Parse it to derive:
 - Chapter name: 1=Introduction, 2=Theory, 3=Methodology, 4=Findings, 5=Discussion, 6=Conclusion
 - Target .tex file: `result/chapters/ch{N}/ch{N}-{name}.tex`
 
-Initialise: `round = 1`, `polish_attempted = false`.
+Initialise: `round = 1`.
 
 ## Step 1: VALIDATE
 
@@ -73,8 +73,14 @@ Read the paragraph plan for section `{X.Y}` in `context/outline.md`. Extract eve
 4. Do not write around missing support by weakening the claim, deleting the claim, or inserting `[CITATION NEEDED]`. Missing support must become a source request with section, paragraph, and claim.
 
 **Anchor and trace readiness — hard stop if any fail:**
-1. For Chapter 5, each `MUST ANCHOR` to Ch 2, Ch 3, or Ch 4 must point to a section that already contains real drafted content (≥150 words, not only comments/placeholders). If the referenced section is not drafted, **STOP** and tell the user which section must be written first.
-2. For Chapter 6, all Chapters 1–5 must contain real drafted content before writing starts. Section 6.2 must explicitly answer the main research question and all three sub-questions from `context/context.md`; SQ3 is not optional.
+
+1. **Locked anchor name validation (hard fail on synonym).** Every `MUST ANCHOR` marker that names an anchor concept must use one of three locked names verbatim: **Effektivitet**, **Tillit/kontroll**, **Tilpasningsdyktighet**. Anchor tags that are synonyms or paraphrases — e.g. `MUST ANCHOR: kontroll`, `MUST ANCHOR: human control`, `MUST ANCHOR: fleksibilitet`, `MUST ANCHOR: skalerbarhet`, `MUST ANCHOR: efficiency`, `MUST ANCHOR: trust calibration`, `MUST ANCHOR: oversight` — are a hard fail. **STOP** with the message: "Section {X.Y} has a MUST ANCHOR marker `{tag}` that is not one of the locked anchor names (Effektivitet / Tillit/kontroll / Tilpasningsdyktighet). Update outline.md before writing."
+
+2. **Cross-chapter trace targets exist.** For Chapter 5, each `MUST ANCHOR` to Ch 2, Ch 3, or Ch 4 must point to a section that already contains real drafted content (≥150 words, not only comments/placeholders). If the referenced section is not drafted, **STOP** and tell the user which section must be written first.
+
+3. **Chapter 5 sub-section anchor structure.** For sections under §5.1 (anchor-organised primary findings — §5.1.1 Effektivitet, §5.1.2 Tillit/kontroll, §5.1.3 Tilpasningsdyktighet), the section must have at least one `MUST ANCHOR` marker tied to **exactly one** locked anchor whose name matches the sub-section's intended anchor (e.g. §5.1.1 → Effektivitet only). If a §5.1.x section has no `MUST ANCHOR` to a locked name, or anchors to two anchors at once, **STOP**.
+
+4. **Chapter 6 RQ-answer trace structure.** For Chapter 6, all Chapters 1–5 must contain real drafted content before writing starts. Section 6.2 must explicitly answer the main research question and all three sub-questions from `context/context.md`; SQ3 is not optional. **Each RQ-answer paragraph must have a `MUST TRACE` marker that (a) points to its originating Ch 5 sub-section AND (b) names the anchor it serves verbatim.** A `MUST TRACE` that names no anchor or names a synonym is a hard fail. Each SQ must be reproduced verbatim as a single-line block quote in the prose, then answered in one paragraph.
 
 **Cross-file consistency — hard stop if any fail:**
 1. For Section 4.2, compare requirement IDs in `context/docs/requirements/functional-requirements.md` against `context/docs/requirements/requirements-traceability.md`. If the same IDs describe different requirements, or implemented/tested status cannot be traced, **STOP**.
@@ -135,12 +141,6 @@ AUTO-REVISION MODE: Fix ONLY the issues listed below. Do not rewrite passages th
 ISSUES TO FIX:
 {Paste consolidated critical issues from Step 6.5}
 
-{If polish mode:}
-POLISH MODE: Optional improvements only. These are not failures.
-Apply only those that genuinely improve the text.
-SUGGESTIONS:
-{Paste consolidated suggestions from Step 6.5}
-
 OUTPUT:
 Return ONLY the LaTeX for section {X.Y}.
 Start with \section{...}, end when section content is complete.
@@ -177,6 +177,11 @@ Check for:
 1. **Filler phrases**: Grep for `it is important to note`, `it is worth noting`
 2. **Repeated transitions**: Count occurrences of "Furthermore", "Moreover", "Additionally" — warn if any appears 3+ times in the section
 3. **Em-dashes**: Grep for `—` (em-dash) in the generated section text (not in .bib, comments, or review files). List all occurrences with line numbers. WARNING, not hard fail.
+4. **Section length vs outline target**: Parse the section's page target from `context/outline.md` (format: `(~X pages)` or `(~X–Y pages)`). Convert to words using ~250 words per page. Count actual words in the drafted section (exclude LaTeX commands, comments, citations themselves). Compare:
+   - Within target range → PASS (silent)
+   - Within ±20 % of target → INFO (logged, not warning)
+   - Outside ±20 % → WARNING with target, actual, deviation. Do NOT hard fail. Cutting good content for length is worse than overshooting.
+   - If outline has no target → skip silently, do not invent a target.
 
 ### Citation Density Listing
 List all paragraphs (by ¶-number) that have zero `\parencite` or `\textcite` citations AND zero references to primary data sources. This is a **listing only** — the reviewer in Step 5 decides which need citations.
@@ -201,6 +206,7 @@ Write check results to `evaluation/review/sections/ch{N}-{X.Y}-round{R}-checks.m
 - Filler phrases: {list if any}
 - Repeated transitions: {list if any}
 - Em-dashes: {count and locations, or "none found"}
+- Section length: target {X words from outline}, actual {Y words}, deviation {±Z %} — {PASS/INFO/WARNING/skipped (no target)}
 
 ## Citation Density
 - Paragraphs without citations: {list or "all paragraphs have citations"}
@@ -210,41 +216,22 @@ Write check results to `evaluation/review/sections/ch{N}-{X.Y}-round{R}-checks.m
 - Evidence keys: {list of missing required sources, or "all required sources present"}
 ```
 
-**If ANY hard fail → go to Step 4.5.** If no hard fails → go to Step 5.
+**If ANY hard fail:** Report failures to user with concrete fix instructions per failure type:
+- Forbidden voice ("we believe", "we think", "we found") — quote occurrence with line number; user revises in writer session.
+- Placeholders ([FILL IN], [CITATION NEEDED]) — list each with section/paragraph; cannot auto-fix.
+- Invalid citation key — list missing keys; user adds entries to references.bib (academic integrity: never auto-add).
+- Missing source notes — list bibkeys whose source notes file is missing or unfilled; user runs source-extractor or selects different source.
+- Compilation fail — show LaTeX error output; user fixes manually.
 
-## Step 4.5: AUTO-FIX DETERMINISTIC FAILS
+Mark section as `drafted-needs-revision` in STATUS.md. Do not run review agents. Manual fix is faster and safer than automated retry for these cases.
 
-Only reached if Step 4 found hard fails. Attempt to auto-fix once.
+**If no hard fails:** Proceed to Step 5.
 
-```
-FOR EACH hard fail:
-  - Forbidden voice ("we believe", "we think", "we found"):
-    Save pre-autofix backup: evaluation/review/sections/ch{N}-{X.Y}-round{R}-pre-autofix.tex
-    Spawn minimal writer-fix:
-      "Fix only the forbidden voice occurrence while preserving meaning.
-       Do not alter quoted text. Do not rewrite surrounding sentences."
-    (NOT blind regex — writer preserves context.)
+## Step 5: REVIEW (2 agents)
 
-  - Placeholders ([FILL IN], [CITATION NEEDED]): CANNOT auto-fix → STOPP.
-  - Invalid citation key: CANNOT auto-fix → STOPP.
-    (Do NOT auto-add entries to references.bib — academic integrity.)
-  - Unapproved citation source: CANNOT auto-fix → STOPP.
-    Report the key, the missing source notes file path, and the section/paragraph claim that needs source notes.
-  - Compilation fail: CANNOT auto-fix → STOPP.
+Only reached if all hard checks pass.
 
-After auto-fix: re-run Step 4 checks for SAME round.
-Max 1 auto-fix attempt. If still fails → STOPP.
-```
-
-**If STOPP:** Report failures to user. Mark section as `drafted-needs-revision` in STATUS.md. Do not run review agents.
-
-**If auto-fix resolved all hard fails:** Proceed to Step 5.
-
-## Step 5: REVIEW (3 agents)
-
-Only reached if all hard checks pass (directly or after auto-fix).
-
-Spawn three agents as independent tasks. Run in parallel if supported; sequentially otherwise. **Do not share context between reviewers.**
+Spawn two agents as independent tasks. Run in parallel if supported; sequentially otherwise. **Do not share context between reviewers.**
 
 **All reviewers share this rule:**
 > If `pass: false`, at least one item in `issues[]` MUST have `severity: "critical"`. If the issue cannot be fixed automatically, set `fixable: false`.
@@ -257,9 +244,10 @@ Spawn three agents as independent tasks. Run in parallel if supported; sequentia
 You are checking logical coherence of ONE section of a bachelor thesis.
 
 Read the section from `{TEX_FILE}` — only the content under \section{...} for section {X.Y}.
-Read `context/thesis-spine.md` — find the sentence for Chapter {N}.
+Read `context/thesis-spine.md` — find the sentence for Chapter {N} and the Anchor Concepts section.
 Read `context/context.md` — find the Research Question and sub-questions.
 Read `context/outline.md` — find the ¶-plan for section {X.Y}. Use this for outline compliance.
+Read `evaluation/reference-thesis-analysis.md` §7 — transferable A-markers (per-chapter and cross-chapter patterns to verify).
 For each cite key used in the section, read `context/docs/method/sources/raw/extracted/{bibkey}.md` to verify the cited claim matches what the source actually says.
 If there are previous sections in this chapter (before {X.Y}), read them too for continuity.
 
@@ -335,7 +323,9 @@ You are an examiner assessing ONE section of a bachelor thesis for A-grade quali
 
 Read the section from `{TEX_FILE}` — only section {X.Y}.
 Read `evaluation/evaluation.md` — find the checklist for Chapter {N}.
-Read `evaluation/a-grade-rubric.md` — what separates A from B.
+Read `evaluation/a-grade-rubric.md` — what separates A from B, including the "Cross-chapter A-markers" appendix.
+Read `evaluation/reference-thesis-analysis.md` §7 — transferable A-markers from the reference A-grade thesis (ChatSSB 2025). Score the section under review against the relevant patterns.
+Read `.claude/agents/naturalness.md` — the 10-point AI-pattern checklist. Apply this as part of your assessment (em-dashes, inflated vocabulary, hedging stacks, formulaic transitions, etc.).
 Read `context/docs/method/academic-writing-guide.md` — the "Writing Action Levels" section.
 Read `context/outline.md` — find MUST markers for this section.
 For each cite key used in the section, verify against `context/docs/method/sources/raw/extracted/{bibkey}.md` that the cited claim matches the verified source notes.
@@ -397,42 +387,16 @@ End your response with this JSON block (REQUIRED):
   "source_requests": [],
   "weakest_aspect": "none",
   "fix": "none needed",
+  "naturalness_score": 5,
+  "ai_patterns": 0,
+  "em_dashes_found": 0,
+  "inflated_vocab_count": 0,
   "issues": [],
   "suggestions": []
 }
 ```
-Pass: quality_grade == "A" AND depth_assessment == "genuine" AND critical_source_issues == 0.
+Pass: quality_grade == "A" AND depth_assessment == "genuine" AND critical_source_issues == 0 AND naturalness_score >= 4.
 "mixed" source_integration doesn't auto-fail — but critical_source_issues must be 0.
-```
-
-### Agent 3 — Naturalness
-
-```
-You are checking if a thesis section sounds like a competent student wrote it, not AI.
-
-Read `.claude/agents/naturalness.md` for your complete 10-point checklist.
-Read the section from `{TEX_FILE}` — only section {X.Y}.
-Optionally read `context/docs/method/academic-phrases.md` for reference.
-
-Go paragraph by paragraph. For each AI-sounding passage: quote it, identify the pattern, suggest a rewrite.
-
-IMPORTANT: If pass is false, at least one issue in issues[] MUST have severity "critical".
-
-End your response with this JSON block (REQUIRED):
-```json
-{
-  "pass": true,
-  "naturalness_score": 4,
-  "ai_patterns": 1,
-  "em_dashes_found": 0,
-  "inflated_vocab_count": 2,
-  "issues": [],
-  "suggestions": [
-    {"severity": "minor", "location": "¶3", "instruction": "minor hedging pattern"}
-  ]
-}
-```
-Pass: naturalness_score >= 4
 ```
 
 ## Step 6: REPORT
@@ -440,14 +404,12 @@ Pass: naturalness_score >= 4
 Save review outputs to:
 - `evaluation/review/sections/ch{N}-{X.Y}-round{R}-coherence.md`
 - `evaluation/review/sections/ch{N}-{X.Y}-round{R}-quality.md`
-- `evaluation/review/sections/ch{N}-{X.Y}-round{R}-naturalness.md`
 
 Parse the JSON from each agent's response.
 
 ### Gate parsing
 - **Coherence**: Pass if all critical counts == 0 AND spine_serves == true.
-- **Quality**: Pass if quality_grade == "A" AND depth_assessment == "genuine" AND critical_source_issues == 0.
-- **Naturalness**: Pass if naturalness_score >= 4.
+- **Quality**: Pass if quality_grade == "A" AND depth_assessment == "genuine" AND critical_source_issues == 0 AND naturalness_score >= 4.
 
 Determine status:
 
@@ -455,8 +417,7 @@ Determine status:
 |-----------|--------|
 | All gates pass | `drafted-reviewed` |
 | Any coherence critical > 0 or spine false | `drafted-needs-revision` |
-| Quality grade B/C or depth "surface" or critical_source_issues > 0 | `drafted-needs-revision` |
-| Naturalness < 4 | `drafted-needs-revision` |
+| Quality grade B/C or depth "surface" or critical_source_issues > 0 or naturalness_score < 4 | `drafted-needs-revision` |
 
 Print summary:
 ```
@@ -469,8 +430,7 @@ Print summary:
 
   HARD CHECKS:   {PASS/FAIL}
   COHERENCE:     {PASS/FAIL} — unsupported: {N crit}/{N minor}, spine: ✓/✗
-  QUALITY:       {A/B/C} — depth: {genuine/surface}, sources: {integrated/mixed/name-dropped}
-  NATURALNESS:   {score}/5 — em-dashes: {N}, inflated vocab: {N}
+  QUALITY:       {A/B/C} — depth: {genuine/surface}, sources: {integrated/mixed/name-dropped}, naturalness: {score}/5 (em-dashes: {N}, inflated vocab: {N})
 
   WARNINGS:      {list if any}
   SOURCE GATE:   {approved/unresolved} — {unapproved keys or SRC ids}
@@ -483,7 +443,7 @@ Print summary:
 
 → Go to Step 6.5.
 
-## Step 6.5: AUTO-REVISE / POLISH
+## Step 6.5: AUTO-REVISE
 
 ### Auto-revise (if drafted-needs-revision)
 
@@ -492,7 +452,7 @@ Print summary:
 ```
 IF status == "drafted-needs-revision" AND round < 3:
   1. Collect all issues where severity == "critical" AND fixable == true
-     from coherence, quality, and naturalness JSON.
+     from coherence and quality JSON.
      Missing source notes, generic MUST CITE markers, and weak/wrong source fit are NOT fixable automatically unless a replacement source with verified notes already exists.
 
   2. IF no fixable critical issues exist:
@@ -507,7 +467,7 @@ IF status == "drafted-needs-revision" AND round < 3:
 
   5. Spawn writer agent in AUTO-REVISION MODE (see Step 2 template).
 
-  6. GOTO Step 3 (SAVE with next_round) → Step 4 → Step 4.5 → Step 5 → Step 6
+  6. GOTO Step 3 (SAVE with next_round) → Step 4 → Step 5 → Step 6
      (Step 6 will re-enter Step 6.5 if still failing.)
 
 IF round >= 3 AND status == "drafted-needs-revision":
@@ -515,41 +475,9 @@ IF round >= 3 AND status == "drafted-needs-revision":
   Report remaining issues. Update STATUS.md. STOP.
 ```
 
-### Polish (if drafted-reviewed)
-
-```
-IF status == "drafted-reviewed"
-  AND (any agent returned suggestions OR minor issues > 0)
-  AND polish_attempted == false:
-
-  1. Set polish_attempted = true.
-
-  2. Save pre-polish backup:
-     evaluation/review/sections/ch{N}-{X.Y}-round{R}-pre-polish.tex
-
-  3. Collect all suggestions + minor issues from all three agents.
-
-  4. Spawn writer agent in POLISH MODE (see Step 2 template).
-
-  5. GOTO Step 3 → Step 4 → Step 5 → Step 6
-     Polish review files use SEPARATE filenames:
-       ch{N}-{X.Y}-round{R}-polish-checks.md
-       ch{N}-{X.Y}-round{R}-polish-coherence.md
-       ch{N}-{X.Y}-round{R}-polish-quality.md
-       ch{N}-{X.Y}-round{R}-polish-naturalness.md
-
-  6. IF polish passes all gates (quality A, naturalness ≥ 4, no hard fails):
-       Keep polished text. Status: "drafted-reviewed"
-     ELSE:
-       Immediately restore pre-polish backup.
-       Status: "drafted-reviewed" (unchanged).
-       Do NOT trigger auto-revise — polish is an isolated round.
-       Report: "Polish introduced regressions — reverted to pre-polish version."
-```
-
 ### Final report
 
-After auto-revise/polish completes (or is skipped):
+After auto-revise completes (or is skipped):
 
 ```
   {If drafted-reviewed:}

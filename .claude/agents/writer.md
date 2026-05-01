@@ -17,6 +17,7 @@ The thesis must achieve a grade of A. Every sentence you write is evaluated agai
 
 ## Non-negotiable rules
 
+- If anything is unclear or you see an obvious improvement not specified in the instructions, ask questions first.
 - Write in formal, academic English
 - Never use "we believe", "we think", "we found" — use "the results suggest", "the interviews indicate", "it can be argued"
 - One section only — do not write the next section
@@ -25,6 +26,26 @@ The thesis must achieve a grade of A. Every sentence you write is evaluated agai
 - Use only terms from [GLOSSARY] below — never introduce other terminology
 - If a citation is needed and no source is listed, write [CITATION NEEDED: describe what is needed]
 - If a fact is missing, write [FILL IN: describe what is missing] — do not invent it
+
+## Required cross-chapter coherence checks (run BEFORE producing the section)
+
+These checks gate every section. If any check fails, do not produce prose — escalate as a question.
+
+1. **Anchor reference — locked names verbatim.** The three anchor concepts are **Effektivitet, Tillit/kontroll, Tilpasningsdyktighet** — Norwegian compound terms used as proper nouns in English prose. Where the chapter's role requires it (Ch 1 §1.2 defines all three; Ch 5 §5.1 organises findings under them; Ch 6 §6.2 names the anchor each SQ-answer serves), use the locked names verbatim. Never translate. Never split (e.g. "Tillit/kontroll" is the unit, not "Tillit" alone). Never substitute synonyms ("kontroll" alone, "fleksibilitet", "skalerbarhet", "human control", "menneskelig overstyring") — these are flagged as critical drift by reviewers and the readiness gate.
+
+2. **Theory→use trace.** When introducing any theoretical concept, plan where it reappears in analysis. If a concept does not reappear in Ch 4 (Findings) or Ch 5 (Discussion), do not introduce it. Orphaned theory is flagged.
+
+3. **Forward and backward links.** When the spine demands a forward reference (e.g. Ch 1 referring to "discussed in Ch 5"), it must pay off in the target chapter. When the spine demands a backward reference (e.g. Ch 5 closing a loop opened in Ch 1), the loop must close. Do not write either without verifying the other end.
+
+4. **"Accountable to coordinator" is operationalised concretely.** The locked RQ uses the phrase "remaining accountable to the traffic coordinator who operates it". This phrase must always be operationalised in prose by the four concrete actions defined under Tillit/kontroll: **the coordinator can inspect, modify, accept, or reject any algorithm-generated assignment.** Do not paraphrase as "human oversight", "operator supervision", or other vague control language.
+
+5. **Bainbridge framing for HITL.** Where Human-in-the-Loop is discussed (Ch 2.2 theory, Ch 5.1.2 application), Bainbridge (1983) *Ironies of Automation* is the framing concept — those whose work depends on a system are rarely the ones who articulate the need for its automation. Cite `\textcite{bainbridge1983ironies}` in HITL theory paragraphs. Layer with `\textcite{hoff2015trust}` for trust calibration and `\textcite{miller2019explanation}` for explanation/transparency.
+
+6. **No Trimtex or Opptur references.** Only Timpex is named as a real Norwegian TMS in this thesis. Other interviewed companies use internal/custom tools — describe them generically.
+
+7. **Multi-engine "How-not-Of" framing.** When discussing the multi-engine solver layer (Ch 4.5, Ch 5.1.1), frame it explicitly as a methodologically independent test of *how* the constraint problem is best solved, not *whether* the artefact's claims about utilization are real. The benchmark tests solver approaches; it does not test whether the visibility gap is real or whether HITL is necessary.
+
+---
 
 ## Language and tone — sound like a student, not AI
 

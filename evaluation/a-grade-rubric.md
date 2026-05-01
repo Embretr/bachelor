@@ -28,10 +28,12 @@
 ### Chapter 1 — Introduction
 
 **An A introduction:**
+- **Anchor coherence:** Names the three anchor concepts (Effektivitet, Tillit/kontroll, Tilpasningsdyktighet) verbatim in §1.2 with brief definitions; these exact names recur in Discussion and Conclusion without synonyms.
+- **Visibility-gap opening:** First paragraph leads with a concrete Norwegian transport-sector fact and the resource-utilization visibility gap, not generic preamble ("the transport sector's role in Norway", "in today's digital world").
 - States the problem in one crisp sentence — what, for whom, and why it matters — in the first paragraph
 - Motivates the problem with concrete evidence (scale, cost, or observed inefficiency), not just assertion
 - Research question is narrow, answerable, and directly traceable to the problem statement
-- Sub-questions are additive — each covers a distinct dimension not covered by the main RQ
+- Sub-questions are additive — each covers a distinct dimension not covered by the main RQ; each is quotable as a single-line block quote in Ch 6
 - Scope delimiters have explicit justifications — "X is out of scope because Y", not just a list
 - Chapter structure section reads as a logical chain, not a table of contents
 
@@ -46,10 +48,12 @@
 ### Chapter 2 — Theory
 
 **An A theory chapter:**
+- **Asymmetric depth and use-trace:** The most argument-load-bearing theory gets the most space (HITL section dominates given the three-layer Bainbridge / Hoff & Bashir / Miller treatment); secondary concepts get under one page; every theoretical concept introduced reappears in Findings or Discussion.
+- **Three-layer HITL:** §2.2 layers Bainbridge (operator-vs-owner asymmetry, irony of automation) → Hoff & Bashir (trust-calibration model) → Miller (explanation as interface), alongside existing Parasuraman taxonomy and Lee trust foundation.
+- **Utilization framing:** §2.1 frames resource scheduling under the utilization lens (overtime, idle time, load balance), not just as constraint satisfaction — preloading the Discussion's Effektivitet sub-section.
 - Every theory presented is directly connected to a specific design decision or finding in the thesis
 - Resource scheduling formulation is precise: problem structure (multi-resource assignment with constraints), why this characterisation fits the domain, and how it differs from adjacent problems (e.g., VRP focuses on sequencing, not assignment)
-- Human-in-the-loop is not just defined — it is argued as necessary for this domain with evidence
-- Existing systems (TMS) are positioned against Ressursplanlegger — what they do, what they lack
+- Existing systems (TMS) are positioned against Ressursplanlegger as category — only Timpex named by name; other interviewed companies use internal/custom tools
 - No theory is presented for its own sake — if it does not appear in Ch 4 or Ch 5, it should not be in Ch 2
 - Primary sources are cited — textbooks for foundational theory, peer-reviewed papers for specific claims
 
@@ -64,12 +68,15 @@
 ### Chapter 3 — Methodology
 
 **An A methodology chapter:**
+- **Origin story (§X.1):** Opens with a paragraph naming how the project began — Admmit's bachelor task, the team's own initiative in contacting coordinators, HITL as Admmit mandate from project start (validated by interviews, not introduced by them). Reads as a story, not a specification.
+- **DSRM applied step-by-step:** Method Theory section maps Peffers' six DSRM activities to this specific project, one bullet per activity. Each bullet is 2–4 sentences naming what was actually done. (See `evaluation/reference-thesis-analysis.md` §11.5 for format.)
+- **Named iterations (4–6):** Iterative Development Process contains at least four named iterations with descriptive titles (e.g., *Single-engine baseline*, *Constraint generalisation*, *Multi-engine selection*). Each iteration follows tried / why / what happened (positive AND limitations) / learned / next. Honest about failure. Each iteration carries an inline origin label (interview-driven / Admmit mandate / designer-technical) per §12.0.5.
+- **Evaluation framework separate from validity:** A dedicated sub-section describes how the artefact is tested (synthetic dataset design, multi-engine "How-not-Of" benchmark) — distinct from Validity and Reliability which addresses the research's epistemic limits.
 - Research paradigm is stated and justified in one clear paragraph — not just named
 - DSR is connected to Ressursplanlegger explicitly: the artefact, the evaluation, the iteration
 - Interview methodology is described precisely enough that it could be replicated
 - Participant selection is justified: why these 7 companies, why traffic coordinators specifically
-- Validity and reliability section is honest: acknowledges self-selection bias and small sample
-- Development process is described as methodology, not just a timeline
+- Validity and reliability section is honest: acknowledges self-selection bias, small sample, and author affiliation with Admmit
 - Every methodological choice has a "because" — not just "we chose semi-structured interviews"
 
 **Red flags that signal B or lower:**
@@ -83,6 +90,10 @@
 ### Chapter 4 — Findings
 
 **An A findings chapter:**
+- **Category split:** Findings split by category — empirical interview synthesis / artefact (Ressursplanlegger system + algorithm) / process documentation (sprint log, decisions, time tracking). No interpretation in any of them; that lives in Discussion.
+- **DSR Artifacts mapping:** A dedicated table maps each project artefact to its DSR category (Construct / Model / Method / Instantiation), making the abstract DSRM theory in Ch 3.2 concrete and verifiable.
+- **Multi-engine "How-not-Of" framing:** §4.5 algorithm section opens with explicit framing — the multi-engine architecture is a methodologically independent test of *how* the constraint problem is best solved, not *whether* the artefact's claims about utilization are real (per §12.0.5).
+- **Visibility-gap finding surfaces in interview themes:** §4.1 names the resource-utilization visibility gap as one of the empirical themes from interviews, with operator-vs-owner asymmetry as a secondary surprising finding.
 - Interview findings are presented without interpretation — facts only, in this chapter
 - Pain points are ranked or weighted by frequency across interviews, not listed equally
 - Requirements have explicit source tracing: each requirement is attributed to specific interview(s)
@@ -101,12 +112,16 @@
 ### Chapter 5 — Discussion
 
 **An A discussion chapter:**
+- **Anchor-organised primary findings:** §5.1 contains exactly three sub-sections, one per locked anchor (5.1.1 Effektivitet, 5.1.2 Tillit/kontroll, 5.1.3 Tilpasningsdyktighet). Anchor names are used verbatim — no synonyms ("kontroll" alone, "fleksibilitet", "skalerbarhet", "human control"). Each sub-section has a `MUST ANCHOR` marker tied to exactly one anchor.
+- **Operator-vs-owner asymmetry framed inside §5.1.1:** The asymmetry is the interpretive frame for the visibility-gap finding — owners demand utilization optimization, coordinators do not articulate this need themselves. Bainbridge's *ironies of automation* is cited here.
+- **Three-layer HITL applied in §5.1.2:** Bainbridge frames operator authority over override; Hoff & Bashir's dimensional model of trust antecedents explains how trust forms over use; Miller motivates explanation/transparency as a design requirement.
+- **Hierarchical limitations (L1–L12), each named:** §5.4 contains three named sub-subsections — Empirical Foundation (L1, L2, L3, L4), Validation and Artefact (L5–L9), Conceptual and Methodological (L10, L11, L12). Each L# is a named paragraph or `\paragraph{}`, not a buried sentence. An L#-to-SQ mapping appears at the top of §5.4.
+- **Deviations and Methodology Reflection as named sections:** §5.5 names plan-vs-reality differences explicitly. §5.6 contains a self-critical paragraph naming the actual weak spot in the method (e.g., small sample, synthetic-only validation, dev-team = research-team).
 - Opens by explicitly referencing the research question — the answer is developed, not stated
 - Every finding in Ch 4 is either addressed or explicitly declared out of scope for discussion
 - Connects findings back to specific theories from Ch 2 — not just "as discussed in Chapter 2"
 - Limitations section analyses impact: "this limitation means that X conclusion must be qualified because Y"
 - Adoption barriers are discussed as design problems, not just observations
-- The section on human override is the analytical core — argues what the right balance is and why
 - Does not introduce new facts — everything is interpretation of what was already presented
 
 **Red flags that signal B or lower:**
@@ -120,12 +135,11 @@
 ### Chapter 6 — Conclusion
 
 **An A conclusion:**
+- **RQ block-quote pattern:** Each sub-question is reproduced verbatim as a single-line block quote, then answered in one discrete paragraph with no new material. Three SQs → three paragraphs. Each paragraph carries a `MUST TRACE` to the originating Ch 5 sub-section AND names the anchor it serves.
+- **Limitation-grounded Future Work:** Each Future Work item cites a specific named limitation from §5.4 (e.g., "addresses L8 — no user testing with coordinators"). Generic items without a named limitation grounding are red flags.
+- **Closing domain claim:** Final sentence makes a claim about algorithm-assisted planning under stakeholder asymmetry in Norwegian transport, not just about the artefact ("Ressursplanlegger does X").
 - First paragraph summarises the thesis in 3–5 sentences — problem, method, finding, implication
-- Research question is answered directly with a qualified statement — not "partially" without elaboration
-- Each sub-question gets its own answer, cross-referenced to the chapter where evidence was presented
-- Future work is concrete and connected to the limitations identified in Ch 5 — not a generic wish list
 - No new analysis or claims are introduced
-- Final sentence makes a claim about the domain, not just the project
 
 **Red flags that signal B or lower:**
 - Sub-questions are not answered individually
@@ -160,6 +174,21 @@ These apply to the thesis as a whole:
 - All quotes are in quotation marks with page number
 - Paraphrased content is cited
 - The system is not described as solving problems it was not tested against
+
+---
+
+## Cross-chapter A-markers (source: ChatSSB 2025)
+
+Structural patterns observed in a verified A-grade NTNU CS bachelor (Reference: `evaluation/reference-thesis-analysis.md`). Reviewers MUST check these eight patterns when assessing the thesis as a whole.
+
+1. **Three locked anchors threaded from Ch 1 to Ch 6** — Effektivitet, Tillit/kontroll, Tilpasningsdyktighet are defined verbatim in Ch 1.2, used to organise Discussion §5.1, and named in each Conclusion RQ-answer paragraph. Synonyms anywhere are flagged as critical drift.
+2. **Origin story in Method §3.1** grounding design choices in Admmit's mandate and the team's stakeholder dialogue with seven coordinators.
+3. **Named iterations with descriptive titles** in Method §3.5 development section — at minimum four iterations, each with tried / why / what happened / learned / next, and an inline origin label.
+4. **Hierarchical limitations in Discussion §5.4** — three named sub-subsections (Empirical L1–L4, Validation L5–L9, Conceptual L10–L12), each L# a named paragraph, not a buried sentence.
+5. **Deviations from Plan section** in Discussion §5.5 making plan-vs-reality differences explicit. Most theses hide deviations; A-grade work surfaces them.
+6. **Self-critical Methodology Reflection** in Discussion §5.6 naming an actual weak spot in the method, not a perfunctory acknowledgment.
+7. **Conclusion that quotes each SQ verbatim** as a block quote and answers discretely in one paragraph each, with no new material.
+8. **Forward references in Ch 1 paid off in their target chapter; backward references in Ch 5/6 closing loops opened in Ch 1.** The thesis reads as a single argument, not a sequence of independent chapters.
 
 ---
 

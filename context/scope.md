@@ -7,6 +7,16 @@
 
 ---
 
+## Cross-cutting Design Qualities
+
+Three locked anchor concepts (defined in `context/glossary.md` and `context/thesis-spine.md`) shape Ressursplanlegger as **cross-cutting design qualities** — not features but qualities every in-scope feature must satisfy. Each is referenced verbatim throughout the thesis; no synonyms.
+
+- **Effektivitet** — every in-scope feature must contribute to making resource utilization visible and improvable along three dimensions: overtime, idle time between assignments, and uneven driver load.
+- **Tillit/kontroll** — every algorithm-generated artefact must be inspectable, modifiable, acceptable, or rejectable by the traffic coordinator. **Note:** Human-in-the-loop is an explicit Admmit mandate from project start, not a finding derived from interviews. The seven interviews validated the necessity but did not introduce the requirement.
+- **Tilpasningsdyktighet** — every assignment-related rule (hard or soft constraint, weight, status workflow) must be configurable per company. Multi-company commercial deployment (SaaS) is itself out of scope (see Out of Scope), but the architecture supports per-company configurability.
+
+---
+
 ## In Scope
 
 ### Core Planning Interface
@@ -93,9 +103,10 @@ The following are explicitly excluded from the thesis and the system. They may b
 ### External Integrations
 - Billing and invoicing systems (identified as important by interviewees, but out of scope)
 - Payroll integration
-- GPS tracking and real-time location data
-- Integration with Timpex, Trimtex, Opptur, or any existing TMS
+- GPS tracking and real-time location data (Ressursplanlegger is a planning artefact, not an execution-monitoring artefact)
+- Integration with Timpex or any other existing TMS
 - External data source integration (e.g., weather, traffic)
+- Cross-border or international transport regulations (Norwegian regulatory context only)
 
 ### Multi-Tenant Commercial Features
 - Multi-company SaaS functionality (subscription management, pricing, onboarding)
@@ -107,6 +118,8 @@ The following are explicitly excluded from the thesis and the system. They may b
 - Automatic sick-leave replanning without coordinator input
 - Real-time replanning triggered by live events (e.g., vehicle breakdown mid-route)
 - Route optimisation with geographic coordinates and travel time estimation
+- **Vehicle Routing Problem (VRP)** — sequencing routes for a fleet (Braekers et al. 2016). Ressursplanlegger is an assignment problem (who does what), not a sequencing problem. VRP is referenced in Theory only to delimit.
+- **Full automation without HITL** — explicitly excluded per Admmit mandate. The coordinator's authority over every individual assignment decision is a design constraint, not a configurable feature. Discussed in Ch 5 as a deliberate constraint, not as a limitation.
 
 ### Administration
 - Admin panel for managing users, roles, and permissions within a company (auth exists, admin UI does not)

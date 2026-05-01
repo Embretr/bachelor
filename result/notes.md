@@ -68,7 +68,17 @@ After every writing session, Claude adds an entry:
 
 *Decisions made that all future writing must be consistent with:*
 
-*(None yet)*
+### SSB-tallet 137 308 — kvalifisert bruk påkrevd
+
+`ssb2026sysselsetting` Tabell 2 oppgir 137 308 sysselsatte i «Transport og lagring» (4. kvartal 2025). Denne næringsklassen inkluderer godstransport, persontransport, sjøfart, lagerholdere m.m. — ikke bare norske transportselskaper av typen Ressursplanlegger er laget for.
+
+**Regler for bruk:**
+- Skriv alltid «sysselsatte i transport og lagring» — aldri «sjåfører», «trafikkoordinatorer» eller «potensielle Ressursplanlegger-brukere».
+- Bruk tallet til å kontekstualisere sektorens omfang i norsk økonomi (Ch 1.1 ¶1), ikke til å anslå markedsstørrelse.
+- Om du beregner andel: 137 308 / 2 872 855 ≈ 4,8 % av alle sysselsatte — men merk at dette er beregnet, ikke direkte oppgitt av kilden.
+- Siteringslokator: tabell-referanse + «ingen sidetall» (web-statistikk, ingen trykte sidetall).
+
+Kilde: `context/docs/method/sources/raw/extracted/ssb2026sysselsetting.md` (Forbehold og begrensninger)
 
 ---
 

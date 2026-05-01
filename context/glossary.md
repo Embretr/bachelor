@@ -7,6 +7,33 @@
 
 ---
 
+## Anchor Concepts
+
+The thesis argument turns on three named concepts. Every chapter must reference at least one. Discussion (Ch 5) and Conclusion (Ch 6) MUST organise findings under them.
+
+**Convention:** Anchor names are Norwegian compound terms used as proper nouns in English prose — never translated, never split (e.g. "Tillit/kontroll" is the unit, not "Tillit" alone). Synonyms ("kontroll" alone, "fleksibilitet", "skalerbarhet", "human control", "menneskelig overstyring") drift the spine and must be flagged by reviewers.
+
+**Effektivitet**
+Improved resource utilization across three concrete dimensions: reduced overtime, reduced idle time between assignments, and reduced uneven load between drivers (load balancing). Secondary: reduced time spent on the planning activity itself. Visibility into current utilization is the precondition for optimization — the system's primary value is making invisible utilization patterns legible to the coordinator and the company.
+
+**Tillit/kontroll**
+The traffic coordinator's ability to inspect, modify, accept, or reject any algorithm-generated assignment. Trust and control are inseparable in this thesis: trust is built through demonstrable control. Use the compound term verbatim — never split into "Tillit" or "kontroll" alone, and never substitute "menneskelig overstyring" or "human oversight".
+
+**Tilpasningsdyktighet**
+Capacity of the system to function meaningfully across companies with materially different operational rules, fleet composition, and assignment criteria. Distinct from "skalerbarhet" (which concerns volume). Expressed technically through configurable soft-constraint weights and per-company assignment rules.
+
+---
+
+## Framing Concepts (theoretical anchors)
+
+**Visibility gap**
+The absence of a structured, comparable overview of resource utilization in current Norwegian transport-company planning practice. Overtime is handled reactively, idle time is invisible, and load balancing depends on coordinator memory. The visibility gap is the empirical starting point of the thesis argument and the precondition that makes optimization a meaningful goal.
+
+**Operator-vs-owner asymmetry (demand asymmetry)**
+The structural pattern in which demand for an algorithm-assisted system is articulated by owners and the business side, not by the operators (traffic coordinators) who must run the system day to day. Frames the thesis discussion of stakeholder dynamics. Theoretical anchor: Bainbridge (1983), *Ironies of Automation*. Use this term verbatim; do not paraphrase as "stakeholder mismatch", "user-vs-buyer gap", or similar.
+
+---
+
 ## Core System Terms
 
 **Assignment (Oppdrag)**
@@ -51,7 +78,7 @@ The category of vehicle (e.g., light van, heavy truck, crane truck). Assignments
 ## Knowledge and Automation Terms
 
 **Tacit knowledge**
-Operational knowledge held by the traffic coordinator that is not formally captured in any system — such as driver preferences, customer relationships, road knowledge, or unstated assignment constraints. A central design challenge for Ressursplanlegger.
+Operational knowledge held by the traffic coordinator that is not formally captured in any system — such as driver preferences, customer relationships, road knowledge, or unstated assignment constraints. A central design challenge for Ressursplanlegger. Used in this thesis as a domain concept — describing what the system cannot capture and why coordinator override remains the irreducible operator role — rather than as a theoretically anchored construct. Ressursplanlegger's deviation taxonomy and constraint formalisation partially externalise coordinator tacit knowledge into structured conflict data, but tuning thresholds and edge-case interpretation remain coordinator judgement.
 
 **Human-in-the-loop**
 A system design pattern where an algorithm proposes a solution but a human reviews, adjusts, and approves it before it takes effect. The model used by Ressursplanlegger.
@@ -61,16 +88,12 @@ The traffic coordinator's action of changing an algorithm-generated assignment �
 
 ---
 
-## Existing Systems (Competitors)
+## Existing Systems
 
 **Timpex**
-A Norwegian transport management system used by several of the interviewed companies. Characterised by slow performance and limited planning support.
+The only widely-used commercial Norwegian transport management system named by name in the interview pool. Used by several of the interviewed companies. Characterised by slow performance under concurrent use and by handling order management and invoicing without offering planning or decision support.
 
-**Trimtex**
-Another Norwegian TMS encountered in the interviews. Similar limitations to Timpex.
-
-**Opptur**
-A third TMS mentioned by one interview participant (Harlem Solutions).
+Other interviewed companies use internal or custom tools whose specific identities are not relevant to the thesis argument.
 
 ---
 
@@ -84,6 +107,22 @@ The research methodology used in this thesis. Focuses on creating and evaluating
 
 **Transport Management System (TMS)**
 Software used by transport companies to manage operations, dispatch, and in some cases planning. The category of product Ressursplanlegger belongs to.
+
+**Positivist research paradigm**
+An IS research stance assuming objective measurement of pre-existing reality, hypothesis testing, and quantified generalisation. Considered as an alternative paradigm in §2.4 ¶2 / §3.2 ¶1 and rejected for this thesis because the contribution combines artefact construction with situated knowledge claims that quantitative hypothesis testing alone cannot capture. Theoretical reference: Orlikowski & Baroudi (1991).
+
+**Interpretivist research paradigm**
+An IS research stance treating organisational reality as socially constructed and reading meaning from participants' frames of reference. Considered as an alternative paradigm in §2.4 ¶2 / §3.2 ¶1 and rejected as the sole frame because the thesis also produces a working artefact that requires evaluation beyond participant interpretation. Theoretical reference: Orlikowski & Baroudi (1991), which covers all three IS paradigms (positivist, interpretive, critical). DSR is layered on top — interview interpretation feeds requirements, but the artefact itself is evaluated by validation, not interpretation.
+
+---
+
+## Adoption and Configurability Terms
+
+**Technology acceptance (UTAUT)**
+The Unified Theory of Acceptance and Use of Technology (Venkatesh et al. 2003) — the canonical IS-adoption model integrating performance expectancy, effort expectancy, social influence, and facilitating conditions across organisational contexts. Used in §5.1.3 ¶1 and §5.2 ¶1 to frame cost / benefit thresholds for adoption that vary across the seven interviewed companies — different fleet sizes, different operational rules, different willingness-to-pay translate into different facilitating conditions. Distinct from the older TAM (Davis 1989), which UTAUT subsumes.
+
+**Multi-tenant variability (configurability)**
+The capability of a single deployed software instance to serve organisations with materially different operational rules through configuration rather than code changes. Theoretical anchor: Mietzner et al. (2009), variability modelling for multi-tenant SaaS. Operationalised in Ressursplanlegger via per-company soft-constraint weights (§3.5.8). The technical mechanism behind the Tilpasningsdyktighet anchor — distinct from Tilpasningsdyktighet itself, which is the *capacity* the mechanism realises (configurability is the means; Tilpasningsdyktighet is the end).
 
 ---
 
