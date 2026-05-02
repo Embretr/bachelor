@@ -1,4 +1,4 @@
-# Context Index — What Exists and When to Load It
+e# Context Index — What Exists and When to Load It
 
 > Claude reads this first in every session.
 > Use it to decide which files to load for the current task.
@@ -42,6 +42,7 @@
 | `context/docs/method/theoretical-framework.md` | Resource scheduling, constraint programming, human-in-the-loop, TMS, DSR theory notes | Ch 2 |
 | `context/docs/project/sprint-log.md` | Weekly progress log | Ch 3.4 |
 | `context/docs/project/decision-log.md` | Key technical and methodological decisions | Ch 3, 5 |
+| `context/docs/project/supervisor-feedback.md` | Chronological log of NTNU supervisor directives, dated; section-specific calibration plus pointers to generalised rules in `evaluation/review/lessons-learned.md` | Read at session start when working on a chapter the supervisor has commented on |
 | `context/docs/method/decision-making.md` | Decision-making framework, criteria, roles, trade-offs, threats | Ch 3.4, 3.5, 5 |
 | `context/docs/project/change-log.md` | Evolution from early MVP to current system | Ch 5, 6 |
 | `context/docs/tech/algorithm.md` | Algorithm: input, output, constraints, method, limitations | Ch 4.5, 5.2 |

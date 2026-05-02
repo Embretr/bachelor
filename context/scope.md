@@ -104,7 +104,7 @@ The following are explicitly excluded from the thesis and the system. They may b
 - Billing and invoicing systems (identified as important by interviewees, but out of scope)
 - Payroll integration
 - GPS tracking and real-time location data (Ressursplanlegger is a planning artefact, not an execution-monitoring artefact)
-- Integration with Timpex or any other existing TMS
+- Integration with Timpex, Opter, or any other existing TMS
 - External data source integration (e.g., weather, traffic)
 - Cross-border or international transport regulations (Norwegian regulatory context only)
 
@@ -147,4 +147,4 @@ Items that are partially in scope or where the boundary requires clarification.
 
 - [ ] Embret — technical scope confirmed
 - [ ] Mikael — user research scope confirmed
-- [ ] Supervisor — [FILL IN NAME] — approved [DATE]
+- [ ] Supervisor — Ali Alsam — approval pending

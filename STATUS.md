@@ -95,11 +95,11 @@ Fixed pre-write activity: before any `/write-section`, confirm that every requir
 ### Chapter 2 — Theory
 | Section | Written | Checks | Coherence | Quality | Naturalness | Status |
 |---------|:-------:|:------:|:---------:|:-------:|:-----------:|--------|
-| 2.1 | ⬜ | — | — | — | — | not started |
-| 2.2 | ⬜ | — | — | — | — | not started |
-| 2.3 | ⬜ | — | — | — | — | not started |
-| 2.4 | ⬜ | — | — | — | — | not started |
-Chapter integration: not started (reset 2026-05-01; ch2-theory.tex cleared, all sections to be rewritten against new outline)
+| 2.1 | ✅ R1 | PASS | PASS | A / genuine / integrated | 5/5 | drafted-reviewed |
+| 2.2 | ✅ R1 | PASS | PASS | A / genuine / integrated | 5/5 | drafted-reviewed |
+| 2.3 | ✅ R2 | PASS | PASS | A / genuine / integrated | 5/5 | drafted-reviewed |
+| 2.4 | ✅ R1 | PASS | PASS | A / genuine / integrated | 5/5 | drafted-reviewed |
+Chapter integration: candidate-approved (2026-05-02 — sensor PASS A; redthread originally FAIL on spine mismatch + minor structure gaps; all 7 issues fixed manually without re-review per user instruction: (1) spine Ch 2 sentence updated to five-layer HITL, (2) chapter-intro paragraph added, (3) §2.1→§2.2 bridge sentence added, (4) §2.3→§2.4 bridge sentence added, (5) NP-hard consequence expanded with multi-engine motivation, (6) Hoff & Bashir analogy paired with explicit use-statement, (7) §2.4 ¶3 Wieringa paragraph trimmed by ~1 sentence. New word count ~3041 / ~8.7 pages, target ~8.5 pages. Anchor drift remains 0; no forbidden synonyms. PDF compiles. See `evaluation/review/redthread-ch2.md` and `evaluation/review/quality-ch2.md`. Awaiting human approval.)
 
 ### Chapter 3 — Methodology
 | Section | Written | Checks | Coherence | Quality | Naturalness | Status |

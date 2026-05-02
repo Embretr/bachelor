@@ -58,7 +58,7 @@ Hevner presenterer DSR som bestående av tre gjensidig avhengige sykler: Relevan
 - **Direkte sitat:** "It is contingent on the researchers to thoroughly research and reference the knowledge base in order to guarantee that the designs produced are research contributions and not routine designs based upon the application of well-known processes" (p. 90 / PDF 5)
 - **Parafrase:** Det er forskerens ansvar å sikre at designvalgene er forankret i vitenskaplig kunnskapsbase — ellers er artefaktet et produkt, ikke en forskningsbidrag.
 - **Forbehold:** «Well-known processes» er ikke definert presist; grensen mellom «routine design» og «research contribution» er pragmatisk og kontekstavhengig.
-- **Anvendelse på vårt case:** Ressursplanlegger-prosjektet skiller seg fra ordinær TMS-utvikling (Timpex, Trimtex) nettopp ved Rigor Cycle: algoritme-designvalgene er forankret i scheduling-teori (Pinedo 2016), constraint programming (Rossi et al. 2006) og HITL-litteratur (Parasuraman & Riley 2000) — dette gjør oppgaven til et forskningsbidrag fremfor rutineutvikling.
+- **Anvendelse på vårt case:** Ressursplanlegger-prosjektet skiller seg fra ordinær TMS-utvikling (Timpex, Opter) nettopp ved Rigor Cycle: algoritme-designvalgene er forankret i scheduling-teori (Pinedo 2016), constraint programming (Rossi et al. 2006) og HITL-litteratur (Parasuraman & Riley 2000) — dette gjør oppgaven til et forskningsbidrag fremfor rutineutvikling.
 
 ---
 
@@ -103,7 +103,7 @@ Hevner presenterer DSR som bestående av tre gjensidig avhengige sykler: Relevan
 | requirements | Funksjonelle og ikke-funksjonelle krav fra intervjuer (MoSCoW) | Input fra Relevance Cycle |
 | acceptance criteria | Benchmarking-målsetninger + kravdekning | Hvordan artefaktet evalueres |
 | meta-artifacts | Ressursplanlegger + planleggingsalgoritmen | Design-produkter generert |
-| routine design | Eksisterende TMS-systemer (Timpex, Trimtex) | Det Rigor Cycle skiller oss fra |
+| routine design | Eksisterende TMS-systemer (Timpex, Opter) | Det Rigor Cycle skiller oss fra |
 | feedback to refine the design | Benchmark-resultater som driver algoritmevalg og constraint-vekting | Iterasjon i Design Cycle |
 
 ## Forbehold og begrensninger

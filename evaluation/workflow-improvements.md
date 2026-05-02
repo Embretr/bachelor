@@ -140,6 +140,66 @@ It prevents unsupported or merely suggested sources from entering thesis prose w
 
 ---
 
+## 2026-05-02 — Proposal #6
+
+**Triggered by:** Audit of which evaluation files each review agent loads showed `evaluation/theory-usage.md` was only consulted by `/review-chapter` (Ch 5+), not by `/write-section`. Orphan- and missing-theory drift would therefore only surface after every section in a chapter is `drafted-reviewed`, forcing late re-opens.
+**Type:** updated rule / updated skill
+**Applied changes to:** `.claude/skills/write-section/SKILL.md`
+
+**Change:**
+- Section coherence agent (Agent 1): for Ch 4, 5, 6 sections, read `evaluation/theory-usage.md` and run a "theory-tracker check" — every theoretical concept the section invokes must be tracked in the matrix; flag `theory_missing_from_tracker` for missing entries; list rows whose status should change from `planned` to `connected` for manual update.
+- Added JSON fields `theory_missing_from_tracker` (counter) and `theory_tracker_updates` (list) to the coherence output schema.
+- Updated coherence pass condition (both inline gate text and Step 6 gate parsing) to require `theory_missing_from_tracker == 0`.
+
+**Why this improves output:**
+Catches orphan/missing theory drift at section time instead of chapter time, removing one round of late revision when `/review-chapter 5` runs.
+
+**Status:** ✅ Applied
+
+---
+
+## 2026-05-02 — Proposal #7
+
+**Triggered by:** §2.1 round 1 token cost was ~300–400 k. Audit showed the orchestrator and three agents (writer + 2 reviewers) each loaded full `outline.md` (~53 kB), `a-grade-rubric.md` (~17 kB), `reference-thesis-analysis.md` (~61 kB), `references.bib` (~16 kB), and the orchestrator additionally loaded all 6 source notes (~163 kB) just to validate `wc -c ≥ 500` and the `Notes generated from raw` marker. Steps 1c and 4 also duplicated source-notes validation. None of these reads contributed to output quality.
+**Type:** updated rule / updated skill
+**Applied changes to:** `.claude/skills/write-section/SKILL.md`
+
+**Change:**
+- New **Step 1.5: PRECOMPUTE SLICES** — orchestrator extracts §X.Y plan, Chapter N rubric slice, §7 / per-chapter / cross-chapter ref-analysis slice, and per-key bib entries via `awk` once per pipeline run. The slices are pasted inline in writer + reviewer prompts.
+- **Source-notes validation moved to Bash** in Step 1c (existence + `wc -c ≥ 500` + `grep -q "Notes generated from raw"`). The orchestrator no longer Reads the file content. Step 4 stops re-validating what Step 1c already validated; it only checks any new keys the writer introduced.
+- Writer and both reviewer prompts now state "DO NOT READ THESE FULL FILES" for outline / rubric / ref-analysis / bib, with the slice provided inline. Source notes themselves are still read by writer/reviewer (necessary for cite faithfulness).
+- Removed `source_requests` array from coherence and quality JSON gates.
+- Removed all "Run extraction (see source-extractor.md)" / "user runs source-extractor" / "report as source request" prompts. The thesis-source set is locked (39 extracted notes); cite-related issues now resolve to "use a different existing key from BIB_SLICE" or "remove/weaken the claim".
+- Deduplicated the two "Evidence readiness" blocks in Step 1c.
+- Step 6 report dropped `SOURCE GATE` and `SOURCE NEEDS` lines.
+
+**Why this improves output:**
+Estimated 300–400 k tokens saved per `/write-section` run (≈50 % reduction) with zero quality impact — slices contain everything the agents actually used. Locking the source set also removes a class of false suggestions where reviewers proposed "add a new source" that would never be acted on.
+
+**Status:** ✅ Applied
+
+---
+
+## 2026-05-02 — Proposal #8
+
+**Triggered by:** User question — "når review agentene gir tilbakemelding, blir dette videreført slik at det brukes i videre skriving dersom aktuelt/det gjelder skriving generelt?" Audit revealed the lessons-learned loop existed (writer + both reviewers load `lessons-learned.md`) but the *capture* of new patterns was a soft ritual in `CLAUDE.md` post-task step 4 — easy to forget. A clean PASS-PASS section would jump to `STATUS.md` update without ever scanning `suggestions[]`, losing generalisable wisdom.
+**Type:** new pipeline step / updated skill + ritual
+**Applied changes to:** `.claude/skills/write-section/SKILL.md`, `CLAUDE.md`
+
+**Change:**
+- New **Step 6.6: LESSONS-LEARNED HARVEST** — mandatory step after every final round (whether `drafted-reviewed` or `drafted-needs-manual-fix`). Scans both reviewers' `issues[]` (severity: minor) + `suggestions[]` + `notes` / `weakest_aspect` / `fix`.
+- **Deterministic GENERAL-vs-SECTION-SPECIFIC classifier** with 7 GENERAL triggers (names a source key/type, names a chapter or chapter-type, names a paragraph type, names a phrase to ban/prefer, names a structural pattern, cites the writing-action-level for a chapter-type, supervisor-style directive). When in doubt, classify GENERAL. Critical issues are *not* harvested (they were either auto-revised or escalated).
+- **Hard prompt format**: prints the candidate with verbatim source quote + proposed `lessons-learned.md` entry (Rule / Why / When to apply / Source) + `Apply? (y / n / edit)`. Orchestrator waits per candidate; no batching, no auto-apply. `y` appends to `lessons-learned.md` under the closest existing heading; `n` logs decline reason in the round file; `edit` accepts user-revised text.
+- Status update to `STATUS.md` happens **only after** every candidate has been answered.
+- `CLAUDE.md` post-task ritual #4 rewritten to point at Step 6.6 (no more duplicate informal description that could drift).
+
+**Why this improves output:**
+Closes the feedback loop with mechanical guarantee. Every reviewer suggestion that has cross-section value now has a forced moment of human triage before the pipeline ends — turning a one-off review into a permanent rule that fires automatically on every subsequent `/write-section`. This compounds: each section's reviewers benefit from every prior section's harvested lessons, and the writer is never told the same thing twice.
+
+**Status:** ✅ Applied
+
+---
+
 ## Rejected Proposals
 
 *(None yet)*

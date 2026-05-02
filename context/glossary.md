@@ -91,7 +91,10 @@ The traffic coordinator's action of changing an algorithm-generated assignment â
 ## Existing Systems
 
 **Timpex**
-The only widely-used commercial Norwegian transport management system named by name in the interview pool. Used by several of the interviewed companies. Characterised by slow performance under concurrent use and by handling order management and invoicing without offering planning or decision support.
+A commercial Norwegian transport management system named by name in the interview pool. Used by Norlog Lakselv, Norlog Mo i Rana, and Norlog Tana. Characterised by slow performance under concurrent use and by handling order management and invoicing without offering planning or decision support. Does not generate assignment plans automatically.
+
+**Opter**
+A commercial Norwegian transport management system named by name in the interview pool. Used by Harlem Solutions. Handles order management, invoicing, and driver notification through a dedicated order app. Does not generate assignment plans automatically.
 
 Other interviewed companies use internal or custom tools whose specific identities are not relevant to the thesis argument.
 

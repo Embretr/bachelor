@@ -1,11 +1,13 @@
 ---
 name: review-chapter
-description: "Chapter integration check: 2 agents (red-thread + sensor) after all sections are drafted-reviewed. Usage: /review-chapter 2"
+description: "Chapter integration check: 2 subagents (chapter-redthread + chapter-sensor) after all sections are drafted-reviewed. Usage: /review-chapter 2"
 ---
 
 # Review Chapter Pipeline
 
 You are the orchestrator for chapter-level integration review. You check that all sections work together as a coherent chapter.
+
+You do NOT review content yourself — you spawn the `chapter-redthread` and `chapter-sensor` subagents for that.
 
 **This is NOT a rewrite trigger.** It is a health check before human approval.
 
@@ -28,101 +30,184 @@ Read the .tex file. Verify every `\section{...}` has real content (≥150 words,
 ### Proportionality check
 Read the chapter target length in `context/outline.md`. Estimate the chapter word count from the `.tex` file, excluding comments, commands, bibliography, and appendices. Use approximately 350 words per thesis page for a rough page estimate.
 
-If the actual length is more than 20% below or above the target range, flag this in the report. This is not an automatic hard stop, but the sensor agent must consider whether the imbalance weakens the chapter.
+If the actual length is more than 20% below or above the target range, flag this in the report. This is not an automatic hard stop, but the sensor subagent must consider whether the imbalance weakens the chapter.
 
-### Post-Chapter-5 theory usage check
-If reviewing Chapter 5 or later, read `evaluation/theory-usage.md`. Check whether every theory introduced in Chapter 2 is either:
-- used in Chapter 4 or 5,
-- explicitly marked `reference only`, or
-- flagged for removal/reconnection.
-
-For Chapter 5, unresolved orphaned theories are a review issue and must be included in the report.
-
-### Chapter-level source audit
-Read `result/references.bib` and verify each cited key has a filled source notes file at `context/docs/method/sources/raw/extracted/{bibkey}.md`.
-
-Check:
-- citation density by section, and flag suspiciously low or suspiciously high citation density,
-- orphan sources: sources cited in the chapter but not clearly used to support a claim,
-- any citation key that lacks a filled source notes file,
-- theories or frameworks used without verified source notes,
-- claims in the text that drift from what the source notes documented.
-
-Missing or unverified source notes are review issues. This pipeline never marks a source notes file as verified — that is human-only.
-
-## Step 2: Spawn 2 Review Agents
-
-Launch both as independent tasks (parallel if supported, sequential otherwise).
-
-### Agent 1 — Chapter Red Thread
-
-```
-You are a critical academic reviewer checking the coherence of an ENTIRE chapter.
-
-Read `.claude/agents/red-thread.md` for your full assessment structure (5 parts).
-
-The chapter to review: read `{TEX_FILE}` — the complete file, all sections.
-The thesis backbone: read `context/thesis-spine.md`
-The research question: read `context/context.md` — Research Question section.
-Previous chapters: read `result/chapters/ch{1..N-1}/*.tex` files that have real content.
-Read `context/outline.md` for the chapter target length and section plan.
-For each cite key in the chapter, verify against `context/docs/method/sources/raw/extracted/{bibkey}.md` that the cited claim matches the verified source notes.
-If reviewing Chapter 5 or later, read `evaluation/theory-usage.md` and check for orphaned theories.
-
-Focus on CHAPTER-LEVEL issues that section reviews cannot catch:
-1. Transitions between sections — do they flow or feel disconnected?
-2. Repetition — is the same point made in multiple sections?
-3. Spine alignment — does the chapter AS A WHOLE serve its spine sentence?
-4. RQ contribution — how does this chapter contribute to answering the research question?
-5. Missing elements — is anything promised in the chapter intro not delivered?
-6. Proportion — is the chapter length within the target range, or does imbalance weaken the argument?
-7. For Ch 5+: are all Chapter 2 theories used, marked as reference-only, or clearly flagged for removal?
-8. Source audit — are citation density, orphan sources, unresolved source requests, and unapproved citation keys acceptable?
-9. Concept placement across sections — is every technical term, acronym, or named concept introduced BEFORE its first use at the chapter level? A concept defined only in a later section is a placement bug that section reviews miss. Examples: CP-SAT, tacit knowledge, HITL, DSR. Quote each misplacement and state where the introduction should move to.
-10. Terminology consistency across the chapter — list any pair of synonyms used across sections for the same concept ("driver"/"employee", "planner"/"dispatcher", "solver"/"engine"). Every drift is an issue.
-11. Ordering across sections — does the chapter move from concrete/broad to abstract/specific where appropriate (e.g. Ch 2 opens with examples of resource scheduling in other domains BEFORE the formal definition)? Does narrative framing (how the work is done today) appear early enough in the chapter? Flag misordering at the chapter level.
-
-For each issue: quote the passage, reference the section, suggest a fix.
-
-End with JSON (REQUIRED):
-```json
-{"cross_section_issues": 0, "spine_aligned": true, "rq_contribution": "A", "source_audit_issues": 0, "pass": true}
-```
-Pass: cross_section_issues == 0 AND source_audit_issues == 0 AND spine_aligned AND rq_contribution in ["A", "B"]
+### Source notes existence check
+Extract every cite key used in the chapter (`grep -oE '\\(par|text)cite\{[^}]+\}' {TEX_FILE}` and parse). For each, verify the source notes file exists and is non-template via Bash:
+```bash
+for k in KEY1 KEY2 ...; do
+  f="context/docs/method/sources/raw/extracted/$k.md"
+  if [ ! -f "$f" ] || [ "$(wc -c < "$f")" -lt 500 ] || ! grep -q "Notes generated from raw" "$f"; then
+    echo "MISSING: $k"
+  fi
+done
 ```
 
-### Agent 2 — Chapter Sensor
+If any FAIL: this is a repository-state issue (file deleted or path wrong) — report it in the final summary as a source-notes-readiness issue. Do not block the review; the chapter-redthread and chapter-sensor subagents will assess content fit on the keys whose source notes do exist.
+
+## Step 1.5: Precompute Slices
+
+The chapter-level subagents need small structured inputs that should be extracted ONCE rather than reading full files in each subagent. Compute these via Bash and pass inline in the user message.
+
+### A. SPINE_SENTENCE — chapter {N} spine + Anchor Concepts section
+```bash
+awk -v n="$N" '/^## /{p=0} /^## (Anchor|Anchors)/{p=1} $0 ~ "^### Chapter "n"|^### Ch "n {p=1} p' context/thesis-spine.md
+```
+Or: read the line matching `Chapter {N}` plus the Anchor Concepts block.
+
+### B. RQ_BLOCK — Research Question and sub-questions
+```bash
+awk '/^## Research [Qq]uestion/{p=1} p && /^## /{c++} c>1{p=0} p' context/context.md
+```
+
+### C. OUTLINE_CHAPTER_SLICE — section plan for Chapter {N}
+```bash
+awk -v n="$N" '
+  $0 ~ "^# Chapter "n" " || $0 ~ "^## Chapter "n" " {p=1; next}
+  p && /^# Chapter [0-9]+ / {p=0}
+  p {print}
+' context/outline.md
+```
+
+### D. RUBRIC_SLICE — Chapter {N} rubric (chapter-sensor only)
+```bash
+awk -v ch="### Chapter $N " '
+  $0 ~ "^"ch {p=1}
+  p && /^### Chapter [0-9]+ / && $0 !~ "^"ch {p=0}
+  p && /^---$/ {p=0}
+  p {print}
+' evaluation/a-grade-rubric.md
+```
+Always include "Cross-Chapter A Criteria" appendix.
+
+### E. REF_ANALYSIS_SLICE — same shape as in /write-section
+```bash
+awk '/^## 7\. /{p=1} /^## 8\. /{p=0} p' evaluation/reference-thesis-analysis.md
+awk -v ch="### Chapter $N " '/^## 3\. /{ins=1} ins && $0 ~ "^"ch {p=1} ins && /^### Chapter [0-9]+ / && $0 !~ "^"ch {p=0} ins && /^## /{ins=0; p=0} p' evaluation/reference-thesis-analysis.md
+awk '/^## Cross-chapter A-markers/{p=1} p && /^## /{c++} c>1{p=0} p' evaluation/reference-thesis-analysis.md
+```
+
+### F. BIB_SLICE — only the entries cited in this chapter
+```bash
+keys=$(grep -oE '\\(par|text)cite\{[^}]+\}' {TEX_FILE} | sed -E 's/.*\{([^}]+)\}/\1/' | tr ',' '\n' | sort -u)
+for k in $keys; do
+  awk -v k="$k" 'BEGIN{p=0} $0 ~ "^@[a-z]+\\{"k"," {p=1} p; p && /^\}$/ {p=0; print ""}' result/references.bib
+done
+```
+
+### G. EVALUATION_CHECKLIST — chapter {N} block
+```bash
+awk -v ch="## Chapter $N" '
+  $0 ~ "^"ch {p=1}
+  p && /^## Chapter [0-9]+/ && $0 !~ "^"ch {p=0}
+  p {print}
+' evaluation/evaluation.md
+```
+
+### H. TARGET_LENGTH_BLOCK — target range + actual + proportionality verdict
+Construct from Step 1's proportionality check output. Format:
+```
+Target: {target range from outline}
+Actual: ~{words} words / ~{pages} pages
+Proportionality: {OK | >20% over | >20% under} — {one-line implication}
+```
+
+## Step 2: Spawn 2 Review Subagents
+
+Spawn `chapter-redthread` and `chapter-sensor` in parallel — single message with both Agent calls. Their contexts are independent by design.
+
+Both subagents' system prompts already contain their full check lists, JSON gate formats, anchor-drift hard checks, and the locked-source-set rule. Do NOT repeat them in the user message.
 
 ```
-You are an external examiner (sensor) grading an ENTIRE chapter of a bachelor thesis.
-
-Read `.claude/agents/quality.md` for your assessment structure.
-Read `evaluation/grading-guidelines.md` for official NRT criteria and weighting.
-Read `evaluation/a-grade-rubric.md` for A-grade standards.
-Read `evaluation/evaluation.md` for chapter-specific checklist.
-
-The chapter: read `{TEX_FILE}` — all sections as a whole.
-Context: read `context/context.md` and `context/thesis-spine.md`.
-Previous chapters: read completed `result/chapters/ch{1..N-1}/*.tex`.
-Read `context/outline.md` for target length and `evaluation/theory-usage.md` for theory tracking when reviewing Chapter 5 or later.
-For each cite key in the chapter, verify against `context/docs/method/sources/raw/extracted/{bibkey}.md` that the cited claim matches the verified source notes.
-
-Grade the ENTIRE chapter against NRT criteria. Consider:
-- Does the chapter demonstrate the expected level of insight for its role?
-- Is the overall quality consistent, or are there weak sections pulling it down?
-- Does the chapter contribute to the thesis earning an A?
-- Is the chapter proportionate to its role in the thesis (not too thin, not over-expanded)?
-- For Chapter 5 or later: does the discussion use the theories introduced in Chapter 2, or are there orphaned concepts?
-- Does the source use meet A-grade standards: claim coverage, source fit, authority, integration, reuse sanity, and no orphan sources?
-- Are any theories, frameworks, or empirical claims supported by citations that lack filled source notes?
-
-For each NRT criterion relevant to this chapter: give a grade and one-sentence justification.
-
-End with JSON (REQUIRED):
-```json
-{"overall_grade": "A", "criteria_at_C": [], "source_audit_issues": 0, "most_important_fix": "none", "pass": true}
+Agent({
+  subagent_type: "chapter-redthread",
+  prompt: <REDTHREAD_USER_MESSAGE>
+})
 ```
-Pass: overall_grade == "A" AND criteria_at_C is empty AND source_audit_issues == 0
+
+```
+Agent({
+  subagent_type: "chapter-sensor",
+  prompt: <SENSOR_USER_MESSAGE>
+})
+```
+
+**REDTHREAD_USER_MESSAGE template:**
+
+```
+Chapter: {N} — {CHAPTER_NAME}
+Target .tex: {TEX_FILE}
+
+---
+
+SPINE_SENTENCE (Chapter {N} spine + Anchor Concepts):
+{paste output of slice A from Step 1.5 verbatim}
+
+RQ_BLOCK (Research Question and sub-questions):
+{paste output of slice B from Step 1.5 verbatim}
+
+OUTLINE_CHAPTER_SLICE (section plan for Chapter {N}):
+{paste output of slice C from Step 1.5 verbatim}
+
+REF_ANALYSIS_SLICE (§7 Transferable A-Markers + Chapter {N} per-chapter pattern + Cross-chapter A-markers):
+{paste output of slice E from Step 1.5 verbatim}
+
+BIB_SLICE (the locked source set this chapter cited):
+{paste output of slice F from Step 1.5 verbatim}
+
+TARGET_LENGTH:
+{paste slice H from Step 1.5 verbatim}
+
+---
+
+Files to read:
+- {TEX_FILE} — the complete chapter, all sections
+- For each cite key in BIB_SLICE: context/docs/method/sources/raw/extracted/{bibkey}.md
+{If any earlier chapter has ≥150 words of real content:}
+- {list previous chapter .tex paths} — for cross-chapter continuity
+{If Chapter {N} is 5 or later:}
+- evaluation/theory-usage.md (for the theory-tracker check)
+```
+
+**SENSOR_USER_MESSAGE template:**
+
+```
+Chapter: {N} — {CHAPTER_NAME}
+Target .tex: {TEX_FILE}
+
+---
+
+RUBRIC_SLICE (Chapter {N} A-grade criteria + Cross-Chapter A Criteria):
+{paste output of slice D from Step 1.5 verbatim}
+
+REF_ANALYSIS_SLICE (§7 Transferable A-Markers + Chapter {N} per-chapter pattern + Cross-chapter A-markers):
+{paste output of slice E from Step 1.5 verbatim}
+
+EVALUATION_CHECKLIST (chapter-{N} checklist from evaluation/evaluation.md):
+{paste output of slice G from Step 1.5 verbatim}
+
+SPINE_BLOCK:
+{paste full context/thesis-spine.md or use slice A — full file is small}
+
+CONTEXT_BLOCK:
+{paste relevant section of context/context.md or full file — small}
+
+BIB_SLICE (the locked source set this chapter cited):
+{paste output of slice F from Step 1.5 verbatim}
+
+TARGET_LENGTH:
+{paste slice H from Step 1.5 verbatim}
+
+---
+
+Files to read:
+- {TEX_FILE} — the complete chapter, all sections
+- evaluation/grading-guidelines.md (official NRT criteria and weighting)
+- For each cite key in BIB_SLICE: context/docs/method/sources/raw/extracted/{bibkey}.md
+{If any earlier chapter has ≥150 words of real content:}
+- {list previous chapter .tex paths} — for cross-chapter context
+{If Chapter {N} is 5 or later:}
+- evaluation/theory-usage.md
 ```
 
 ## Step 3: Report
@@ -138,7 +223,7 @@ Parse JSON gates.
   CHAPTER {N} — {NAME} — INTEGRATION REVIEW
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-  RED THREAD:  {PASS/FAIL} — cross-section issues: {N}, spine: {aligned/not}, RQ: {A/B/C}
+  RED THREAD:  {PASS/FAIL} — cross-section issues: {N}, spine: {aligned/not}, RQ: {A/B/C}, anchor drift: {N}
   SENSOR:      {PASS/FAIL} — grade: {A/B/C}, weakest: {criterion}
   LENGTH:      ~{words} words / ~{pages} pages — target: {range}, deviation: {OK/>20%}
   THEORY USE:  {OK/orphaned concepts listed/not applicable}

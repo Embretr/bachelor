@@ -21,10 +21,12 @@ The core function of Ressursplanlegger is resource scheduling: assigning employe
 
 This is a multi-resource scheduling problem (each assignment requires both an employee and a vehicle), which increases combinatorial complexity compared to single-resource scheduling.
 
-**Key sources:**
-- Pinedo, M. L. (2016). *Scheduling: Theory, Algorithms, and Systems* (5th ed.). Springer.
-- [FILL IN — crew scheduling / driver scheduling literature]
-- [FILL IN — nurse scheduling as analogous domain (relevant for constraint handling)]
+**Key sources (bibkeys):**
+- `pinedo2016scheduling` — Foundational scheduling textbook covering job-shop, personnel, and resource-constrained scheduling.
+- `ernst2004staff` — Ernst, Jiang, Krishnamoorthy & Sier (2004). *Staff Scheduling and Rostering: A Review of Applications, Methods and Models.* Canonical analogous-domains review covering nurse, crew, and driver scheduling.
+- `braekers2016vrp` — VRP delimit reference: cited only to clarify the boundary between Ressursplanlegger (assignment) and the Vehicle Routing Problem (sequencing).
+- `glover1986future` — Tabu-search foundations.
+- `burke2017late` — Late-acceptance hill climbing (one of Timefold's metaheuristics).
 
 ---
 
@@ -62,20 +64,23 @@ A Transport Management System is software used by logistics and transport compan
 
 **Existing systems in the Norwegian context:**
 
+Per CLAUDE.md, **Timpex** and **Opter** are the two real Norwegian TMS named in this thesis. Other interviewed companies use internal or custom systems whose specific identities are not relevant to the thesis argument and must not be invented. Neither Timpex nor Opter generates assignment plans automatically — both are order/invoicing tools.
+
 | System | Used by | Strengths | Key limitations |
 |--------|---------|-----------|-----------------|
-| Timpex | Norlog Lakselv, Norlog Mo i Rana | Established, handles invoicing, driver notification via Timpex Confirm app | Extremely slow with concurrent users; no optimisation; no capacity overview |
-| Trimtex | Norlog Tana | Handles basic order management | Slow; limited features; no planning support |
-| Opptur | Harlem Solutions | Order and invoicing | Primarily a billing tool, not a planning tool |
-| Custom systems | Ottem, Nordic Crane | Tailored to own operations | No standardisation; difficult to maintain; no optimisation |
-| None | Bergen Bulk Transport | — | Fully manual — phone calls, memory, no system at all |
+| Timpex | Norlog Lakselv, Norlog Mo i Rana, Norlog Tana | Established, handles invoicing, driver notification via Timpex Confirm app | Extremely slow with concurrent users; no automatic plan generation; no capacity overview |
+| Opter | Harlem Solutions | Order management, invoicing, driver notification via order app | No automatic plan generation; no capacity overview; primarily a billing tool |
+| Internal/custom systems | Several interviewed companies | Tailored to own operations | No standardisation; difficult to maintain; no optimisation |
+| None | One interviewed company | — | Fully manual — phone calls, memory, no system at all |
 
 **Gap Ressursplanlegger addresses:**
 None of the systems above include optimisation-based plan generation, structured decision support for driver assignment, or automated conflict detection. They are containers for orders and invoices — the actual assignment of drivers to jobs is always a manual, knowledge-dependent process performed by the traffic coordinator. Ressursplanlegger targets precisely this gap: the space between "order exists" and "driver is assigned."
 
-**Key sources:**
-- [FILL IN — TMS industry overview or academic review]
-- [FILL IN — literature on digitalisation in Norwegian transport/logistics, if available]
+**Key sources (bibkeys):**
+- `griffis2007tms` — Griffis & Goldsby (2007). *Transportation Management Systems: An Exploration of Progress and Future Prospects.* Definitional reference for TMS as a software category.
+- `heinbach2022datadriven` — Heinbach et al. (2022). *Data-Driven Forwarding: A Typology of Digital Platforms for Road Freight Transport Management.* Modern digital-platform extension.
+- `cichosz2020digital` — Cichosz, Wallenburg & Knemeyer (2020). *Digital transformation at logistics service providers: barriers, success factors and leading practices.* General digital-transformation framing.
+- `kristensen2021digital` — Kristensen (2021), TØI-rapport 1857/2021. Norwegian-specific complement on digital transport infrastructure.
 
 ---
 
@@ -95,11 +100,11 @@ Ressursplanlegger uses three solver approaches that represent different points o
 
 This multi-engine approach is itself a design contribution — it allows benchmarking and comparison, and gives the coordinator a choice between speed and solution quality.
 
-**Key sources:**
-- Rossi, F., van Beek, P., & Walsh, T. (Eds.). (2006). *Handbook of Constraint Programming*. Elsevier.
-- Google OR-Tools documentation: [reference as software, not academic source]
-- Timefold Solver documentation: [reference as software]
-- [FILL IN — CP-SAT specific papers if needed for depth]
+**Key sources (bibkeys):**
+- `rossi2006constraint` — Rossi, van Beek & Walsh (Eds., 2006). *Handbook of Constraint Programming.* Foundational CP reference.
+- `googleortools2026cpsat` — Google OR-Tools constraint-optimization documentation (referenced as software).
+- `timefold2026solver` — Timefold Solver optimization-algorithms documentation (referenced as software).
+- `perron2023cpsatlp` — Perron, Didier & Gay (2023). *The CP-SAT-LP Solver (Invited Talk)*, CP 2023. Canonical reference for the specific CP-SAT-LP implementation used.
 
 ---
 
@@ -113,9 +118,12 @@ Ressursplanlegger is the artefact. The research question asks whether an algorit
 
 See `context/docs/method/research-design.md` for the detailed application of DSR phases to this project.
 
-**Key sources:**
-- Hevner, A. R., March, S. T., Park, J., & Ram, S. (2004). Design Science in Information Systems Research. *MIS Quarterly*, 28(1), 75–105.
-- Peffers, K., Tuunanen, T., Rothenberger, M. A., & Chatterjee, S. (2007). A Design Science Research Methodology for Information Systems Research. *Journal of Management Information Systems*, 24(3), 45–77.
+**Key sources (bibkeys):**
+- `hevner2004design` — Hevner, March, Park & Ram (2004). *Design Science in Information Systems Research.* Foundational seven-guidelines paper.
+- `hevner2007threecycle` — Hevner (2007). *A Three Cycle View of Design Science Research.* Direct source for the relevance / design / rigor cycles.
+- `peffers2007dsrm` — Peffers, Tuunanen, Rothenberger & Chatterjee (2007). *A Design Science Research Methodology for Information Systems Research.* Six-activity DSRM process model.
+- `wieringa2014dsm` — Wieringa (2014). *Design Science Methodology for Information Systems and Software Engineering.* Validation vs evaluation distinction.
+- `orlikowski1991studying` — Orlikowski & Baroudi (1991). *Studying Information Technology in Organizations: Research Approaches and Assumptions.* IS research-paradigm taxonomy (positivist/interpretive/critical) used to justify DSR over alternatives.
 
 ---
 

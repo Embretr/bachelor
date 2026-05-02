@@ -180,5 +180,5 @@ How it is triggered:
 | Algorithm benchmarking | ✅ Implemented |
 | Driver mobile app | ⬜ Out of scope |
 | GPS tracking | ⬜ Out of scope |
-| Integration with Timpex / Trimtex | ⬜ Out of scope |
+| Integration with Timpex / Opter | ⬜ Out of scope |
 | Billing / invoicing | ⬜ Out of scope |

@@ -10,8 +10,8 @@
 
 | Field | Value |
 |---|---|
-| **Title** | [FILL IN] |
-| **Subtitle** | [FILL IN or remove] |
+| **Title** | Ressursplanlegger |
+| **Subtitle** | Algorithm-Assisted Resource Planning for Transport Companies |
 | **Institution** | NTNU Gløshaugen — Department of Computer Science (IDI) |
 | **Program** | Data Engineering (Dataingeniør) |
 | **Author 1** | Embret Olav Rasmussen Roås — primary responsibility: system development |
@@ -35,7 +35,7 @@ Norwegian transport companies operate without systematic visibility into resourc
 
 Demand for algorithm-assisted planning thus comes primarily from owners and the business side, not from the coordinators who must operate any such system. This stakeholder asymmetry mirrors Bainbridge's (1983) *ironies of automation*: those whose work depends on a system are rarely the ones who articulate the need for its automation. The same configuration appears across the seven Norwegian transport companies interviewed for this thesis.
 
-Tacit knowledge dependency and slow legacy software are downstream consequences of the visibility gap, not its origin. Traffic coordinators rely on information held in their heads — who has the right licence, who is experienced on which routes, who is approaching overtime limits, which vehicle fits the job — because no system surfaces this information in a structured, comparable form. The one widely-used commercial TMS named in the interview pool, Timpex, handles order management and invoicing but offers no planning or decision support, and is described by users as extremely slow under concurrent use; other interviewed companies use internal or custom tools.
+Tacit knowledge dependency and slow legacy software are downstream consequences of the visibility gap, not its origin. Traffic coordinators rely on information held in their heads — who has the right licence, who is experienced on which routes, who is approaching overtime limits, which vehicle fits the job — because no system surfaces this information in a structured, comparable form. The two commercial TMS named in the interview pool, Timpex and Opter, handle order management and invoicing but offer no planning or decision support; neither generates assignment plans automatically. Timpex is described by users as extremely slow under concurrent use. Other interviewed companies use internal or custom tools.
 
 This creates several downstream problems:
 
@@ -142,7 +142,7 @@ Ressursplanlegger is a **full-stack monorepo** built on Next.js. There is no sep
 
 ## What Makes Ressursplanlegger Unique
 
-Compared to existing systems used by the interviewed companies (Timpex, internal/custom tools, manual processes):
+Compared to existing systems used by the interviewed companies (Timpex, Opter, internal/custom tools, manual processes):
 
 | Capability | Existing systems | Ressursplanlegger |
 |---|---|---|
@@ -195,17 +195,17 @@ Seven semi-structured interviews were conducted on 4 March 2026 with traffic coo
 | # | Company | Current system | Scale |
 |---|---|---|---|
 | 1 | Bergen Bulk Transport | None (manual) | 8–20 drivers |
-| 2 | Harlem Solutions | Internal/custom tool | Unknown |
+| 2 | Harlem Solutions | Opter | Unknown |
 | 3 | Norlog Lakselv | Timpex | Medium |
 | 4 | Norlog Mo i Rana | Timpex + Admin | Medium |
-| 5 | Norlog Tana | Internal/custom tool | Small (far north) |
+| 5 | Norlog Tana | Timpex | Small (far north) |
 | 6 | Ottem | Own system | ~45 vehicles, 3 departments |
 | 7 | Nordic Crane (Svein) | Own system | Crane + transport |
 
 **Key findings:**
 
 1. **All assign jobs manually** — no system provides automatic assignment.
-2. **Legacy systems are extremely slow** — Timpex under concurrent use; other interviewed companies report similar friction with internal/custom tools.
+2. **Legacy systems are extremely slow** — Timpex under concurrent use; Opter and internal/custom tools report similar friction.
 3. **Critical knowledge is tacit** — licences, experience, route familiarity, overtime status.
 4. **Attitude to automation is split** — consensus: the system should suggest a plan the coordinator can correct, not replace the coordinator.
 5. **Adoption depends on** speed, cost/benefit ratio, usability, and trust in the algorithm's output.

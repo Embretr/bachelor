@@ -11,10 +11,10 @@
 | Bedrift | System i dag | Flåte / skala | Ruter/dag | Planhorisont | Automatisering |
 |--------|-------------|--------------|:---------:|-------------|---------------|
 | Bergen Bulk Transport | Ingen (manuelt, telefon, hukommelse) | 8–20 sjåfører | Ukjent | Dag-til-dag | Skeptisk pga. kostnad; mener TMS blir relevant ved 15–20+ biler |
-| Harlem Solutions | Opptur + kundeintegrasjoner | Ukjent | Standardruter, 1 ordre/dag auto-generert | Varierer | Skeptisk – kundeordrer varierer daglig, ingen dager er like |
+| Harlem Solutions | Opter + kundeintegrasjoner | Ukjent | Standardruter, 1 ordre/dag auto-generert | Varierer | Skeptisk – kundeordrer varierer daglig, ingen dager er like |
 | Norlog Lakselv | Timpex (kan auto-generere faste turer) | Middels | Ukjent | Faste + variable | Positiv for faste ruter; jobber med Timpex–Admin-integrasjon |
 | Norlog Mo i Rana | Timpex + Admin + (Admit nevnt) | Middels | Ukjent | Ukjent | Positiv; minimerer gule lapper, alt i system |
-| Norlog Tana | Trimtex | Liten (~5 ruter/dag, 7–20 mil) | ~5 | Dag-til-dag | Positiv; men sykdom er daglig problemløsning |
+| Norlog Tana | Timpex | Liten (~5 ruter/dag, 7–20 mil) | ~5 | Dag-til-dag | Positiv; men sykdom er daglig problemløsning |
 | Ottem | Eget ordresystem | ~45 biler, 3 avdelinger | Ukjent | ~1 min per oppdrag | Skeptisk – ordrer kanselleres, ting skjer fort |
 | Nordic Crane (Svein) | Eget ordresystem (planlegger systembytte) | Kran + transport | 3–4 per sjåfør | 5 timer – 2 måneder | Delvis positiv; vil ha auto-distribusjon 18–24t før utførelse |
 
@@ -23,10 +23,10 @@
 ## Gjennomgående funn
 
 ### 1. Alle tildeler oppdrag manuelt
-Ingen av respondentene har full automatisk tildeling. Selv bedrifter med systemer (Timpex, Opptur) gjør selve sjåfør-tildelingen manuelt. Det er dette produktet primært skal løse.
+Ingen av respondentene har full automatisk tildeling. Verken Timpex eller Opter genererer planer automatisk; selv bedrifter med disse systemene gjør sjåfør-tildelingen manuelt. Det er dette produktet primært skal løse.
 
 ### 2. Treghet er det største problemet med eksisterende systemer
-Timpex og Trimtex beskrives gjennomgående som **ekstremt trege**, spesielt med mange samtidige brukere. Norlog Mo i Rana beskriver det som "ekstremt tregt" med "gammelt grensesnitt" og sier hastighet er "100 prosent" det viktigste å forbedre. Norlog Lakselv bekrefter at ytelsen faller dramatisk med flere brukere på serveren samtidig. Dette er en klar mulighet for et moderne alternativ.
+Timpex beskrives gjennomgående som **ekstremt tregt**, spesielt med mange samtidige brukere. Norlog Mo i Rana beskriver det som "ekstremt tregt" med "gammelt grensesnitt" og sier hastighet er "100 prosent" det viktigste å forbedre. Norlog Lakselv bekrefter at ytelsen faller dramatisk med flere brukere på serveren samtidig. Dette er en klar mulighet for et moderne alternativ.
 
 ### 3. Kritisk kunnskap sitter i operatørens hode
 Alle respondenter har kunnskap som ikke er formalisert:
@@ -44,7 +44,7 @@ Et godt system må gjøre det mulig å **digitalisere og bruke denne kunnskapen 
 - Avhenger sterkt av antall tilgjengelige sjåfører, rutefleksibilitet, og om rutene krever spesialkompetanse (f.eks. scanning hos Norlog Tana)
 
 ### 5. Fakturering er tett koblet til planlegging
-Timpex og Opptur brukes til fakturering. Et nytt system **må enten integrere mot eksisterende faktureringssystem eller ha egne faktureringsfunksjoner**.
+Timpex og Opter brukes til fakturering. Et nytt system **må enten integrere mot eksisterende faktureringssystem eller ha egne faktureringsfunksjoner**.
 
 ### 6. Holdning til full automatisering er delt
 - **Positive:** Norlog Lakselv, Mo i Rana, Tana
@@ -73,7 +73,7 @@ Rangert etter hyppighet nevnt på tvers av intervjuer:
 
 ## Kommunikasjon med sjåfører
 
-- Primært via **app med push-varsler** (Timpex Confirm hos Norlog Lakselv/Mo i Rana; ordreapp hos Harlem/Opptur)
+- Primært via **app med push-varsler** (Timpex Confirm hos Norlog Lakselv/Mo i Rana; ordreapp hos Harlem/Opter)
 - **Telefon direkte** brukes av Norlog Tana og Bergen Bulk Transport
 - Nordic Crane: sjåfører har 3–4 oppdrag per dag, kommuniserer kun ved avvik
 - Kommunikasjon skjer helst kun ved avvik/problemer underveis

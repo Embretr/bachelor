@@ -67,7 +67,7 @@ Content-driven, not marker-driven. Project-specific factual claims (interview th
 ### §1.1 ¶3 — Tacit-knowledge dependency, slow legacy software
 - **Marker:** `MUST GROUND: empirical evidence for tacit-knowledge dependency and slow legacy software (interview synthesis)`
 - **Triage:** INTERNAL (interviews)
-- **Recommendation:** Ground in `context/interviews-summary.md` and `context/fitgap-summary.md` (Timpex specifics).
+- **Recommendation:** Ground in `context/interviews-summary.md` and `context/fitgap-summary.md` (Timpex and Opter specifics).
 
 ### §1.1 ¶4 — "Constraint-based optimisation matured; digital transformation in logistics"
 - **Marker:** none (content-driven Scholar pass)
@@ -372,7 +372,7 @@ Content-driven, not marker-driven. Project-specific factual claims (interview th
 - **Triage:** INTERNAL (`context/docs/requirements/functional-requirements.md`, `non-functional-requirements.md`).
 
 ### §4.3 — Fit/Gap Analysis
-- **Markers:** `MUST EVIDENCE: fit-items` and `MUST EVIDENCE: gap-items; Timpex-specific factual context`
+- **Markers:** `MUST EVIDENCE: fit-items` and `MUST EVIDENCE: gap-items; Timpex- and Opter-specific factual context`
 - **Triage:** INTERNAL (`context/fitgap-summary.md`).
 
 ### §4.4 — System Description

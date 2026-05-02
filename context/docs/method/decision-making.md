@@ -183,7 +183,7 @@ are not the full list — the decision log is canonical.
 - **Decision:** Exclude invoicing integration despite multiple interviewees citing
   it as critical for adoption.
 - **Criteria applied:** Technical feasibility within scope (very low — would require
-  partner agreements with Timpex/Trimtex), alignment with RQ (RQ is about planning
+  partner agreements with Timpex/Opter), alignment with RQ (RQ is about planning
   efficiency, not financial integration), cost of being wrong (low — addressable
   in future work).
 - **Outcome:** Recorded as out of scope in `context/scope.md` and surfaced as

@@ -134,4 +134,4 @@ Auth pages (no sidebar):
 | GPS / route tracking | ⬜ Out of scope | No live location data |
 | Weekly / monthly planning view | ⬜ Not implemented | Planning is per-day only |
 | Billing / invoicing | ⬜ Out of scope | No financial module |
-| Integration with Timpex / Trimtex | ⬜ Out of scope | No external system connectors |
+| Integration with Timpex / Opter | ⬜ Out of scope | No external system connectors |

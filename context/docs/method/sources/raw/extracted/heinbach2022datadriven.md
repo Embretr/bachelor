@@ -23,7 +23,7 @@ Heinbach et al. (2022) explore digital platforms (DPs) for road freight transpor
 | Område | Bidrag |
 |---|---|
 | Ch 2.3 ¶1 (TMS definition and category) | Covered: explicit TMS definition cited from De Muynck et al. (2020) + source's own characterisation of TMS activities |
-| Ch 2.3 ¶2 (TMS landscape — what TMS does well) | Partial: source describes TMS activities at general level (planning, execution, tracking, billing); no coverage of specific Norwegian vendors (Timpex, Trimtex, Opptur) |
+| Ch 2.3 ¶2 (TMS landscape — what TMS does well) | Partial: source describes TMS activities at general level (planning, execution, tracking, billing); no coverage of specific Norwegian vendors (Timpex, Opter) |
 | Ch 2.3 ¶3 (planning gap) | Partial: source identifies that DPs enrich TMS by covering operational processes TMS does not fully address; planning gap is implicit in the framework but not the paper's focus |
 | Ch 1.5 (digital transformation in logistics) | Covered: source describes ongoing digitisation pressure in European road freight; useful scene-setting |
 | Ch 5.3 (adoption barriers / digital transformation context) | Outside scope: source focuses on platform providers, not adoption by end-user transport companies |
@@ -36,7 +36,7 @@ Heinbach et al. (2022) explore digital platforms (DPs) for road freight transpor
 - **Direkte sitat:** "TMSs generically refer to the category of software that deals with the planning and execution of the physical movement of goods across supply chains." (p. 811)
 - **Parafrase:** The source, citing De Muynck et al. (2020, p. 1), defines transport management systems as the class of software whose core function is to plan and execute how physical goods move through supply chains.
 - **Forbehold:** This definition is cited by Heinbach et al. from a Gartner source (De Muynck et al., 2020). It is therefore a practitioner-origin definition adopted in an academic context. Page 811 is confirmed (line 405 in extracted text; page marker "811" at line 350, before the definition; page "812" appears at line 423, after the definition).
-- **Anvendelse på vårt case:** In Ch 2.3 ¶1, this definition establishes that Ressursplanlegger — a platform for planning and executing driver/vehicle assignments — operates squarely within the TMS category as defined here, while existing Norwegian tools (Timpex, Trimtex) address the same category but with different feature coverage.
+- **Anvendelse på vårt case:** In Ch 2.3 ¶1, this definition establishes that Ressursplanlegger — a platform for planning and executing driver/vehicle assignments — operates squarely within the TMS category as defined here, while existing Norwegian tools (Timpex, Opter) address the same category but with different feature coverage.
 
 ---
 
@@ -93,7 +93,7 @@ Heinbach et al. (2022) explore digital platforms (DPs) for road freight transpor
 
 | Kildens term | Vårt domene-ekvivalent | Notat |
 |---|---|---|
-| Transport management system (TMS) | TMS / planleggingsverktøy | Direkte ekvivalent; Heinbach bruker "TMS" som kategori, vi bruker det om Timpex, Trimtex, Opptur |
+| Transport management system (TMS) | TMS / planleggingsverktøy | Direkte ekvivalent; Heinbach bruker "TMS" som kategori, vi bruker det om Timpex og Opter |
 | Road freight transport management (RFTM) | Ressursplanlegging i transportsektor | Bredere enn vår case: RFTM dekker B2B-fraktmarkedet; vår case er intern daglig sjåfør-/kjøretøytildeling |
 | Fleet resources | Sjåfører og kjøretøy | Kilden bruker "fleet resources" for carrier-eide lastebiler; vi bruker det for sjåfør+kjøretøy-kombinasjoner hos transportselskapet |
 | Transport execution / truck dispatching | Sjåfør-/kjøretøytildeling | Direkte ekvivalent for vår case (sub-aktivitet under RFTM stage 2) |
@@ -110,7 +110,7 @@ Heinbach et al. (2022) explore digital platforms (DPs) for road freight transpor
 
 - **TMS-definisjonen er lånt, ikke primær:** Heinbach et al. siterer TMS-definisjonen fra De Muynck et al. (2020, Gartner). Hvis primærkilden er tilgjengelig, bør den siteres direkte. Heinbach er akseptabel sekundærkilde for definisjonen, men dette bør noteres.
 
-- **Norsk kontekst ikke dekket:** Kilden er begrenset til det europeiske markedet, med tyske og europeiske aktører. Norske TMS-er (Timpex, Trimtex, Opptur) er ikke nevnt. Kilden kan ikke brukes som kilde for påstander om norske verktøy.
+- **Norsk kontekst ikke dekket:** Kilden er begrenset til det europeiske markedet, med tyske og europeiske aktører. Norske TMS-er (Timpex, Opter) er ikke nevnt. Kilden kan ikke brukes som kilde for påstander om norske verktøy.
 
 - **Planleggingsgapet er implisitt, ikke eksplisitt:** Kilden konstaterer at DPs utfyller TMS, men analyserer ikke det spesifikke gapet mellom "oppdrag eksisterer" og "sjåfør er tildelt." Ressursplanleggers posisjonering i dette gapet kan støttes av kildens rammeverk, men krever at writer-agent trekker en eksplisitt slutning kilden selv ikke gjør.
 

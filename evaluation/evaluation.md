@@ -9,7 +9,7 @@
 ## All Chapters
 
 - [ ] **Anchor names verbatim:** Wherever Effektivitet, Tillit/kontroll, or Tilpasningsdyktighet appear, the locked Norwegian compound terms are used as proper nouns in English prose. **Synonym drift is critical:** "kontroll" alone, "fleksibilitet", "skalerbarhet", "human control", "menneskelig overstyring" — flag and reject.
-- [ ] **No Trimtex or Opptur references:** Only Timpex is named as a real Norwegian TMS. Other interviewed companies use internal/custom tools.
+- [ ] **No Trimtex or Opptur references:** They are factual errors. Only **Timpex** and **Opter** are named as real Norwegian TMS. Other interviewed companies use internal/custom tools. Neither Timpex nor Opter generates assignment plans automatically.
 - [ ] Formal, academic English — no filler words, no "we believe"
 - [ ] Every claim has a citation or is grounded in own data
 - [ ] Consistent terminology from `context/glossary.md` — no synonyms introduced (no "driver"/"employee" drift, no "planner"/"dispatcher" drift)
@@ -81,7 +81,7 @@ These derive from advisor feedback on Ch 2. Violations are usually visible withi
 | [ ] | **Three-layer HITL** | §2.2 layers Bainbridge (operator-vs-owner asymmetry) → Hoff & Bashir (trust calibration) → Miller (explanation), alongside Parasuraman taxonomy and Lee trust foundation. All three new sources cited. |
 | [ ] | **Utilization framing in §2.1** | Resource scheduling reframed under utilization lens (overtime, idle time, load balance), not just constraint satisfaction. Preloads Ch 5.1.1 vocabulary. |
 | [ ] | Resource scheduling defined and connected to this project's problem | Multi-resource assignment with constraints — mapped to driver/vehicle assignment, not generic textbook scheduling |
-| [ ] | TMS as software category | Only Timpex named as a real Norwegian TMS; others described generically as internal/custom tools. No Trimtex or Opptur. |
+| [ ] | TMS as software category | Timpex and Opter named as real Norwegian TMS; others described generically as internal/custom tools. No Trimtex or Opptur. Neither Timpex nor Opter generates plans automatically. |
 | [ ] | DSR methodology introduced with citations | Hevner (2004), Peffers (2007), Wieringa (2014) |
 | [ ] | **Every theory introduced is used later** in Ch 4 or Ch 5 | If a theory is not referenced again, remove it |
 | [ ] | Theory chapter is "pure" — no own empirical data mixed in | Findings belong in Ch 4, not here |

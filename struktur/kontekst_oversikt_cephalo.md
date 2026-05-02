@@ -14,7 +14,7 @@ Det viktigste enkeltdokumentet i repoet. Skal besvare:
 - Hvem er målgruppen? (trafikkleder, transportleder, admin)
 - Teknisk stack (frontend, backend, database, hosting)
 - Overordnet arkitektur (hvordan henger delene sammen)
-- Hva er det unike med løsningen vs. eksisterende systemer (Timpex, Trimtex, manuell drift)
+- Hva er det unike med løsningen vs. eksisterende systemer (Timpex, Opter, manuell drift)
 - Prosjektstatus – hvor langt er dere kommet
 
 ### ⬜ `context/ordliste.md`

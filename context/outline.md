@@ -18,7 +18,7 @@ All ¶-plans use these markers. The deterministic checker greps for them. Each m
 | `MUST TRACE:` | Must trace back to a specific section, finding, or limitation. For Ch 6 RQ-answer paragraphs the format is `§5.1.X (<anchor name>)` with the anchor name verbatim. | Ch 6 |
 | `MUST GROUND:` | Must be grounded in a context source — TYPE-described — with detailed evidence delivered later. | Ch 1 |
 
-**Source-independence note (locked):** The current state of `result/references.bib`, `context/docs/method/sources/raw/extracted/`, `context/interviews-summary.md` theme labels, and `context/docs/tech/` is draft. This outline is structured around the locked substance (anchors, RQ, SQs, L1–L12, ChatSSB-derived A-grade pattern, three-layer HITL, §12.0.5 origin map). Sources and evidence are fitted to the structure as a downstream task. Locked theoretical authors may be referenced by surname (Bainbridge, Hoff & Bashir, Miller, Parasuraman, Lee, Hevner, Peffers, Wieringa, Braun & Clarke, Malterud, Kvale, Oates) — surnames are stable even when bib keys change.
+**Source-independence note (locked):** The current state of `result/references.bib`, `context/docs/method/sources/raw/extracted/`, `context/interviews-summary.md` theme labels, and `context/docs/tech/` is draft. This outline is structured around the locked substance (anchors, RQ, SQs, L1–L12, ChatSSB-derived A-grade pattern, five-layer HITL, §12.0.5 origin map). Sources and evidence are fitted to the structure as a downstream task. Locked theoretical authors may be referenced by surname (Bainbridge, Hoff & Bashir, Miller, Parasuraman, Lee, Hevner, Peffers, Wieringa, Orlikowski & Baroudi, Braun & Clarke, Malterud) — surnames are stable even when bib keys change.
 
 ---
 
@@ -35,7 +35,7 @@ All ¶-plans use these markers. The deterministic checker greps for them. Each m
   MUST GROUND: Norwegian transport-sector statistic on resource utilization (overtime / idle / load imbalance)
 - ¶2: Introduce the traffic coordinator role and the operator-vs-owner stakeholder configuration. Coordinator runs the system day to day; owners and Admmit articulate the demand for algorithm-assisted planning. The configuration mirrors Bainbridge's *ironies of automation*.
   MUST GROUND: empirical evidence for operator-vs-owner asymmetry (interview convergence)
-- ¶3: Tacit-knowledge dependency and slow legacy software repositioned as *consequences* of the visibility gap, not its origin. Tacit knowledge is used here as a domain concept (operational knowledge held by the coordinator that is not formally captured in any system) rather than as a theoretically anchored construct — no foundational theory citation is required at this scope. Reference Timpex only as a real Norwegian TMS; describe other interviewed companies as using internal/custom systems.
+- ¶3: Tacit-knowledge dependency and slow legacy software repositioned as *consequences* of the visibility gap, not its origin. Tacit knowledge is used here as a domain concept (operational knowledge held by the coordinator that is not formally captured in any system) rather than as a theoretically anchored construct — no foundational theory citation is required at this scope. Reference Timpex and Opter as real Norwegian TMS named in the interview pool; describe other interviewed companies as using internal/custom systems. Neither Timpex nor Opter generates assignment plans automatically.
   MUST GROUND: empirical evidence for tacit-knowledge dependency and slow legacy software (interview synthesis)
 - ¶4: Why now — constraint-based optimisation tools have matured, making algorithm-assisted planning feasible for SMEs; digital transformation in logistics is accelerating but the resource-utilization planning gap persists.
 - ¶5: Introduce Ressursplanlegger in one paragraph — algorithm-assisted, multi-engine solver layer, drag-and-drop HITL timeline. Coordinator can inspect, modify, accept, or reject every algorithm-generated assignment.
@@ -71,7 +71,7 @@ All ¶-plans use these markers. The deterministic checker greps for them. Each m
 ---
 
 ## Chapter 2 — Theory
-**Owner:** Mikael | **Target:** ~8.5 pages, asymmetric depth | **Status:** §2.3 + §2.4 drafted-reviewed (need rework per restructure)
+**Owner:** Mikael | **Target:** ~8.5 pages, asymmetric depth | **Status:** Not started (cleared 2026-05-01 per restructure; previous draft archived under `evaluation/review/sections/archive/2026-05-01-ch2-supervisor-snapshot/`)
 
 **Purpose:** Establish the theoretical foundation underpinning system design and research approach, with depth proportional to argumentative load.
 
@@ -111,14 +111,27 @@ Five-layer HITL theory: Parasuraman taxonomy + Lee trust foundation + Bainbridge
 
 **2.3 Transport Management Systems (TMS)** (~1 page, **trimmed**)
 
-- ¶1: Define TMS as software category — order management, route planning, carrier management, freight billing.
+> **Supervisor calibration 2026-05-02** (full log: `context/docs/project/supervisor-feedback.md`):
+> - The TMS definition in ¶1 must be used unchanged in ¶2 and ¶3 — do not let the second paragraph narrow it implicitly. If a narrower sense is needed, flag the shift in-prose and revert.
+> - State of the art must be named, not implied: list Timpex, Opter, and at least one international vendor that appears in the literature; describe what each covers.
+> - Do not claim that all (or "Norwegian", or generally) transporters operate a TMS. Several interviewed companies do not. Frame TMS coverage as variable.
+> - Theory chapter purity: no interview material in §2.3 prose. The Norwegian-TMS landscape claim in ¶2 is theory-of-the-domain (vendors named, what each does), not interview-grounded; reserve interview-validated coverage for Ch 4.
+> - Bridge sentences between ¶1→¶2→¶3 are mandatory. The previous draft was flagged for abrupt transitions.
+> - The internal term "fit/gap" must not appear unglossed in prose. ¶3 reframes the gap as "what existing systems cover vs. what is missing"; the planning label stays in `fitgap-summary.md` and Ch 4.3 outline only.
+
+- ¶1: Define TMS as software category — order management, route planning, carrier management, freight billing. The TMS scope established here is the operational definition used through the rest of §2.3; later paragraphs do not narrow it without flagging.
   MUST CITE: TMS as software category (definitional)
-- ¶2: Norwegian TMS context. **Only Timpex** named as a real Norwegian TMS used by interviewed companies. Other interviewed companies use internal or custom systems whose specific identities are not relevant to the thesis argument. Vendor-specific Timpex content (slow performance under concurrent use, etc.) moves to Ch 4.3 fit/gap.
-  MUST EVIDENCE: empirical-evidence on Norwegian TMS landscape (interview-derived)
-- ¶3: The planning gap — none of the existing systems address the space between "order exists" and "driver is assigned". Bridge sentence to Chapter 4.
-  MUST EVIDENCE: gap items from fit/gap analysis
+- ¶2: TMS landscape — name the live state-of-the-art. **Timpex and Opter** are the real Norwegian TMS named by interviewed companies (treated here as public market facts, not interview evidence); neither generates assignment plans automatically. Add at least one international TMS vendor named in the literature to anchor the category beyond Norway. Frame adoption as variable across the sector — not all transport companies operate a TMS. Vendor-specific operational content (slow performance under concurrent use, etc.) is reserved for Ch 4.3.
+  MUST CITE: international TMS vendor reference (literature-anchored)
+- ¶3: What existing TMS cover vs. what is missing — the planning space between "order exists" and "driver is assigned" is unaddressed by the systems just named. Reframe in plain language ("what exists / what is missing"); do not surface the term "fit/gap" in prose. The structural claim is theoretical here; Ch 4.3 substantiates with the empirical comparison. Bridge sentence to Chapter 4.
 
 **2.4 Design Science Research** (~2 pages, slightly expanded)
+
+> **Supervisor calibration 2026-05-02** (full log: `context/docs/project/supervisor-feedback.md`):
+> - Theory chapter purity: no interview material in §2.4 prose.
+> - Definitional consistency: DSR is defined once in ¶1; ¶2 and ¶3 do not redefine it.
+> - Bridge sentences between paragraphs are mandatory; the previous draft of Ch 2 was flagged for abrupt transitions throughout.
+> - Be careful with sweeping claims about IS-research practice; prefer "the literature reports" over universal statements.
 
 - ¶1: Define DSR — creating and evaluating artefacts to address practical problems. Name the three foundational cycles (relevance, design, rigor) and the six DSRM activities.
   MUST CITE: Hevner — DSR three-cycle (foundational)
@@ -336,8 +349,8 @@ Separated from validity / reliability — describes *how* the artefact is tested
 
 - ¶1: What existing systems provide vs. what coordinators need. Fit table.
   MUST EVIDENCE: fit-items from fit/gap analysis
-- ¶2: Gap table; **Timpex-vendor specifics absorbed here** (slow performance under concurrent use; what Timpex does well — order management and invoicing; what it lacks — planning and decision support). Only Timpex is named as a real Norwegian TMS; other interviewed companies use internal/custom systems described generically.
-  MUST EVIDENCE: gap-items from fit/gap analysis; Timpex-specific factual context
+- ¶2: Gap table; **Timpex- and Opter-vendor specifics absorbed here** (Timpex's slow performance under concurrent use; what each system does well — order management, invoicing, driver notification — and what neither does — automatic plan generation, planning support, decision support). Timpex and Opter are named as real Norwegian TMS; other interviewed companies use internal/custom systems described generically.
+  MUST EVIDENCE: gap-items from fit/gap analysis; Timpex- and Opter-specific factual context
 
 **4.4 System Description** (~3 pages) — *Embret*
 
@@ -441,7 +454,7 @@ Surviving fragment of the prior topical 5.3, repositioned as *implications* of t
 
 - ¶1: Cost / benefit threshold for adoption — what the artefact must demonstrate before companies adopt.
   MUST CITE: Venkatesh — UTAUT (cost-benefit threshold framing for adoption)
-- ¶2: Timpex / legacy integration gap; billing-system integration as a future requirement identified by interviewees but out of scope.
+- ¶2: Timpex / Opter / legacy integration gap; billing-system integration as a future requirement identified by interviewees but out of scope.
   MUST EVIDENCE: TMS-as-category framing from §2.3 reappearing here
 - ¶3: Deployment-readiness — what would it take to move from validation (this thesis) to production? Forwarded to §6.3.
 

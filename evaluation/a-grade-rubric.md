@@ -53,7 +53,7 @@
 - **Utilization framing:** §2.1 frames resource scheduling under the utilization lens (overtime, idle time, load balance), not just as constraint satisfaction — preloading the Discussion's Effektivitet sub-section.
 - Every theory presented is directly connected to a specific design decision or finding in the thesis
 - Resource scheduling formulation is precise: problem structure (multi-resource assignment with constraints), why this characterisation fits the domain, and how it differs from adjacent problems (e.g., VRP focuses on sequencing, not assignment)
-- Existing systems (TMS) are positioned against Ressursplanlegger as category — only Timpex named by name; other interviewed companies use internal/custom tools
+- Existing systems (TMS) are positioned against Ressursplanlegger as category — Timpex and Opter named by name; other interviewed companies use internal/custom tools. Neither Timpex nor Opter generates assignment plans automatically
 - No theory is presented for its own sake — if it does not appear in Ch 4 or Ch 5, it should not be in Ch 2
 - Primary sources are cited — textbooks for foundational theory, peer-reviewed papers for specific claims
 

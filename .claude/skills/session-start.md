@@ -1,104 +1,78 @@
 # Session Start — Required Ritual
 
 > Run this sequence at the start of every Claude session.
-> Do not skip steps. Do not combine with writing in the same message.
-> This ritual is what makes the workflow repeatable and coherent.
+> The actual writing and reviewing is automated by `/write-section` and `/review-chapter`. This ritual is what loads the orientation context Claude needs to invoke them correctly.
 
 ---
 
 ## Step 1 — Load the backbone (always, in this order)
 
-Paste these files into the session context:
+Read these files into the session context:
 
-1. `context/index.md` — understand what context exists
+1. `context/index.md` — understand what context exists and which files map to which chapter
 2. `context/context.md` — thesis identity, RQ, scope, status
-3. `context/thesis-spine.md` — one-sentence argument per chapter
-4. `evaluation/a-grade-rubric.md` — A criteria (read carefully)
+3. `context/thesis-spine.md` — one-sentence argument per chapter + the locked Anchor Concepts
+4. `evaluation/a-grade-rubric.md` — A criteria
 5. `STATUS.md` — what is done, in progress, not started
 
 ---
 
-## Step 2 — State the task
+## Step 2 — Decide the task
 
-Tell Claude exactly what the task is, in one sentence:
+Pick the appropriate command:
 
-```
-Task: Write section [X.Y] of Chapter [N] — [section title]
-```
+| Goal | Command |
+|---|---|
+| Draft a new section | `/write-section X.Y` |
+| Revise a section using prior reviews | `/write-section X.Y` (it auto-detects existing content and offers revise mode) |
+| Integration check on a finished chapter | `/review-chapter N` |
+| Extract structured notes from a source PDF | `Agent({subagent_type: "source-extractor", prompt: "Bibkey: {bibkey}"})` |
+| Log supervisor feedback | `/log-supervisor-feedback` |
 
-or:
-
-```
-Task: Revise section [X.Y] — [what is wrong and what should be better]
-```
-
-or:
-
-```
-Task: Run red-thread check on Chapter [N] (new session, no writer context)
-```
+The skills handle prerequisite validation, deterministic checks, subagent spawning, and report generation. The user does not paste prompts manually anymore.
 
 ---
 
-## Step 3 — Load chapter-specific context
+## Step 3 — Verify prerequisites if writing a new section
 
-Use `context/index.md` Quick Load Guide to identify which files to load.
+Before running `/write-section X.Y`, confirm:
 
-Paste the relevant files into the session.
+- [ ] The section has a paragraph-level plan in `context/outline.md` (look for `- ¶` markers under §X.Y). The skill will hard-stop if missing.
+- [ ] Any new MUST CITE bibkeys exist in `result/references.bib` AND have source notes in `context/docs/method/sources/raw/extracted/{bibkey}.md`. The skill validates this in Step 1c.
 
-For writing:
-- `context/outline.md` — section plan for this chapter
-- `context/glossary.md` — domain glossary
-- Chapter-specific files (see index.md)
-- Previous chapter .tex file (for continuity)
-
-For review:
-- The chapter .tex file to be reviewed
-- `evaluation/grading-guidelines.md` (if filled)
-- Previous review output from `evaluation/review/`
+If anything is missing, fix it before invoking the command — the skill will refuse to start otherwise.
 
 ---
 
-## Step 4 — Verify prerequisites
+## Step 4 — Run the command and respond to the report
 
-Before Claude starts writing, verify:
+The skill will:
+- Spawn subagents (writer, then in parallel: section-coherence + section-quality)
+- Print a tight 2–3 line status line + JSON gates
+- Auto-revise up to 3 rounds if reviewers fail with fixable critical issues
+- Surface generalisable lessons-learned candidates for your `y / n / edit` answer
 
-- [ ] The section to write has a detailed plan in `context/outline.md`
-- [ ] The research question is known (from `context/context.md`)
-- [ ] Any technical claims (algorithm, architecture) have source files in `context/docs/tech/`
-- [ ] Any interview claims have source in `context/interviews-summary.md`
-- [ ] Any citations needed have BibTeX keys in `result/references.bib`
-
-If a prerequisite is missing, note it as `[FILL IN: X needed]` in the output and continue.
+Your role: answer harvest candidates, decide on `drafted-needs-manual-fix` cases, and update `STATUS.md` only when you are satisfied with the section.
 
 ---
 
-## Step 5 — Write or review
+## After every chapter is `drafted-reviewed` for all sections
 
-Follow the appropriate prompt template:
-- Writing: `.claude/agents/writer.md`
-- Red-thread: `.claude/agents/red-thread.md` (new session only)
-- Quality: `.claude/agents/quality.md` (new session only, after red-thread)
-
----
-
-## After the Session
-
-- Paste completed section into the correct `result/chapters/` file
-- Update `result/notes.md` with: what was written, decisions made, open questions
-- Update `STATUS.md`: mark section as drafted / reviewed / revised
-- Commit with: `git commit -m "ch[N]: draft section [X.Y] — [section title]"`
+1. Run `/review-chapter N` for chapter integration check
+2. **Spine sync check**: compare the chapter's actual argument against `context/thesis-spine.md`. If shifted, update the spine before moving on.
+3. **Human approval**: review the chapter yourself. Mark as `approved` in STATUS.md only when you are satisfied.
 
 ---
 
-## Session Types — What Each Does
+## Subagents available (defined in `.claude/agents/`)
 
-| Session type | What it does | Can be combined with? |
+| Subagent | Used by | Mandate |
 |---|---|---|
-| **Writer** | Produces new text for one section | Nothing else |
-| **Red-thread** | Checks argument coherence, no grammar | Nothing else |
-| **Quality** | Grades chapter against A criteria | Nothing else |
-| **Revision** | Fixes specific issues from red-thread/quality | Can be combined with writer for minor fixes |
-| **Context update** | Updates a context file with new information | Always safe to combine |
+| `writer` | `/write-section` Step 2 | Drafts section LaTeX from outline + slices |
+| `section-coherence` | `/write-section` Step 5 | Logical coherence + structure + MUST markers + theory tracker |
+| `section-quality` | `/write-section` Step 5 | A-grade rubric + source integration + AI-voice (naturalness) |
+| `chapter-redthread` | `/review-chapter` Step 2 | Cross-section transitions, repetition, RQ, terminology, anchor coherence |
+| `chapter-sensor` | `/review-chapter` Step 2 | Per-NRT-criterion grading + A-markers + anchor drift |
+| `source-extractor` | Standalone | Extracts structured notes from one source PDF |
 
-Red-thread and quality MUST be separate sessions from the writer. The writer session has a bias toward producing content; the reviewer session needs a clean perspective.
+Each subagent has its own context window — the orchestrator passes only inline slices and file paths, not full files.

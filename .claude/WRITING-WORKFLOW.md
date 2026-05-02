@@ -5,11 +5,11 @@
 ## Quick Start
 
 ```
-/write-section 2.1          ← write one section (auto context + checks + 3 reviews + auto-revision)
+/write-section 2.1          ← write one section (auto context + checks + 2 reviews + auto-revision)
 /write-section 2.2          ← repeat for each section in the chapter
 /write-section 2.3
 /write-section 2.4
-/review-chapter 2           ← chapter integration check (2 agents)
+/review-chapter 2           ← chapter integration check (2 subagents)
 → Human marks approved      ← you decide when it's done
 ```
 
@@ -18,26 +18,28 @@
 ```
 .claude/
 ├── commands/
-│   ├── write-section.md       # /write-section 2.1 — entry point
-│   └── review-chapter.md      # /review-chapter 2 — entry point
+│   ├── write-section.md         # /write-section 2.1 — entry point
+│   └── review-chapter.md        # /review-chapter 2 — entry point
 ├── skills/
-│   ├── write-section/SKILL.md # full pipeline logic
-│   └── review-chapter/SKILL.md # chapter integration logic
-└── agents/
-    ├── writer.md              # writer prompt template
-    ├── red-thread.md          # chapter-level coherence template
-    ├── quality.md             # chapter-level grading template
-    └── naturalness.md         # AI-detection checklist
+│   ├── write-section/SKILL.md   # full pipeline logic (orchestrator)
+│   └── review-chapter/SKILL.md  # chapter integration logic (orchestrator)
+└── agents/                      # registered subagents (YAML frontmatter)
+    ├── writer.md                # drafts one section at a time
+    ├── section-coherence.md     # section-level coherence reviewer
+    ├── section-quality.md       # section-level A-grade + naturalness reviewer
+    ├── chapter-redthread.md     # chapter-level integration reviewer
+    ├── chapter-sensor.md        # chapter-level external examiner
+    └── source-extractor.md      # extracts notes from one source PDF
 ```
 
 ## What `/write-section` Does
 
 1. **Validates** — checks outline has ¶-plan, context files exist, glossary/refs populated
-2. **Writes** — spawns writer agent with explicit context manifest
+2. **Writes** — spawns the `writer` subagent with inline slices (OUTLINE_SLICE, BIB_SLICE, RUBRIC_SLICE)
 3. **Saves** — inserts into .tex file, creates round-scoped backup
 4. **Checks** — deterministic hard fails + warnings (filler, transitions, em-dashes) + citation density + outline compliance
 5. **Auto-fixes** — attempts to fix forbidden voice via minimal writer-fix (Step 4.5)
-6. **Reviews** — 3 independent agents (coherence, quality, naturalness) with structured JSON gates
+6. **Reviews** — 2 independent subagents in parallel (`section-coherence` + `section-quality`; the latter includes the AI-voice / naturalness check) with structured JSON gates
 7. **Auto-revises** — if reviews fail with fixable critical issues, spawns writer with consolidated feedback (max 3 rounds)
 8. **Polishes** — if reviews pass but have minor suggestions, runs one polish round with rollback
 9. **Reports** — structured summary, saves review files, updates STATUS.md
@@ -68,9 +70,8 @@
 | Gate | Pass criterion | Fail action |
 |------|---------------|-------------|
 | Hard checks | No placeholders, no forbidden voice, all citation keys valid, compile passes | Step 4.5 auto-fix attempt, then `drafted-needs-revision` if still fails |
-| Coherence | All critical counts == 0, spine serves | Auto-revise (Step 6.5) |
-| Quality | Grade A, depth "genuine", critical_source_issues == 0 | Auto-revise (Step 6.5) |
-| Naturalness | Score ≥ 4/5 | Auto-revise (Step 6.5) |
+| Coherence (`section-coherence`) | All critical counts == 0, spine serves, anchor_drift_count == 0, theory_missing_from_tracker == 0 | Auto-revise (Step 6.5) |
+| Quality (`section-quality`) | Grade A, depth "genuine", critical_source_issues == 0, naturalness_score ≥ 4, anchor_drift_count == 0 | Auto-revise (Step 6.5) |
 | **All pass** | | `drafted-reviewed` → polish if suggestions exist |
 
 ### Statuses
@@ -127,9 +128,8 @@ Ch 2 → Ch 3 → Ch 4.1 → 4.3 → 4.2 → 4.4 → 4.5
 ```
 evaluation/review/sections/
 ├── ch2-2.1-round1-checks.md         # deterministic checks
-├── ch2-2.1-round1-coherence.md      # coherence review
-├── ch2-2.1-round1-quality.md        # quality review
-├── ch2-2.1-round1-naturalness.md    # naturalness review
+├── ch2-2.1-round1-coherence.md      # section-coherence subagent JSON + report
+├── ch2-2.1-round1-quality.md        # section-quality subagent JSON + report (includes naturalness)
 ├── ch2-2.1-round1-backup.tex        # content backup
 ├── ch2-2.1-round1-pre-autofix.tex   # backup before deterministic fix (if any)
 ├── ch2-2.1-round2-...               # auto-revision round 2
@@ -139,6 +139,6 @@ evaluation/review/sections/
 └── ...
 
 evaluation/review/
-├── redthread-ch2.md                 # chapter integration: red thread
-└── quality-ch2.md                   # chapter integration: sensor
+├── redthread-ch2.md                 # chapter integration: chapter-redthread subagent
+└── quality-ch2.md                   # chapter integration: chapter-sensor subagent
 ```

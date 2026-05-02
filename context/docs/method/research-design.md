@@ -69,7 +69,7 @@ The DSR process follows Peffers et al. (2007) six activities, applied to *this* 
 ### Fit/gap analysis
 
 - **Purpose:** Compare what existing systems provide against what coordinators need (DSRM Step 2 input).
-- **Input:** Interview findings + factual context on Timpex (the only commercial Norwegian TMS named in the consultation pool). Other interviewed companies use internal/custom tools described generically — their specific identities are not relevant to the thesis argument.
+- **Input:** Interview findings + factual context on Timpex and Opter (the two commercial Norwegian TMS named in the consultation pool). Other interviewed companies use internal/custom tools described generically — their specific identities are not relevant to the thesis argument.
 - **Output:** `context/fitgap-summary.md` — fit table and gap table.
 
 ---
@@ -80,7 +80,7 @@ The DSR process follows Peffers et al. (2007) six activities, applied to *this* 
 
 - **Sikt/NSD status:** No formal Sikt/NSD registration was made. The project was treated as industry consultation under Admmit's bachelor task brief and NTNU institutional supervision. No special-category personal data per GDPR was collected — conversations covered work practices, system use, and assignment criteria only.
 - **Informed consent:** Consent was implicit through participants agreeing to take the call and answer questions. No formal consent form was administered. Recording was conducted without an explicit consent step before recording began. *This is an honest limitation; flagged in §5.4 L3 (researcher–developer overlap and informal study procedures).*
-- **Anonymisation:** No formal anonymisation protocol was applied. Only Timpex (a vendor, not a customer) is named as a real Norwegian TMS in the thesis. The seven interviewed companies are referenced generically (size, sector, system maturity) without naming.
+- **Anonymisation:** No formal anonymisation protocol was applied. Only Timpex and Opter (vendors, not customers) are named as real Norwegian TMS in the thesis. The seven interviewed companies are referenced generically (size, sector, system maturity) without naming.
 - **Data storage:** Recordings and transcriptions are stored locally on the project author's device. Access is limited to the project author and supervisor. All recordings and transcriptions will be deleted after thesis submission and grading.
 - **Use of transcription tools:** Sonix.ai was used for automated transcription. Recordings are uploaded to Sonix's cloud infrastructure for processing; this was not explicitly disclosed to participants at the time of recording. *Acknowledged as a procedural limitation; flagged in §5.4 L3.*
 

@@ -49,10 +49,10 @@ Use the automated pipeline:
 
 This single command:
 1. Validates prerequisites (outline plan, context files, glossary, references)
-2. Spawns a writer agent that reads its own context
+2. Spawns the `writer` subagent that reads its own context
 3. Saves output to the correct .tex file
 4. Runs deterministic checks (placeholders, forbidden phrases, citation keys, compilation)
-5. Spawns 3 review agents (coherence, quality, naturalness) with JSON gates
+5. Spawns 2 review subagents in parallel — `section-coherence` and `section-quality` (the latter includes the AI-voice / naturalness check) — each with its own JSON gate
 6. Reports pass/fail status and updates STATUS.md
 
 If the section already has content, you choose: **revise** (recommended) or **overwrite**.
@@ -67,7 +67,7 @@ After all sections in a chapter are `drafted-reviewed`:
 /review-chapter 2
 ```
 
-This runs 2 integration agents (red-thread + sensor) that assess the chapter as a whole.
+This runs 2 integration subagents (`chapter-redthread` + `chapter-sensor`) that assess the chapter as a whole.
 If it passes → `candidate-approved`. **You** make the final approval decision.
 
 See `.claude/skills/review-chapter/SKILL.md` for details.
@@ -94,15 +94,19 @@ These rules are non-negotiable. They override convenience and save more time tha
 
 The section plan (`context/outline.md`) is more important than the prompt itself. If you know exactly what each paragraph should say, the output will always be usable. Without it, the result will be generic filler that takes longer to fix than to write from scratch. **Never start writing a section unless `context/outline.md` contains a concrete, paragraph-level plan for that section.** If the plan is missing or vague, stop and ask the user to fill it in before proceeding.
 
-### 2. Writer and red-thread must never share a session
+### 2. Writer and reviewers must never share a context
 
-The writer agent is set up to produce — it is not objective. The red-thread agent needs a clean slate without the preceding context to see flaws. Running both in the same session contaminates the review. **Always open a new, separate Claude session for red-thread and quality checks.** This is already stated in the workflow above, but it bears repeating: violating this rule invalidates the review.
+The writer subagent is set up to produce — it is not objective. Reviewers need a clean slate without the writer's framing to see flaws. The `/write-section` and `/review-chapter` skills enforce this automatically by spawning each agent as an independent subagent (fresh context window per spawn). Do not bypass that by pasting the writer's output back into a reviewer prompt or by running reviewer checks in the same conversation as the writer.
 
 ### 3. Update thesis-spine.md after every chapter
 
 If a finished chapter shifts the argument even slightly, update `context/thesis-spine.md` immediately. The spine is the single source of truth for cross-chapter coherence. If it drifts out of sync with what was actually written, every subsequent chapter risks building on a stale foundation. **After completing any chapter draft, compare what was written against the spine and update if needed — before moving on.**
 
-### 4. Anchor Concept Coherence
+### 4. Supervisor feedback flows from log to lessons-learned
+
+All NTNU supervisor directives are logged in `context/docs/project/supervisor-feedback.md` (chronological, dated, verbatim). When a directive is generalisable beyond the immediate section, mirror it as a rule in `evaluation/review/lessons-learned.md` so the `writer`, `section-coherence`, and `section-quality` subagents all enforce it automatically (each reads `lessons-learned.md` per their system prompt). When a directive is section-specific, mirror it as a `> **Supervisor calibration**` note under the relevant block in `context/outline.md` so the writer sees it at draft time. Cross-link both directions. **Never store supervisor directives only in user memory** — memory is per-machine, but the thesis is co-authored. The log is the single source of truth across collaborators and sessions.
+
+### 5. Anchor Concept Coherence
 
 The three anchor concepts defined in `context/thesis-spine.md` and `context/glossary.md` are the spine of the thesis argument:
 
@@ -134,7 +138,8 @@ After the pipeline reports, the only manual steps are:
 
 1. **Read the pipeline report** — check the status and any flagged issues
 2. **If `drafted-needs-revision`** — fix issues and re-run `/write-section X.Y` (revise mode)
-3. **If `drafted-reviewed`** — move to the next section
+3. **If `drafted-reviewed`** — answer the LESSONS-LEARNED HARVEST candidates, then move to the next section
+4. **Lessons-learned capture** is now a hard pipeline step (Step 6.6 in `.claude/skills/write-section/SKILL.md`) — the orchestrator surfaces every generalisable reviewer minor-issue / suggestion as a `Apply? (y / n / edit)` candidate before declaring the section complete. Your role is to answer per candidate; the orchestrator never auto-applies. Section-specific findings stay in the round file automatically.
 
 ### After completing a chapter (all sections `drafted-reviewed`)
 
@@ -192,10 +197,10 @@ Do not propose trivial changes (spelling, formatting) — only changes that affe
 - Write outside the scope of the current section — not the next section, not the chapter introduction
 - Assume something is tested unless it appears in `context/docs/requirements/requirements-traceability.md`
 - Change the research question — use it verbatim from `context/context.md`
-- Run writer and red-thread in the same session — they require separate contexts
+- Run the writer and reviewers in the same context — they are spawned as independent subagents on purpose
 - Make changes that do not improve the thesis grade
 - **Translate or split anchor names** — Effektivitet, Tillit/kontroll, Tilpasningsdyktighet are Norwegian proper-nouns in English prose. Never write "Efficiency", "Trust/control", "Adaptability", "kontroll" alone, "fleksibilitet", "skalerbarhet"
-- **Reference Trimtex or Opptur** as Norwegian transport management systems — they are factual errors. Only Timpex is a real Norwegian TMS named in the interview pool; other interviewed companies use internal/custom tools described generically
+- **Reference Trimtex or Opptur** as Norwegian transport management systems — they are factual errors (frequent transcription confusions for Timpex and Opter respectively). Only **Timpex** and **Opter** are real Norwegian TMS named in the interview pool; other interviewed companies use internal/custom tools described generically. Neither Timpex nor Opter generates assignment plans automatically — both are order/invoicing tools
 
 ---
 
@@ -236,11 +241,13 @@ bachelor/
 │   ├── commands/
 │   │   ├── write-section.md     ← /write-section 2.1 — entry point
 │   │   └── review-chapter.md    ← /review-chapter 2 — entry point
-│   ├── agents/
-│   │   ├── writer.md            ← writer agent prompt template
-│   │   ├── red-thread.md        ← coherence review template
-│   │   ├── quality.md           ← sensor/grading review template
-│   │   └── naturalness.md       ← AI-detection review template
+│   ├── agents/                  ← registered subagents (YAML frontmatter)
+│   │   ├── writer.md            ← drafts one section at a time
+│   │   ├── section-coherence.md ← section-level coherence reviewer
+│   │   ├── section-quality.md   ← section-level A-grade + naturalness reviewer
+│   │   ├── chapter-redthread.md ← chapter-level integration reviewer
+│   │   ├── chapter-sensor.md    ← chapter-level external examiner
+│   │   └── source-extractor.md  ← extracts notes from one source PDF
 │   ├── skills/
 │   │   ├── write-section/SKILL.md  ← full write+check+review pipeline
 │   │   ├── review-chapter/SKILL.md ← chapter integration check

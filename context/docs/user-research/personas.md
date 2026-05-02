@@ -20,14 +20,15 @@
 - Communicating assignment details to drivers (via app, phone, or push notification)
 
 **Current tools (from interviews):**
-- Timpex (Norlog Lakselv, Norlog Mo i Rana) — used for order management and invoicing, not for driver assignment
-- Trimtex (Norlog Tana) — similar function, limited planning support
-- Opptur (Harlem Solutions) — order and invoicing system
+- Timpex (Norlog Lakselv, Norlog Mo i Rana, Norlog Tana) — used for order management and invoicing, not for driver assignment
+- Opter (Harlem Solutions) — order and invoicing system with driver notification app
 - Own order systems (Ottem, Nordic Crane) — custom-built, no optimisation
 - No system at all (Bergen Bulk Transport) — fully manual with phone calls and personal memory
 
+Neither Timpex nor Opter generates assignment plans automatically — driver-to-assignment matching is performed manually in every interviewed company.
+
 **Pain points (from interviews):**
-- Current systems (Timpex, Trimtex) are extremely slow, especially with multiple concurrent users
+- Current systems (Timpex in particular) are extremely slow, especially with multiple concurrent users
 - No single view of all drivers, vehicles, and their availability — information is fragmented
 - Must remember constraints from memory: who has which licence, who is experienced on which route, who is approaching overtime limits
 - Sick-leave handling ranges from trivial (2–3 keystrokes) to a daily, time-consuming problem, depending on fleet size and route flexibility
@@ -42,7 +43,7 @@ Split across interviewees:
 
 Consensus across all: the system should **suggest a plan the coordinator can correct** — not replace the coordinator entirely.
 
-**Technical proficiency:** Moderate. Comfortable using existing TMS (Timpex, Trimtex) and mobile apps for driver communication. Not developers — the interface must be learnable quickly. Several interviewees emphasised that low learning curve is a key adoption criterion.
+**Technical proficiency:** Moderate. Comfortable using existing TMS (Timpex, Opter) and mobile apps for driver communication. Not developers — the interface must be learnable quickly. Several interviewees emphasised that low learning curve is a key adoption criterion.
 
 **Typical workflow (current, without Ressursplanlegger):**
 1. Arrive at work, review incoming assignments for the day (from order system, phone, or email)
@@ -93,7 +94,7 @@ Consensus across all: the system should **suggest a plan the coordinator can cor
 **Role:** Receives assignments and executes routes. In the current system, the driver is not a user of the planning platform — they receive their assignments through other channels.
 
 **Current notification methods (from interviews):**
-- App with push notifications (Timpex Confirm, Opptur order app)
+- App with push notifications (Timpex Confirm, Opter order app)
 - Direct phone call from the traffic coordinator (Norlog Tana, Bergen Bulk Transport)
 - Paper-based assignment lists (some smaller operations)
 

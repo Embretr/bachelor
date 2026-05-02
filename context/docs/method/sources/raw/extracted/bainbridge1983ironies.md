@@ -72,7 +72,7 @@ Fra outline.md og thesis-spine.md, hvilke områder ble vurdert for denne kilden:
 - **Direkte sitat:** "the designer who tries to eliminate the operator still leaves the operator to do the tasks which the designer cannot think how to automate. It is this approach which causes the problems to be discussed here, as it means that the operator can be left with an arbitrary collection of tasks, and little thought may have been given to providing support for them." (p. 775)
 - **Parafrase:** Systems designed with the goal of eliminating the human operator tend to assign residual tasks arbitrarily, without proper support design — leading to worse human performance, not better.
 - **Forbehold:** Bainbridge is critiquing a specific design philosophy ("eliminate the operator"), not arguing against automation per se. Ressursplanlegger's design starts from the opposite premise — human involvement is a requirement, not a failure mode.
-- **Anvendelse på vårt case:** The existing transport systems (Timpex, Trimtex) effectively leave coordinators with the "arbitrary collection of tasks" Bainbridge describes — invoicing is automated, but assignment planning is unsupported. Ressursplanlegger's HITL design is a direct response to this pattern: it provides structured decision support for the tasks that remain irreducibly human.
+- **Anvendelse på vårt case:** The existing transport systems (Timpex, Opter) effectively leave coordinators with the "arbitrary collection of tasks" Bainbridge describes — invoicing is automated, but assignment planning is unsupported. Ressursplanlegger's HITL design is a direct response to this pattern: it provides structured decision support for the tasks that remain irreducibly human.
 
 ---
 

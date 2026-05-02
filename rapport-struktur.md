@@ -42,7 +42,7 @@ Rapportstruktur — Ressursplanlegger
 
 - 2.3 Transportadministrasjonssystemer (TMS)
   - TMS som programvarekategori
-  - Norsk landskap: Timpex, Trimtex, Opptur
+  - Norsk landskap: Timpex, Opter
   - Planleggingsgapet ingen systemer dekker
 
 - 2.4 Design Science Research

@@ -34,7 +34,7 @@ Griffis & Goldsby (2007) survey 45 North American firms on their adoption of, ex
 - **Direkte sitat:** "Transportation management systems are information technologies used to plan, optimize, and execute transportation operations. A TMS can facilitate transportation management activities that take place before, during, and after the transportation movement by optimizing freight flows among multiple facilities, tracking freight in transit, and managing the freight payment process" (p. 19 / PDF 3)
 - **Parafrase:** TMS is a software category covering pre-, during-, and post-transport activities: freight flow optimisation, in-transit tracking, and payment management.
 - **Forbehold:** Definition is written from a shipper/freight perspective. "Transportation operations" here means moving goods between facilities, not assigning drivers to jobs within a transport company.
-- **Anvendelse på vårt case:** Denne definisjonen etablerer TMS som softwarekategori i Ch 2.3 ¶1; den klargjør samtidig at Timpex og Trimtex (faktureringsfokusert) faller innenfor TMS-kategorien, mens Ressursplanlegger adresserer planleggingsdelen ("before the transportation movement") som kommersielle systemer ikke dekker for norske transportselskaper.
+- **Anvendelse på vårt case:** Denne definisjonen etablerer TMS som softwarekategori i Ch 2.3 ¶1; den klargjør samtidig at Timpex og Opter (faktureringsfokusert) faller innenfor TMS-kategorien, mens Ressursplanlegger adresserer planleggingsdelen ("before the transportation movement") som kommersielle systemer ikke dekker for norske transportselskaper.
 
 ---
 
@@ -52,7 +52,7 @@ Griffis & Goldsby (2007) survey 45 North American firms on their adoption of, ex
 - **Direkte sitat:** "It is interesting to note that the functionality most commonly realized does not directly overlap with the motives for TMS adoption. While motives tend to speak of high-level strategic concerns, the functions most commonly employed involve support for operations-based decisions, those involving individual shipments and transactions." (p. 25 / PDF 9)
 - **Parafrase:** Firms adopt TMS for strategic reasons (consolidation, cost reduction) but end up using it for day-to-day operational tasks; strategic decision-support capabilities often go unrealised.
 - **Forbehold:** Specific to freight/shipper context. "Strategic" in this article = network design, lane analysis; not directly comparable to Ressursplanlegger's planning goals.
-- **Anvendelse på vårt case:** Mønsteret er gjenkjennelig i norsk transportkontekst: koordinatorer bruker eksisterende systemer (Timpex, Trimtex) til fakturering og ordreregistrering, men planlegging forblir manuell — systemer adopteres for administrative formål, ikke for planleggingsstøtte.
+- **Anvendelse på vårt case:** Mønsteret er gjenkjennelig i norsk transportkontekst: koordinatorer bruker eksisterende systemer (Timpex, Opter) til fakturering og ordreregistrering, men planlegging forblir manuell — systemer adopteres for administrative formål, ikke for planleggingsstøtte.
 
 ---
 
@@ -61,7 +61,7 @@ Griffis & Goldsby (2007) survey 45 North American firms on their adoption of, ex
 - **Direkte sitat:** "The incompatibility of systems, a perennial IT issue, appeared in 57 percent of the implementations reported by TMS users. Delays in the implementation phase of the project were also an issue for one-half of the respondents. Reluctance among the top levels of the firm to adopt a system presented problems for 43 percent of the firms installing a TMS as senior management and executives questioned the need for or value of these systems." (p. 25 / PDF 9)
 - **Parafrase:** System incompatibility (57 %), implementation delays (50 %), and management resistance (43 %) are the three leading TMS implementation barriers.
 - **Forbehold:** Based on 45 US firms in 2007. Percentage figures should not be presented as current norms; use as illustrative pattern evidence only.
-- **Anvendelse på vårt case:** Disse tre barrierene gjenfinnes i Ressursplanleggers adopsjonssituasjon: integrasjon med faktureringssystemer (Timpex/Trimtex) er uløst, ledelsesforankring er avgjørende, og implementeringsforsinkelserrisiko er reell for SMB-ene i utvalget. Kan brukes som støtte for adopsjonsdiskusjonen i Ch 5.3, men som kontekstuell parallell — ikke som direkte empiri om norske forhold.
+- **Anvendelse på vårt case:** Disse tre barrierene gjenfinnes i Ressursplanleggers adopsjonssituasjon: integrasjon med faktureringssystemer (Timpex/Opter) er uløst, ledelsesforankring er avgjørende, og implementeringsforsinkelserrisiko er reell for SMB-ene i utvalget. Kan brukes som støtte for adopsjonsdiskusjonen i Ch 5.3, men som kontekstuell parallell — ikke som direkte empiri om norske forhold.
 
 ---
 
@@ -82,7 +82,7 @@ Griffis & Goldsby (2007) survey 45 North American firms on their adoption of, ex
 | Shipment | Oppdrag | Kildens analyseenhet; i vår thesis = oppdrag (assignment) med fast tid og sted |
 | Shipment routing | Oppdragstildeling (delvis analogt) | Kilden: hvilken rute å ta; vår thesis: hvilken sjåfør/kjøretøy som utfører oppdraget — ulik semantikk |
 | Load consolidation | (Ingen direkte ekvivalent) | Kilden: slå sammen forsendelser på én bil; vår thesis: multi-ressurs-tildeling — strukturelt likt, semantisk ulikt |
-| Freight payment process | Fakturering | Kildens "payment" = fraktfaktura; dette er det eksisterende norske systemer (Timpex, Trimtex) allerede dekker |
+| Freight payment process | Fakturering | Kildens "payment" = fraktfaktura; dette er det eksisterende norske systemer (Timpex, Opter) allerede dekker |
 | Decision support (operational) | Planleggingsstøtte | Overlappende konsept — begge handler om operasjonell beslutningsstøtte for transportaktiviteter |
 
 ## Forbehold og begrensninger
@@ -90,7 +90,7 @@ Griffis & Goldsby (2007) survey 45 North American firms on their adoption of, ex
 - **Feil domene for direkte bruk:** Kilden handler om fraktstyring fra et avsenderperspektiv (gods fra A til B), ikke om tildeling av sjåfør+kjøretøy til oppdrag. "Transportation management" i kilden er ikke det samme som "ressursplanlegging" i vår thesis. Definisjonen (p. 19) kan siteres for å etablere TMS-kategorien, men kan ikke brukes til å si noe om hva Ressursplanlegger gjør eller ikke gjør.
 - **Utdatert (2007):** TMS-markedet har endret seg betydelig siden 2007. Markedsandeler, adopsjonsrater og funksjonslistene i kilden er ikke representative for 2026-situasjonen. Statistikk fra kilden bør ikke presenteres som gjeldende fakta.
 - **US-kontekst:** 45 nordamerikanske selskaper. Norsk regulatorisk kontekst (kjøre-og-hviletid, tariffavtaler, HMS-krav) er ikke dekket.
-- **Ingen dekning av norske systemer:** Kilden nevner ikke Timpex, Trimtex, Opptur eller lignende norske systemer. Ch 2.3 ¶2 (TMS-landskapet i Norge) må støttes av andre kilder (intervjufunn, fitgap-summary.md).
+- **Ingen dekning av norske systemer:** Kilden nevner ikke Timpex, Opter eller lignende norske systemer. Ch 2.3 ¶2 (TMS-landskapet i Norge) må støttes av andre kilder (intervjufunn, fitgap-summary.md).
 - **MUST CITE-marker i Ch 2.3 ¶1 bekreftet:** Kilden støtter definisjonsformålet i ¶1. ✓
 - **MUST CITE-marker i Ch 2.3 ¶1 for heinbach2022datadriven:** Den andre ¶1-kilden (heinbach2022datadriven) er ikke denne kilden — de to siteres side om side.
 

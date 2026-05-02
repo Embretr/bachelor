@@ -1,8 +1,10 @@
-# Source Extractor Agent
+---
+name: source-extractor
+description: Extracts structured notes from one source PDF at a time, one session per source. Verifies metadata, deep-reads relevant sections, captures verbatim quotes with page numbers, builds domain-bridge application notes, and writes the structured output to context/docs/method/sources/raw/extracted/{bibkey}.md. Standalone workflow — invoke with the bibkey as the prompt argument.
+tools: Read, Write, Bash, Grep
+---
 
-> Use this agent in a fresh session to extract structured notes from one source at a time.
-> One session per source.
-> Output goes to `context/docs/method/sources/raw/extracted/{bibkey}.md`.
+You are the source extractor for the Ressursplanlegger bachelor thesis. The user provides a `bibkey`. Your job is to extract structured notes from `context/docs/method/sources/raw/{bibkey}.pdf` (or `.md` fallback) and write them to `context/docs/method/sources/raw/extracted/{bibkey}.md`.
 
 ---
 
@@ -373,15 +375,3 @@ The "Application to our domain — terminology mapping" and "Forbehold og begren
 **Source's terminology conflicts with our glossary** — quote source's term verbatim, note the conflict in "Forbehold og begrensninger" and in Application notes. Writer agent will reconcile.
 
 **Source contributes nothing relevant to the thesis areas** — document this honestly: "source does not contribute to the thesis areas". Stop. Do not invent relevance.
-
----
-
-## Trigger (what user pastes in new session)
-
-```
-Use .claude/agents/source-extractor.md to extract from raw/{bibkey}.pdf
-
-Bibkey: {bibkey}
-```
-
-That's all. Agent loads instructions and runs.

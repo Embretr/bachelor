@@ -91,8 +91,8 @@ The *Handbook of Constraint Programming* is the canonical research reference wor
 
   > "[A]nother strength was identiﬁed namely the capacity to in a natural and ﬂexible way model the scheduling or planning problem at hand in the required real-life detail. We want to stress that this capacity is becoming more and more important. Indeed through the widespread adoption of ERP (Enterprise Resource Planning) systems, more and more companies have access to the data that allows them to capture the reality in the detail they need." (p. 794 / PDF 103)
 - **Parafrase:** Baptiste et al. argue that the limitation of existing Advanced Planning and Scheduling (APS) systems is not raw solving power but the inability to represent company-specific side constraints. The result is that APS systems solve a simplified problem and produce plans that don't match operational reality. Constraint-based scheduling, by contrast, lets each company's constraints be modelled directly and has unused potential precisely on this dimension.
-- **Forbehold:** The handbook is not transport-specific — "APS" here is the manufacturing-software category, not Norwegian TMS systems like Timpex/Trimtex. The argument about flexibility-vs-oversimplification transfers, but the writer must not over-claim that Baptiste et al. directly characterise Norwegian TMS shortcomings; that anchoring belongs to the interview findings.
-- **Anvendelse på vårt case:** This passage supports Ch 5.1/5.4's argument that Ressursplanlegger's competitive position vs. Timpex/Trimtex/Opptur lies precisely in handling planning with company-specific constraints — the same class of "side constraints" Baptiste et al. flag as the weakness of APS systems. It also supports Ch 2.1 ¶3's framing that configurable soft-constraint weights are a feature, not an engineering convenience.
+- **Forbehold:** The handbook is not transport-specific — "APS" here is the manufacturing-software category, not Norwegian TMS systems like Timpex/Opter. The argument about flexibility-vs-oversimplification transfers, but the writer must not over-claim that Baptiste et al. directly characterise Norwegian TMS shortcomings; that anchoring belongs to the interview findings.
+- **Anvendelse på vårt case:** This passage supports Ch 5.1/5.4's argument that Ressursplanlegger's competitive position vs. Timpex/Opter lies precisely in handling planning with company-specific constraints — the same class of "side constraints" Baptiste et al. flag as the weakness of APS systems. It also supports Ch 2.1 ¶3's framing that configurable soft-constraint weights are a feature, not an engineering convenience.
 
 ## Application to our domain
 
@@ -191,7 +191,7 @@ Ressursplanlegger's three-engine pattern (greedy → CP-SAT → Timefold) is a c
 - **Premiss 3:** CP's modelling vocabulary lets new constraints be added without re-designing the solver (Ch 22.6 conclusion).
 - **Konklusjon:** The CP value proposition for industrial scheduling is flexibility-in-modelling combined with propagation-driven solving, not solely raw optimality.
 - **Sted:** p. 794–795 / PDF 103–104.
-- **Hvilke claims dette støtter:** Ch 2.1 ¶3 (motivates configurable soft-constraint weights), Ch 5.1 / 5.4 (interpretation: why Timpex/Trimtex/Opptur leave the planning gap open).
+- **Hvilke claims dette støtter:** Ch 2.1 ¶3 (motivates configurable soft-constraint weights), Ch 5.1 / 5.4 (interpretation: why Timpex/Opter leave the planning gap open).
 
 ## Examples / case studies kilden bruker
 

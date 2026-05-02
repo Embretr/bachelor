@@ -29,14 +29,7 @@
 
 ## Risk Events (Materialised Risks)
 
-[FILL IN — if any of the risks above occurred, document what happened and how it was handled]
-
-### [DATE] — [Risk ID] Materialised
-
-**What happened:** [FILL IN]
-**Impact on project:** [FILL IN]
-**Response:** [FILL IN]
-**Lesson learned:** [FILL IN]
+No risk in the register above materialised as a discrete event during the project. The risks remain Open as ongoing considerations addressed structurally (HITL preserves coordinator authority for R-01/R-02/R-03; sample-size, deployment, and bias risks R-04/R-05/R-10 are named explicitly as L1–L11 limitations in §5.4; scope and time risks R-06/R-07 were managed by freezing scope in `scope.md` and following the per-section drafting workflow).
 
 ---
 
