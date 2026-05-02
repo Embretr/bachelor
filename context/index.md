@@ -31,6 +31,7 @@
 | File | Content | Load for |
 |------|---------|----------|
 | `context/interviews-summary.md` | Distilled findings from 7 interviews — pain points, ranking, attitudes | Ch 1, 3, 4, 5 |
+| `context/current-practice.md` | How traffic coordinators do resource planning today — workflow, tooling, gaps | Ch 1, 4.1, 4.3, 5.1 |
 | `context/fitgap-summary.md` | Fit/gap analysis comparing current systems to needs | Ch 4.3 |
 | `context/docs/requirements/functional-requirements.md` | Functional requirements (MoSCoW + source) | Ch 4.2 |
 | `context/docs/requirements/non-functional-requirements.md` | Non-functional requirements | Ch 4.2 |
@@ -100,6 +101,7 @@ Files are filled in varying degrees. Use this to know what can be relied upon:
 | `context/scope.md` | ✅ Filled | Needs Embret confirmation |
 | `context/writing-style-examples.md` | ⬜ Empty | Fill after first good section is written |
 | `context/interviews-summary.md` | ✅ Complete | 7 interviews distilled + per-company operational details |
+| `context/current-practice.md` | ✅ Filled | Workflow + gaps in current resource planning, reconstructed from 7 interviews |
 | `context/fitgap-summary.md` | ✅ Filled | 14 gaps, 5 fits, coverage matrix |
 | `context/docs/requirements/functional-requirements.md` | ✅ Filled | 42 requirements with MoSCoW and implementation status |
 | `context/docs/requirements/non-functional-requirements.md` | ✅ Filled | Embret — 9+ NFRs with targets |
