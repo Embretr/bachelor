@@ -1,0 +1,106 @@
+## Evidence Marker Taxonomy
+
+All ¶-plans use these markers. The deterministic checker greps for them. Each marker must be on its own indented line under the ¶.
+
+| Marker | Meaning | Used in |
+|--------|---------|---------|
+| `MUST CITE:` | Academic source TYPE required (foundational textbook, locked theoretical anchor by surname, methodological tradition, etc.). The downstream source-fitting task resolves the type to a specific bib entry plus verified source notes. | Ch 2, 3 |
+| `MUST EVIDENCE:` | Empirical / system evidence TYPE required (interview-derived theme, fit/gap item, architecture documentation, benchmark results, etc.). Resolved to specific extracted-content references at write-time. | Ch 4 |
+| `MUST ANCHOR:` | Must explicitly connect to the RQ, thesis spine, an earlier chapter section, or a locked anchor concept. For Ch 5 sub-sections the value MUST be one of `Effektivitet`, `Tillit/kontroll`, `Tilpasningsdyktighet` verbatim. Synonyms ("kontroll" alone, "fleksibilitet", "skalerbarhet", "human control", "menneskelig overstyring") fail the readiness gate. | Ch 5 (every sub-section); other chapters where structurally relevant |
+| `MUST TRACE:` | Must trace back to a specific section, finding, or limitation. For Ch 6 RQ-answer paragraphs the format is `§5.1.X (<anchor name>)` with the anchor name verbatim. | Ch 6 |
+| `MUST GROUND:` | Must be grounded in a context source — TYPE-described — with detailed evidence delivered later. | Ch 1 |
+
+**Source-independence note (locked):** The current state of `result/references.bib`, `context/docs/method/sources/raw/extracted/`, `context/interviews-summary.md` theme labels, and `context/docs/tech/` is draft. This outline is structured around the locked substance (anchors, RQ, SQs, L1–L12, ChatSSB-derived A-grade pattern, five-layer HITL, §12.0.5 origin map). Sources and evidence are fitted to the structure as a downstream task. Locked theoretical authors may be referenced by surname (Bainbridge, Hoff & Bashir, Miller, Parasuraman, Lee, Hevner, Peffers, Wieringa, Orlikowski & Baroudi, Braun & Clarke, Malterud) — surnames are stable even when bib keys change.
+
+---
+
+**3.5 Iterative Development Process** (~5 pages, NEW/expanded per §8.4 Move 3)
+
+Eight named iterations told as a connected narrative (tried → why → what happened → learned → next). Each iteration carries an inline origin label per §12.0.5 honesty rule.
+
+Opening framing paragraph (~0.4 pages):
+- Introduces the eight iterations as a narrative arc from substrate (§3.5.1) through algorithm depth (§3.5.2–§3.5.4) to operator surface (§3.5.5–§3.5.7) and per-company configurability (§3.5.8). Explains the tried / why / what-happened / learned / next pattern. Includes one sentence noting that iteration boundaries are reconstructed retrospectively from project artefacts and decision points; precise dates and ordering are approximate.
+- Bridges to §3.6 — the iterations describe how the artefact was built; §3.6 describes how the artefact is tested.
+
+Each iteration is a numbered sub-subsection (§3.5.1 through §3.5.8) of approximately 0.55 pages, structured as a six-bullet list with the **Origin** bullet first.
+
+---
+
+**3.5.1 Schema and Timeline Scaffolding**
+
+- **Origin:** Admmit mandate (multi-tenant architecture) + designer-technical exploration (data model + read-only timeline UI)
+- **Tried:** core entity model for employees, vehicles, assignments, certifications, work schedules, and time-off; multi-tenant data isolation enforced at the data layer; read-only Gantt-style timeline UI
+- **Why:** later solver iterations need a structured substrate; the multi-tenant boundary must be enforced at the data layer per Admmit's customer structure
+- **What happened:** substrate adequate for the simplest assignment heuristic but required revision when constraint-solver formalisation surfaced gaps in the data model (explicit time-off windows, certificate-expiry as queryable date)
+- **Learned:** schema-first discipline reduces rework but cannot fully anticipate solver requirements; the substrate is itself an iteration, not a one-shot setup
+- **Next:** with substrate stable, attempt the simplest possible assignment heuristic
+
+**3.5.2 Single-engine Baseline (greedy)**
+
+- **Origin:** designer-technical exploration
+- **Tried:** priority-sorted greedy first-fit assignment heuristic
+- **Why:** instant baseline producing a feasible plan; reference point for richer solvers; instant UI feedback for the coordinator
+- **What happened:** works on small instances; on larger instances priority-sorted greedy commits early to locally optimal but globally suboptimal choices, blocking later assignments and producing avoidable idle time and overtime
+- **Learned:** the greedy ceiling is structural, not a tuning issue — needs constraint propagation and a global view to break out
+- **Next:** introduce a complete solver
+
+**3.5.3 Constraint Generalisation (CP-SAT)**
+
+- **Origin:** designer-technical exploration
+- **Tried:** constraint-programming solver with explicit hard + weighted soft constraints + objective function
+- **Why:** constraint programming is a known fit for assignment problems with complex interaction between hard and soft constraints
+- **What happened:** near-optimal solutions on small to medium instances within a configurable time limit; quality degrades on larger instances when the time limit binds; modelling complexity higher than the heuristic
+- **Learned:** CP-SAT covers the medium-instance gap but introduces a scaling boundary that motivates a third engine
+- **Next:** a third engine for large instances + a way to compare the three
+
+**3.5.4 Multi-engine Selection and Benchmarking**
+
+- **Origin:** designer-technical exploration — operationalises the §12.0.5 "How-not-Of" methodologically independent test
+- **Tried:** pluggable solver registry with three engines (heuristic, complete, metaheuristic); benchmarking framework with synthetic small / medium / large datasets; engine version snapshots for reproducibility
+- **Why:** under realistic constraint combinations, which solver approach best meets Effektivitet? — a how-question independent of whether the visibility gap is real (interviews surface this) or whether HITL is necessary (Admmit mandate)
+- **What happened:** subprocess plumbing complex; reproducibility issues required adding engine-version snapshots after early benchmark results were inconsistent
+- **Learned:** the multi-engine architecture is a comparative test of *how*, not *whether* — Effektivitet measurement, not problem validation. This framing returns in §3.6, §4.5, and §5.1.1.
+  MUST ANCHOR: Effektivitet
+- **Next:** with computation infrastructure stable, build the human-in-the-loop surface
+
+**3.5.5 HITL Surface (drag-and-drop timeline + override flow)**
+
+- **Origin:** Admmit mandate (HITL principle from project start) + interview-driven (drag-drop UI specifically validated by interview-derived consensus on coordinator-led correction) — mixed
+- **Tried:** Gantt-style drag-and-drop assignment UI; explicit accept / modify / reject on every algorithm-generated suggestion; thin post-hoc constraint check (basic feasibility only)
+- **Why:** HITL was Admmit's requirement from project start; interviews validated the necessity through a consensus that the system should suggest a plan the coordinator can correct, not replace the coordinator
+- **What happened:** drag-and-drop functional but state-consistency between optimistic UI updates and server mutations produced occasional stale conflict displays
+- **Learned:** HITL surface needs richer real-time feedback than a thin post-hoc check; coordinator authority is meaningful only when the system surfaces what to act on
+  MUST ANCHOR: Tillit/kontroll
+- **Next:** expand the post-hoc check into a full deviation taxonomy
+
+**3.5.6 Real-time Deviation Detection**
+
+- **Origin:** designer / domain knowledge — extensions of pain points around tacit knowledge but specific deviation categories were not asked about in interviews (per §12.0.5 origin map)
+- **Tried:** post-generation conflict scanner across multiple deviation categories (overbooking, overtime violations, missing competencies, expired certifications, rest-period violations, vehicle maintenance conflicts, night-work conflicts, unavailable-employee assignments); severity levels and status workflow; inline display on the planning timeline plus a dedicated deviations view
+- **Why:** a meaningful HITL surface requires the system to surface *what* the coordinator should override toward — not just an empty timeline they edit blindly
+- **What happened:** false positives where edge-case interactions between work-schedule and time-off produce noisy alerts (week boundaries, mid-shift absences); rest-period violations inherently noisy due to multiple regulatory definitions
+- **Learned:** deviation detection materialises tacit knowledge as structured conflict data — but tuning thresholds is itself a coordination problem the system cannot fully resolve
+- **Next:** with the planning surface and deviation feedback complete, expose the user-facing planning-time control
+
+**3.5.7 User-controlled Plan-time vs Plan-quality Tradeoff**
+
+- **Origin:** designer / Tillit/kontroll refinement — gives the coordinator agency over the planning *process*, not just over plan outcomes
+- **Tried:** user-facing solver-time-budget control — coordinator selects either *fast / less accurate* (heuristic with short time limit) or *slower / more accurate* (constraint solver with longer time limit); the time-quality tradeoff is exposed as a deliberate choice rather than an internal default
+- **Why:** different planning situations have different urgency-quality requirements (a sick-leave replanning under time pressure differs from next-week's planning); coordinator authority over plan generation is a Tillit/kontroll dimension distinct from plan-content override
+- **What happened:** the choice surface itself raises the question of *what the user is choosing between* — bare time labels are not legible; descriptive labels ("fast suggestion" vs "best-effort plan") are clearer but smuggle in claims about quality the system cannot verify per-instance
+- **Learned:** exposing a tradeoff requires explanation as interface (Miller framing) — the time control is itself a small case of explanation-driven HITL design
+  MUST ANCHOR: Tillit/kontroll
+- **Next:** bridge into per-company configurability of *planning rules* (the soft-constraint weight space)
+
+**3.5.8 Configurable Soft-constraint Weights**
+
+- **Origin:** designer / architectural — operationalises the Tilpasningsdyktighet anchor that the project committed to from the start (Admmit-mandated multi-tenant architecture); specific weight set chosen by designers, not interview-validated as the right set
+- **Tried:** per-company weight configuration UI for soft constraints (workload balance, vehicle preference, transitions between consecutive assignments, priority, employee preferences); weights flow into the solver objective function
+- **Why:** interviews confirmed assignment criteria differ materially across companies — Tilpasningsdyktighet means the same artefact must serve materially different operational rules
+- **What happened:** hard to validate that user-chosen weight combinations don't produce degenerate solutions; UX challenge of explaining what each weight means to a coordinator without optimization vocabulary
+- **Learned:** configurability for soft weights is a partial Tilpasningsdyktighet realisation — broader configurability (hard constraints, status workflow) is acknowledged as L4-adjacent and remains future work (cross-references §6.3 + §5.4 L4)
+  MUST ANCHOR: Tilpasningsdyktighet
+- **Next:** with eight iterations of artefact in place, the methodological question is *how* to test whether it meets the locked anchors — bridges into §3.6
+
+---
+

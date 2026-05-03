@@ -1,0 +1,7 @@
+**3.4 Data Analysis** (~1 page)
+
+- ¶1: Thematic analysis — familiarisation, coding, theme generation, review, definition.
+  MUST CITE: Braun & Clarke — thematic analysis
+- ¶2: From themes to requirements — pain points translated into functional requirements via MoSCoW. Fit/gap analysis compared needs against existing systems.
+- ¶3: Methodological constraints — rich but not generalisable; self-selection bias; single-day collection. Limitations of the analysis are catalogued in §5.4 (do not duplicate here).
+

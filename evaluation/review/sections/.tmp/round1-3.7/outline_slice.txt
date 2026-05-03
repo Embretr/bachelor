@@ -1,0 +1,8 @@
+**3.7 Validity and Reliability** (~1 page, trimmed)
+
+- ¶1: Malterud's three criteria — relevance, validity, reflexivity. (NB: source extraction 2026-05-01 confirmed the paper presents exactly three standards, not four. "Systematic critical reflection" does not appear as a standalone criterion in Malterud 2001.)
+  MUST CITE: Malterud — qualitative validity (three criteria: relevance, validity, reflexivity)
+- ¶2: Interview validity — purposive sample, triangulation across interviews, generalisation limits.
+- ¶3: System validity — requirements traceability + algorithm benchmarking. Validation per Wieringa (cited in §3.2 — do not re-cite).
+- ¶4: Researcher bias — dev team = research team; author affiliation with Admmit. Forwarded to §5.4 L3.
+

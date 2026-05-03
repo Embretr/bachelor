@@ -1,0 +1,77 @@
+### §7 Transferable A-Markers
+
+## 7. Transferable A-Markers (for review agents)
+
+When reviewing one of our sections, look for these markers (each present = A-evidence; absent = consider whether intentional):
+
+**Per chapter:**
+- Ch 1: Are 3 anchor concepts named in §1.1 and reused later? Are RQs numbered and discrete?
+- Ch 2: Does every theory subsection open with a definition? Is depth proportional to argumentative importance? Does each theory point reappear in Ch 4 or Ch 5?
+- Ch 3 (our Method): Is there an origin-story paragraph? Is DSRM applied step-by-step? Are iterations named with descriptive titles? Is evaluation a separate sub-section from development?
+- Ch 4 (our Findings): Are findings split by category (e.g. interview / artefact / process)? Is there a DSR artifacts mapping table? Are interview findings stated without interpretation?
+- Ch 5 (our Discussion): Are findings organised under the anchor concepts from Ch 1? Are limitations named as sub-subsections (not buried)? Are deviations from plan explicit? Are recommendations grounded in implementation experience? Are ethics/societal implications a substantive sub-section, not a disclaimer?
+- Ch 6 (our Conclusion): Is each sub-question quoted verbatim and answered discretely in one paragraph? Is Further Work concrete (each item names the limitation it addresses)?
+
+**Cross-chapter:**
+- Forward references in Ch 1 actually pay off in their referenced chapters
+- Backward references close every loop opened in Ch 1
+- The same three anchor concepts appear in Ch 1, Ch 4 evaluation, Ch 5 discussion, and Ch 6 conclusion
+- No theoretical concept is introduced that does not reappear in analysis
+
+---
+
+
+---
+### Reference Method chapter (their Ch4 = our Ch3)
+
+### Chapter 4 (Method, 22 pages — the largest chapter)
+
+**Sub-structure:**
+- §4.1 Defining the Task (origin story — 1.5 pages)
+- §4.2 Method Theory (DSR/DSRM applied — 3 pages)
+- §4.3 Choice of Technologies (4 short sub-subsections — 2 pages)
+- §4.4 Iterative Development Process (NINE NAMED ITERATIONS — 12 pages, the bulk)
+- §4.5 Evaluation (test setup — 3 pages)
+
+**§4.1 Defining the Task — the origin-story move.** Tells how the idea emerged ("the authors' own experience navigating the SSB website"), how the stakeholder was approached ("initiated contact through the organization's general inquiry webpage. After seven days, a response was received"), and how requirements crystallised through that dialogue. **Reads like a story, not a specification.** This is rare and powerful — it makes every later design choice traceable to a real conversation, not an arbitrary decision.
+
+**§4.2 Method Theory.** Defines DSR (citing Hevner, Gregor & Hevner). Names the three foundational cycles (relevance, design, rigor). Briefly contrasts DSR against positivist and interpretivist alternatives — shows they considered alternatives. Then DSRM (Peffers et al.) is given as a structured framework, and **each of the six DSRM steps gets one bullet that applies it to this project specifically**:
+> - Problem Identification and Motivation: The problem was identified through observations that...
+> - Objectives of a Solution: In consultation with SSB architects requirements for efficiency, stability, and security were defined.
+> - Design and Development: A web application supporting user interaction was developed...
+
+**This applied-bullet pattern is the single most copyable A-grade move.** It converts methodology theory into a verifiable mapping to the actual work. (See §8.4 for how to import this.)
+
+**§4.3 Choice of Technologies.** One sub-subsection per major technology, each 1–4 sentences. Format: name → what it is → why it was chosen for THIS project. No deep dives; the deep dives live in Ch 3.
+
+**§4.4 Iterative Development Process — nine named iterations.**
+
+The names tell the story: 4.4.1 *All at Once* → 4.4.2 *From Query to Data* → 4.4.3 *Enhance Functionality While Maintaining Simplicity* → 4.4.4 *Absolute Constraints* → 4.4.5 *Tentatively Comparing LLMs* → 4.4.6 *Coming to Terms with LLM's Volatility* → 4.4.7 *Leveraging Language and Creating New Context* → 4.4.8 *A New Approach to Navigation* → 4.4.9 *Retry on Failure*.
+
+Each iteration follows the same micro-structure:
+1. What was tried (concrete: a specific approach with code listing or schema)
+2. Why it was tried (the hypothesis)
+3. What happened (positive results AND limitations)
+4. What was learned and what came next (the bridge to the next iteration)
+
+**The narrative is honest about failure.** §4.4.1 explicitly says: "This approach had several major flaws. Mainly, the sheer volume of unprocessed data overwhelmed the capabilities of the 4o-mini model, often resulting in hallucinated outputs." Failure is described, attributed to a cause, and used to motivate the next iteration.
+
+**§4.5 Evaluation.** Distinct from §4.4. Sets up the **evaluation framework**: techniques vs. configurations (a key conceptual distinction); benchmark question design; controlled test environment. This is *how* the artefact is evaluated, separate from *how* it was built. Includes the user-test design (participant recruitment, environment, question selection, expected favourabilities per question).
+
+
+---
+## Cross-chapter A-markers (source: ChatSSB 2025)
+
+Structural patterns observed in a verified A-grade NTNU CS bachelor (Reference: `evaluation/reference-thesis-analysis.md`). Reviewers MUST check these eight patterns when assessing the thesis as a whole.
+
+1. **Three locked anchors threaded from Ch 1 to Ch 6** — Effektivitet, Tillit/kontroll, Tilpasningsdyktighet are defined verbatim in Ch 1.2, used to organise Discussion §5.1, and named in each Conclusion RQ-answer paragraph. Synonyms anywhere are flagged as critical drift.
+2. **Origin story in Method §3.1** grounding design choices in Admmit's mandate and the team's stakeholder dialogue with seven coordinators.
+3. **Named iterations with descriptive titles** in Method §3.5 development section — at minimum four iterations, each with tried / why / what happened / learned / next, and an inline origin label.
+4. **Hierarchical limitations in Discussion §5.4** — three named sub-subsections (Empirical L1–L4, Validation L5–L9, Conceptual L10–L12), each L# a named paragraph, not a buried sentence.
+5. **Deviations from Plan section** in Discussion §5.5 making plan-vs-reality differences explicit. Most theses hide deviations; A-grade work surfaces them.
+6. **Self-critical Methodology Reflection** in Discussion §5.6 naming an actual weak spot in the method, not a perfunctory acknowledgment.
+7. **Conclusion that quotes each SQ verbatim** as a block quote and answers discretely in one paragraph each, with no new material.
+8. **Forward references in Ch 1 paid off in their target chapter; backward references in Ch 5/6 closing loops opened in Ch 1.** The thesis reads as a single argument, not a sequence of independent chapters.
+
+---
+

@@ -46,7 +46,7 @@ Norwegian transport companies operate without systematic visibility into resourc
 Resource scheduling under utilization-oriented constraints, a five-layer human-in-the-loop theory (Parasuraman's automation taxonomy, Bainbridge's operator-vs-owner framing, Hoff and Bashir's trust-calibration model, Miller's explanation-as-interface, and Lee and See's trust foundation), and Design Science Research provide the theoretical foundation; vehicle routing theory is referenced only to delimit and TMS-as-category is used to position the gap the artefact fills.
 
 **Chapter 3 — Methodology:**
-A Design Science Research process applied through Peffers' six DSRM activities — anchored in the project's origin in Admmit's bachelor task, semi-structured interviews with seven traffic coordinators contacted on the team's own initiative, four to six named iterations of the artefact, and a separate evaluation framework that benchmarks solver approaches under realistic constraint combinations — establishes how the research was conducted.
+A Design Science Research process applied through Peffers' six DSRM activities — anchored in the project's origin in Admmit's bachelor task, semi-structured interviews with seven traffic coordinators contacted on the team's own initiative, eight named iterations of the artefact, and a separate evaluation framework that benchmarks solver approaches under realistic constraint combinations — establishes how the research was conducted.
 
 **Chapter 4 — Findings:**
 Interview themes surface the resource-utilization visibility gap and the operator-vs-owner asymmetry that makes it a finding worth surfacing, and Ressursplanlegger embodies the locked design qualities as a Next.js + tRPC + PostgreSQL platform with a multi-engine solver layer (greedy / OR-Tools CP-SAT / Timefold) and a human-in-the-loop drag-and-drop timeline, with a DSR Artifacts mapping linking each project artefact to its category.
@@ -69,7 +69,7 @@ Each sub-question is quoted verbatim and answered in a single paragraph tied to 
 
 ## Spine Status: APPROVED DRAFT
 
-Last revised: 2026-05-02. Updated Ch 2 sentence to five-layer HITL (Parasuraman + Bainbridge + Hoff & Bashir + Miller + Lee) to match `context/outline.md` §2.2 and the drafted `result/chapters/ch2/ch2-theory.tex`; reworded TMS-as-category clause from "delimit" to "position the gap" to match what §2.3 actually does.
+Last revised: 2026-05-02. Ch 3 sentence updated from "four to six named iterations" to "eight named iterations" to match the chapter scaffold (§3.5.1–§3.5.8) and §3.1 ¶4 prose. Earlier same-day revision: updated Ch 2 sentence to five-layer HITL (Parasuraman + Bainbridge + Hoff & Bashir + Miller + Lee) to match `context/outline.md` §2.2 and the drafted `result/chapters/ch2/ch2-theory.tex`; reworded TMS-as-category clause from "delimit" to "position the gap" to match what §2.3 actually does.
 Previous revision 2026-04-30: Sharpened RQ + locked anchor concepts (Effektivitet / Tillit/kontroll / Tilpasningsdyktighet) + revised sub-questions reflecting operator-vs-owner asymmetry per `evaluation/reference-thesis-analysis.md` §12.0–§12.0.7. Bainbridge (1983) added as theoretical anchor for HITL discussion.
 Review again after Chapter 4 is drafted — if findings shift the argument, update the spine before writing Chapter 5.
 

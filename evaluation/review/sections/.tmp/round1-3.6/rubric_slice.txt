@@ -1,0 +1,69 @@
+### Chapter 3 — Methodology
+
+**An A methodology chapter:**
+- **Origin story (§X.1):** Opens with a paragraph naming how the project began — Admmit's bachelor task, the team's own initiative in contacting coordinators, HITL as Admmit mandate from project start (validated by interviews, not introduced by them). Reads as a story, not a specification.
+- **DSRM applied step-by-step:** Method Theory section maps Peffers' six DSRM activities to this specific project, one bullet per activity. Each bullet is 2–4 sentences naming what was actually done. (See `evaluation/reference-thesis-analysis.md` §11.5 for format.)
+- **Named iterations (4–6):** Iterative Development Process contains at least four named iterations with descriptive titles (e.g., *Single-engine baseline*, *Constraint generalisation*, *Multi-engine selection*). Each iteration follows tried / why / what happened (positive AND limitations) / learned / next. Honest about failure. Each iteration carries an inline origin label (interview-driven / Admmit mandate / designer-technical) per §12.0.5.
+- **Evaluation framework separate from validity:** A dedicated sub-section describes how the artefact is tested (synthetic dataset design, multi-engine "How-not-Of" benchmark) — distinct from Validity and Reliability which addresses the research's epistemic limits.
+- Research paradigm is stated and justified in one clear paragraph — not just named
+- DSR is connected to Ressursplanlegger explicitly: the artefact, the evaluation, the iteration
+- Interview methodology is described precisely enough that it could be replicated
+- Participant selection is justified: why these 7 companies, why traffic coordinators specifically
+- Validity and reliability section is honest: acknowledges self-selection bias, small sample, and author affiliation with Admmit
+- Every methodological choice has a "because" — not just "we chose semi-structured interviews"
+
+**Red flags that signal B or lower:**
+- DSR is described generically without connecting it to this specific project
+- "7 interviews were conducted" without explaining how companies were selected
+- No discussion of validity or limitations of the method
+- System development process is absent or described as a sprint diary
+
+
+---
+## Cross-Chapter A Criteria
+
+
+These apply to the thesis as a whole:
+
+**Argument coherence:**
+- The thesis spine (context/thesis-spine.md) is traceable chapter by chapter
+- No chapter contradicts another
+- The conclusion follows logically from the findings and discussion
+
+**Citation quality:**
+- Primary sources preferred over secondary sources
+- No citation for a claim that is common knowledge in the domain
+- No claim left uncited that requires support
+- Every citation in text appears in references.bib
+
+**Language:**
+- No hedging that weakens claims that have evidence ("it seems to be", "could possibly")
+- No overclaiming that goes beyond evidence ("proves that", "definitively shows")
+- No passive voice used to hide agency where agency matters ("mistakes were made")
+- Consistent use of glossary.md terminology throughout
+
+**Academic integrity:**
+- All quotes are in quotation marks with page number
+- Paraphrased content is cited
+- The system is not described as solving problems it was not tested against
+
+---
+
+
+---
+## Cross-chapter A-markers (source: ChatSSB 2025)
+
+
+Structural patterns observed in a verified A-grade NTNU CS bachelor (Reference: `evaluation/reference-thesis-analysis.md`). Reviewers MUST check these eight patterns when assessing the thesis as a whole.
+
+1. **Three locked anchors threaded from Ch 1 to Ch 6** — Effektivitet, Tillit/kontroll, Tilpasningsdyktighet are defined verbatim in Ch 1.2, used to organise Discussion §5.1, and named in each Conclusion RQ-answer paragraph. Synonyms anywhere are flagged as critical drift.
+2. **Origin story in Method §3.1** grounding design choices in Admmit's mandate and the team's stakeholder dialogue with seven coordinators.
+3. **Named iterations with descriptive titles** in Method §3.5 development section — at minimum four iterations, each with tried / why / what happened / learned / next, and an inline origin label.
+4. **Hierarchical limitations in Discussion §5.4** — three named sub-subsections (Empirical L1–L4, Validation L5–L9, Conceptual L10–L12), each L# a named paragraph, not a buried sentence.
+5. **Deviations from Plan section** in Discussion §5.5 making plan-vs-reality differences explicit. Most theses hide deviations; A-grade work surfaces them.
+6. **Self-critical Methodology Reflection** in Discussion §5.6 naming an actual weak spot in the method, not a perfunctory acknowledgment.
+7. **Conclusion that quotes each SQ verbatim** as a block quote and answers discretely in one paragraph each, with no new material.
+8. **Forward references in Ch 1 paid off in their target chapter; backward references in Ch 5/6 closing loops opened in Ch 1.** The thesis reads as a single argument, not a sequence of independent chapters.
+
+---
+

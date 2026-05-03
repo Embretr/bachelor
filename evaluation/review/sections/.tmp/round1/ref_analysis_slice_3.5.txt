@@ -1,0 +1,149 @@
+## 7. Transferable A-Markers (for review agents)
+
+When reviewing one of our sections, look for these markers (each present = A-evidence; absent = consider whether intentional):
+
+**Per chapter:**
+- Ch 1: Are 3 anchor concepts named in §1.1 and reused later? Are RQs numbered and discrete?
+- Ch 2: Does every theory subsection open with a definition? Is depth proportional to argumentative importance? Does each theory point reappear in Ch 4 or Ch 5?
+- Ch 3 (our Method): Is there an origin-story paragraph? Is DSRM applied step-by-step? Are iterations named with descriptive titles? Is evaluation a separate sub-section from development?
+- Ch 4 (our Findings): Are findings split by category (e.g. interview / artefact / process)? Is there a DSR artifacts mapping table? Are interview findings stated without interpretation?
+- Ch 5 (our Discussion): Are findings organised under the anchor concepts from Ch 1? Are limitations named as sub-subsections (not buried)? Are deviations from plan explicit? Are recommendations grounded in implementation experience? Are ethics/societal implications a substantive sub-section, not a disclaimer?
+- Ch 6 (our Conclusion): Is each sub-question quoted verbatim and answered discretely in one paragraph? Is Further Work concrete (each item names the limitation it addresses)?
+
+**Cross-chapter:**
+- Forward references in Ch 1 actually pay off in their referenced chapters
+- Backward references close every loop opened in Ch 1
+- The same three anchor concepts appear in Ch 1, Ch 4 evaluation, Ch 5 discussion, and Ch 6 conclusion
+- No theoretical concept is introduced that does not reappear in analysis
+
+---
+
+
+---
+## Reference-thesis Method-chapter pattern (their Ch 4 = our Ch 3, §3.5 iteration narrative is the analog of their §4.4)
+
+### Chapter 4 (Method, 22 pages — the largest chapter)
+
+**Sub-structure:**
+- §4.1 Defining the Task (origin story — 1.5 pages)
+- §4.2 Method Theory (DSR/DSRM applied — 3 pages)
+- §4.3 Choice of Technologies (4 short sub-subsections — 2 pages)
+- §4.4 Iterative Development Process (NINE NAMED ITERATIONS — 12 pages, the bulk)
+- §4.5 Evaluation (test setup — 3 pages)
+
+**§4.1 Defining the Task — the origin-story move.** Tells how the idea emerged ("the authors' own experience navigating the SSB website"), how the stakeholder was approached ("initiated contact through the organization's general inquiry webpage. After seven days, a response was received"), and how requirements crystallised through that dialogue. **Reads like a story, not a specification.** This is rare and powerful — it makes every later design choice traceable to a real conversation, not an arbitrary decision.
+
+**§4.2 Method Theory.** Defines DSR (citing Hevner, Gregor & Hevner). Names the three foundational cycles (relevance, design, rigor). Briefly contrasts DSR against positivist and interpretivist alternatives — shows they considered alternatives. Then DSRM (Peffers et al.) is given as a structured framework, and **each of the six DSRM steps gets one bullet that applies it to this project specifically**:
+> - Problem Identification and Motivation: The problem was identified through observations that...
+> - Objectives of a Solution: In consultation with SSB architects requirements for efficiency, stability, and security were defined.
+> - Design and Development: A web application supporting user interaction was developed...
+
+**This applied-bullet pattern is the single most copyable A-grade move.** It converts methodology theory into a verifiable mapping to the actual work. (See §8.4 for how to import this.)
+
+**§4.3 Choice of Technologies.** One sub-subsection per major technology, each 1–4 sentences. Format: name → what it is → why it was chosen for THIS project. No deep dives; the deep dives live in Ch 3.
+
+**§4.4 Iterative Development Process — nine named iterations.**
+
+The names tell the story: 4.4.1 *All at Once* → 4.4.2 *From Query to Data* → 4.4.3 *Enhance Functionality While Maintaining Simplicity* → 4.4.4 *Absolute Constraints* → 4.4.5 *Tentatively Comparing LLMs* → 4.4.6 *Coming to Terms with LLM's Volatility* → 4.4.7 *Leveraging Language and Creating New Context* → 4.4.8 *A New Approach to Navigation* → 4.4.9 *Retry on Failure*.
+
+Each iteration follows the same micro-structure:
+1. What was tried (concrete: a specific approach with code listing or schema)
+2. Why it was tried (the hypothesis)
+3. What happened (positive results AND limitations)
+4. What was learned and what came next (the bridge to the next iteration)
+
+**The narrative is honest about failure.** §4.4.1 explicitly says: "This approach had several major flaws. Mainly, the sheer volume of unprocessed data overwhelmed the capabilities of the 4o-mini model, often resulting in hallucinated outputs." Failure is described, attributed to a cause, and used to motivate the next iteration.
+
+**§4.5 Evaluation.** Distinct from §4.4. Sets up the **evaluation framework**: techniques vs. configurations (a key conceptual distinction); benchmark question design; controlled test environment. This is *how* the artefact is evaluated, separate from *how* it was built. Includes the user-test design (participant recruitment, environment, question selection, expected favourabilities per question).
+
+
+---
+
+## Cross-chapter A-markers (source: ChatSSB 2025)
+
+Structural patterns from a verified A-grade NTNU CS bachelor:
+- Three locked anchors threaded from Ch 1 through to Ch 6 — synonyms are flagged
+- Origin story in Method §X.1 grounding design choices in stakeholder dialogue
+- Named iterations with descriptive titles in the development section
+- Limitations as named sub-subsections, each analysed for impact
+- Deviations section making plan-vs-reality differences explicit
+- Conclusion that quotes each RQ verbatim and answers discretely
+- Forward references in Ch 1 that pay off in their target chapter
+- Backward references in Ch 5/6 that close loops opened in Ch 1
+```
+
+### 8.6 — `evaluation/evaluation.md`
+
+For each chapter checklist, add a verifier item:
+
+```
+- [ ] Anchor reference: this chapter references the three anchors (Effektivitet, Tillit/kontroll, Tilpasningsdyktighet) where the spine requires it. Specifically:
+  - Ch 1: all three are defined verbatim
+  - Ch 5: each Primary Findings sub-section is named after exactly one anchor
+  - Ch 6: each RQ answer connects back to the anchor it serves
+```
+
+Synonyms or paraphrases of anchor names are checklist failures.
+
+### 8.7 — `.claude/agents/writer.md`
+
+Add a "Required cross-chapter coherence checks" section near the top:
+
+```
+Before producing your section, verify:
+
+1. Anchor reference — does this section reference one of the three locked anchors (Effektivitet, Tillit/kontroll, Tilpasningsdyktighet) where the spine requires it? In Ch 1 you are DEFINING them; in Ch 5/Ch 6 you must ORGANISE findings under them. Use the locked names verbatim — no synonyms.
+2. Theory→use trace — if introducing a theoretical concept, plan where it reappears in analysis. If it does not reappear, do not introduce it.
+3. Forward/backward links — explicit cross-references where the spine demands.
+```
+
+### 8.8 — `.claude/agents/red-thread.md`
+
+Add to the existing checklist:
+
+```
+- Does each section reference an anchor concept (using the locked name verbatim) where the spine requires it?
+- Are forward references made in earlier chapters paid off in later ones?
+- Are backward references in Ch 5/6 closing loops opened in Ch 1?
+- Are limitations in Ch 5 named as sub-subsections (not buried in paragraphs)?
+- Does the Conclusion quote each sub-question verbatim and answer discretely?
+```
+
+### 8.9 — `.claude/agents/quality.md`
+
+Add a "Reference-thesis A-markers" section pointing to `evaluation/reference-thesis-analysis.md` §7. Instruct the reviewer to score whether the section under review exhibits the relevant patterns from that list and to flag drift from the locked anchor names as a critical issue.
+
+### 8.10 — `.claude/skills/write-section/SKILL.md`
+
+In Step 1c (the readiness gate), extend the existing `MUST ANCHOR` check so that:
+- The marker's anchor tag must match one of the three locked anchor names verbatim. A `MUST ANCHOR` pointing to a synonym, paraphrase, or unknown concept is a hard fail.
+- For Ch 5 sections: each sub-section must have a `MUST ANCHOR` marker tied to exactly one of the three anchors.
+- For Ch 6 sections: each RQ-answer paragraph must have a `MUST TRACE` marker pointing to the originating Ch 5 sub-section AND naming the anchor.
+
+In Step 5 (review agents), add `evaluation/reference-thesis-analysis.md` §7 to the files-loaded list for Agent 1 (coherence) and Agent 2 (quality).
+
+This change is scoped to existing marker syntax — no new parsers needed.
+
+### 8.11 — `CLAUDE.md`
+
+Add a new entry under "Critical Workflow Rules":
+
+```
+### 4. Anchor Concept Coherence
+
+The three anchor concepts (Effektivitet, Tillit/kontroll, Tilpasningsdyktighet) defined in `context/thesis-spine.md` are the spine of the thesis argument.
+
+- Ch 1 MUST define them verbatim
+- Ch 5 MUST organise its Primary Findings under them (one sub-section per anchor)
+- Ch 6 MUST connect each RQ answer to the anchor it serves
+- Other chapters MUST reference at least one where structurally relevant
+
+Drift from the locked names — synonyms ("kontroll" alone, "fleksibilitet", "skalerbarhet") or paraphrases — is a critical issue. Reviewers must flag drift; writers must use the locked names verbatim.
+```
+
+### 8.12 — One-time outline audit (after locking anchors)
+
+Do a one-pass review of `context/outline.md` to ensure every section's ¶-plan that needs an anchor has a `MUST ANCHOR` marker pointing to the right one. ~30 minutes. Must happen BEFORE writing Ch 5 or Ch 6 — those chapters depend most on anchor coherence.
+
+---
+

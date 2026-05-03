@@ -210,6 +210,11 @@ Files to read:
 
 ---
 
+SECTION-SPECIFIC CALIBRATION (optional — only if the section needs guidance not derivable from outline + lessons-learned + writer.md):
+{≤5 bullets, ≤300 words. Each bullet must be a fact specific to this section that the writer cannot derive from the loaded files alone — e.g. "the appendix referenced in outline ¶3 does not exist yet — phrase as working-notes pointer", or "§3.1 already established Admmit / multi-tenant origin; do not re-introduce". Do NOT use this block to repeat writer.md rules (no em-dash / no we-believe / actor-term consistency / bridges between paragraphs / "every choice has a because"), rubric criteria, lessons-learned rules, or BIB_SLICE constraints — those are loaded directly. If you find yourself repeating any of those, delete the bullet.}
+
+---
+
 {If mode == revise:}
 REVISE MODE: read the previous review files and fix the issues raised, preserving what works:
 - evaluation/review/sections/ch{N}-{X.Y}-round{R-1}-coherence.md
@@ -222,7 +227,7 @@ ISSUES TO FIX:
 {Paste consolidated critical issues from Step 6.5}
 ```
 
-The writer's system prompt handles output format (LaTeX only, starts with \section{}), source rules, anchor rules, glossary discipline, paragraph discipline, and self-check. The orchestrator does not repeat them.
+The writer's system prompt handles output format (LaTeX only, starts with \section{}), source rules, anchor rules, glossary discipline, paragraph discipline, and self-check. The orchestrator does not repeat them. The SECTION-SPECIFIC CALIBRATION block is the ONLY inline-guidance channel; if it grows past five bullets, the orchestrator is duplicating standing rules and must trim before spawning the writer.
 
 ## Step 3: SAVE
 
@@ -259,6 +264,7 @@ Check for:
    - Within target range → PASS (silent)
    - Within ±20 % of target → INFO (logged, not warning)
    - Outside ±20 % → WARNING with target, actual, deviation. Do NOT hard fail. Cutting good content for length is worse than overshooting.
+   - **Chapter-3 calibration:** Ch 3 method sections inflate by 30–60 % over outline target by design — the rubric demand "every methodological choice has a because" + the lessons-learned "decisions without rationale" check together require a why-clause on every choice, which the outline page-targets do not absorb. For any §3.x section, raise the silent-INFO band to ±50 % and only emit WARNING above +50 %. Apply the same calibration to any other section type whose rubric explicitly demands rationale-per-decision.
    - If outline has no target → skip silently, do not invent a target.
 
 ### Citation Density Listing
@@ -526,34 +532,16 @@ A finding is **SECTION-SPECIFIC** (→ leave in the round file, do not surface) 
 
 GENERALISABLE → propose adding as permanent rule in lessons-learned.md ({K} candidates)
 
-  1. PROPOSED RULE: {one-line rule headline, ≤ 80 chars}                       [{src}]
+  1. {one-line rule headline, ≤ 80 chars}                              [{src}]
+     why:   {1 sentence — what changes in writing if this rule is enforced}
+     scope: § {target heading in lessons-learned.md} → {sections affected, e.g. §2.2, §5.1.2}
 
-     What it means in practice:
-       {2–3 sentence concrete explanation in plain language — what would change
-       in writing if this rule was enforced. Use a tiny before/after example
-       where it helps the user grasp it.}
-
-     What the reviewer flagged:
-       "{verbatim quote from reviewer JSON, ≤ 200 chars; trim to the part that
-       triggered this candidate}"
-
-     If you approve:
-       Added under § {target heading in lessons-learned.md}. Will be enforced on
-       {specific sections — e.g. §2.2, §5.1.2, §6.2} and checked by writer +
-       both reviewers on every future /write-section run touching {scope}.
-
-  2. PROPOSED RULE: {headline}                                                  [{src}]
-
-     What it means in practice:
-       {explanation}
-
-     What the reviewer flagged:
-       "{verbatim quote}"
-
-     If you approve:
-       Added under § {heading}. Will be enforced on {scope}.
+  2. {headline}                                                        [{src}]
+     why:   {1 sentence}
+     scope: § {heading} → {sections}
 
   → reply: y N  |  n N  |  y all  |  n all  |  edit N  |  detail N
+  (use `detail N` for the verbatim reviewer quote and full proposed entry)
 
 ─────────────────────────────────────────
 

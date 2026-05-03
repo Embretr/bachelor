@@ -6,6 +6,44 @@
 
 ---
 
+## 2026-05-03 — Five-fix bundle after §3.3 review (8 minor issues, 2 regressions of documented rules)
+
+**Triggered by:** §3.3 round 1 surfaced 11 minor issues across both reviewers. Two were regressions of documented lessons-learned rules (term-drift line 120, bridges line 174), three were new generalisable patterns now promoted, six were section-specific. Root-cause analysis identified five workflow leaks.
+
+**Status:** APPLIED 2026-05-03 (user instruction "ja fiks alle 5").
+
+**Changes:**
+
+1. **`.claude/skills/write-section/SKILL.md` Step 2 USER_MESSAGE template** — added a `SECTION-SPECIFIC CALIBRATION` block with hard caps (≤5 bullets, ≤300 words) and explicit "do not repeat writer.md / lessons-learned / rubric / BIB_SLICE rules" instruction. Reason: §3.3 brief had 9 CRITICAL CONSTRAINTS, ~4 of which were repetition of standing rules — competing for writer attention with section-specific calibration.
+
+2. **`.claude/skills/write-section/SKILL.md` Step 4 length check** — added Chapter-3 calibration: silent-INFO band raised to ±50 % for §3.x sections, since the rubric "every methodological choice has a because" + the lessons-learned "decisions without rationale" check together inflate Ch 3 sections by 30–60 % over outline page-targets. Reason: §3.2 +30 %, §3.3 +65 % both produced length warnings that were flagged as "defensible" — the warning is structurally noise.
+
+3. **`.claude/agents/section-coherence.md` + `.claude/agents/section-quality.md`** — added "Regression escalation rule (HARD)": findings within the agent's domain that match a documented `lessons-learned.md` rule (same chapter scope / source key / paragraph type / named pattern) escalate to `severity: critical, fixable: true` regardless of how minor the local instance feels. Triggers auto-revise instead of silently shipping. Reason: §3.3 shipped as `drafted-reviewed` despite repeating two documented rules.
+
+4. **`evaluation/review/lessons-learned.md`** — added top-level Index (by chapter, by source key, by paragraph type) so writer/reviewer can scan applicable rules without reading the whole file. The "When to apply" prose per rule is preserved unchanged. Reason: lessons-learned grew to ~13 rules; topic-sorted format makes "what applies HERE" hard to extract.
+
+5. **`.claude/agents/section-coherence.md` + `.claude/agents/section-quality.md`** — added explicit "Domain ownership" lists. Coherence owns terminology/bridges/structure/spine/evidence-markers/theory-tracker. Quality owns rubric/depth/source-integration/definition/technical-depth/naturalness/anchor-drift. Quality must NOT add structure findings to `issues[]` — only mention in `notes` for cross-validation. Reason: both reviewers flagged term-drift and bridges in §3.3, inflating issue count and creating dedup work.
+
+**Why this improves output:**
+
+- (1) keeps writer attention on section-specific calibration instead of repeating already-loaded rules.
+- (2) eliminates structurally-expected length warnings that were noise, not signal.
+- (3) regressions of documented rules now block ship, forcing one R2 polish pass instead of letting the pattern recur in future sections.
+- (4) reduces lessons-learned scan time; rules stay enforceable without growing the file's read cost linearly.
+- (5) eliminates duplicate minor flags between reviewers; cleaner harvest, faster decisions.
+
+**Risk assessment:**
+
+- (1) writer might miss legitimate section-specific guidance if orchestrator over-trims. Mitigation: the SKILL.md note allows up to 5 bullets when genuinely section-specific.
+- (2) Ch 3 sections might genuinely overshoot by 70 %+; warning still fires above +50 %.
+- (3) regression escalation may fire on borderline matches. Mitigation: rule body says "Exception: if the rule's 'When to apply' scope explicitly excludes this section, do not escalate."
+- (4) index needs maintenance when rules are added/removed. Process note added to file header.
+- (5) one structural issue might glip past coherence and not be re-flagged by quality. Mitigation: quality still mentions in `notes`, and the chapter-redthread agent will catch chapter-level structural drift later.
+
+**Test:** next `/write-section` run will exercise all five changes. Re-run `/write-section 3.4` (next in writing order) to verify.
+
+---
+
 ## How This Works
 
 After every task, Claude:

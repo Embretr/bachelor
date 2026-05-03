@@ -1,0 +1,10 @@
+@book{wieringa2014dsm,
+  author    = {Wieringa, Roel J.},
+  title     = {Design Science Methodology for Information Systems and Software Engineering},
+  publisher = {Springer},
+  address   = {Berlin},
+  year      = {2014},
+  doi       = {10.1007/978-3-662-43839-8},
+  isbn      = {978-3-662-43838-1}
+}
+

@@ -1,0 +1,86 @@
+@article{miller2019explanation,
+  author  = {Miller, Tim},
+  title   = {Explanation in Artificial Intelligence: Insights from the Social Sciences},
+  journal = {Artificial Intelligence},
+  year    = {2019},
+  volume  = {267},
+  pages   = {1--38},
+  doi     = {10.1016/j.artint.2018.07.007}
+}
+
+@article{bainbridge1983ironies,
+  author  = {Bainbridge, Lisanne},
+  title   = {Ironies of Automation},
+  journal = {Automatica},
+  year    = {1983},
+  volume  = {19},
+  number  = {6},
+  pages   = {775--779},
+  doi     = {10.1016/0005-1098(83)90046-8}
+}
+
+@article{hoff2015trust,
+  author  = {Hoff, Kevin Anthony and Bashir, Masooda},
+  title   = {Trust in Automation: Integrating Empirical Evidence on Factors That Influence Trust},
+  journal = {Human Factors},
+  year    = {2015},
+  volume  = {57},
+  number  = {3},
+  pages   = {407--434},
+  doi     = {10.1177/0018720814547570}
+}
+
+@article{hevner2004design,
+  author  = {Hevner, Alan R. and March, Salvatore T. and Park, Jinsoo and Ram, Sudha},
+  title   = {Design Science in Information Systems Research},
+  journal = {MIS Quarterly},
+  year    = {2004},
+  volume  = {28},
+  number  = {1},
+  pages   = {75--105},
+  doi     = {10.2307/25148625}
+}
+
+@article{peffers2007dsrm,
+  author  = {Peffers, Ken and Tuunanen, Tuure and Rothenberger, Marcus A. and Chatterjee, Samir},
+  title   = {A Design Science Research Methodology for Information Systems Research},
+  journal = {Journal of Management Information Systems},
+  year    = {2007},
+  volume  = {24},
+  number  = {3},
+  pages   = {45--77},
+  doi     = {10.2753/MIS0742-1222240302}
+}
+
+@book{wieringa2014dsm,
+  author    = {Wieringa, Roel J.},
+  title     = {Design Science Methodology for Information Systems and Software Engineering},
+  publisher = {Springer},
+  address   = {Berlin},
+  year      = {2014},
+  doi       = {10.1007/978-3-662-43839-8},
+  isbn      = {978-3-662-43838-1}
+}
+
+@book{pinedo2016scheduling,
+  author    = {Pinedo, Michael L.},
+  title     = {Scheduling: Theory, Algorithms, and Systems},
+  edition   = {5},
+  publisher = {Springer},
+  address   = {Cham},
+  year      = {2016},
+  doi       = {10.1007/978-3-319-26580-3},
+  isbn      = {978-3-319-26578-0}
+}
+
+@article{parasuraman2000automation,
+  author  = {Parasuraman, Raja and Sheridan, Thomas B. and Wickens, Christopher D.},
+  title   = {A Model for Types and Levels of Human Interaction with Automation},
+  journal = {IEEE Transactions on Systems, Man, and Cybernetics---Part A: Systems and Humans},
+  year    = {2000},
+  volume  = {30},
+  number  = {3},
+  pages   = {286--297},
+  doi     = {10.1109/3468.844354}
+}
+

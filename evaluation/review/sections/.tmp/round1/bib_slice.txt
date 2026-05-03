@@ -1,0 +1,11 @@
+@article{braun2006thematic,
+  author  = {Braun, Virginia and Clarke, Victoria},
+  title   = {Using Thematic Analysis in Psychology},
+  journal = {Qualitative Research in Psychology},
+  year    = {2006},
+  volume  = {3},
+  number  = {2},
+  pages   = {77--101},
+  doi     = {10.1191/1478088706qp063oa}
+}
+

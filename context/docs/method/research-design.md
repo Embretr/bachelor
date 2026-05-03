@@ -55,7 +55,7 @@ The DSR process follows Peffers et al. (2007) six activities, applied to *this* 
 - **Date:** Single day, March 2026.
 - **Format:** Phone calls, recorded.
 - **Duration:** Approximately 15 minutes per call. Total cumulative interview time: roughly 105 minutes across the seven companies.
-- **Transcription:** Automated transcription via Sonix.ai with manual review and correction of segments used for analysis.
+- **Transcription:** Automated transcription with manual review and correction of segments used for analysis.
 - **Interview guide structure:** Five themes — current tools/workflow, assignment criteria, sick-leave handling, automation attitudes, adoption criteria. Open questions within each theme.
 - **Honest framing:** Brief duration (~15 min) means the interviews surfaced themes but cannot support deep methodological claims. The framing is *exploratory stakeholder consultation as DSRM Step 1 input*, not full Kvale-style interview craft.
 
@@ -82,8 +82,6 @@ The DSR process follows Peffers et al. (2007) six activities, applied to *this* 
 - **Informed consent:** Consent was implicit through participants agreeing to take the call and answer questions. No formal consent form was administered. Recording was conducted without an explicit consent step before recording began. *This is an honest limitation; flagged in §5.4 L3 (researcher–developer overlap and informal study procedures).*
 - **Anonymisation:** No formal anonymisation protocol was applied. Only Timpex and Opter (vendors, not customers) are named as real Norwegian TMS in the thesis. The seven interviewed companies are referenced generically (size, sector, system maturity) without naming.
 - **Data storage:** Recordings and transcriptions are stored locally on the project author's device. Access is limited to the project author and supervisor. All recordings and transcriptions will be deleted after thesis submission and grading.
-- **Use of transcription tools:** Sonix.ai was used for automated transcription. Recordings are uploaded to Sonix's cloud infrastructure for processing; this was not explicitly disclosed to participants at the time of recording. *Acknowledged as a procedural limitation; flagged in §5.4 L3.*
-
 ---
 
 ## System Development Approach
