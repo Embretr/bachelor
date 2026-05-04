@@ -81,7 +81,7 @@ Content-driven, not marker-driven. Project-specific factual claims (interview th
 - **Marker:** `MUST GROUND: scope-of-system summary (in-scope features as cross-cutting design qualities)`
 - **Triage:** INTERNAL (`context/scope.md`, `context/context.md`)
 
-### §1.2 ¶¶1–3 — Anchor concept definitions (Effektivitet / Tillit/kontroll / Tilpasningsdyktighet)
+### §1.2 ¶¶1–3 — Anchor concept definitions (Efficiency / Trust/control / Adaptability)
 - **Marker:** `MUST GROUND: anchor-concept definitions from thesis-spine.md (verbatim)`
 - **Triage:** INTERNAL (`context/thesis-spine.md`, `context/glossary.md`)
 
@@ -121,8 +121,8 @@ Content-driven, not marker-driven. Project-specific factual claims (interview th
 - **Marker:** none
 - **Triage:** NO-CITATION (the paragraph applies §2.1 ¶1 vocabulary to Ressursplanlegger; the supporting citation is already on ¶1).
 
-### §2.1 ¶3 — Utilization framing (Effektivitet preload)
-- **Marker:** `MUST ANCHOR: Effektivitet (preload via §2.1 → §5.1.1)`
+### §2.1 ¶3 — Utilization framing (Efficiency preload)
+- **Marker:** `MUST ANCHOR: Efficiency (preload via §2.1 → §5.1.1)`
 - **Triage:** NO-CITATION external; INTERNAL anchor (`context/thesis-spine.md`).
 
 ### §2.1 ¶4 — Hard and soft constraints; CP foundations
@@ -170,7 +170,7 @@ Content-driven, not marker-driven. Project-specific factual claims (interview th
 - **Recommendation:** **KEEP** `parasuraman2000automation` — Scholar's #1 and #2 are derivative works that explicitly cite Parasuraman 2000. The 2000 paper is the foundational taxonomy reference (also incorporates the Sheridan 1978 10-level scale via Table I). Locked anchor confirmed canonical.
 
 ### §2.2 ¶2 — Bainbridge operator-vs-owner asymmetry
-- **Marker:** `MUST CITE: Bainbridge — operator-vs-owner asymmetry (theoretical anchor for HITL)` + `MUST ANCHOR: Tillit/kontroll` **[LOCKED]**
+- **Marker:** `MUST CITE: Bainbridge — operator-vs-owner asymmetry (theoretical anchor for HITL)` + `MUST ANCHOR: Trust/control` **[LOCKED]**
 - **Search:** `ironies of automation operator`
   - **Top 1:** Bainbridge (1983) — "Ironies of Automation" (in Elsevier book *Analysis, design and evaluation of man–machine systems*).
   - **Top 2:** Strauch (2017) — "Ironies of automation: Still unresolved after all these years" (IEEE).
@@ -327,10 +327,10 @@ Content-driven, not marker-driven. Project-specific factual claims (interview th
 ### §3.5 — Iterative Development Process (eight named iterations)
 - **Triage:** Each iteration's bullets (Origin / Tried / Why / What happened / Learned / Next) are INTERNAL — project-specific narrative grounded in `context/docs/project/sprint-log.md`, `context/docs/project/decision-log.md`, and the `evaluation/reference-thesis-analysis.md §12.0.5` origin map.
 - **Anchor-only markers:**
-  - §3.5.4 `MUST ANCHOR: Effektivitet` — INTERNAL (spine reference, no Scholar pass needed).
-  - §3.5.5 `MUST ANCHOR: Tillit/kontroll` — INTERNAL.
-  - §3.5.7 `MUST ANCHOR: Tillit/kontroll` — INTERNAL. The Miller framing in the "Learned" bullet ("exposing a tradeoff requires explanation as interface (Miller framing)") is a *re-cite* of `miller2019explanation` from §2.2 ¶4 — KEEP, no new search.
-  - §3.5.8 `MUST ANCHOR: Tilpasningsdyktighet` — INTERNAL.
+  - §3.5.4 `MUST ANCHOR: Efficiency` — INTERNAL (spine reference, no Scholar pass needed).
+  - §3.5.5 `MUST ANCHOR: Trust/control` — INTERNAL.
+  - §3.5.7 `MUST ANCHOR: Trust/control` — INTERNAL. The Miller framing in the "Learned" bullet ("exposing a tradeoff requires explanation as interface (Miller framing)") is a *re-cite* of `miller2019explanation` from §2.2 ¶4 — KEEP, no new search.
+  - §3.5.8 `MUST ANCHOR: Adaptability` — INTERNAL.
 
 ### §3.5 opening framing paragraph — "iterations as a narrative arc"
 - **Triage:** NO-CITATION. **DROP-implication for `larman2003iterative` and `beck2001manifesto`** — both currently in the bib but the §3.5 framing is project-specific and does not invoke iterative-development theory. See DROP candidates below.
@@ -339,7 +339,7 @@ Content-driven, not marker-driven. Project-specific factual claims (interview th
 
 ### §3.6 — Evaluation Framework
 - **¶1 `MUST EVIDENCE: §12.0.5 Findings stance — How-not-Of framing`** — INTERNAL.
-- **¶2 `MUST ANCHOR: Effektivitet, Tillit/kontroll, Tilpasningsdyktighet`** — INTERNAL anchor.
+- **¶2 `MUST ANCHOR: Efficiency, Trust/control, Adaptability`** — INTERNAL anchor.
 - **¶3 `MUST EVIDENCE: synthetic dataset design rationale`** — INTERNAL (`context/docs/tech/benchmark-results.md`).
 - **¶4 `MUST EVIDENCE: requirements traceability matrix`** — INTERNAL (`context/docs/requirements/requirements-traceability.md`).
 - **¶5 — what evaluation does NOT test** — NO-CITATION (forward to §5.4).
@@ -380,7 +380,7 @@ Content-driven, not marker-driven. Project-specific factual claims (interview th
 - **Triage:** INTERNAL (`context/docs/tech/architecture.md`, `tech-stack.md`, `flow-diagrams.md`, `codebase-overview.md`).
 
 ### §4.5 ¶1 — How-not-Of framing
-- **Marker:** `MUST ANCHOR: Effektivitet (preload via §4.5 → §5.1.1)`
+- **Marker:** `MUST ANCHOR: Efficiency (preload via §4.5 → §5.1.1)`
 - **Triage:** INTERNAL anchor.
 
 ### §4.5 ¶¶2,4,5,6 — Problem formulation / hard+soft constraints / objective function / known limitations
@@ -415,19 +415,19 @@ Content-driven, not marker-driven. Project-specific factual claims (interview th
 
 ## Chapter 5 — Discussion
 
-### §5.1.1 — Effektivitet (sub-section)
-- **¶1 `MUST ANCHOR: Effektivitet` + `MUST EVIDENCE: visibility-gap interview theme`** — anchor + INTERNAL (interviews).
+### §5.1.1 — Efficiency (sub-section)
+- **¶1 `MUST ANCHOR: Efficiency` + `MUST EVIDENCE: visibility-gap interview theme`** — anchor + INTERNAL (interviews).
 - **¶2 `MUST CITE: Bainbridge — operator-vs-owner asymmetry`** **[LOCKED]** — re-cite of `bainbridge1983ironies`. KEEP (canonical confirmation from §2.2 ¶2 search applies).
 - **¶3 — three utilization dimensions** — INTERNAL anchor.
 - **¶4 — multi-engine benchmark as How-not-Of test** — INTERNAL trace to §3.6 / §3.5.4.
 
-### §5.1.2 — Tillit/kontroll (sub-section)
-- **¶1 `MUST ANCHOR: Tillit/kontroll` + `MUST CITE: Bainbridge — operator authority over override`** **[LOCKED]** — re-cite `bainbridge1983ironies`. KEEP.
+### §5.1.2 — Trust/control (sub-section)
+- **¶1 `MUST ANCHOR: Trust/control` + `MUST CITE: Bainbridge — operator authority over override`** **[LOCKED]** — re-cite `bainbridge1983ironies`. KEEP.
 - **¶2 `MUST CITE: Hoff & Bashir — trust calibration`** **[LOCKED]** — re-cite `hoff2015trust`. KEEP.
 - **¶3 `MUST CITE: Miller — explanation as interface`** **[LOCKED]** — re-cite `miller2019explanation`. KEEP. **Optional add:** `amershi2019guidelines` as a complementary practical-design reference (currently in bib but not explicitly used; see §2.2 note).
 - **¶4 — tacit knowledge / inspect/modify/accept/reject** — INTERNAL anchor. (No external citation; the four-action operationalisation is grounded in `context/glossary.md` and `context/thesis-spine.md`.)
 
-### §5.1.3 — Tilpasningsdyktighet (sub-section)
+### §5.1.3 — Adaptability (sub-section)
 - **All paragraphs** — INTERNAL anchor + INTERNAL evidence (interview cross-company variation, soft-constraint weight artefact).
 
 ---
@@ -634,7 +634,7 @@ These are exactly the claims that the IS-adoption literature (TAM, UTAUT) addres
 
 #### Gap 4 — Configurable mechanism across organisations (§5.1.3 ¶3)
 
-§5.1.3 ¶3 names "Configurable soft-constraint weights as the technical mechanism" — the central technical claim of the Tilpasningsdyktighet anchor. Software-product-line and multi-tenant SaaS variability literature is the natural anchor. Currently 0 sources.
+§5.1.3 ¶3 names "Configurable soft-constraint weights as the technical mechanism" — the central technical claim of the Adaptability anchor. Software-product-line and multi-tenant SaaS variability literature is the natural anchor. Currently 0 sources.
 
 **Search:** `software product line variability configurability multi-tenant`
 - **Top 1:** Mietzner, Metzger, Leymann et al. (2009) — "Variability modeling to support customization and deployment of multi-tenant-aware software as a service applications" (ICSE Workshop).

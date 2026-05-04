@@ -58,7 +58,7 @@ Sub-questions (each designed to be quotable verbatim as a single-line block quot
 2. **SQ2** — *How can an algorithm-assisted planning system be designed so that automated optimisation improves resource utilization while remaining operable and overridable by the traffic coordinator?*
 3. **SQ3** — *To what extent and under what limitations does Ressursplanlegger demonstrate measurable improvement in resource utilization?*
 
-The thesis argument turns on three locked **anchor concepts** — **Effektivitet**, **Tillit/kontroll**, **Tilpasningsdyktighet** — defined in `context/thesis-spine.md` and `context/glossary.md`. Anchor names are Norwegian compound terms used as proper nouns in English prose; never translated, never split. The theoretical anchor for the human-in-the-loop stance is Bainbridge (1983), *Ironies of Automation*: demand for automation is articulated by owners, not by the operators who must run the system.
+The thesis argument turns on three locked **anchor concepts** — **Efficiency**, **Trust/control**, **Adaptability** — defined in `context/thesis-spine.md` and `context/glossary.md`. Anchor names are locked English proper nouns used consistently across the thesis; never re-translated to Norwegian, never split, never paraphrased. The theoretical anchor for the human-in-the-loop stance is Bainbridge (1983), *Ironies of Automation*: demand for automation is articulated by owners, not by the operators who must run the system.
 
 ---
 
@@ -68,7 +68,7 @@ The thesis distinguishes between *primary operator* (the user who must run the s
 
 | Role | Stakeholder position | Description | System access |
 |---|---|---|---|
-| **Traffic coordinator (trafikkleder)** | **Primary operator** | Primary daily user. Plans daily assignments, handles sick-leave replacements, manages driver/vehicle allocation. Uses the system multiple times per day. Must retain authority over individual assignment decisions (Tillit/kontroll). | Full access to planning interface, algorithm, manual override |
+| **Traffic coordinator (trafikkleder)** | **Primary operator** | Primary daily user. Plans daily assignments, handles sick-leave replacements, manages driver/vehicle allocation. Uses the system multiple times per day. Must retain authority over individual assignment decisions (Trust/control). | Full access to planning interface, algorithm, manual override |
 | **Transport manager / company owner** | **Primary demand-side stakeholder** | Articulates the resource-utilization optimization need. Reviews utilisation statistics, approves plans, monitors deviations. Uses the system weekly or at key decision points. | Dashboard, reports, oversight views |
 | **Admin** | Operational support | Manages company settings, users, and invitations. | Settings, user management (admin panel not yet built) |
 | **Driver (sjåfør)** | Subject of plan | Receives assignments. Planned to have a dedicated page showing their schedule and assigned tasks. | Own page — planned, not yet implemented |

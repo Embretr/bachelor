@@ -11,15 +11,15 @@
 
 The thesis argument turns on three named concepts. Every chapter must reference at least one. Discussion (Ch 5) and Conclusion (Ch 6) MUST organise findings under them.
 
-**Convention:** Anchor names are Norwegian compound terms used as proper nouns in English prose — never translated, never split (e.g. "Tillit/kontroll" is the unit, not "Tillit" alone). Synonyms ("kontroll" alone, "fleksibilitet", "skalerbarhet", "human control", "menneskelig overstyring") drift the spine and must be flagged by reviewers.
+**Convention:** Anchor names are locked English proper nouns used consistently across the thesis — never re-translated to Norwegian, never split, never paraphrased (e.g. "Trust/control" is the unit, not "control" alone). Synonyms ("effektivitet", "tillit/kontroll", "tilpasningsdyktighet", "fleksibilitet", "skalerbarhet", "human control", "operator oversight", "trust calibration") drift the spine and must be flagged by reviewers.
 
-**Effektivitet**
+**Efficiency**
 Improved resource utilization across three concrete dimensions: reduced overtime, reduced idle time between assignments, and reduced uneven load between drivers (load balancing). Secondary: reduced time spent on the planning activity itself. Visibility into current utilization is the precondition for optimization — the system's primary value is making invisible utilization patterns legible to the coordinator and the company.
 
-**Tillit/kontroll**
+**Trust/control**
 The traffic coordinator's ability to inspect, modify, accept, or reject any algorithm-generated assignment. Trust and control are inseparable in this thesis: trust is built through demonstrable control. Use the compound term verbatim — never split into "Tillit" or "kontroll" alone, and never substitute "menneskelig overstyring" or "human oversight".
 
-**Tilpasningsdyktighet**
+**Adaptability**
 Capacity of the system to function meaningfully across companies with materially different operational rules, fleet composition, and assignment criteria. Distinct from "skalerbarhet" (which concerns volume). Expressed technically through configurable soft-constraint weights and per-company assignment rules.
 
 ---
@@ -35,6 +35,9 @@ The structural pattern in which demand for an algorithm-assisted system is artic
 ---
 
 ## Core System Terms
+
+**Ressursplanlegger (RP)**
+The artefact built and investigated in this thesis: an algorithm-assisted planning platform on which an algorithm proposes daily driver-plus-vehicle assignment plans and a traffic coordinator decides which of those plans take effect. **Thesis prose convention:** the full name "Ressursplanlegger" is introduced once at the first prose mention (currently Ch 2 §preamble; will move to Ch 1 once that chapter is drafted) as "Ressursplanlegger (hereafter RP)", and the abbreviation "RP" is used in all subsequent body prose. Section labels, code identifiers, and the title page keep the full name. Context files (this glossary, the spine, the outline) keep the full name as the canonical term.
 
 **Assignment (Oppdrag)**
 A transport job with a defined origin, destination, time window, vehicle requirement, and driver competence requirement. The atomic unit of planning in Ressursplanlegger.
@@ -125,7 +128,7 @@ An IS research stance treating organisational reality as socially constructed an
 The Unified Theory of Acceptance and Use of Technology (Venkatesh et al. 2003) — the canonical IS-adoption model integrating performance expectancy, effort expectancy, social influence, and facilitating conditions across organisational contexts. Used in §5.1.3 ¶1 and §5.2 ¶1 to frame cost / benefit thresholds for adoption that vary across the seven interviewed companies — different fleet sizes, different operational rules, different willingness-to-pay translate into different facilitating conditions. Distinct from the older TAM (Davis 1989), which UTAUT subsumes.
 
 **Multi-tenant variability (configurability)**
-The capability of a single deployed software instance to serve organisations with materially different operational rules through configuration rather than code changes. Theoretical anchor: Mietzner et al. (2009), variability modelling for multi-tenant SaaS. Operationalised in Ressursplanlegger via per-company soft-constraint weights (§3.5.8). The technical mechanism behind the Tilpasningsdyktighet anchor — distinct from Tilpasningsdyktighet itself, which is the *capacity* the mechanism realises (configurability is the means; Tilpasningsdyktighet is the end).
+The capability of a single deployed software instance to serve organisations with materially different operational rules through configuration rather than code changes. Theoretical anchor: Mietzner et al. (2009), variability modelling for multi-tenant SaaS. Operationalised in Ressursplanlegger via per-company soft-constraint weights (§3.5.8). The technical mechanism behind the Adaptability anchor — distinct from Adaptability itself, which is the *capacity* the mechanism realises (configurability is the means; Adaptability is the end).
 
 ---
 

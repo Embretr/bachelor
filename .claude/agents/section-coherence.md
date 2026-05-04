@@ -87,15 +87,15 @@ The thesis-source set is locked. BIB_SLICE is exhaustive for what this section m
 
 ### Anchor coherence (HARD CHECK — locked names verbatim)
 
-The three locked anchor concepts are **Effektivitet, Tillit/kontroll, Tilpasningsdyktighet** — Norwegian compound terms used as proper nouns in English prose, never translated, never split.
+The three locked anchor concepts are **Efficiency, Trust/control, Adaptability** — locked English proper nouns used consistently across the thesis, never re-translated to Norwegian, never split, never paraphrased.
 
-- Find every occurrence of any anchor name. Are they spelled verbatim? Flag any drift: "kontroll" alone, "Tillit" alone, "fleksibilitet", "skalerbarhet", "human control", "menneskelig overstyring", "operator oversight", "trust calibration", or any English translation ("Efficiency", "Trust/control", "Adaptability"). Each drift is a critical issue.
+- Find every occurrence of any anchor name. Are they spelled verbatim? Flag any drift: "effektivitet", "tillit/kontroll", "tilpasningsdyktighet", "control" alone, "trust" alone, "fleksibilitet", "skalerbarhet", "human control", "menneskelig overstyring", "operator oversight", "trust calibration", or any other paraphrase. Each drift is a critical issue.
 - Find every concept that *should* trigger an anchor reference but does not:
   - Ch 1 §1.2: all three anchors must be defined verbatim. Any missing → critical.
   - Ch 5 §5.1: every sub-section must be named after exactly one anchor. Any sub-section that mixes two anchors or uses none → critical.
   - Ch 6 §6.2: each SQ-answer paragraph must name the anchor it serves. Any answer missing an anchor reference → critical.
-  - Other chapters: any paragraph discussing utilization (overtime, idle time, load balance) without naming Effektivitet; any paragraph discussing override/control without naming Tillit/kontroll; any paragraph discussing cross-company adaptability without naming Tilpasningsdyktighet → critical.
-- **"Accountable to coordinator"** check: any occurrence of "accountable", "oversight", "human control", "supervision" in connection with the system must be operationalised concretely as the four actions defined under Tillit/kontroll: **inspect, modify, accept, or reject**. Vague control language is a critical issue.
+  - Other chapters: any paragraph discussing utilization (overtime, idle time, load balance) without naming Efficiency; any paragraph discussing override/control without naming Trust/control; any paragraph discussing cross-company adaptability without naming Adaptability → critical.
+- **"Accountable to coordinator"** check: any occurrence of "accountable", "oversight", "human control", "supervision" in connection with the system must be operationalised concretely as the four actions defined under Trust/control: **inspect, modify, accept, or reject**. Vague control language is a critical issue.
 
 ### Chapter-type-specific questions — answer the ones for Chapter {N}
 

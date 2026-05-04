@@ -11,9 +11,9 @@
 
 Three locked anchor concepts (defined in `context/glossary.md` and `context/thesis-spine.md`) shape Ressursplanlegger as **cross-cutting design qualities** — not features but qualities every in-scope feature must satisfy. Each is referenced verbatim throughout the thesis; no synonyms.
 
-- **Effektivitet** — every in-scope feature must contribute to making resource utilization visible and improvable along three dimensions: overtime, idle time between assignments, and uneven driver load.
-- **Tillit/kontroll** — every algorithm-generated artefact must be inspectable, modifiable, acceptable, or rejectable by the traffic coordinator. **Note:** Human-in-the-loop is an explicit Admmit mandate from project start, not a finding derived from interviews. The seven interviews validated the necessity but did not introduce the requirement.
-- **Tilpasningsdyktighet** — every assignment-related rule (hard or soft constraint, weight, status workflow) must be configurable per company. Multi-company commercial deployment (SaaS) is itself out of scope (see Out of Scope), but the architecture supports per-company configurability.
+- **Efficiency** — every in-scope feature must contribute to making resource utilization visible and improvable along three dimensions: overtime, idle time between assignments, and uneven driver load.
+- **Trust/control** — every algorithm-generated artefact must be inspectable, modifiable, acceptable, or rejectable by the traffic coordinator. **Note:** Human-in-the-loop is an explicit Admmit mandate from project start, not a finding derived from interviews. The seven interviews validated the necessity but did not introduce the requirement.
+- **Adaptability** — every assignment-related rule (hard or soft constraint, weight, status workflow) must be configurable per company. Multi-company commercial deployment (SaaS) is itself out of scope (see Out of Scope), but the architecture supports per-company configurability.
 
 ---
 

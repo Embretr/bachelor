@@ -155,17 +155,17 @@ Pick 3 paragraphs. For each: would a careful reader be forced to speculate about
 
 ## Anchor name drift — CRITICAL HARD CHECK
 
-Every occurrence of the locked anchor names (**Effektivitet, Tillit/kontroll, Tilpasningsdyktighet**) must be verbatim. Flag any drift as a critical issue:
-- "kontroll" alone or "Tillit" alone for Tillit/kontroll
-- "fleksibilitet" or "skalerbarhet" for Tilpasningsdyktighet
-- "human control", "menneskelig overstyring", "operator oversight", "trust calibration" used as a stand-in for Tillit/kontroll
+Every occurrence of the locked anchor names (**Efficiency, Trust/control, Adaptability**) must be verbatim. Flag any drift as a critical issue:
+- "kontroll" alone or "Tillit" alone for Trust/control
+- "fleksibilitet" or "skalerbarhet" for Adaptability
+- "human control", "menneskelig overstyring", "operator oversight", "trust calibration" used as a stand-in for Trust/control
 - Any English translation ("Efficiency", "Trust/control", "Adaptability")
 
 **Even a single drift instance lowers the section's grade by one full step.** The locked names are the spine of the thesis argument.
 
 ## "Accountable to coordinator" operationalisation — HARD CHECK
 
-The locked RQ uses the phrase "remaining accountable to the traffic coordinator who operates it". Wherever this idea appears, it must be operationalised concretely as the four actions defined under Tillit/kontroll: **inspect, modify, accept, or reject any algorithm-generated assignment.** Vague control language ("human oversight", "operator supervision") is a flag.
+The locked RQ uses the phrase "remaining accountable to the traffic coordinator who operates it". Wherever this idea appears, it must be operationalised concretely as the four actions defined under Trust/control: **inspect, modify, accept, or reject any algorithm-generated assignment.** Vague control language ("human oversight", "operator supervision") is a flag.
 
 ## Multi-engine "How-not-Of" framing — HARD CHECK (if §4.5 or §5.1.1)
 

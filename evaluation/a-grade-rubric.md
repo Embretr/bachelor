@@ -28,7 +28,7 @@
 ### Chapter 1 — Introduction
 
 **An A introduction:**
-- **Anchor coherence:** Names the three anchor concepts (Effektivitet, Tillit/kontroll, Tilpasningsdyktighet) verbatim in §1.2 with brief definitions; these exact names recur in Discussion and Conclusion without synonyms.
+- **Anchor coherence:** Names the three anchor concepts (Efficiency, Trust/control, Adaptability) verbatim in §1.2 with brief definitions; these exact names recur in Discussion and Conclusion without synonyms.
 - **Visibility-gap opening:** First paragraph leads with a concrete Norwegian transport-sector fact and the resource-utilization visibility gap, not generic preamble ("the transport sector's role in Norway", "in today's digital world").
 - States the problem in one crisp sentence — what, for whom, and why it matters — in the first paragraph
 - Motivates the problem with concrete evidence (scale, cost, or observed inefficiency), not just assertion
@@ -50,7 +50,7 @@
 **An A theory chapter:**
 - **Asymmetric depth and use-trace:** The most argument-load-bearing theory gets the most space (HITL section dominates given the three-layer Bainbridge / Hoff & Bashir / Miller treatment); secondary concepts get under one page; every theoretical concept introduced reappears in Findings or Discussion.
 - **Three-layer HITL:** §2.2 layers Bainbridge (operator-vs-owner asymmetry, irony of automation) → Hoff & Bashir (trust-calibration model) → Miller (explanation as interface), alongside existing Parasuraman taxonomy and Lee trust foundation.
-- **Utilization framing:** §2.1 frames resource scheduling under the utilization lens (overtime, idle time, load balance), not just as constraint satisfaction — preloading the Discussion's Effektivitet sub-section.
+- **Utilization framing:** §2.1 frames resource scheduling under the utilization lens (overtime, idle time, load balance), not just as constraint satisfaction — preloading the Discussion's Efficiency sub-section.
 - Every theory presented is directly connected to a specific design decision or finding in the thesis
 - Resource scheduling formulation is precise: problem structure (multi-resource assignment with constraints), why this characterisation fits the domain, and how it differs from adjacent problems (e.g., VRP focuses on sequencing, not assignment)
 - Existing systems (TMS) are positioned against Ressursplanlegger as category — Timpex and Opter named by name; other interviewed companies use internal/custom tools. Neither Timpex nor Opter generates assignment plans automatically
@@ -112,7 +112,7 @@
 ### Chapter 5 — Discussion
 
 **An A discussion chapter:**
-- **Anchor-organised primary findings:** §5.1 contains exactly three sub-sections, one per locked anchor (5.1.1 Effektivitet, 5.1.2 Tillit/kontroll, 5.1.3 Tilpasningsdyktighet). Anchor names are used verbatim — no synonyms ("kontroll" alone, "fleksibilitet", "skalerbarhet", "human control"). Each sub-section has a `MUST ANCHOR` marker tied to exactly one anchor.
+- **Anchor-organised primary findings:** §5.1 contains exactly three sub-sections, one per locked anchor (5.1.1 Efficiency, 5.1.2 Trust/control, 5.1.3 Adaptability). Anchor names are used verbatim — no synonyms ("kontroll" alone, "fleksibilitet", "skalerbarhet", "human control"). Each sub-section has a `MUST ANCHOR` marker tied to exactly one anchor.
 - **Operator-vs-owner asymmetry framed inside §5.1.1:** The asymmetry is the interpretive frame for the visibility-gap finding — owners demand utilization optimization, coordinators do not articulate this need themselves. Bainbridge's *ironies of automation* is cited here.
 - **Three-layer HITL applied in §5.1.2:** Bainbridge frames operator authority over override; Hoff & Bashir's dimensional model of trust antecedents explains how trust forms over use; Miller motivates explanation/transparency as a design requirement.
 - **Hierarchical limitations (L1–L12), each named:** §5.4 contains three named sub-subsections — Empirical Foundation (L1, L2, L3, L4), Validation and Artefact (L5–L9), Conceptual and Methodological (L10, L11, L12). Each L# is a named paragraph or `\paragraph{}`, not a buried sentence. An L#-to-SQ mapping appears at the top of §5.4.
@@ -181,7 +181,7 @@ These apply to the thesis as a whole:
 
 Structural patterns observed in a verified A-grade NTNU CS bachelor (Reference: `evaluation/reference-thesis-analysis.md`). Reviewers MUST check these eight patterns when assessing the thesis as a whole.
 
-1. **Three locked anchors threaded from Ch 1 to Ch 6** — Effektivitet, Tillit/kontroll, Tilpasningsdyktighet are defined verbatim in Ch 1.2, used to organise Discussion §5.1, and named in each Conclusion RQ-answer paragraph. Synonyms anywhere are flagged as critical drift.
+1. **Three locked anchors threaded from Ch 1 to Ch 6** — Efficiency, Trust/control, Adaptability are defined verbatim in Ch 1.2, used to organise Discussion §5.1, and named in each Conclusion RQ-answer paragraph. Synonyms anywhere are flagged as critical drift.
 2. **Origin story in Method §3.1** grounding design choices in Admmit's mandate and the team's stakeholder dialogue with seven coordinators.
 3. **Named iterations with descriptive titles** in Method §3.5 development section — at minimum four iterations, each with tried / why / what happened / learned / next, and an inline origin label.
 4. **Hierarchical limitations in Discussion §5.4** — three named sub-subsections (Empirical L1–L4, Validation L5–L9, Conceptual L10–L12), each L# a named paragraph, not a buried sentence.

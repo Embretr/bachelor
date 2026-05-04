@@ -110,20 +110,20 @@ All NTNU supervisor directives are logged in `context/docs/project/supervisor-fe
 
 The three anchor concepts defined in `context/thesis-spine.md` and `context/glossary.md` are the spine of the thesis argument:
 
-- **Effektivitet** — improved resource utilization (overtime, idle time, load balance)
-- **Tillit/kontroll** — coordinator's ability to inspect, modify, accept, or reject any algorithm-generated assignment
-- **Tilpasningsdyktighet** — capacity to function meaningfully across companies with different operational rules
+- **Efficiency** — improved resource utilization (overtime, idle time, load balance)
+- **Trust/control** — coordinator's ability to inspect, modify, accept, or reject any algorithm-generated assignment
+- **Adaptability** — capacity to function meaningfully across companies with different operational rules
 
-These are **Norwegian compound terms used as proper nouns in English prose** — never translated, never split. Where the spine demands them:
+These are **English proper nouns used consistently across the thesis** — never re-translated to Norwegian, never split, never replaced with synonyms. Where the spine demands them:
 
 - **Ch 1 §1.2** MUST define all three verbatim
-- **Ch 5 §5.1** MUST organise its Primary Findings under them (one sub-section per anchor: 5.1.1 Effektivitet, 5.1.2 Tillit/kontroll, 5.1.3 Tilpasningsdyktighet)
+- **Ch 5 §5.1** MUST organise its Primary Findings under them (one sub-section per anchor: 5.1.1 Efficiency, 5.1.2 Trust/control, 5.1.3 Adaptability)
 - **Ch 6 §6.2** MUST connect each SQ-answer paragraph to the anchor it serves
 - **Other chapters** MUST reference at least one anchor where structurally relevant
 
-**Drift from the locked names is a critical issue.** Synonyms — "kontroll" alone, "fleksibilitet", "skalerbarhet", "human control", "menneskelig overstyring", "operator oversight", "trust calibration", or any English translation — must be flagged by reviewers and refused by writers. The `/write-section` readiness gate (Step 1c in `.claude/skills/write-section/SKILL.md`) hard-fails on synonym drift in MUST ANCHOR markers.
+**Drift from the locked names is a critical issue.** Synonyms — "effektivitet", "tillit/kontroll", "tilpasningsdyktighet", "fleksibilitet", "skalerbarhet", "control" alone, "human control", "operator oversight", "trust calibration", or any other paraphrase — must be flagged by reviewers and refused by writers. The locked terms are exactly: **Efficiency**, **Trust/control**, **Adaptability**. The `/write-section` readiness gate (Step 1c in `.claude/skills/write-section/SKILL.md`) hard-fails on synonym drift in MUST ANCHOR markers.
 
-**The phrase "accountable to the traffic coordinator"** in the research question must always be operationalised in prose by the four concrete actions defined under Tillit/kontroll: inspect, modify, accept, or reject. Vague control language ("human oversight", "operator supervision") is forbidden.
+**The phrase "accountable to the traffic coordinator"** in the research question must always be operationalised in prose by the four concrete actions defined under **Trust/control**: inspect, modify, accept, or reject. Vague control language ("human oversight", "operator supervision") is forbidden.
 
 **Theoretical anchor for HITL**: Bainbridge (1983) *Ironies of Automation* (`bainbridge1983ironies`). Where Human-in-the-Loop is theorised or discussed, layer Bainbridge (operator-vs-owner asymmetry) with Hoff & Bashir 2015 (trust calibration) and Miller 2019 (explanation as interface).
 
@@ -199,7 +199,7 @@ Do not propose trivial changes (spelling, formatting) — only changes that affe
 - Change the research question — use it verbatim from `context/context.md`
 - Run the writer and reviewers in the same context — they are spawned as independent subagents on purpose
 - Make changes that do not improve the thesis grade
-- **Translate or split anchor names** — Effektivitet, Tillit/kontroll, Tilpasningsdyktighet are Norwegian proper-nouns in English prose. Never write "Efficiency", "Trust/control", "Adaptability", "kontroll" alone, "fleksibilitet", "skalerbarhet"
+- **Replace, split, or paraphrase anchor names** — the locked English proper nouns are **Efficiency**, **Trust/control**, **Adaptability**. Never write the old Norwegian forms ("Effektivitet", "Tillit/kontroll", "Tilpasningsdyktighet"), never split the slash compound ("control" alone), and never paraphrase ("efficiency gains", "operator oversight", "fleksibilitet", "skalerbarhet")
 - **Reference Trimtex or Opptur** as Norwegian transport management systems — they are factual errors (frequent transcription confusions for Timpex and Opter respectively). Only **Timpex** and **Opter** are real Norwegian TMS named in the interview pool; other interviewed companies use internal/custom tools described generically. Neither Timpex nor Opter generates assignment plans automatically — both are order/invoicing tools
 
 ---

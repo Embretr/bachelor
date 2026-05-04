@@ -112,7 +112,7 @@ Locked surnames (Hevner, Peffers, Wieringa) all confirmed as the right anchors.
 | **¶1 (supplement)** | **Malterud, K. (2012). Systematic text condensation: a strategy for qualitative analysis. *Scandinavian Journal of Public Health*, 40(8), 795–805.** | Highly cited | Optional companion if the analysis approach borrows from systematic text condensation rather than pure Braun & Clarke TA. |
 
 > §3.2 (DSR / DSRM) cites the same Hevner / Peffers / Wieringa triplet as §2.4. Do not duplicate.
-> §3.5 iteration narrative is empirical and self-grounding — no external citations needed beyond §3.5.4's `MUST ANCHOR: Effektivitet` (which traces, not cites).
+> §3.5 iteration narrative is empirical and self-grounding — no external citations needed beyond §3.5.4's `MUST ANCHOR: Efficiency` (which traces, not cites).
 > §3.6 Evaluation framework: Wieringa (2014) covers validation-vs-evaluation; do not re-cite if already in §3.2.
 
 ---

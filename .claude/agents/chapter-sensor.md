@@ -111,7 +111,7 @@ Per chapter:
 - **Ch 2**: Asymmetric depth (HITL section dominates given three-layer Bainbridge / Hoff & Bashir / Miller treatment)? Every theory introduced reappears in Ch 4 or Ch 5? §2.1 frames scheduling under utilization lens (overtime / idle time / load balance)?
 - **Ch 3**: Origin story §3.1 (Admmit task, team's own initiative, HITL as mandate)? DSRM applied step-by-step, one bullet per Peffers activity? Iterative Development §3.5 contains 4–6 named iterations with origin labels? Evaluation Framework as a separate sub-section?
 - **Ch 4**: Findings split by category (interview / artefact / process)? DSR Artifacts mapping table present? §4.5 ¶1 explicitly frames multi-engine benchmark as a "How-not-Of" test (tests *how*, not *whether*)? Process Documentation in body?
-- **Ch 5**: Primary findings under three locked anchors (5.1.1 Effektivitet, 5.1.2 Tillit/kontroll, 5.1.3 Tilpasningsdyktighet)? Operator-vs-owner asymmetry framed inside §5.1.1 (not standalone)? Three-layer HITL applied in §5.1.2? §5.4 hierarchical L1–L12 with three named sub-subsections + L#-to-SQ mapping? §5.5 Deviations from Plan? §5.6 Methodology Reflection (self-critical)?
+- **Ch 5**: Primary findings under three locked anchors (5.1.1 Efficiency, 5.1.2 Trust/control, 5.1.3 Adaptability)? Operator-vs-owner asymmetry framed inside §5.1.1 (not standalone)? Three-layer HITL applied in §5.1.2? §5.4 hierarchical L1–L12 with three named sub-subsections + L#-to-SQ mapping? §5.5 Deviations from Plan? §5.6 Methodology Reflection (self-critical)?
 - **Ch 6**: Each SQ quoted verbatim as block quote and answered discretely? Each SQ-answer names the anchor it serves? Each Future Work item cites a specific L#? Closing domain claim about algorithm-assisted planning under stakeholder asymmetry?
 
 Cross-chapter (when reviewing Ch 5 or Ch 6):
@@ -122,17 +122,17 @@ Cross-chapter (when reviewing Ch 5 or Ch 6):
 
 ## Anchor name drift — CRITICAL HARD CHECK
 
-Every occurrence of the locked anchor names (**Effektivitet, Tillit/kontroll, Tilpasningsdyktighet**) must be verbatim. Flag any drift as a critical issue:
-- "kontroll" alone or "Tillit" alone for Tillit/kontroll
-- "fleksibilitet" or "skalerbarhet" for Tilpasningsdyktighet
-- "human control", "menneskelig overstyring", "operator oversight", "trust calibration" used as a stand-in for Tillit/kontroll
+Every occurrence of the locked anchor names (**Efficiency, Trust/control, Adaptability**) must be verbatim. Flag any drift as a critical issue:
+- "kontroll" alone or "Tillit" alone for Trust/control
+- "fleksibilitet" or "skalerbarhet" for Adaptability
+- "human control", "menneskelig overstyring", "operator oversight", "trust calibration" used as a stand-in for Trust/control
 - Any English translation ("Efficiency", "Trust/control", "Adaptability")
 
 **Even a single drift instance lowers the chapter's grade by one full step.** The locked names are the spine of the thesis argument.
 
 ## "Accountable to coordinator" operationalisation — HARD CHECK
 
-The locked RQ uses the phrase "remaining accountable to the traffic coordinator who operates it". Wherever this idea appears, it must be operationalised concretely as the four actions defined under Tillit/kontroll: **inspect, modify, accept, or reject any algorithm-generated assignment.** Vague control language ("human oversight", "operator supervision") is a flag.
+The locked RQ uses the phrase "remaining accountable to the traffic coordinator who operates it". Wherever this idea appears, it must be operationalised concretely as the four actions defined under Trust/control: **inspect, modify, accept, or reject any algorithm-generated assignment.** Vague control language ("human oversight", "operator supervision") is a flag.
 
 ## Multi-engine "How-not-Of" framing — HARD CHECK
 

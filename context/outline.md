@@ -14,7 +14,7 @@ All ¶-plans use these markers. The deterministic checker greps for them. Each m
 |--------|---------|---------|
 | `MUST CITE:` | Academic source TYPE required (foundational textbook, locked theoretical anchor by surname, methodological tradition, etc.). The downstream source-fitting task resolves the type to a specific bib entry plus verified source notes. | Ch 2, 3 |
 | `MUST EVIDENCE:` | Empirical / system evidence TYPE required (interview-derived theme, fit/gap item, architecture documentation, benchmark results, etc.). Resolved to specific extracted-content references at write-time. | Ch 4 |
-| `MUST ANCHOR:` | Must explicitly connect to the RQ, thesis spine, an earlier chapter section, or a locked anchor concept. For Ch 5 sub-sections the value MUST be one of `Effektivitet`, `Tillit/kontroll`, `Tilpasningsdyktighet` verbatim. Synonyms ("kontroll" alone, "fleksibilitet", "skalerbarhet", "human control", "menneskelig overstyring") fail the readiness gate. | Ch 5 (every sub-section); other chapters where structurally relevant |
+| `MUST ANCHOR:` | Must explicitly connect to the RQ, thesis spine, an earlier chapter section, or a locked anchor concept. For Ch 5 sub-sections the value MUST be one of `Efficiency`, `Trust/control`, `Adaptability` verbatim. Synonyms ("kontroll" alone, "fleksibilitet", "skalerbarhet", "human control", "menneskelig overstyring") fail the readiness gate. | Ch 5 (every sub-section); other chapters where structurally relevant |
 | `MUST TRACE:` | Must trace back to a specific section, finding, or limitation. For Ch 6 RQ-answer paragraphs the format is `§5.1.X (<anchor name>)` with the anchor name verbatim. | Ch 6 |
 | `MUST GROUND:` | Must be grounded in a context source — TYPE-described — with detailed evidence delivered later. | Ch 1 |
 
@@ -43,16 +43,16 @@ All ¶-plans use these markers. The deterministic checker greps for them. Each m
 
 **1.2 Anchor Concepts** (~0.5 pages, NEW)
 
-- ¶1 (Effektivitet): three sentences naming the anchor verbatim. Define its three concrete dimensions (overtime, idle time, load balance) and state visibility as the precondition for optimization.
-- ¶2 (Tillit/kontroll): three sentences naming the compound term verbatim. State the four operator actions (inspect, modify, accept, reject) and the inseparability of trust and control.
-- ¶3 (Tilpasningsdyktighet): three sentences naming the anchor verbatim. State the cross-company adaptability claim and distinguish from skalerbarhet.
+- ¶1 (Efficiency): three sentences naming the anchor verbatim. Define its three concrete dimensions (overtime, idle time, load balance) and state visibility as the precondition for optimization.
+- ¶2 (Trust/control): three sentences naming the compound term verbatim. State the four operator actions (inspect, modify, accept, reject) and the inseparability of trust and control.
+- ¶3 (Adaptability): three sentences naming the anchor verbatim. State the cross-company adaptability claim and distinguish from skalerbarhet.
 - These exact names recur in every later chapter; synonyms drift the spine.
   MUST GROUND: anchor-concept definitions from thesis-spine.md (verbatim)
 
 **1.3 Research Questions** (~0.5 pages)
 
 - ¶1: State the main RQ verbatim. One sentence on what it asks — the linking phrase between resource-utilization improvement and coordinator accountability.
-- ¶2: List SQ1, SQ2, SQ3 verbatim. One sentence each on what each addresses, naming the anchor it maps to (SQ1 → Effektivitet, SQ2 → Tillit/kontroll, SQ3 → Tilpasningsdyktighet primary + cross-anchor).
+- ¶2: List SQ1, SQ2, SQ3 verbatim. One sentence each on what each addresses, naming the anchor it maps to (SQ1 → Efficiency, SQ2 → Trust/control, SQ3 → Adaptability primary + cross-anchor).
 - Do NOT discuss or justify here — that is for Chapter 3.
 
 **1.4 Scope and Delimitations** (~0.5 pages)
@@ -82,8 +82,8 @@ All ¶-plans use these markers. The deterministic checker greps for them. Each m
 - ¶1: Define resource scheduling — assigning a set of limited resources (people, vehicles) to tasks over time, subject to constraints. Note analogous domains (nurse scheduling, crew scheduling, driver scheduling) to establish the multi-resource-assignment problem framing. Open with a single-resource example from an adjacent domain to build intuition before introducing multi-resource complexity. Introduce the traffic coordinator early — the human actor whose work the scheduling problem describes.
   MUST CITE: foundational scheduling textbook (definitional; analogous-domains framing)
 - ¶2: Multi-resource scheduling — Ressursplanlegger assigns *both* an employee and a vehicle to each assignment. Increases combinatorial complexity compared to single-resource problems. Define the Ressursplanlegger problem in this vocabulary: assignments = tasks with fixed time windows and resource requirements; drivers + vehicles = resources with competency, availability, and capacity constraints; objective = maximise coverage + balance soft constraints.
-- ¶3: **Utilization framing** (key add — preloads §5.1.1 Effektivitet vocabulary). Scheduling under the utilization lens — overtime, idle time between assignments, uneven driver load — not just constraint satisfaction. Visibility into current utilization is the precondition for optimization; the system's first contribution is making invisible utilization patterns legible.
-  MUST ANCHOR: Effektivitet (preload via §2.1 → §5.1.1)
+- ¶3: **Utilization framing** (key add — preloads §5.1.1 Efficiency vocabulary). Scheduling under the utilization lens — overtime, idle time between assignments, uneven driver load — not just constraint satisfaction. Visibility into current utilization is the precondition for optimization; the system's first contribution is making invisible utilization patterns legible.
+  MUST ANCHOR: Efficiency (preload via §2.1 → §5.1.1)
 - ¶4: Hard and soft constraints. Hard constraints must be satisfied for feasibility (competencies, availability, no double-booking, vehicle type). Soft constraints define preferences with configurable weights (workload balance, driver preferences, priority).
   MUST CITE: constraint programming foundations
 - ¶5: NP-hardness motivating heuristics. The Vehicle Routing Problem is referenced **only to delimit** — Ressursplanlegger is an assignment problem (who does what), not a sequencing problem. Sequencing is not part of the problem.
@@ -99,7 +99,7 @@ Five-layer HITL theory: Parasuraman taxonomy + Lee trust foundation + Bainbridge
   MUST CITE: Parasuraman — automation taxonomy (10-level scale)
 - ¶2 (NEW — Bainbridge frame): operator-vs-owner asymmetry; the irony of automation that automation needs are rarely articulated by those who must operate the system. Establishes the framing this thesis empirically extends to Norwegian transport's resource-planning domain.
   MUST CITE: Bainbridge — operator-vs-owner asymmetry (theoretical anchor for HITL)
-  MUST ANCHOR: Tillit/kontroll
+  MUST ANCHOR: Trust/control
 - ¶3 (NEW — Hoff & Bashir): three-dimensional model of trust antecedents (dispositional, situational, learned). Frames how operator trust forms over use of the artefact and what conditions enable calibrated trust rather than over- or under-reliance.
   MUST CITE: Hoff & Bashir — trust-calibration model (three-dimensional antecedent)
 - ¶4 (NEW — Miller): explanation as interface; transparency as a design requirement for automated decision systems. Motivates the artefact's surfacing of algorithm reasoning (deviation alerts, scoring breakdown, time-quality control).
@@ -174,7 +174,7 @@ Origin story — how the project began. Reads as a story, not a specification.
   MUST CITE: Peffers — DSRM
 - **DSRM Applied bullets** — each of the six DSRM activities gets one bullet of two to four sentences applied to this specific project (per §11.5, the single most copyable A-grade move):
   - **Problem Identification and Motivation:** the resource-utilization visibility-gap finding from interviews + Admmit's mandate motivated formalising algorithm-assisted planning. The problem is described concretely in §4.1 and discussed in §5.1.1.
-  - **Objectives of a Solution:** locked anchor concepts — Effektivitet (overtime / idle time / load balance), Tillit/kontroll (coordinator authority via inspect / modify / accept / reject), Tilpasningsdyktighet (cross-company adaptability via configurable weights and rules).
+  - **Objectives of a Solution:** locked anchor concepts — Efficiency (overtime / idle time / load balance), Trust/control (coordinator authority via inspect / modify / accept / reject), Adaptability (cross-company adaptability via configurable weights and rules).
   - **Design and Development:** algorithm-assisted planning platform with multi-engine solver layer (heuristic / constraint solver / metaheuristic) and drag-and-drop human-in-the-loop timeline. Built across eight named iterations described in §3.5.
   - **Demonstration:** synthetic-dataset multi-engine benchmark (described in §3.6) plus requirements traceability matrix as the coverage check.
   - **Evaluation:** what the artefact tests is *how* solver approaches compare under realistic constraint combinations — a methodologically independent test of how-not-of per §12.0.5. What it does not test (production deployment, real-world utilization gains, user-tested override flow) is forwarded to §5.4 limitations.
@@ -242,10 +242,10 @@ Each iteration is a numbered sub-subsection (§3.5.1 through §3.5.8) of approxi
 
 - **Origin:** designer-technical exploration — operationalises the §12.0.5 "How-not-Of" methodologically independent test
 - **Tried:** pluggable solver registry with three engines (heuristic, complete, metaheuristic); benchmarking framework with synthetic small / medium / large datasets; engine version snapshots for reproducibility
-- **Why:** under realistic constraint combinations, which solver approach best meets Effektivitet? — a how-question independent of whether the visibility gap is real (interviews surface this) or whether HITL is necessary (Admmit mandate)
+- **Why:** under realistic constraint combinations, which solver approach best meets Efficiency? — a how-question independent of whether the visibility gap is real (interviews surface this) or whether HITL is necessary (Admmit mandate)
 - **What happened:** subprocess plumbing complex; reproducibility issues required adding engine-version snapshots after early benchmark results were inconsistent
-- **Learned:** the multi-engine architecture is a comparative test of *how*, not *whether* — Effektivitet measurement, not problem validation. This framing returns in §3.6, §4.5, and §5.1.1.
-  MUST ANCHOR: Effektivitet
+- **Learned:** the multi-engine architecture is a comparative test of *how*, not *whether* — Efficiency measurement, not problem validation. This framing returns in §3.6, §4.5, and §5.1.1.
+  MUST ANCHOR: Efficiency
 - **Next:** with computation infrastructure stable, build the human-in-the-loop surface
 
 **3.5.5 HITL Surface (drag-and-drop timeline + override flow)**
@@ -255,7 +255,7 @@ Each iteration is a numbered sub-subsection (§3.5.1 through §3.5.8) of approxi
 - **Why:** HITL was Admmit's requirement from project start; interviews validated the necessity through a consensus that the system should suggest a plan the coordinator can correct, not replace the coordinator
 - **What happened:** drag-and-drop functional but state-consistency between optimistic UI updates and server mutations produced occasional stale conflict displays
 - **Learned:** HITL surface needs richer real-time feedback than a thin post-hoc check; coordinator authority is meaningful only when the system surfaces what to act on
-  MUST ANCHOR: Tillit/kontroll
+  MUST ANCHOR: Trust/control
 - **Next:** expand the post-hoc check into a full deviation taxonomy
 
 **3.5.6 Real-time Deviation Detection**
@@ -269,22 +269,22 @@ Each iteration is a numbered sub-subsection (§3.5.1 through §3.5.8) of approxi
 
 **3.5.7 User-controlled Plan-time vs Plan-quality Tradeoff**
 
-- **Origin:** designer / Tillit/kontroll refinement — gives the coordinator agency over the planning *process*, not just over plan outcomes
+- **Origin:** designer / Trust/control refinement — gives the coordinator agency over the planning *process*, not just over plan outcomes
 - **Tried:** user-facing solver-time-budget control — coordinator selects either *fast / less accurate* (heuristic with short time limit) or *slower / more accurate* (constraint solver with longer time limit); the time-quality tradeoff is exposed as a deliberate choice rather than an internal default
-- **Why:** different planning situations have different urgency-quality requirements (a sick-leave replanning under time pressure differs from next-week's planning); coordinator authority over plan generation is a Tillit/kontroll dimension distinct from plan-content override
+- **Why:** different planning situations have different urgency-quality requirements (a sick-leave replanning under time pressure differs from next-week's planning); coordinator authority over plan generation is a Trust/control dimension distinct from plan-content override
 - **What happened:** the choice surface itself raises the question of *what the user is choosing between* — bare time labels are not legible; descriptive labels ("fast suggestion" vs "best-effort plan") are clearer but smuggle in claims about quality the system cannot verify per-instance
 - **Learned:** exposing a tradeoff requires explanation as interface (Miller framing) — the time control is itself a small case of explanation-driven HITL design
-  MUST ANCHOR: Tillit/kontroll
+  MUST ANCHOR: Trust/control
 - **Next:** bridge into per-company configurability of *planning rules* (the soft-constraint weight space)
 
 **3.5.8 Configurable Soft-constraint Weights**
 
-- **Origin:** designer / architectural — operationalises the Tilpasningsdyktighet anchor that the project committed to from the start (Admmit-mandated multi-tenant architecture); specific weight set chosen by designers, not interview-validated as the right set
+- **Origin:** designer / architectural — operationalises the Adaptability anchor that the project committed to from the start (Admmit-mandated multi-tenant architecture); specific weight set chosen by designers, not interview-validated as the right set
 - **Tried:** per-company weight configuration UI for soft constraints (workload balance, vehicle preference, transitions between consecutive assignments, priority, employee preferences); weights flow into the solver objective function
-- **Why:** interviews confirmed assignment criteria differ materially across companies — Tilpasningsdyktighet means the same artefact must serve materially different operational rules
+- **Why:** interviews confirmed assignment criteria differ materially across companies — Adaptability means the same artefact must serve materially different operational rules
 - **What happened:** hard to validate that user-chosen weight combinations don't produce degenerate solutions; UX challenge of explaining what each weight means to a coordinator without optimization vocabulary
-- **Learned:** configurability for soft weights is a partial Tilpasningsdyktighet realisation — broader configurability (hard constraints, status workflow) is acknowledged as L4-adjacent and remains future work (cross-references §6.3 + §5.4 L4)
-  MUST ANCHOR: Tilpasningsdyktighet
+- **Learned:** configurability for soft weights is a partial Adaptability realisation — broader configurability (hard constraints, status workflow) is acknowledged as L4-adjacent and remains future work (cross-references §6.3 + §5.4 L4)
+  MUST ANCHOR: Adaptability
 - **Next:** with eight iterations of artefact in place, the methodological question is *how* to test whether it meets the locked anchors — bridges into §3.6
 
 ---
@@ -295,8 +295,8 @@ Separated from validity / reliability — describes *how* the artefact is tested
 
 - ¶1: Frame the evaluation explicitly as a "How-not-Of" test per §12.0.5. The multi-engine benchmark tests *how* solver approaches compare under realistic constraint combinations; it does not test whether the visibility gap is real (interviews surface this) or whether HITL is necessary (Admmit mandate).
   MUST EVIDENCE: §12.0.5 Findings stance — How-not-Of framing
-- ¶2: Anchor-to-method mapping. Multi-engine benchmark → Effektivitet (the anchor it tests). Requirements traceability matrix → all three anchors (the artefact embodies them, traceability checks coverage). User testing → Tillit/kontroll (would test, but not done — forwarded to §5.4 L8).
-  MUST ANCHOR: Effektivitet, Tillit/kontroll, Tilpasningsdyktighet
+- ¶2: Anchor-to-method mapping. Multi-engine benchmark → Efficiency (the anchor it tests). Requirements traceability matrix → all three anchors (the artefact embodies them, traceability checks coverage). User testing → Trust/control (would test, but not done — forwarded to §5.4 L8).
+  MUST ANCHOR: Efficiency, Trust/control, Adaptability
 - ¶3: Synthetic dataset design — small, medium, and large instances with what each tests for. Why synthetic rather than production data (forwarded to §5.4 L5).
   MUST EVIDENCE: synthetic dataset design rationale
 - ¶4: Requirements traceability matrix as coverage check — implementation status and test status per requirement.
@@ -366,7 +366,7 @@ Separated from validity / reliability — describes *how* the artefact is tested
 **4.5 Optimisation Algorithm** (~3.5 pages) — *Embret*
 
 - ¶1 (NEW opener — How-not-Of framing): the multi-engine architecture is a methodologically independent test of *how* the constraint problem is best solved, not *whether* the artefact's claims about utilization are real. (Echoes §3.5.4 Learned, §3.6 ¶1, and §5.1.1 ¶4.)
-  MUST ANCHOR: Effektivitet (preload via §4.5 → §5.1.1)
+  MUST ANCHOR: Efficiency (preload via §4.5 → §5.1.1)
 - ¶2: Problem formulation — input, output, decision variables.
   MUST EVIDENCE: problem formulation (input/output, constraint set, objective function)
 - ¶3: Chosen approaches and justification — heuristic for instant baseline, complete solver for medium instances, metaheuristic for large instances.
@@ -410,22 +410,22 @@ ChatSSB pattern (their §5.3 Administrative Results) — kept in body, not appen
 
 **5.1 Primary Findings under the Anchors** (~5–6 pages, the new core)
 
-§5.1 opens with a brief opener paragraph: "the discussion organises primary findings under the three locked anchor concepts (Effektivitet, Tillit/kontroll, Tilpasningsdyktighet) — one sub-section per anchor, names used verbatim throughout".
+§5.1 opens with a brief opener paragraph: "the discussion organises primary findings under the three locked anchor concepts (Efficiency, Trust/control, Adaptability) — one sub-section per anchor, names used verbatim throughout".
 
-**5.1.1 Effektivitet** (~2 pages)
+**5.1.1 Efficiency** (~2 pages)
 
 - ¶1: Visibility-gap finding as the primary surprising result. Reference the named theme in §4.1.
-  MUST ANCHOR: Effektivitet
+  MUST ANCHOR: Efficiency
   MUST EVIDENCE: visibility-gap interview theme
 - ¶2: **Operator-vs-owner asymmetry framed here** (Bainbridge) — the asymmetry IS what makes the visibility gap a finding worth surfacing. Owners and Admmit demand utilization optimization; coordinators do not articulate this need themselves. This is the configuration Bainbridge's *ironies of automation* anticipates.
   MUST CITE: Bainbridge — operator-vs-owner asymmetry
 - ¶3: Three utilization dimensions (overtime, idle time between assignments, uneven driver load) — what the artefact makes visible. The visibility itself is the precondition for optimization.
 - ¶4: Multi-engine benchmark as the methodologically independent How-not-Of test. Tie back to §3.6 framing — the benchmark tests *how* solver approaches compare, not whether the visibility gap is real.
 
-**5.1.2 Tillit/kontroll** (~2 pages)
+**5.1.2 Trust/control** (~2 pages)
 
 - ¶1: Three-layer HITL theory applied to override authority. Bainbridge frames the coordinator's authority over override — operator authority is the resolution to the operator-vs-owner asymmetry that motivated automation in the first place. Parasuraman situates the artefact at automation level 5–6 — system suggests, human approves — the level at which override is the constitutive interaction.
-  MUST ANCHOR: Tillit/kontroll
+  MUST ANCHOR: Trust/control
   MUST CITE: Bainbridge — operator authority over override
   MUST CITE: Parasuraman — automation taxonomy (level 5–6 framing for HITL override)
 - ¶2: Hoff & Bashir's dimensional model of trust antecedents — how trust forms over use; calibration mechanics in this artefact; why both over- and under-reliance are design failures. Layered onto Lee's foundational trust-reliance model — Hoff & Bashir refines, does not replace.
@@ -434,17 +434,17 @@ ChatSSB pattern (their §5.3 Administrative Results) — kept in body, not appen
 - ¶3: Miller — explanation/transparency as design requirement. How the system surfaces algorithm reasoning (deviation alerts, scoring breakdown, the time-quality control from §3.5.7 as a small case of explanation-driven design). Amershi's Human-AI guidelines complement Miller's social-science framing with practical design heuristics.
   MUST CITE: Miller — explanation as interface
   MUST CITE: Amershi — Human-AI interaction guidelines (practical complement to Miller)
-- ¶4: Tacit knowledge as the operator's irreducible role. Coordinator inspect / modify / accept / reject operationalises Tillit/kontroll concretely — vague control language is forbidden by the spine. Tacit knowledge used here as a domain concept (operational knowledge held by the coordinator beyond what the system can capture); no separate theoretical anchor required.
+- ¶4: Tacit knowledge as the operator's irreducible role. Coordinator inspect / modify / accept / reject operationalises Trust/control concretely — vague control language is forbidden by the spine. Tacit knowledge used here as a domain concept (operational knowledge held by the coordinator beyond what the system can capture); no separate theoretical anchor required.
 
-**5.1.3 Tilpasningsdyktighet** (~1.5 pages)
+**5.1.3 Adaptability** (~1.5 pages)
 
 - ¶1: Cost / benefit thresholds across the seven interviewed companies — different fleet sizes, different operational rules, different willingness-to-pay.
-  MUST ANCHOR: Tilpasningsdyktighet
+  MUST ANCHOR: Adaptability
   MUST CITE: Venkatesh — UTAUT (technology adoption thresholds across organisational contexts)
 - ¶2: Fit / gap variation — different companies' assignment-criteria rankings produce different soft-constraint weight profiles.
 - ¶3: Configurable soft-constraint weights as the technical mechanism (§3.5.8 result). Honest about what is *not* configurable yet — hard constraints, status workflow definitions, and per-company assignment-rule taxonomies. These are L4-adjacent and forwarded to §6.3 future work.
   MUST CITE: Mietzner — multi-tenant SaaS variability (configurability mechanism)
-- ¶4: Distinct from skalerbarhet (which concerns volume). Tilpasningsdyktighet is about meaningfulness across material rule differences, not throughput.
+- ¶4: Distinct from skalerbarhet (which concerns volume). Adaptability is about meaningfulness across material rule differences, not throughput.
 
 ---
 
@@ -464,7 +464,7 @@ Surviving fragment of the prior topical 5.3, repositioned as *implications* of t
   MUST CITE: SusAF / sustainability awareness framework
   MUST EVIDENCE: sustainability analysis documentation
 - ¶2: Sustainability effects table — benefits and harms per dimension.
-- ¶3: Key dilemmas — fairness (algorithmic bias against drivers), accountability (who is responsible for an algorithm-generated assignment that goes wrong), privacy (employee data handling), working conditions (does optimization tighten driver workload?). Where a dilemma ties to a specific anchor (accountability ↔ Tillit/kontroll; working conditions ↔ Effektivitet), name the anchor verbatim.
+- ¶3: Key dilemmas — fairness (algorithmic bias against drivers), accountability (who is responsible for an algorithm-generated assignment that goes wrong), privacy (employee data handling), working conditions (does optimization tighten driver workload?). Where a dilemma ties to a specific anchor (accountability ↔ Trust/control; working conditions ↔ Efficiency), name the anchor verbatim.
   MUST CITE: Mittelstadt — ethics of algorithms (fairness / privacy taxonomy)
   MUST CITE: Martin — algorithmic accountability (accountability dilemma)
   MUST CITE: Lee MK — algorithmic management and worker fairness (working-conditions dilemma)
@@ -481,9 +481,9 @@ Surviving fragment of the prior topical 5.3, repositioned as *implications* of t
 2. The L#-to-SQ mapping block:
 
 ```
-SQ1 → §5.1.1 (Effektivitet) — bounded by L1, L2, L3, L4
-SQ2 → §5.1.2 (Tillit/kontroll) — bounded by L8, L10
-SQ3 → §5.1.3 (Tilpasningsdyktighet) + cross-anchor — bounded by L5, L6, L7, L9, L11, L12
+SQ1 → §5.1.1 (Efficiency) — bounded by L1, L2, L3, L4
+SQ2 → §5.1.2 (Trust/control) — bounded by L8, L10
+SQ3 → §5.1.3 (Adaptability) + cross-anchor — bounded by L5, L6, L7, L9, L11, L12
 ```
 
 Three sub-subsections, each L# rendered as a `\paragraph{Lk — Name}` (named paragraph; no TOC bloat). Each L# paragraph names the limitation, describes what it prevents the thesis from claiming, and analyses impact on conclusions.
@@ -518,7 +518,7 @@ Explicit acknowledgement of where the project's actual path diverged from initia
 
 **5.6 Methodology Reflection** (~0.5 pages, NEW per §8.4 + §11.6)
 
-Single substantive paragraph naming the actual weak spot in the method — per §11.6, "find the actual weak spot in your method and name it". The writer must pick whichever weak spot is most load-bearing for the thesis (recommendation: synthetic-benchmark validation, since this is the central evaluation method for the artefact's primary anchor Effektivitet — but small interview sample, dev-team = research-team, or single-domain are also defensible choices).
+Single substantive paragraph naming the actual weak spot in the method — per §11.6, "find the actual weak spot in your method and name it". The writer must pick whichever weak spot is most load-bearing for the thesis (recommendation: synthetic-benchmark validation, since this is the central evaluation method for the artefact's primary anchor Efficiency — but small interview sample, dev-team = research-team, or single-domain are also defensible choices).
 
 ---
 
@@ -543,13 +543,13 @@ Single substantive paragraph naming the actual weak spot in the method — per �
 > **Block-quote pattern instruction (locked):** Each sub-question MUST be reproduced verbatim as a block quote (LaTeX `\begin{quote}...\end{quote}`, or `\begin{displayquote}` if the thesis loads `csquotes`), then answered in one discrete paragraph with no new material. Three SQs → three answer paragraphs, each tied to the anchor it serves.
 
 - ¶1: Restate the main RQ verbatim as a block quote and answer it directly with a qualified statement grounded in findings + discussion. Cross-anchor.
-  MUST TRACE: §5.1.1 (Effektivitet), §5.1.2 (Tillit/kontroll), §5.1.3 (Tilpasningsdyktighet)
+  MUST TRACE: §5.1.1 (Efficiency), §5.1.2 (Trust/control), §5.1.3 (Adaptability)
 - ¶2: SQ1 verbatim block quote, then one-paragraph answer.
-  MUST TRACE: §5.1.1 (Effektivitet)
+  MUST TRACE: §5.1.1 (Efficiency)
 - ¶3: SQ2 verbatim block quote, then one-paragraph answer.
-  MUST TRACE: §5.1.2 (Tillit/kontroll)
+  MUST TRACE: §5.1.2 (Trust/control)
 - ¶4: SQ3 verbatim block quote, then one-paragraph answer.
-  MUST TRACE: §5.1.3 (Tilpasningsdyktighet) + cross-anchor (Effektivitet, Tillit/kontroll)
+  MUST TRACE: §5.1.3 (Adaptability) + cross-anchor (Efficiency, Trust/control)
 - ¶5: Contribution statement — the artefact, the requirements / findings synthesis, and the validation-based knowledge about algorithm-assisted planning under stakeholder asymmetry in this domain.
 
 **6.3 Future Work** (~1 page)
@@ -566,7 +566,7 @@ Each item must cite a specific named limitation from §5.4. Generic items ("furt
   MUST TRACE: §5.4 L9
 - ¶5: Algorithm scaling improvements — addresses the constraint-solver scaling boundary from §3.5.3.
   MUST TRACE: §5.4 L9
-- ¶6: Broader Tilpasningsdyktighet — hard-constraint and status-workflow configurability — addresses §3.5.8 partial realisation + L4 interview-guide coverage gap.
+- ¶6: Broader Adaptability — hard-constraint and status-workflow configurability — addresses §3.5.8 partial realisation + L4 interview-guide coverage gap.
   MUST TRACE: §5.4 L4
 - ¶7: Cross-domain replication — addresses L11 single-domain.
   MUST TRACE: §5.4 L11
@@ -581,7 +581,7 @@ Verification helper for the §7 reviewer marker "every theory point reappears in
 
 | Theory concept (Ch 2) | First reappearance | Subsequent |
 |---|---|---|
-| Resource scheduling — utilization framing (§2.1) | §5.1.1 Effektivitet | §6.2 SQ1 |
+| Resource scheduling — utilization framing (§2.1) | §5.1.1 Efficiency | §6.2 SQ1 |
 | HITL — Parasuraman taxonomy (§2.2 ¶1) | §5.1.2 ¶1 | — |
 | HITL — Bainbridge operator-vs-owner (§2.2 ¶2) | §5.1.1 (asymmetry) | §5.1.2 ¶1, §6.2 SQ1+SQ2 |
 | HITL — Hoff & Bashir trust calibration (§2.2 ¶3) | §5.1.2 ¶2 | §6.2 SQ2 |

@@ -87,13 +87,13 @@ The single biggest reason output fails is overcomplicated prose. Use the simples
 
 ## Anchor names (locked — never deviate)
 
-The three anchor concepts are Norwegian compound terms used as proper nouns in English prose:
+The three anchor concepts are locked English proper nouns used consistently across the thesis:
 
-- **Effektivitet** — improved resource utilization (overtime, idle time, load balance)
-- **Tillit/kontroll** — coordinator's ability to inspect, modify, accept, or reject any algorithm-generated assignment
-- **Tilpasningsdyktighet** — capacity to function meaningfully across companies with different operational rules
+- **Efficiency** — improved resource utilization (overtime, idle time, load balance)
+- **Trust/control** — coordinator's ability to inspect, modify, accept, or reject any algorithm-generated assignment
+- **Adaptability** — capacity to function meaningfully across companies with different operational rules
 
-**Never translate. Never split.** Tillit/kontroll is one unit, never "Tillit" or "kontroll" alone. **Never substitute synonyms** ("fleksibilitet", "skalerbarhet", "human control", "menneskelig overstyring", "operator oversight", "trust calibration", "Efficiency", "Trust/control", "Adaptability"). The orchestrator's readiness gate hard-fails on synonym drift in MUST ANCHOR markers.
+**Never re-translate to Norwegian. Never split. Never paraphrase.** Trust/control is one unit, never "control" alone. **Never substitute synonyms** ("effektivitet", "tillit/kontroll", "tilpasningsdyktighet", "fleksibilitet", "skalerbarhet", "human control", "operator oversight", "trust calibration"). The orchestrator's readiness gate hard-fails on synonym drift in MUST ANCHOR markers.
 
 **"Accountable to the traffic coordinator"** in the RQ must be operationalised concretely as the four actions: **inspect, modify, accept, or reject any algorithm-generated assignment**. Vague control language ("human oversight", "operator supervision") is forbidden.
 

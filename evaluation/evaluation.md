@@ -8,7 +8,7 @@
 
 ## All Chapters
 
-- [ ] **Anchor names verbatim:** Wherever Effektivitet, Tillit/kontroll, or Tilpasningsdyktighet appear, the locked Norwegian compound terms are used as proper nouns in English prose. **Synonym drift is critical:** "kontroll" alone, "fleksibilitet", "skalerbarhet", "human control", "menneskelig overstyring" — flag and reject.
+- [ ] **Anchor names verbatim:** the three locked English proper nouns are **Efficiency**, **Trust/control**, **Adaptability** — used consistently across the thesis, never re-translated to Norwegian, never split, never paraphrased. **Synonym drift is critical:** "effektivitet", "tillit/kontroll", "tilpasningsdyktighet", "control" alone, "fleksibilitet", "skalerbarhet", "human control", "menneskelig overstyring", "operator oversight", "trust calibration" — flag and reject.
 - [ ] **No Trimtex or Opptur references:** They are factual errors. Only **Timpex** and **Opter** are named as real Norwegian TMS. Other interviewed companies use internal/custom tools. Neither Timpex nor Opter generates assignment plans automatically.
 - [ ] Formal, academic English — no filler words, no "we believe"
 - [ ] Every claim has a citation or is grounded in own data
@@ -61,7 +61,7 @@ These derive from advisor feedback on Ch 2. Violations are usually visible withi
 | Check | What sensor looks for | How to verify |
 |:-----:|----------------------|---------------|
 | [ ] | **Visibility-gap opening** | First paragraph leads with a concrete Norwegian transport-sector fact and the resource-utilization visibility gap, not with "the transport sector's role in Norway" or "growing complexity" preamble. |
-| [ ] | **§1.2 Anchor Concepts present and verbatim** | Three anchor concepts (Effektivitet, Tillit/kontroll, Tilpasningsdyktighet) defined verbatim with brief definitions in §1.2. Names match `context/glossary.md`. |
+| [ ] | **§1.2 Anchor Concepts present and verbatim** | Three anchor concepts (Efficiency, Trust/control, Adaptability) defined verbatim with brief definitions in §1.2. Names match `context/glossary.md`. |
 | [ ] | **Bainbridge framing** | Bainbridge (1983) referenced as the theoretical anchor for the operator-vs-owner asymmetry, somewhere in §1.1 or §1.3. |
 | [ ] | Problem is clearly motivated — reader understands *why* this matters | A non-expert should grasp the problem after reading 1.1 |
 | [ ] | Research question is stated precisely | Verbatim from `context/context.md` |
@@ -133,7 +133,7 @@ These derive from advisor feedback on Ch 2. Violations are usually visible withi
 
 | Check | What sensor looks for | How to verify |
 |:-----:|----------------------|---------------|
-| [ ] | **§5.1 anchor-organised primary findings** | Three sub-sections, one per locked anchor: 5.1.1 Effektivitet, 5.1.2 Tillit/kontroll, 5.1.3 Tilpasningsdyktighet. Anchor names verbatim — no synonyms. Each sub-section has a `MUST ANCHOR` marker tied to exactly one anchor. |
+| [ ] | **§5.1 anchor-organised primary findings** | Three sub-sections, one per locked anchor: 5.1.1 Efficiency, 5.1.2 Trust/control, 5.1.3 Adaptability. Anchor names verbatim — no synonyms. Each sub-section has a `MUST ANCHOR` marker tied to exactly one anchor. |
 | [ ] | **§5.1.1 includes operator-vs-owner asymmetry** | Bainbridge framing applied here — visibility gap is the manifestation of asymmetry (owners demand, coordinators don't articulate). Not a standalone section. |
 | [ ] | **§5.1.2 three-layer HITL applied** | Bainbridge frames operator authority over override; Hoff & Bashir for trust calibration over use; Miller for explanation/transparency. Tacit-knowledge content absorbed here. |
 | [ ] | **§5.4 hierarchical limitations (L1–L12)** | Three named sub-subsections: 5.4.1 Empirical Foundation (L1, L2, L3, L4), 5.4.2 Validation and Artefact (L5–L9), 5.4.3 Conceptual and Methodological (L10, L11, L12). Each L# is a named paragraph or `\paragraph{}`, not a buried sentence. **L#-to-SQ mapping at top of §5.4.** |
@@ -156,7 +156,7 @@ These derive from advisor feedback on Ch 2. Violations are usually visible withi
 | Check | What sensor looks for | How to verify |
 |:-----:|----------------------|---------------|
 | [ ] | **§6.2 SQ block-quote pattern** | Each sub-question reproduced verbatim as a single-line block quote, then answered in one discrete paragraph with no new material. Three SQs → three paragraphs. |
-| [ ] | **Anchor-tied SQ answers** | Each SQ-answer paragraph carries a `MUST TRACE` to the originating Ch 5 sub-section AND names the anchor it serves. SQ1 → §5.1.1 Effektivitet; SQ2 → §5.1.2 Tillit/kontroll; SQ3 → §5.1.3 Tilpasningsdyktighet (and cross-anchor where relevant). |
+| [ ] | **Anchor-tied SQ answers** | Each SQ-answer paragraph carries a `MUST TRACE` to the originating Ch 5 sub-section AND names the anchor it serves. SQ1 → §5.1.1 Efficiency; SQ2 → §5.1.2 Trust/control; SQ3 → §5.1.3 Adaptability (and cross-anchor where relevant). |
 | [ ] | **Limitation-grounded Future Work** | Each Future Work item cites a specific named limitation from §5.4 (e.g., "addresses L8 — no user testing with coordinators"). Generic items without limitation grounding flagged. |
 | [ ] | **Closing domain claim** | Final sentence makes a claim about algorithm-assisted planning under stakeholder asymmetry in Norwegian transport — not just about the artefact. |
 | [ ] | Main RQ answered directly — one clear paragraph | Verbatim question, then answer |
@@ -169,8 +169,8 @@ These derive from advisor feedback on Ch 2. Violations are usually visible withi
 
 ## Cross-Chapter Checks (run after all chapters are drafted)
 
-- [ ] **Anchor traceability:** Each of the three locked anchors (Effektivitet, Tillit/kontroll, Tilpasningsdyktighet) appears verbatim in: §1.2 (defined), §5.1 (one sub-section per anchor), §6.2 (each SQ-answer names the anchor it serves). No synonyms anywhere.
-- [ ] **Visibility-gap red thread:** The visibility-gap finding introduced in §1.1 is named again in §4.1 interview themes and synthesised in §5.1.1 Effektivitet. Loop closed.
+- [ ] **Anchor traceability:** Each of the three locked anchors (Efficiency, Trust/control, Adaptability) appears verbatim in: §1.2 (defined), §5.1 (one sub-section per anchor), §6.2 (each SQ-answer names the anchor it serves). No synonyms anywhere.
+- [ ] **Visibility-gap red thread:** The visibility-gap finding introduced in §1.1 is named again in §4.1 interview themes and synthesised in §5.1.1 Efficiency. Loop closed.
 - [ ] **Operator-vs-owner asymmetry red thread:** The asymmetry framed in §1.1 (Bainbridge) reappears as a finding in §4.1, is interpreted in §5.1.1, and is named in §6.2 SQ1's answer.
 - [ ] **L1–L12 forward references in Future Work:** Each item in §6.3 cites a specific L# from §5.4.
 - [ ] **Red thread:** Does the argument flow logically from Ch 1 → 6? Does every chapter serve its spine sentence?
