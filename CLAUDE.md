@@ -90,6 +90,17 @@ Ch 6 is written last.
 
 These rules are non-negotiable. They override convenience and save more time than they cost.
 
+### 0. Plain prose is the primary criterion (supervisor 2026-05-04)
+
+Every section, every paragraph, every sentence must be **clear, simple, and direct**. This rule overrides every other stylistic preference. Before any other workflow rule kicks in, the prose has to satisfy four checks:
+
+1. **Open broad, narrow to one clear message.** The section starts with a framing the reader can already grasp, then narrows in stages to the one specific claim it exists to make. Name that one message in a single sentence before drafting; if you cannot, the section is not ready.
+2. **Build understanding, not vocabulary.** Our prose is OURS, not the sources'. Where a source uses a heavy academic term ("combinatorial complexity", "stochastic dispatch", "epistemic asymmetry"), paraphrase plainly first; the technical term, if it appears at all, comes second in parentheses or a follow-on. The goal is a reader with limited technical background understanding on first pass — not adding words, not sounding smart.
+3. **Open abstract concepts with everyday-life intuition.** When a paragraph introduces an abstract or technical concept, the FIRST sentence anchors the reader in an everyday situation (a head nurse on a paper rota, a passenger waiting for a delayed train, a parent juggling pickups). Only then move to the technical name. Einstein did not open relativity with "combinatorial complexity"; he opened with a person on a platform watching a train.
+4. **Sequence the argument linearly — no cross-winds.** The section's paragraphs read as one line of thought going in one direction. The reader must never feel the argument is being pulled sideways while they were going forwards. If two adjacent paragraphs would have to be read together to make sense, one of them is in the wrong place.
+
+A section that fails any of the four is not A-grade no matter how strong its source rigour or anchor coverage. The full statements live as rules in `evaluation/review/lessons-learned.md` ("Top-of-stack mandate" block + the four named rules under Structure / Reader accessibility / Flow). Existing drafts (Ch 2.1–2.4, Ch 3.1–3.7) are flagged in `STATUS.md` for a plain-prose pass before final submission; new sections satisfy the rules at draft time.
+
 ### 1. Section plan before writing — always
 
 The section plan (`context/outline.md`) is more important than the prompt itself. If you know exactly what each paragraph should say, the output will always be usable. Without it, the result will be generic filler that takes longer to fix than to write from scratch. **Never start writing a section unless `context/outline.md` contains a concrete, paragraph-level plan for that section.** If the plan is missing or vague, stop and ask the user to fill it in before proceeding.

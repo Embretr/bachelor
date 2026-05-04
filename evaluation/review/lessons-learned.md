@@ -11,6 +11,19 @@
 
 ---
 
+## Top-of-stack mandate (binds every section, every chapter)
+
+Supervisor 2026-05-04 set the primary criterion for the rewrite and for all remaining writing: **the text must be clear, simple, and direct, everywhere**. This overrides every other stylistic preference. Before any of the rules below kick in, the prose has to satisfy the four plain-prose rules added 2026-05-04:
+
+1. **Each section opens broad, then narrows to one clear message** (Structure).
+2. **Build understanding, not vocabulary — paraphrase the source's hard words in our own plain prose** (Reader accessibility).
+3. **Open abstract concepts with everyday-life intuition before naming the technical term** (Reader accessibility).
+4. **Sequence the argument linearly — no cross-winds, no sailboat-in-side-wind paragraphs** (Flow).
+
+These four rules apply to every section, every paragraph, every sentence. They are not Ch 2 / Ch 3 specific. Existing drafts (Ch 2.1–2.4, Ch 3.1–3.7) are marked for a plain-prose pass before final submission; new sections must satisfy the rules at draft time. A section that fails any of the four is not A-grade no matter how strong its source rigour or anchor coverage.
+
+---
+
 ## Index — which rules apply to which sections
 
 Use this to find the rules that touch the section you are writing or reviewing. Read the full rule body in the section below before drafting/judging. The same rule may appear under several scopes.
@@ -172,6 +185,14 @@ Use this to find the rules that touch the section you are writing or reviewing. 
 
 ---
 
+### Hedge the chapter's reach to the reader explicitly when synthesising a landscape
+- **Rule:** When a chapter (especially Ch 2 background sections, Ch 4.3 fit/gap, Ch 5.2 adoption) presents a synthesis of "what the field looks like", do not let the prose promise more than the study can deliver. Insert a one-sentence reflexive hedge at or near the chapter / section opening that tells the reader the synthesis is partial: this thesis covers a bounded slice — seven Norwegian transport coordinators, a literature scan limited by the bachelor's scope and timeline, the systems Admmit's customer base happens to use — and the picture it draws of the landscape should be read with that frame in mind. The hedge is not a disclaimer that weakens the chapter; it is a calibrated honesty move that tells the reader to take the synthesis with a pinch of salt while the chapter still tells them what we did learn.
+- **Why:** Supervisor 2026-05-04: "Tekst som lover utrolig mye. Sagt til leseren: ta dette med klype salt, vi har vaert begrenset i studiet men vi har skjoent at dette er landskapet." Distinct from the existing *Don't generalize from the interview sample to "the industry"* rule, which is about claim wording. This rule is about the chapter's stance — a piece of prose that explicitly tells the reader where the floor and ceiling of the study are, so every later claim sits inside that frame instead of needing its own hedge.
+- **When to apply:** Every chapter that synthesises external state (Ch 2, Ch 4.3, Ch 5.2). One paragraph or one sentence suffices; do not repeat the hedge in every paragraph. Place it where the synthesis begins, not buried in limitations.
+- **Source:** Supervisor 2026-05-04 (logged in `context/docs/project/supervisor-feedback.md`).
+
+---
+
 ## Coverage
 
 ### Name existing solutions explicitly when describing a problem space
@@ -200,9 +221,10 @@ Use this to find the rules that touch the section you are writing or reviewing. 
 - **Rule:** When a sentence ties a concrete artefact element (a UI feature, an architectural property, an algorithmic capability) to one of the three locked anchor names, use a functional verb — `enables`, `realises`, `implements`, `operationalises`, `delivers` — not a metaphor — `is the substrate of`, `is the foundation of`, `is the scaffolding for`, `embodies the spirit of`. The functional verb names the causal relationship; the metaphor only hints at it. If the verb needs qualification (how it enables, by what mechanism), add a `by ...` clause rather than reaching for a metaphor.
   - **Sub-clause A — anchors cannot be the grammatical subject of imperative verbs.** The anchor name itself must NOT be the grammatical subject of `requires`, `demands`, `mandates`, or any other imperative verb. The artefact element is the subject; the anchor is the realised property. BEFORE: "Efficiency requires that the artefact reduce overtime"; AFTER: "Efficiency is realised by the artefact reducing overtime". This rule applies inside relative clauses too: "the configurability surface that Adaptability requires" inverts the binding — rewrite as "the configurability surface through which Adaptability is delivered".
   - **Sub-clause B — when describing what was decided/built/fixed, name the artefact element, not the anchor.** Where §3.1 has carefully separated the artefact element (HITL, multi-tenant architecture) from the anchor it operationalises (Trust/control, Adaptability), downstream paragraphs must preserve that distinction. BEFORE: "Admmit's mandate fixed Trust/control and Adaptability"; AFTER: "Admmit's mandate fixed HITL and the multi-tenant architecture (the artefact elements operationalising Trust/control and Adaptability)". The anchors are the realised properties, not the things Admmit decided.
-- **Why:** Anchor-binding sentences are spine-load-bearing across §1.2, §2.2 (HITL), §3.1, §4.4, §4.5, every §5.1.x sub-section, §6.2. A metaphorical bind reads as decorative compression to a sensor reading for argumentative discipline; the same sentence with `enables` is judged transparent. Example from §3.1 round 1: BEFORE — "the multi-tenant architecture is the technical substrate of Adaptability"; AFTER — "the multi-tenant architecture enables Adaptability by isolating per-customer configuration in a single deployed instance". Sub-clauses A and B emerged from §3.2 round 1 + round 2: the same anchor-binding category includes inverted constructions and artefact-element-vs-anchor-property collapse, both of which a strict sensor would flag.
+  - **Sub-clause C — name the four Trust/control actions inline, not as a count.** When a sentence references the four operationalisations of Trust/control, name the four actions in the prose — "inspect, modify, accept, or reject" — rather than referring to "the four actions defined under Trust/control" or "the four operationalisations of Trust/control". The named actions are short, concrete, and load-bearing for the spine; replacing them with a count forces the reader to look up what the four are while losing the rhetorical weight of seeing them. The same principle applies to any other anchor whose operationalisation is a small named set: name the set, do not refer to its cardinality.
+- **Why:** Anchor-binding sentences are spine-load-bearing across §1.2, §2.2 (HITL), §3.1, §4.4, §4.5, every §5.1.x sub-section, §6.2. A metaphorical bind reads as decorative compression to a sensor reading for argumentative discipline; the same sentence with `enables` is judged transparent. Example from §3.1 round 1: BEFORE — "the multi-tenant architecture is the technical substrate of Adaptability"; AFTER — "the multi-tenant architecture enables Adaptability by isolating per-customer configuration in a single deployed instance". Sub-clauses A and B emerged from §3.2 round 1 + round 2: the same anchor-binding category includes inverted constructions and artefact-element-vs-anchor-property collapse, both of which a strict sensor would flag. Sub-clause C emerged from supervisor 2026-05-04: writing "the four actions defined under Trust/control" instead of naming them is a form of anchor-binding evasion that lands on the reader as vagueness.
 - **When to apply:** Any sentence in any chapter that names a locked anchor (Efficiency, Trust/control, Adaptability) and ties an artefact element to it. Particularly §1.2 (anchor definitions), §3.1 ¶4 (origin → anchor binding), §3.2 (DSRM Applied "Objectives" bullet + closing-paragraph project-ordering caveat), §4.4–4.5 (system features → anchor), §5.1.1/§5.1.2/§5.1.3 (every sub-section), §6.2 (RQ-answer paragraphs).
-- **Source:** §3.1 round 1 coherence review (2026-05-02); sub-clauses A + B added from §3.2 round 1 + round 2 reviews (2026-05-03).
+- **Source:** §3.1 round 1 coherence review (2026-05-02); sub-clauses A + B added from §3.2 round 1 + round 2 reviews (2026-05-03); sub-clause C added from supervisor 2026-05-04 (logged in `context/docs/project/supervisor-feedback.md`).
 
 ### Parenthesise the abbreviation on first mention of a multi-word concept
 - **Rule:** The first time a multi-word concept that will later be abbreviated appears in prose, write it with the abbreviation in parentheses: "Design Science Research Methodology (DSRM)", "Transport Management System (TMS)", "Constraint Programming SAT (CP-SAT)". Subsequent uses may take the abbreviation alone. Do not introduce the abbreviation only at second use — it lands cold for a reader following the section linearly. This applies to concept-level abbreviations, alongside the existing actor-term-form rule.
@@ -218,14 +240,28 @@ Use this to find the rules that touch the section you are writing or reviewing. 
 - **Source:** §3.4 round 1 + round 2 coherence reviews (2026-05-03).
 
 ### Cross-chapter terminology lock for Ch 2-committed vocabulary distinctions
-- **Rule:** When Ch 2 commits the thesis to one side of a vocabulary distinction — Wieringa "validate" (predict deployed behaviour) over "evaluate" (deploy in production); Bainbridge "operator-vs-owner asymmetry" over "stakeholder mismatch" / "demand asymmetry"; Hoff & Bashir three-dimensional "trust antecedents" over generic "trust"; Miller "explanation as interface" over "transparency" alone; Adaptability over "skalerbarhet" / "fleksibilitet" — every downstream chapter uses that committed vocabulary, not the alternatives. Activity / section / heading labels are exempt where they originate elsewhere (e.g. the DSRM activity name "Evaluation" is from Peffers, not from the thesis vocabulary), but the body describing what the activity does *in this thesis* must use the committed verb.
+- **Rule:** When Ch 2 commits the thesis to one side of a vocabulary distinction — Wieringa "validate" (predict deployed behaviour) over "evaluate" (deploy in production); Bainbridge "operator-vs-owner asymmetry" over "stakeholder mismatch" / "demand asymmetry"; Hoff & Bashir three-dimensional "trust antecedents" over generic "trust"; Miller "explanation as interface" over "transparency" alone; Adaptability over "skalerbarhet" / "fleksibilitet"; "metrics" over "measures" (supervisor 2026-05-04) — every downstream chapter uses that committed vocabulary, not the alternatives. Activity / section / heading labels are exempt where they originate elsewhere (e.g. the DSRM activity name "Evaluation" is from Peffers, not from the thesis vocabulary), but the body describing what the activity does *in this thesis* must use the committed verb.
 - **Why:** §3.2 round 1 used "tested for / test of / not tested" three times in the Evaluation bullet where §2.4 ¶3 had explicitly committed the thesis to Wieringa's "validate". The Evaluation bullet header is the DSRM activity label and stays; the bullet body must use the committed verb. The fix in round 2 rewrote the bullet with "validated against / validation instrument / not validated". Vocabulary drift across chapters is a sensor-visible discipline failure even when no individual sentence is wrong.
 - **When to apply:** Any chapter that re-engages a Ch 2 vocabulary commitment. Particularly §3.2 (Wieringa validation; Bainbridge asymmetry as DSRM-Applied Problem-Identification framing), §3.6 (Wieringa validation; "How-not-Of" framing), §3.7 (Wieringa validation; Malterud's three criteria, not four), §4.5 (algorithm benchmarking — "validation" not "test" / "evaluation"), §5.1.1 (Bainbridge asymmetry verbatim), §5.1.2 (Hoff & Bashir three-dimensional, Miller explanation as interface, Lee trust foundation), §6.2 (RQ-answer paragraphs must use the committed vocabulary verbatim).
-- **Source:** §3.2 round 1 coherence review (2026-05-03).
+- **Source:** §3.2 round 1 coherence review (2026-05-03); reinforced + measures->metrics added by supervisor 2026-05-04 (logged in `context/docs/project/supervisor-feedback.md`).
 
 ---
 
 ## Reader accessibility
+
+### Build understanding, not vocabulary — paraphrase the source's hard words in our own plain prose
+- **Rule:** The thesis prose is OURS, not the sources'. Where a source uses a heavy academic term ("combinatorial complexity", "stochastic dispatch", "epistemic asymmetry", "constraint satisfaction"), do not lift the term into our sentences and ask the reader to follow. Paraphrase plainly first, then optionally name the technical term in parentheses or in a follow-on sentence so it is available to readers who already know it. Our language and the sources' language must be visibly separated. The goal of every paragraph is to BUILD UNDERSTANDING for a reader with limited technical background — not to add words, not to sound smart, not to mirror the source's register. If a sentence reads as if the writer was stacking impressive vocabulary, cut it and re-write the same idea in plain sentences a non-specialist could read aloud.
+  - BEFORE: "Multi-resource scheduling under combinatorial complexity admits no closed-form solution."
+  - AFTER: "When the planner must assign both a driver and a vehicle to each task, the number of possible combinations grows quickly with the number of tasks. There is no shortcut formula that gives the best plan; an algorithm has to search through the options. (Textbooks call this *combinatorial complexity*.)"
+- **Why:** Supervisor 2026-05-04: "Dumme ned teksten. Resultat av smarte ord. Heller lettlest og kunne hevet nivaaet litt, enn at jeg ikke skjoente noe / for avansert spraak." Also: "Ikke bruk saa avansert spraak som i kildene, vaart spraak og sitat fra kilder maa skilles." Hard vocabulary lifted from sources is the most common reason supervisor and external readers find the thesis "vague and complicated"; plain prose is read as more rigorous, not less.
+- **When to apply:** Every section, every chapter. Hardest violators historically: Ch 2 theory sections, §3.1, §3.6, §5.1.x. The check at draft time: read each sentence aloud and ask "would a smart non-specialist understand this on first pass?" If no, rewrite.
+- **Source:** Supervisor 2026-05-04 (logged in `context/docs/project/supervisor-feedback.md`).
+
+### Open abstract concepts with everyday-life intuition before naming the technical term
+- **Rule:** When a paragraph introduces an abstract or technical concept (scheduling, trust calibration, design science, NP-hardness, multi-tenancy), the FIRST sentence should anchor the reader in an everyday situation they already understand — "a head nurse splitting shifts on a paper rota", "a passenger waiting for a delayed train", "a parent juggling pickup times across two children" — and only then move to the technical name. Einstein did not open relativity with "combinatorial complexity"; he opened with a person standing on a platform watching a train. Use the same move. The intuition does not have to be the source's example; pick whatever everyday situation makes the abstract idea concrete in one sentence.
+- **Why:** Supervisor 2026-05-04: "Relativity theory av Albert Einstein: gjoer det enkelt. 'Tenk at du staar aa venter paa et tog...': forstaa med klare ord." A technical concept landed cold reads as alien; the same concept landed via an everyday situation reads as clarifying. The intuition opener is also the cleanest way to satisfy the broad-to-narrow rule.
+- **When to apply:** Every section that opens at an abstract or technical concept. Particularly Ch 2 (every theory section), Ch 4.5 (algorithm), Ch 5.1.x (anchor sub-sections). §2.1 ¶1's head-nurse opener is the canonical example.
+- **Source:** Supervisor 2026-05-04 (logged in `context/docs/project/supervisor-feedback.md`).
 
 ### Gloss in-house jargon on first use, or pick plainer phrasing
 - **Rule:** Internal vocabulary — "fit/gap", "anchor concept", "spine", "outline marker", "MUST CITE", and similar workflow terms — is not legible to a cold sensor. On first use in prose, gloss the term in one short clause ("the fit/gap analysis — what existing systems cover and what they do not — ...") or replace with plainer phrasing. The supervisor's preferred fix for fit/gap specifically is a table contrasting "what exists" against "what is missing"; plain prose may use that same framing.
@@ -258,6 +294,12 @@ Use this to find the rules that touch the section you are writing or reviewing. 
 
 ## Flow
 
+### Sequence the argument linearly — no cross-winds, no sailboat-in-side-wind paragraphs
+- **Rule:** A section's paragraphs must read as a single line of thought going one direction: each paragraph adds the next step in an argument the reader is following, not a separate observation arriving from a different angle. If two adjacent paragraphs would have to be read together to make sense, one of them is in the wrong place; reorder, merge, or cut. The reader should never feel that the argument is being pulled sideways while they were going forwards.
+- **Why:** Supervisor 2026-05-04: "Ting kommer paa tvers. Omtrent seilbaat men vind kommer fra alle retninger." This is distinct from the existing "bridges between paragraphs" rule: bridges fix the joints between adjacent paragraphs once the order is right; this rule fixes the order itself. A section can have perfect bridges and still feel like a sailboat in cross-winds if the underlying claim sequence is wrong.
+- **When to apply:** Every section longer than three paragraphs. The check at draft time: write down each paragraph's claim in one sentence; read the list top-to-bottom; does it read as one argument unfolding, or as several argument-fragments stitched in non-linear order? Reorder until it reads as one.
+- **Source:** Supervisor 2026-05-04 (logged in `context/docs/project/supervisor-feedback.md`).
+
 ### Bridge between paragraphs — no abrupt topic jumps
 - **Rule:** Each new paragraph must open with a bridge that names what the previous paragraph established and what this one adds (a contrast, a refinement, a consequence, a counterexample, a delimitation). Topic-switching mid-section without a bridge sentence reads as if the section were assembled from disjoint notes. The bridge sentence is one sentence, not a paragraph; it carries the joint, then the new paragraph develops the new claim normally.
 - **Why:** Supervisor 2026-05-02: "Brå overgang mellom avsnitt: bør være bedre overganger." The lack of bridges is also a visible AI-tell in long-form academic prose and a frequent reason sensors mark "argument is hard to follow".
@@ -267,6 +309,12 @@ Use this to find the rules that touch the section you are writing or reviewing. 
 ---
 
 ## Structure
+
+### Each section opens broad, then narrows to one clear message
+- **Rule:** Every section starts with a broad framing the reader can already grasp (the everyday situation, the human role, the problem in plain terms), then narrows in stages to the one specific claim the section exists to make. The section has ONE clear message — name it to yourself in a single sentence before drafting; if you cannot, the section is not ready to write. Every paragraph must visibly serve that one message; tangents go in another section or get cut. The reader leaves the section knowing one thing more than they did when they entered.
+- **Why:** Supervisor 2026-05-04: "begynn med bredere og saa spesifiser. Klar tanker, klar tekst." The Ch 2 / Ch 3 drafts repeatedly opened mid-stream at the technical level, leaving the reader to reverse-engineer the framing. Sections without one clear message read as topic-bundles; the reader cannot tell what the section is for.
+- **When to apply:** Every section, every chapter. Particularly Ch 2 theory sections (where it is tempting to open at the textbook concept level), Ch 3 method sections (where the rationale is more important than the procedure label), Ch 5 discussion sub-sections (where one anchor = one message).
+- **Source:** Supervisor 2026-05-04 (logged in `context/docs/project/supervisor-feedback.md`).
 
 ### Name the taxonomy explicitly in the orientation sentence, even when it is implied
 - **Rule:** For paragraphs that enumerate items (constraint types, solver families, automation levels, requirement categories), state the list in the FIRST sentence. Do not assume the body's per-item sentences imply the taxonomy.

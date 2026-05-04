@@ -79,6 +79,12 @@ All ¶-plans use these markers. The deterministic checker greps for them. Each m
 
 **2.1 Resource Scheduling** (~2 pages)
 
+> **Supervisor calibration 2026-05-04** (full log: `context/docs/project/supervisor-feedback.md`):
+> - Keep the current first sentence and the head-nurse intuition opener — both flagged as good and simple. The broad-to-narrow shape should be preserved.
+> - Replace "combinatorial complexity" in our prose with plain step-by-step language. Example shape: "the planner has to make a plan so that the traffic coordinator gets a driver and a vehicle for each task, in a way that respects competence, time windows, and shift limits, and there are usually too many possible combinations to check by hand, so an algorithm searches through them step by step until it lands on a workable plan." Textbooks may use "combinatorial complexity"; our paraphrase comes first, the technical term is optional and parenthetical.
+> - The supervisor's example template: plain, constructive, step-by-step prose that leads to a goal. "Vi skal lage en plan slik at trafikkledere ditt datt osv... enkelt, konstruktivt, steg for steg, leder til maal."
+> - Source quoting (Pinedo, Burke, etc.) keeps the source's vocabulary inside the cite, but our surrounding sentences paraphrase plainly. Do not let the source's register leak into our prose.
+
 - ¶1: Define resource scheduling — assigning a set of limited resources (people, vehicles) to tasks over time, subject to constraints. Note analogous domains (nurse scheduling, crew scheduling, driver scheduling) to establish the multi-resource-assignment problem framing. Open with a single-resource example from an adjacent domain to build intuition before introducing multi-resource complexity. Introduce the traffic coordinator early — the human actor whose work the scheduling problem describes.
   MUST CITE: foundational scheduling textbook (definitional; analogous-domains framing)
 - ¶2: Multi-resource scheduling — Ressursplanlegger assigns *both* an employee and a vehicle to each assignment. Increases combinatorial complexity compared to single-resource problems. Define the Ressursplanlegger problem in this vocabulary: assignments = tasks with fixed time windows and resource requirements; drivers + vehicles = resources with competency, availability, and capacity constraints; objective = maximise coverage + balance soft constraints.
@@ -158,6 +164,26 @@ Eight sections per the §8.4 reference-thesis pattern: origin story, applied DSR
 **3.1 Defining the Task** (~1.5 pages, NEW per §8.4 + §12.1)
 
 Origin story — how the project began. Reads as a story, not a specification.
+
+> **Supervisor calibration 2026-05-04** (full log: `context/docs/project/supervisor-feedback.md`):
+> - The task description belongs at the top of the section. Open with what the project was — Admmit's task — before any framing about students, interviews, or process.
+> - Do not call them "design choices" in this section. Frame the section as research that informs design; the design choices are made later, with the research as the input.
+> - The word "brief" is unclear. Use concrete phrasing — "Admmit's bachelor task description", "the task offered by Admmit", or similar.
+> - Grammar: when referring to the team in a possessive form, use "their", not "its".
+> - Use "the companies interviewed" or "the seven companies" when referring to the interview sample, not the disembodied "interviews".
+> - Do not present seven interviews as happening on a single day. The honest reconstruction: one interview at a time, with the team adjusting questions and reflecting between calls; vendor names like Timpex and Opter surfaced gradually through "what tools do you use" questions, with several companies describing mixes of tools rather than single-vendor adoption.
+> - Strengthen the motivation for the choice to interview seven coordinators. The current draft reads as a decision presented without a reason. Name what the team needed the interviews to answer.
+> - Do not jump from "seven interviews" straight to "two design choices were locked". The two are not in the same chain of causation; the connecting reasoning has to be visible.
+> - Reframe the HITL and multi-tenant origin honestly: "after the interviews, the team agreed with what Admmit had set as requirements; Admmit had the requirements, and the interviews validated them" — not "regardless of what coordinators said, HITL was chosen". Admmit had the mandate; the interviews validated it.
+> - Do not write "not in the interviews". The phrasing reads as dismissive or boss-like. State positively where the requirement actually came from.
+> - Explain multi-tenant in plain language. One short sentence — one deployed system serving several customer companies, each company's data and configuration isolated from the others.
+> - Drop the phrase "they validated but did not introduce". The framing is wrong; rewrite around the corrected origin story above.
+> - Drop the meta-phrase "so the reader can tell apart". Awkward and unnecessary if the prose itself is clear.
+> - Drop "every design choice traced through" if it has already been said earlier in the section. The text up to the HITL paragraph in the previous draft was largely repetition; cut.
+> - When the section names the four Trust/control operationalisations, write the four actions in the prose — "inspect, modify, accept, or reject" — rather than "the four actions defined under Trust/control" or "the four operationalisations of Trust/control".
+> - Simplify the Efficiency sentence. Whatever the precise wording becomes, it must be a sentence a reader with no prior exposure to the anchor concepts could read once and understand.
+> - Drop "interview-driven analysis" as a compound. Use plain phrasing.
+> - Read the whole section after drafting and ask: does the argument move forward in one direction? The previous draft read as cross-winds (a sailboat with wind from every direction). Sequence: task -> why interviews were needed -> how the interviews actually unfolded -> what they validated against Admmit's existing requirements -> bridge to method.
 
 - ¶1: How the project began — Admmit's bachelor task offer to NTNU. The decision to accept the task and build Ressursplanlegger.
 - ¶2: Stakeholder access — seven traffic coordinators contacted directly by the team on its own initiative (Admmit did not broker introductions). Phone interviews on a single day.

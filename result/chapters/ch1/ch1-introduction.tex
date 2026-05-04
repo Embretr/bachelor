@@ -2,24 +2,76 @@
 \label{chap:introduction}
 
 % See context/outline.md Ch 1 for paragraph-level plan.
-% Ch 1 is written AFTER Ch 2-5 are drafted (so the intro matches what was actually written).
-
 
 \section{Background and Motivation}
 \label{sec:background}
+
+Every working day, Norwegian transport companies move several hundred million tonne-kilometres of goods across the country \parencite{ssb2026godstransport}. Behind that movement, in every transport company, a traffic coordinator decides which driver takes which assignment in which vehicle. The decision happens dozens of times a day. Across the seven Norwegian transport companies interviewed for this thesis, the same pattern surfaced in every conversation: overtime is handled reactively rather than systematically, idle time between assignments is invisible in the tools the coordinator uses, and load balancing across drivers depends on memory rather than on any structured overview. We call this pattern the resource-utilization visibility gap. It is the starting point of this thesis.
+
+The traffic coordinator is the person who runs the planning system day to day, but the demand for an algorithm-assisted planning system is not coming from coordinators. Across the seven interviews, owners and managers articulated the need for utilisation visibility and for an automatically generated plan; coordinators articulated the need for speed, override authority, and a system that does not get in their way. The same configuration appears at the project level: Admmit, the Norwegian software firm that offered this thesis as a bachelor task, articulated a Human-in-the-Loop (HITL) operation requirement and a multi-tenant architecture from the outset. The seven interviewed companies validated those requirements; they did not introduce them. This split between who articulates the demand for automation and who must operate it is the configuration \textcite{bainbridge1983ironies} anticipates in \emph{Ironies of Automation}, and it runs across the empirical foundation of this thesis.
+
+Tacit-knowledge dependency and slow legacy software are downstream consequences of the visibility gap, not its origin. Coordinators rely on operational knowledge held in their heads (who has the right licence, who is experienced on which routes, who is approaching overtime limits, which vehicle suits which job) because no current system surfaces that information in a structured, comparable form. The two commercial Transport Management Systems named in the interview pool, Timpex and Opter, handle order management and invoicing well; neither generates assignment plans automatically, and Timpex is described by users as extremely slow under concurrent use. Other interviewed companies use internal or custom tools, or plan from memory and by phone. The planning step itself, between an order existing and a specific driver and vehicle being assigned to perform it, is unaddressed by every system the seven interviewed companies use.
+
+The conditions to address that step are now in place. Constraint-programming solvers (Google's OR-Tools CP-SAT) and metaheuristic engines (Timefold) have matured enough to be embedded in a small-and-medium-enterprise transport platform without a dedicated optimisation team \parencite{rossi2006constraint, burke2017late}. Modern web frameworks (Next.js with TypeScript end-to-end) make a fast, multi-tenant planning interface feasible for a two-student team to build and operate. Norwegian digital transformation in logistics is accelerating \parencite{kristensen2021digital}, but the resource-utilization planning gap persists across the seven companies in the consultation pool. The visibility gap is not a technology gap; the data needed to see utilisation exists in every company. What is missing is a structured view that makes utilisation patterns legible to the people who would act on them.
+
+Ressursplanlegger (hereafter RP) is the artefact this thesis investigates. RP is an algorithm-assisted planning platform with a multi-engine solver layer (greedy heuristic, OR-Tools CP-SAT, Timefold metaheuristic) and a drag-and-drop human-in-the-loop timeline. The algorithm proposes a plan; the coordinator can inspect, modify, accept, or reject every algorithm-generated assignment before it takes effect. Per-company configurability of the soft-constraint weights lets the same artefact serve companies with materially different operational rules without code changes. RP is not a Transport Management System in the sense Timpex and Opter are: it does not handle order management or invoicing. It addresses the planning step those systems leave open.
 
 
 \section{Anchor Concepts}
 \label{sec:anchors}
 
+The thesis argument turns on three locked anchor concepts. The names are used verbatim throughout the thesis; synonyms drift the spine and are flagged by reviewers.
+
+\textbf{Efficiency} is the anchor for improved resource utilization across three concrete dimensions: reduced overtime, reduced idle time between assignments, and reduced uneven load between drivers. Visibility into current utilization is the precondition for optimization; the system's primary value is making invisible utilisation patterns legible to the coordinator and the owner before any algorithm reorders them.
+
+\textbf{Trust/control} is the anchor for the coordinator's authority over every algorithm-generated assignment. The coordinator must be able to inspect, modify, accept, or reject any assignment the algorithm produces. Trust and control are inseparable in this thesis: trust in the algorithm is built through demonstrable control over its output. The compound term is used verbatim; "control" alone, "trust" alone, or paraphrases such as "human oversight" or "operator supervision" are not equivalent.
+
+\textbf{Adaptability} is the anchor for the artefact's capacity to function meaningfully across companies with materially different operational rules, fleet composition, and assignment criteria. Adaptability is distinct from skalerbarhet, which concerns volume rather than meaningful operation across material rule differences. The same RP instance must serve a small operator with eight to twenty drivers and a multi-department fleet of around forty-five vehicles, with different soft-constraint weight profiles, without forking the codebase.
+
 
 \section{Research Questions}
 \label{sec:research-questions}
+
+\begin{quote}
+How can an algorithm-assisted resource planning platform improve resource utilization in Norwegian transport companies (reducing overtime, idle time between assignments, and uneven driver load) while remaining accountable to the traffic coordinator who operates it?
+\end{quote}
+
+The main research question links the resource-utilization improvement RP is meant to deliver with the coordinator accountability the artefact must preserve. It binds Efficiency to Trust/control: utilization gains made at the cost of operator authority would not satisfy the question, and operator authority preserved without utilization improvement would not satisfy it either.
+
+Three sub-questions narrow the main research question into questions answerable in the discussion.
+
+\begin{quote}
+\textbf{SQ1} — How is resource-utilization visibility distributed across operator and owner stakeholders in current Norwegian transport-company planning practice?
+\end{quote}
+
+SQ1 addresses the empirical configuration that motivates the artefact. It maps to \textbf{Efficiency} and is answered in §5.1.1 from the seven interviews and the operator-vs-owner asymmetry they surface.
+
+\begin{quote}
+\textbf{SQ2} — How can an algorithm-assisted planning system be designed so that automated optimisation improves resource utilization while remaining operable and overridable by the traffic coordinator?
+\end{quote}
+
+SQ2 addresses the design question. It maps to \textbf{Trust/control} and is answered in §5.1.2 through the four-layer HITL theory applied to the artefact's override flow, deviation viewer, scoring panel, and time/quality control.
+
+\begin{quote}
+\textbf{SQ3} — To what extent and under what limitations does Ressursplanlegger demonstrate measurable improvement in resource utilization?
+\end{quote}
+
+SQ3 addresses the validation question. It maps to \textbf{Adaptability} primarily and to all three anchors cross-anchor; it is answered in §5.1.3 and §5.4 from the multi-engine benchmark, the requirements traceability matrix, and the twelve named limitations that bound what can be claimed.
+
+The three sub-questions are not justified or discussed here. The discussion belongs in Chapter 3.
 
 
 \section{Scope and Delimitations}
 \label{sec:scope}
 
+In scope is everything required to deliver the three anchors as cross-cutting design qualities. The core planning interface (the daily timeline, manual and algorithm-generated assignment, override, plan approval, recurring assignments, priority levels, status workflow). Driver and vehicle management with competencies, certifications with expiry tracking, weekly work schedules, time-off, vehicle types and capacity, vehicle maintenance dates, and trailers. The optimisation algorithm with three pluggable engines (greedy, OR-Tools CP-SAT, Timefold) and configurable soft-constraint weights. Conflict detection across eight deviation categories with severity and status. Multi-tenancy with email-and-password authentication, session-based access, and role-based invitations. The dashboard with utilisation metrics. Each in-scope feature must contribute to at least one anchor: visibility and optimisation under Efficiency, override authority and explanation under Trust/control, configurability and per-company isolation under Adaptability.
+
+Out of scope are several items that are real and that interviewees named, but that the thesis does not deliver and does not claim. A driver-facing mobile app and real-time push notifications to drivers are out of scope: RP is a planning artefact, not a driver dispatch artefact. Billing and invoicing integration is out of scope: it was the most frequently named missing feature across the interviews, but it sits in the order-management category that existing systems already cover, and bridging the two is an integration project rather than a planning project. Cross-border or international transport regulations are out of scope: the regulatory context is Norwegian. Real-time GPS and dispatch tracking are out of scope: RP plans the day rather than monitoring its execution. Vehicle Routing Problem (VRP) approaches that sequence routes for a fleet are out of scope: RP is an assignment problem (who does what), not a sequencing problem, and VRP is referenced in \Cref{chap:theory} only to delimit. Full automation without HITL is out of scope by Admmit mandate: the coordinator's authority over every individual assignment decision is a design constraint, not a configurable feature.
+
+The work was divided between the two authors. Mikael led user research, requirements, the fit/gap analysis, and the bulk of the thesis writing. Embret led system development, including the data model, the planning timeline, the deviation viewer, the dashboard, the three optimisation engines, the benchmark harness, and the multi-tenant infrastructure. Both authors contributed to the eight named iterations, scope decisions, and the discussion in Chapter 5.
+
 
 \section{Thesis Structure}
 \label{sec:structure}
+
+\Cref{chap:theory} establishes the four bodies of theory the thesis stands on: scheduling under a utilization lens, four-layer human-in-the-loop theory (Parasuraman's automation taxonomy, Bainbridge's owner-vs-operator framing, Hoff and Bashir's three-layer trust model, Miller's explanation-as-interface, and Lee and See's appropriate-trust foundation), the Transport Management System category, and Design Science Research with its validation-versus-evaluation distinction. \Cref{chap:method} applies Design Science Research through Peffers' six DSRM activities, narrates the project's origin in Admmit's bachelor task, describes the seven semi-structured interviews and their thematic analysis, documents the eight named iterations that produced the artefact, and sets out the evaluation framework and the validity-and-reliability bounds. \Cref{chap:findings} reports the interview themes, the forty-two functional and sixteen non-functional requirements, the fit/gap analysis against existing systems, the system as it actually is, the optimisation algorithm with multi-engine benchmark results, the DSR artefacts mapping, and the project process documentation. \Cref{chap:discussion} interprets those findings under the three anchors, names the twelve hierarchical limitations that bound what can be claimed, and reflects on the central methodological weak spot. \Cref{chap:conclusion} answers each sub-question in a single paragraph tied to the anchor it serves, and ties future work to specific named limitations. Each chapter closes with what its findings hand to the next.

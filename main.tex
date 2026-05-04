@@ -111,8 +111,11 @@
 \chapter*{Sammendrag}
 \addcontentsline{toc}{chapter}{Sammendrag}
 
-[Skriv norsk sammendrag her — maks 1 side. Skal dekke: hva ble undersøkt,
-hvordan, hva ble funnet, og konklusjon. Skrives til slutt når alt annet er ferdig.]
+Norske transportbedrifter mangler systematisk innsikt i hvordan ressursene faktisk blir brukt. Overtid håndteres reaktivt, dødtid mellom oppdrag er usynlig i dagens verktøy, og lastfordeling mellom sjåfører er avhengig av trafikkleders hukommelse. Denne masteroppgaven undersøker hvordan en algoritmestøttet ressursplanleggingsplattform kan bedre ressursutnyttelsen i norske transportbedrifter samtidig som den forblir ansvarlig overfor trafikklederen som bruker den.
+
+Oppgaven følger paradigmet Design Science Research, anvendt gjennom Peffers' seks DSRM-aktiviteter og åtte navngitte iterasjoner. Det empiriske grunnlaget er semistrukturerte intervjuer med syv trafikkledere og transportledere i norske bedrifter, analysert gjennom Braun og Clarkes seks faser for tematisk analyse. Det utviklede artefaktet, RP, er en plattform bygget på Next.js, tRPC og PostgreSQL med tre optimeringsmotorer (en grådig heuristikk, OR-Tools CP-SAT og Timefold) og et Gantt-basert dra-og-slipp-tidsskjema med menneske-i-løkken. Evalueringsrammen sammenligner motorene mot tre syntetiske datasett og kompletteres av en kravsporbarhetsmatrise.
+
+Intervjuene avdekket et gjennomgående synlighetsgap i ressursutnyttelse, og en operatør-mot-eier-asymmetri som speiler Bainbridges \emph{Ironies of Automation}: behovet for automatisering uttrykkes av eiere og av Admmit, ikke av trafikklederne som må kjøre systemet daglig. Diskusjonen organiserer hovedfunnene under tre låste forankringskonsepter, brukt verbatim på engelsk: \textbf{Efficiency} (synlighetsgapet, asymmetrien, sammenligning av løsere), \textbf{Trust/control} (firelagstolkningen av menneske-i-løkken anvendt på override-autoritet) og \textbf{Adaptability} (konfigurerbare myke-skranke-vekter på tvers av bedrifter). Tolv hierarkiske begrensninger (L1 til L12) avgrenser hva oppgaven kan hevde, der de viktigste er fraværet av produksjonsutrulling (L6) og brukertesting med trafikkledere (L8). Konklusjonen er at algoritmestøttet planlegging under interessentasymmetri i norsk transport er gjennomførbar når operatøren beholder autoritet over hver enkelt tildeling, systemet forklarer seg i operatørens vokabular, og det som skiller én bedrift fra en annen lever som konfigurasjon, ikke som kode.
 
 \newpage
 
@@ -121,8 +124,11 @@ hvordan, hva ble funnet, og konklusjon. Skrives til slutt når alt annet er ferd
 \chapter*{Abstract}
 \addcontentsline{toc}{chapter}{Abstract}
 
-[Write English abstract here — typically 150--250 words summarising background,
-method, findings, and conclusion. Written last when everything else is done.]
+Norwegian transport companies operate without systematic visibility into resource utilization: overtime is handled reactively, idle time between assignments is invisible in current tools, and load balancing depends on the traffic coordinator's memory. This thesis asks how an algorithm-assisted resource planning platform can improve resource utilization in Norwegian transport companies while remaining accountable to the coordinator who operates it.
+
+The thesis follows Design Science Research, applied through Peffers' six DSRM activities and eight named iterations. The empirical foundation is semi-structured interviews with seven traffic coordinators and transport managers across Norway, analysed through Braun and Clarke's six-phase thematic analysis. The artefact, Ressursplanlegger (RP), is a Next.js + tRPC + PostgreSQL platform with three optimisation engines (a greedy heuristic, OR-Tools CP-SAT, and Timefold) and a Gantt-style drag-and-drop human-in-the-loop timeline. The evaluation framework benchmarks the engines against three synthetic datasets and is complemented by a requirements traceability matrix.
+
+The interviews surface a resource-utilization visibility gap as the primary finding and an operator-vs-owner asymmetry that mirrors Bainbridge's \emph{Ironies of Automation}: demand for automation is articulated by owners and by Admmit, not by the coordinators who must run any such system. The discussion organises primary findings under three locked anchor concepts: \textbf{Efficiency} (visibility gap, asymmetry, multi-engine benchmark), \textbf{Trust/control} (four-layer human-in-the-loop theory applied to override authority), and \textbf{Adaptability} (configurable soft-constraint weights across companies). Twelve hierarchical limitations (L1 through L12) bound what the thesis can claim, the most consequential being the absence of production deployment (L6) and of user testing with coordinators (L8). The closing claim is that algorithm-assisted planning under stakeholder asymmetry in Norwegian transport is feasible when the operator keeps authority over every algorithm-generated assignment, when the system explains itself in the operator's vocabulary rather than in solver internals, and when what distinguishes one company from another lives as configuration rather than as code.
 
 \newpage
 
