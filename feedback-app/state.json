@@ -8,14 +8,6 @@
       "suggestion": null,
       "status": null
     },
-    "338ab6070f03a853": {
-      "context": "Theory > Resource Scheduling",
-      "paragraph": "Many everyday jobs come down to scheduling. A dentist fits one-to-one appointments with their patients into the hours of the working day. A waiter routes the next free server to the next ready table. A parent juggles pickup times across two children's after-school activities. Each is a small version of the same problem: matching time-limited resources to tasks at the right time, under rules about who can do what. \\textcite{pinedo2016scheduling} defines scheduling more formally as allocating resources to tasks over time, subject to given constraints, with the goal of optimising one or more objectives. The version that runs at a Norwegian transport company every morning sits inside this definition. A traffic coordinator matches drivers and vehicles to the day's transport assignments, where each assignment has a pickup time, a destination, and rules about who and what can do it. The coordinator's job is to decide who drives which truck, where, and when, so that every assignment is covered by someone qualified and available.",
-      "summary": "Defines scheduling generally and frames RP's daily driver-and-vehicle assignment as one instance of it.",
-      "feedback": null,
-      "suggestion": null,
-      "status": null
-    },
     "846bb9b39ca630d3": {
       "context": "Theory > Resource Scheduling",
       "paragraph": "The version of the problem RP solves is harder than the simplest single-resource case, because each transport assignment needs both a driver and a vehicle, and the two must stay paired for the whole assignment. In scheduling vocabulary, assignments are tasks with fixed time windows and fixed pickup-and-delivery locations, while drivers and vehicles are resources with their own attributes: a driver has competencies and availability, a vehicle has type and capacity. The planning horizon is dynamic: the coordinator sets it in the dashboard and can plan a single day, a week, or longer rotations as the company's operating rhythm requires. Pairing makes the problem harder than the single-resource case that dominates \\parencite{pinedo2016scheduling}, because a candidate plan now has to satisfy compatibility for two resource types at the same moment, not one.",
@@ -64,26 +56,10 @@
       "suggestion": null,
       "status": null
     },
-    "d7be2a1e98e335d8": {
-      "context": "Theory > Human-in-the-Loop Automation",
-      "paragraph": "The reason for placing partial authority with the coordinator, rather than letting the algorithm act on its own, has a structural answer in \\textcite{bainbridge1983ironies}. Bainbridge's central observation is that the people who specify automation are not the same as the people who must operate it. Owners and managers ask for the system; the worker on the floor must run it day to day. This split applies to the present project as well: the system was specified by a software firm whose customers are transport-company owners, while a traffic coordinator must run it every shift. Bainbridge argues that automation built under this asymmetry tends to leave operators with an \"arbitrary collection of tasks\" and inadequate support for them \\parencite[p.~775]{bainbridge1983ironies}. Grounding HITL on this asymmetry rather than on convenience makes trust/control a structural requirement of the system, not a usability feature. The coordinator must be able to inspect, modify, accept, or reject any algorithm-generated assignment, because the system was specified by people who do not bear the consequences of its mistakes.",
-      "summary": "Grounds the human-in-the-loop choice in Bainbridge's owner-versus-operator asymmetry argument.",
-      "feedback": null,
-      "suggestion": null,
-      "status": null
-    },
     "cd675670d5f47d3d": {
       "context": "Theory > Human-in-the-Loop Automation",
       "paragraph": "Trust in the algorithm is a separate question from authority over it. A coordinator who has the authority to override the algorithm may still leave the system unused if they do not trust what it produces. \\textcite{hoff2015trust} review 127 studies of human-automation trust from 101 articles, and group their findings into a three-layer model of dispositional, situational, and learned trust \\parencite[p.~413]{hoff2015trust}. Dispositional trust reflects how much an individual tends to trust automation in general. Situational trust depends on context and workload. Learned trust is built through experience with the specific system: first as initial trust based on reputation, then as dynamic trust that updates with each interaction \\parencite[p.~420]{hoff2015trust}. Two coordinators using the same plan generator may therefore hold different levels of trust at the same moment, and the same coordinator's reliance on the algorithm shifts across days. Hoff and Bashir also report that early errors damage trust more than later errors do \\parencite[p.~426]{hoff2015trust}, which has a concrete consequence for deployment: a coordinator's first week with RP weighs more in trust formation than the months that follow. The studies the model rests on are mostly from aviation and military settings, so applying it to a small Norwegian coordinator pool is by analogy rather than direct empirical support. By analogy, the model gives the project not a number to predict but a design constraint: calibrated trust (neither over- nor under-reliance) is the target the artefact must enable through the override and explanation interfaces that the next two layers specify.",
       "summary": "Introduces Hoff and Bashir's three-layer trust model and what it means for deploying RP.",
-      "feedback": null,
-      "suggestion": null,
-      "status": null
-    },
-    "56bc5a338969f6a2": {
-      "context": "Theory > Human-in-the-Loop Automation",
-      "paragraph": "The coordinator's ability to interpret what the algorithm has done is what keeps trust calibrated rather than blind. \\textcite{miller2019explanation} surveys explanation in the social sciences and argues that explanation has three properties most automated systems ignore. Explanations are contrastive: people ask \"Why P rather than Q?\", not just \"Why P?\". They are selective: people expect one or two relevant causes rather than a complete causal chain. They are social: people treat explanation as a communicative act, tailored to what they already know \\parencite[p.~3]{miller2019explanation}. For an algorithm-assisted plan, the coordinator's question is rarely \"Why was this assignment generated?\". It is \"Why was this driver assigned, rather than the one I would have picked?\". Miller argues that explanation is an interface property of an automated decision system, and that \"trust is lost when users cannot understand traces of observed behaviour or decisions\" \\parencite[p.~3]{miller2019explanation}. The implication for RP is that the system must show contrastive reasons for its choices in the coordinator's vocabulary (competence, time, current load), not in raw constraint weights and solver internals. Explanation belongs alongside the override controls themselves, not as a feature added afterwards.",
-      "summary": "Argues from Miller that explanations must be contrastive, selective, and social to keep trust calibrated.",
       "feedback": null,
       "suggestion": null,
       "status": null
@@ -139,7 +115,7 @@
     "faa36ebe341e7876": {
       "context": "Theory > Design Science Research",
       "paragraph": "DSR is not the only research paradigm available for an information systems study, and two alternatives in the IS literature warrant comparison. \\textcite{orlikowski1991studying} survey the IS literature and group it into three philosophical stances: positivist, interpretive, and critical \\parencite[p.~5]{orlikowski1991studying}. The positivist stance assumes an objective social reality investigated with structured instruments, with the goal of testing hypotheses to increase predictive understanding \\parencite[p.~5]{orlikowski1991studying}. That stance fits a study that measures population-level effects of a deployed system, but on its own it cannot justify building a new artefact whose primary contribution is the design knowledge embedded in it. The interpretive stance assumes that organisational reality is socially constructed and seeks contextual understanding through participants' meanings rather than generalisable laws \\parencite[p.~5]{orlikowski1991studying}. That stance fits a study whose contribution is rich description of coordinator practice, but on its own it cannot support building a runnable artefact whose behaviour can be checked against external criteria. DSR is the third paradigm the present project requires: an artefact-plus-knowledge contribution in which qualitative input informs requirements, and the artefact itself is examined against those requirements.",
-      "summary": "Compares positivist and interpretive paradigms to justify why DSR fits this project.",
+      "summary": "Compares positivist and interpretive paradigms to justify why DSR fits this artefact-plus-knowledge project.",
       "feedback": null,
       "suggestion": null,
       "status": null
@@ -147,10 +123,192 @@
     "06bad32d905e36eb": {
       "context": "Theory > Design Science Research",
       "paragraph": "Inside DSR, the distinction between validation and evaluation shapes what kind of empirical evidence the project can offer. \\textcite{wieringa2014dsm} distinguishes validation from evaluation. Validation predicts whether a deployed system would do what stakeholders want; evaluation observes a deployed system in actual use \\parencite[p.~31]{wieringa2014dsm}. In validation, the researcher experiments with a model of how stakeholders would use the artefact. In evaluation, stakeholders use the artefact independently of the researcher \\parencite[p.~34]{wieringa2014dsm}. The present thesis validates rather than evaluates RP. Behaviour is predicted in two ways. The first is benchmarking on synthetic datasets, which is a single-case mechanism experiment in Wieringa's classification (one artefact, controlled inputs) \\parencite[p.~64]{wieringa2014dsm}. The second is requirements traceability against the requirements derived in the relevance cycle. No transport company has operated the system independently. \\textcite{hevner2007threecycle} treats this exact ordering as expected practice, with artefacts tested in laboratory and experimental situations before being released into field testing along the relevance cycle \\parencite[p.~91]{hevner2007threecycle}, so the absence of production deployment is a structural feature of the project's stage rather than a methodological deficit. \\Cref{sec:evaluation-framework} applies this distinction to the synthetic-benchmark protocol, and Section 5.4 returns to it as limitation L5 when bounding what that validation can and cannot claim.\n",
-      "summary": "Distinguishes validation from evaluation per Wieringa and explains why this thesis validates rather than evaluates RP.",
+      "summary": "Distinguishes Wieringa's validation from evaluation and explains why this thesis validates rather than evaluates RP.",
       "feedback": null,
       "suggestion": null,
       "status": null
+    },
+    "42f8bc235b782d3b": {
+      "context": "Theory > Resource Scheduling",
+      "paragraph": "Improving Efficiency is not possible without first being able to see it. A coordinator working from a spreadsheet or whiteboard cannot reduce overtime they cannot count, or balance a workload they cannot view across drivers. Before the system reorders any assignment, its first contribution is putting those utilization measures in front of the coordinator in a single view they can read at a glance.",
+      "summary": "Argues that visibility of utilization measures is the artefact's first contribution, before any reordering.",
+      "feedback": null,
+      "suggestion": null,
+      "status": null
+    },
+    "ad5bccc996447ef0": {
+      "context": "Theory > Resource Scheduling",
+      "paragraph": "Scheduling constraints split into two kinds, hard and soft, which the solver treats differently. Hard constraints must hold for a plan to be feasible at all: every driver-vehicle pairing has to be legally and physically capable of the assignment, and no resource may be double-booked. Concrete cases include the driver's licence class matching the vehicle, the driver holding any required certifications such as an ADR certificate for hazardous cargo, and the driver being on duty rather than on declared time-off. \\textcite{ernst2004staff} state the rule directly: hard constraints must be satisfied; \\textcite{rossi2006constraint} say the same in constraint-programming vocabulary, distinguishing deadlines that bound feasibility from due dates that enter the weighted objective.",
+      "summary": "Defines hard constraints as feasibility requirements with concrete licence and double-booking examples.",
+      "feedback": null,
+      "suggestion": null,
+      "status": null
+    },
+    "11947622fdfae971": {
+      "context": "Theory > Resource Scheduling",
+      "paragraph": "Constructive heuristics, called dispatching rules in \\textcite{pinedo2016scheduling}, build a plan one assignment at a time according to a priority rule, for example ``schedule the most constrained job first''. They are fast, but they can lock onto a locally good plan and miss a much better plan that would only be reachable by reordering earlier choices.",
+      "summary": "Describes constructive heuristics as fast, priority-rule-driven solvers that can lock onto locally good plans.",
+      "feedback": null,
+      "suggestion": null,
+      "status": null
+    },
+    "11ff43004c8a22e4": {
+      "context": "Theory > Resource Scheduling",
+      "paragraph": "Constraint programming formalises the problem as variables and constraints and then searches the space of feasible plans systematically. It uses propagation, which deduces forced choices from the constraints, and backtracking, which undoes a choice that leads to a dead end. Within a time budget the solver returns near-optimal plans, at the cost of higher modelling effort upfront \\parencite{rossi2006constraint}.",
+      "summary": "Describes constraint programming as systematic search with propagation and backtracking under a time budget.",
+      "feedback": null,
+      "suggestion": null,
+      "status": null
+    },
+    "6180d1334fdcc244": {
+      "context": "Theory > Resource Scheduling",
+      "paragraph": "Metaheuristics are general-purpose search strategies that improve a current candidate plan by repeatedly modifying it. Two well-known examples illustrate the family. The tabu search of \\textcite{glover1986future} keeps a short-term memory of recent moves to avoid cycling back to them. The late-acceptance hill climbing of \\textcite{burke2017late} accepts a new candidate if it is no worse than the candidate seen a fixed number of steps ago. Both let the search escape locally good plans on large instances.",
+      "summary": "Describes metaheuristics through tabu search and late-acceptance hill climbing as escape mechanisms on large instances.",
+      "feedback": null,
+      "suggestion": null,
+      "status": null
+    },
+    "4a0559bb9a3db117": {
+      "context": "Theory > Human-in-the-Loop Automation",
+      "paragraph": "\\textcite{parasuraman2000automation} formalise this division of authority on a ten-level scale of automation for decision and action selection. The scale runs from level 1 (fully manual) to level 10 (fully autonomous), with intermediate steps that progressively transfer authority from human to machine. Level 4 is ``the computer suggests one alternative'', level 5 is ``executes that suggestion if the human approves'', and level 6 is ``executes automatically unless the human vetoes within a time window''. RP sits at level 5: the solver produces one plan, the plan is shown on the timeline, and no driver is dispatched until the coordinator approves it. The artefact deliberately stops short of level 6, where the coordinator would only need to fail to object.",
+      "summary": "Places RP at level 5 of Parasuraman's ten-level automation taxonomy.",
+      "feedback": "beast!!! bra. here the sources are used, and someone who doesnt know anything about the subject would understand.",
+      "suggestion": null,
+      "status": "pending"
+    },
+    "8a438adc241ebe79": {
+      "context": "Theory > Human-in-the-Loop Automation",
+      "paragraph": "Trust in the algorithm is a separate question from authority over it. A coordinator who has the authority to override the algorithm may still leave the system unused if they do not trust what it produces. \\textcite{hoff2015trust} review 127 studies of human-automation trust from 101 articles, and group their findings into a three-layer model of dispositional, situational, and learned trust \\parencite[p.~413]{hoff2015trust}. Dispositional trust reflects how much an individual tends to trust automation in general. Situational trust depends on context and workload. Learned trust is built through experience with the specific system, first as initial trust based on reputation, then as dynamic trust that updates with each interaction \\parencite[p.~420]{hoff2015trust}.",
+      "summary": "Introduces Hoff and Bashir's three-layer model of dispositional, situational, and learned trust.",
+      "feedback": null,
+      "suggestion": null,
+      "status": null
+    },
+    "6b9725f30ae96ce4": {
+      "context": "Theory > Human-in-the-Loop Automation",
+      "paragraph": "After a solver run, a summary panel reports the solution score and counts of hard and soft violations, exposing process and performance in the sense Lee and See describe. The deviation viewer at \\texttt{/avvik} lists each active conflict by type, affected assignment, and affected resource, so a coordinator who disagrees with the algorithm can locate the contested assignment and decide whether to override.",
+      "summary": "Describes the summary panel and deviation viewer as the process and conflict-location mechanisms.",
+      "feedback": null,
+      "suggestion": null,
+      "status": null
+    },
+    "353b3b7e769bb5d9": {
+      "context": "Theory > Human-in-the-Loop Automation",
+      "paragraph": "Override is intentionally low-friction: dragging an assignment block to a different employee row reassigns it, and conflicting changes save with a warning rather than a block. That choice is deliberate. A blocking validator would tell the coordinator that the system, not the coordinator, holds final authority, which is precisely the configuration Bainbridge warns against and the one \\textbf{Trust/control} forbids.",
+      "summary": "Justifies low-friction override against blocking validation, tying it back to Bainbridge and Trust/control.",
+      "feedback": null,
+      "suggestion": null,
+      "status": null
+    },
+    "0cf04fd568834227": {
+      "context": "Theory > Human-in-the-Loop Automation",
+      "paragraph": "Soft constraints are weighted per company so that a coordinator's notion of a good plan can be adjusted without code changes, and the choice of solver engine and time budget is exposed at the point of plan generation so the system's capability limits are visible before the plan is read. These mechanisms are not features added to a finished automation; they are what makes the automation operable at all. \\Cref{sec:iter-hitl,sec:iter-deviations,sec:iter-tradeoff} document how each layer was built into the artefact.",
+      "summary": "Closes the HITL section by tying per-company weights and engine choice to artefact operability.",
+      "feedback": null,
+      "suggestion": null,
+      "status": null
+    },
+    "1dcd6e2eb8e0304d": {
+      "context": "Theory > Transport Management Systems",
+      "paragraph": "Inside that label, the picture is not uniform. What a TMS actually offers depends on the vendor, and whether a transport company uses one at all depends on the company. In the Norwegian market, the two commercial systems named in the interviews are \\textbf{Timpex} and \\textbf{Opter}. Both cover order management and freight billing, and neither generates assignment plans automatically. Adoption itself is uneven. \\textcite{griffis2007tms} report that of the firms in their 2007 North American sample without any TMS, half manage transportation entirely manually, while the other half rely on partial or legacy IT \\parencite[p.~26]{griffis2007tms}. The sector RP enters is therefore a patchwork: different vendors cover different ground, and a substantial share of operations run without dedicated planning software at all.",
+      "summary": "Shows that TMS coverage varies by vendor and that adoption itself is uneven across the sector.",
+      "feedback": null,
+      "suggestion": null,
+      "status": null
+    },
+    "6f1045c94d4dfec6": {
+      "context": "Theory > Transport Management Systems",
+      "paragraph": "Even where a TMS is in place, one part of the operation is missing from the category as a whole: the upstream planning step that decides which driver and vehicle perform which assignment. \\textcite{griffis2007tms} observe that most TMS offerings centre on the individual shipment as the unit of analysis and lack the ability to optimise multi-load shipments, leaving load consolidation as a manual activity \\parencite[p.~27]{griffis2007tms}. \\textcite{heinbach2022datadriven} reach the same conclusion: TMS products focus on shipment-level business activities, while other digital platforms add capabilities outside that focus \\parencite[p.~808]{heinbach2022datadriven}. What existing systems cover, in short, is order management, freight billing, and shipment-level execution. What is missing is the upstream planning step between an order existing and a specific driver and vehicle being assigned to perform it. RP is positioned in exactly that gap. \\Cref{chap:findings} substantiates the gap with the empirical comparison, and the per-company configurability that lets RP fit different vendor environments is built in \\Cref{sec:iter-weights} and discussed under \\textbf{Adaptability} in §5.1.3. \\Cref{sec:dsr} turns to the research paradigm under which an artefact filling the planning gap is built and investigated.",
+      "summary": "Names the upstream driver-and-vehicle planning gap that no TMS covers and that RP fills.",
+      "feedback": null,
+      "suggestion": null,
+      "status": null
+    },
+    "bec649f7f81728ea": {
+      "context": "Theory > Design Science Research",
+      "paragraph": "Design Science Research (DSR) is the research paradigm in which a designed artefact is constructed and investigated as the central contribution of a study, together with the knowledge produced about how that artefact behaves in its context. The point is that the artefact and the knowledge come out of the same project. \\textcite{wieringa2014dsm} states the position concisely: design science is the design and investigation of artefacts in context, where the artefact is built to improve something in its problem context \\parencite[p.~3]{wieringa2014dsm}.",
+      "summary": "Defines Design Science Research as the artefact-plus-knowledge paradigm via Wieringa's framing.",
+      "feedback": null,
+      "suggestion": null,
+      "status": null
+    },
+    "b8de8ba7915b58f3": {
+      "context": "Theory > Design Science Research",
+      "paragraph": "\\textcite{hevner2007threecycle} structures the same work as three linked cycles. The relevance cycle imports requirements and acceptance criteria from the application environment. The rigor cycle draws on the existing scientific knowledge base and contributes new knowledge back to it. The design cycle iterates internally between constructing and evaluating the artefact \\parencite[pp.~88--90]{hevner2007threecycle}.",
+      "summary": "Presents Hevner's three-cycle structure of relevance, rigor, and design.",
+      "feedback": null,
+      "suggestion": null,
+      "status": null
+    },
+    "4f740ce4b7123b19": {
+      "context": "Theory > Design Science Research",
+      "paragraph": "\\textcite{peffers2007dsrm} structure the same paradigm as a procedural model. Their Design Science Research Methodology (DSRM) specifies six activities: problem identification and motivation; objectives for a solution; design and development; demonstration; evaluation; and communication \\parencite[p.~46]{peffers2007dsrm}. The two framings are complementary: the cycles describe what must be present, the activities describe what is done. \\Cref{chap:method} applies the DSRM activities step by step to this project.",
+      "summary": "Presents Peffers' DSRM as six procedural activities and notes complementarity with Hevner's cycles.",
+      "feedback": null,
+      "suggestion": null,
+      "status": null
+    },
+    "4e6010e643b2a0c1": {
+      "context": "Theory > Resource Scheduling",
+      "paragraph": "When a problem is NP-hard, the practical question is no longer whether to find a guaranteed-best solution but which kind of algorithm to use to find a good one. Several broad styles exist. A teacher putting together a class timetable, who picks the first room that fits each lesson and moves on, is using one. A person solving a sudoku, who writes down what each cell could hold and rules out options as they go, is using another. A person editing a complicated calendar, who tries small changes and keeps the ones that improve the schedule, is using a third. The personnel-scheduling literature gives these three styles their formal names: constructive heuristics, constraint programming, and metaheuristics. Mathematical programming is a fourth body that, as \\textcite{ernst2004staff} note, dominates the rostering literature by volume, but it is rarely used on its own for messy real-world instances because the constraints and objectives such instances carry are hard to express in pure mathematical form. The remaining three each fit a regime the others do not: heuristics suit messy real-world objectives that resist clean mathematical formulation, constraint programming dominates highly constrained instances where any feasible plan is acceptable, and metaheuristics search large solution spaces where exact methods do not scale \\parencite[pp.~17--18]{ernst2004staff}. Applied to RP's driver-and-vehicle assignment problem, no single family dominates across all instances, which is why \\Cref{sec:iter-multiengine} instantiates one engine from each.",
+      "feedback": "Mathematical programming is a fourth body that, as Ernst (2004) note, dominates the rostering literature by volume, but it is rarely used on its own for messy real-world instances because the constraints and objectives such instances carry are hard to express in pure mathematical form.v explain this part shorter and easier.",
+      "status": "pending"
+    }
+  },
+  "result/chapters/ch1/ch1-introduction.tex": {
+    "1788ebb63446b73e": {
+      "context": "Introduction",
+      "paragraph": "Norwegian transport companies move large volumes of goods every day. In 2025, these companies carried about 252 million tonnes on behalf of their customers \\parencite{ssb2026godstransport}. Behind every load, in every transport company, a person called the traffic coordinator decides who drives what, in which vehicle, and when. These are large decisions, made dozens of times a day, and they have a substantial impact on the company. Drivers can only work so many hours before overtime kicks in; assigning one already close to that cap means the load is paid at overtime rates, which raises costs and lowers profits. Vehicles and drivers only earn money when they are working; long gaps between assignments mean the company keeps paying for them while they sit idle, and revenue drops. Some routes are harder than others, whether long, late, or unpopular; if the same few drivers get the hardest ones week after week, fairness erodes and employee satisfaction drops.",
+      "feedback": "i like the flow of this paragraph now. One thing to change is the last example, it is not real and our solution doesnt cover this. remove it. You can instead add a narrowing sentence that summarizes the importance of the resource scheduling, and the impact it has on the company.",
+      "status": "ready",
+      "suggestion": "Norwegian transport companies move large volumes of goods every day. In 2025, these companies carried about 252 million tonnes on behalf of their customers \\parencite{ssb2026godstransport}. Behind every load, in every transport company, a person called the traffic coordinator decides who drives what, in which vehicle, and when. These are large decisions, made dozens of times a day, and they have a substantial impact on the company. Drivers can only work so many hours before overtime kicks in; assigning one already close to that cap means the load is paid at overtime rates, which raises costs and lowers profits. Vehicles and drivers only earn money when they are working; long gaps between assignments mean the company keeps paying for them while they sit idle, and revenue drops. Resource scheduling is therefore where a transport company's daily operating margin is decided: better assignments mean lower overtime, less idle time, and higher utilisation of the vehicles and drivers the company already pays for."
+    },
+    "e0cc742248e65bfe": {
+      "context": "Introduction > Anchor Concepts > Efficiency",
+      "paragraph": "The system has to help the company make better use of its drivers and vehicles. Three things should improve: drivers should run less overtime, they should spend less time waiting between assignments, and the work should be shared more evenly across the team. Before the system can improve any of these, it first has to make them easy to see for the coordinator and for the owner. The data is already in the company, but no one can read it at a glance today.",
+      "summary": "Defines Efficiency as improved utilization, with visibility of the measures as the precondition for any improvement.",
+      "feedback": null,
+      "suggestion": null,
+      "status": null
+    },
+    "23054b51408332ee": {
+      "context": "Introduction > Anchor Concepts > Trust/control",
+      "paragraph": "The coordinator has to stay in charge of every assignment the algorithm proposes. For each one, the coordinator should be able to look at it, change it, accept it, or reject it before it takes effect. Trust in the algorithm grows over time, but only if the coordinator can see what it does and change it when needed. A system that made the plans on its own and left the coordinator with no way to step in would not work in the kind of company this thesis is built for.",
+      "summary": "Defines Trust/control as the coordinator's authority to inspect, modify, accept, or reject every assignment.",
+      "feedback": null,
+      "suggestion": null,
+      "status": null
+    },
+    "28b1afece31cdd3a": {
+      "context": "Introduction > Anchor Concepts > Adaptability",
+      "paragraph": "The same system has to work for very different companies without being rebuilt each time. Transport companies vary a lot: a small operator with around ten drivers does not run the same way as a firm with forty-five vehicles split across three departments. The system has to fit both, with the rules and priorities adjusted per company in the settings rather than in the code itself.",
+      "summary": "Defines Adaptability as the system fitting different company sizes and rules through configuration rather than code changes.",
+      "feedback": null,
+      "suggestion": null,
+      "status": null
+    },
+    "0f4af03e4b7c52e7": {
+      "context": "Introduction > Research Questions",
+      "paragraph": "\\begin{quote}\nHow can an algorithm-assisted resource planning platform improve resource utilization in Norwegian transport companies (reducing overtime, idle time between assignments, and uneven driver load) while remaining accountable to the traffic coordinator who operates it?\n\\end{quote}",
+      "summary": "States the main research question verbatim.",
+      "feedback": null,
+      "suggestion": null,
+      "status": null
+    },
+    "a4dd4762c04efb9e": {
+      "context": "Introduction > Research Questions",
+      "paragraph": "Three sub-questions break the main question into smaller pieces that can be answered later in the thesis.",
+      "summary": "Introduces the three sub-questions that decompose the main research question.",
+      "feedback": null,
+      "suggestion": null,
+      "status": null
+    },
+    "a2c94744507a76f7": {
+      "context": "Introduction > Background and Motivation",
+      "paragraph": "Norwegian transport companies move large volumes of goods every day. In 2025, these companies carried about 252 million tonnes on behalf of their customers, almost all of it within Norway \\parencite{ssb2026godstransport}. Behind every load, in every transport company, a person called the traffic coordinator decides who drives what, in which vehicle, and when. These are large decisions, made dozens of times a day, and the choices the coordinator makes go directly to the company's results. Assigning a driver who is already close to the weekly hours cap turns the next load into overtime, which lifts cost and cuts margin. Letting a vehicle and its driver wait between two assignments means the company keeps paying for them while they earn nothing. Concentrating the heaviest workload on the same few drivers week after week wears them down and lowers employee satisfaction. Each of these is a specific choice, and together they roll up to the three outcomes a transport-company owner watches: how much overtime is run, how much idle time sits between assignments, and how evenly the workload is shared across the team. How that choice is made today, and what tools support or constrain it, was explored through interviews with traffic coordinators in Norwegian transport companies and through an ongoing dialogue with Admmit, the Norwegian software firm that offered this thesis as a bachelor task. Across those conversations, the same pattern surfaced. The information needed to track overtime, idle time, and load balance is in the company's systems, but it is spread across an order tool, a timesheet, the coordinator's spreadsheets, and the coordinator's memory, and it is hard to pull together into a single working overview. The coordinator can answer any specific question about a specific driver but cannot easily step back and see how the week as a whole is shaping up for the team. The thesis takes this as its starting point: making the data already in the company's systems easy to read at a glance, and using that data to propose a balanced plan the coordinator can review and adjust.",
+      "feedback": "still you are doing thse 3 concrete things they look at. they look at a lot more, so this becomes wrong. these are just examples, not concrete set in stone stuff. make it sound more like that.",
+      "status": "ready",
+      "suggestion": "Norwegian transport companies move large volumes of goods every day. In 2025, these companies carried about 252 million tonnes on behalf of their customers, almost all of it within Norway \\parencite{ssb2026godstransport}. Behind every load, in every transport company, a person called the traffic coordinator decides who drives what, in which vehicle, and when. These are large decisions, made dozens of times a day, and the choices the coordinator makes go directly to the company's results. Assigning a driver who is already close to the weekly hours cap turns the next load into overtime, which lifts cost and cuts margin. Letting a vehicle and its driver wait between two assignments means the company keeps paying for them while they earn nothing. Concentrating the heaviest workload on the same few drivers week after week wears them down and lowers employee satisfaction. Each of these is a specific choice, and together they roll up to the kind of outcomes a transport-company owner cares about. How that choice is made today, and what tools support or constrain it, was explored through interviews with traffic coordinators in Norwegian transport companies and through an ongoing dialogue with Admmit, the Norwegian software firm that offered this thesis as a bachelor task. Across those conversations, the same pattern surfaced. The information needed to track resource utilization is in the company's systems, but it is spread across an order tool, a timesheet, the coordinator's spreadsheets, and the coordinator's memory, and it is hard to pull together into a single working overview. The coordinator can answer any specific question about a specific driver but cannot easily step back and see how the week as a whole is shaping up for the team. The thesis takes this as its starting point: making the data already in the company's systems easy to read at a glance, and using that data to propose a balanced plan the coordinator can review and adjust."
     }
   }
 }

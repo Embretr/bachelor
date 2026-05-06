@@ -30,16 +30,39 @@ State file format:
         "paragraph":  "Many everyday jobs come down to scheduling...",
         "summary":    null | "One-sentence description of this paragraph.",
         "feedback":   null | "User's feedback text.",
-        "suggestion": null | "Claude-drafted LaTeX rewrite.",
+        "suggestion": null | "Claude-drafted LaTeX rewrite of THIS paragraph."
+                          | ["paragraph 1 text", "paragraph 2 text", ...],
+        "extra_edits": null | [
+          {
+            "target_text": "...exact text of another paragraph to replace...",
+            "new_text":    "...rewrite (string)..." | ["...part 1...", "...part 2..."],
+            "label":       "human-readable hint, e.g. 'SQ1 quote block'"
+          },
+          ...
+        ],
+
+        # Both `suggestion` and `extra_edits[*].new_text` accept a string
+        # (single-paragraph rewrite) or a list of strings (split this paragraph
+        # into N new ones, joined with two newlines on Apply). The web UI shows
+        # each part as its own sub-block so a "split this in two" feedback
+        # produces a visibly two-block suggestion.
+
         "status":     null | "pending" | "ready"
       },
       ...
     }
   }
 
-  The hash is sha256(paragraph_text)[:16] - stable across reorderings, but
-  it changes when the paragraph content changes (so applying a suggestion
-  invalidates the cached summary, as it should).
+  The hash is sha256(paragraph_text)[:16]. Hashes can drift when the .tex
+  file is edited externally or when a suggestion is Applied; attach_state()
+  recovers by matching on the stored `paragraph` field and re-keys the entry
+  to the current hash. save_feedback() always recomputes the hash from the
+  paragraph text it receives, so state stays consistent across sessions.
+
+  `extra_edits` lets one feedback entry drive edits to OTHER paragraphs in
+  the same file. The web UI shows the source entry's primary suggestion plus
+  any extras; Apply replaces all of them atomically (validate-all-then-write).
+  Target paragraphs get a small "incoming edit" notice on their own block.
 """
 
 import argparse
@@ -136,16 +159,72 @@ def file_state(state: dict, rel: str) -> dict:
 
 
 def attach_state(blocks, file_rel: str):
-    state = load_state()
-    fs = state.get(file_rel, {})
-    for b in blocks:
-        if b["kind"] == "paragraph":
+    """Attach state.json fields to blocks, recovering from hash drift.
+
+    If an entry's stored `paragraph` text matches a current block but the
+    entry is keyed under a stale hash (e.g. because the file was edited
+    externally or a previous Apply didn't update DOM hashes), the entry is
+    re-keyed under the current hash and persisted. This is what makes
+    feedback survive paragraph rewrites.
+
+    Also attaches `extra_edits` (drafted by Claude as part of THIS entry's
+    feedback, replacing other paragraphs) and `incoming_edits` (extras from
+    OTHER entries that target THIS paragraph).
+    """
+    with FILE_LOCK:
+        state = load_state()
+        fs = state.get(file_rel, {})
+
+        # Build content -> stale_hash for entries whose stored paragraph
+        # matches some current block.
+        content_to_stored_hash = {}
+        for stored_hash, entry in list(fs.items()):
+            stored_para = entry.get("paragraph")
+            if stored_para:
+                content_to_stored_hash[stored_para] = stored_hash
+
+        # Re-key entries that match a current block by content but not by hash.
+        rekeyed = False
+        for b in blocks:
+            if b["kind"] != "paragraph":
+                continue
+            current_hash = paragraph_hash(b["text"])
+            if current_hash in fs:
+                continue
+            stale = content_to_stored_hash.get(b["text"])
+            if stale and stale in fs and stale != current_hash:
+                fs[current_hash] = fs.pop(stale)
+                rekeyed = True
+
+        if rekeyed:
+            state[file_rel] = fs
+            save_state(state)
+
+        # Build incoming-edits map keyed by target paragraph text.
+        incoming = {}
+        for source_hash, entry in fs.items():
+            for edit in entry.get("extra_edits") or []:
+                tgt = edit.get("target_text")
+                if not tgt:
+                    continue
+                incoming.setdefault(tgt, []).append({
+                    "source_hash": source_hash,
+                    "source_context": entry.get("context", ""),
+                    "label": edit.get("label", ""),
+                    "new_text": edit.get("new_text", ""),
+                })
+
+        for b in blocks:
+            if b["kind"] != "paragraph":
+                continue
             h = paragraph_hash(b["text"])
             entry = fs.get(h, {})
             b["hash"] = h
             b["summary"] = entry.get("summary")
             b["feedback"] = entry.get("feedback")
             b["suggestion"] = entry.get("suggestion")
+            b["extra_edits"] = entry.get("extra_edits") or []
+            b["incoming_edits"] = incoming.get(b["text"], [])
             b["status"] = entry.get("status")
     return blocks
 
@@ -156,7 +235,8 @@ def aggregate_counts() -> dict:
     for fs in state.values():
         for entry in fs.values():
             total_entries += 1
-            if entry.get("suggestion"):
+            has_suggestion = bool(entry.get("suggestion") or entry.get("extra_edits"))
+            if has_suggestion:
                 ready += 1
             elif entry.get("feedback"):
                 pending += 1
@@ -165,30 +245,43 @@ def aggregate_counts() -> dict:
     return {"pending": pending, "ready": ready, "summaries": with_summary, "total": total_entries}
 
 
-def save_feedback(file_rel: str, h: str, paragraph: str, context: str, feedback: str):
+def save_feedback(file_rel: str, client_hash: str, paragraph: str, context: str, feedback: str) -> str:
+    """Persist feedback for a paragraph.
+
+    The hash is recomputed from `paragraph` (the canonical hash) so state
+    stays consistent even if the client posted a stale hash. If the entry
+    already exists under the client's stale hash, it is migrated.
+
+    Returns the canonical hash so the client can update its data-hash.
+    """
+    correct_hash = paragraph_hash(paragraph)
     with FILE_LOCK:
         state = load_state()
         fs = file_state(state, file_rel)
-        entry = fs.setdefault(h, {})
+        if client_hash and client_hash != correct_hash and client_hash in fs and correct_hash not in fs:
+            fs[correct_hash] = fs.pop(client_hash)
+        entry = fs.setdefault(correct_hash, {})
         entry["context"] = context
         entry["paragraph"] = paragraph
+        has_suggestion = bool(entry.get("suggestion") or entry.get("extra_edits"))
         if feedback:
             entry["feedback"] = feedback
-            if not entry.get("suggestion"):
+            if not has_suggestion:
                 entry["status"] = "pending"
         else:
             entry.pop("feedback", None)
-            if not entry.get("suggestion") and not entry.get("summary"):
-                fs.pop(h, None)
+            if not has_suggestion and not entry.get("summary"):
+                fs.pop(correct_hash, None)
             else:
-                entry["status"] = "ready" if entry.get("suggestion") else None
+                entry["status"] = "ready" if has_suggestion else None
         if not fs:
             state.pop(file_rel, None)
         save_state(state)
+    return correct_hash
 
 
 def reject_entry(file_rel: str, h: str):
-    """Drop feedback + suggestion. Keep the summary if it exists."""
+    """Drop feedback, suggestion, and any extra_edits. Keep the summary."""
     with FILE_LOCK:
         state = load_state()
         fs = state.get(file_rel, {})
@@ -197,6 +290,7 @@ def reject_entry(file_rel: str, h: str):
             return
         entry.pop("feedback", None)
         entry.pop("suggestion", None)
+        entry.pop("extra_edits", None)
         entry["status"] = None
         if not entry.get("summary"):
             fs.pop(h, None)
@@ -205,26 +299,42 @@ def reject_entry(file_rel: str, h: str):
         save_state(state)
 
 
-def apply_replacement(file_rel: str, h: str, old_text: str, new_text: str):
+def apply_edits(file_rel: str, source_hash: str, edits: list):
+    """Apply a list of {old, new} edits to the file atomically.
+
+    All edits are validated (each `old` appears exactly once) BEFORE any
+    write happens. If validation passes, the writes proceed in order; the
+    source entry (the one whose feedback drove these edits) is then dropped.
+    """
     full_path = (REPO_ROOT / file_rel).resolve()
     if not str(full_path).startswith(str(REPO_ROOT)):
         return False, "Path outside repo root."
     if not full_path.exists():
         return False, "File not found."
+    if not edits:
+        return False, "No edits supplied."
 
     with FILE_LOCK:
         content = full_path.read_text(encoding="utf-8")
-        count = content.count(old_text)
-        if count == 0:
-            return False, "Original paragraph not found in file (it may have been edited externally - reload the page)."
-        if count > 1:
-            return False, f"Original paragraph appears {count} times in file - refusing to replace ambiguously."
-        full_path.write_text(content.replace(old_text, new_text, 1), encoding="utf-8")
+        for i, e in enumerate(edits, 1):
+            old = e.get("old", "")
+            if not old:
+                return False, f"Edit #{i}: missing `old` text."
+            if "new" not in e:
+                return False, f"Edit #{i}: missing `new` text."
+            count = content.count(old)
+            if count == 0:
+                return False, f"Edit #{i}: original paragraph not found in file (reload the page)."
+            if count > 1:
+                return False, f"Edit #{i}: original paragraph appears {count} times - refusing to replace ambiguously."
+        for e in edits:
+            content = content.replace(e["old"], e["new"], 1)
+        full_path.write_text(content, encoding="utf-8")
 
         state = load_state()
         fs = state.get(file_rel, {})
-        if h in fs:
-            fs.pop(h)
+        if source_hash in fs:
+            fs.pop(source_hash)
             if not fs:
                 state.pop(file_rel, None)
             save_state(state)
@@ -302,6 +412,23 @@ INDEX_HTML = r"""<!doctype html>
   .pending-note { margin-top: 0.5rem; padding: 0.4rem 0.55rem; background: #fef3c7; border: 1px solid #fde68a; color: #92400e; border-radius: 4px; font-size: 0.82rem; }
   .suggestion { margin-top: 0.6rem; padding: 0.6rem; background: #fffbe6; border: 1px solid #f1d97c; border-radius: 4px; }
   .suggestion .label { font-size: 0.72rem; color: #6b5800; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.3rem; }
+  .sug-part { margin: 0.45rem 0; padding: 0.45rem 0.55rem; background: #fffefa; border-left: 3px solid #f1d97c; border-radius: 0 3px 3px 0; }
+  .sug-part .part-label { font-size: 0.68rem; color: #92400e; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.25rem; }
+  .part-label { font-size: 0.7rem; color: #92400e; margin-bottom: 0.4rem; }
+  .split-note { color: #92400e; font-style: italic; font-size: 0.78rem; }
+  .diff { font-family: Georgia, "Times New Roman", serif; font-size: 0.94rem; line-height: 1.6; white-space: pre-wrap; word-wrap: break-word; padding: 0.45rem 0.55rem; background: #fff; border-radius: 4px; margin-top: 0.3rem; }
+  .diff .d-eq { color: #6b7280; }
+  .diff .d-add { background: #d1fae5; color: #064e3b; padding: 0.05rem 0.15rem; border-radius: 2px; }
+  .diff .d-del { background: #fee2e2; color: #7f1d1d; text-decoration: line-through; padding: 0.05rem 0.15rem; border-radius: 2px; }
+  .diff.diff-nochange .d-eq { color: #9ca3af; font-style: italic; }
+  .extra-edit { margin-top: 0.5rem; padding: 0.5rem; background: #fff; border: 1px dashed #e7c15a; border-radius: 4px; }
+  .extra-edit .head { font-size: 0.72rem; color: #6b5800; margin-bottom: 0.3rem; }
+  .extra-edit .head strong { color: #1f2937; }
+  .extra-edit .target-prefix { font-family: ui-monospace, monospace; font-size: 0.78rem; color: #6b7280; background: #f9fafb; padding: 0.25rem 0.4rem; border-radius: 3px; margin-bottom: 0.3rem; white-space: pre-wrap; word-break: break-word; }
+  .incoming-edit { margin: 0.4rem 0; padding: 0.45rem 0.6rem; background: #ecfeff; border: 1px solid #67e8f9; border-radius: 4px; font-size: 0.82rem; color: #155e75; }
+  .incoming-edit strong { color: #0c4a6e; }
+  .incoming-edit a { color: #0e7490; text-decoration: underline; cursor: pointer; }
+  .block.target-of-extra { border-color: #67e8f9; box-shadow: 0 0 0 1px #67e8f9 inset; }
   .suggestion pre.source { display: none; white-space: pre-wrap; font-family: ui-monospace, monospace; font-size: 0.78rem; line-height: 1.5; margin: 0.4rem 0; padding: 0.5rem; background: #fff7d6; border: 1px solid #f1d97c; border-radius: 4px; color: #6b5800; }
   .suggestion pre.source.shown { display: block; }
   .suggestion .show-source { display: block; margin: 0.4rem 0 0 0; font-size: 0.72rem; color: #92400e; cursor: pointer; user-select: none; }
@@ -417,6 +544,86 @@ function renderedBlock(latex, kind /* 'paragraph' | 'suggestion' */) {
     </div>
     <pre class="source">${escaped}</pre>
   `;
+}
+
+// -- Word-level diff (git style) --------------------------------------------
+// Used to render a suggestion as "what changed" rather than as the whole new
+// paragraph next to the original. Tokenises so each word carries its trailing
+// whitespace (this prevents whitespace tokens from matching as common and
+// fragmenting the diff into "del-add-del-add..."), runs LCS, then
+// post-processes to put all deletions before all additions inside each
+// non-equal run so the reader sees "old old old new new new" not interleaved.
+
+function diffTokenize(s) {
+  // Each token = optional leading whitespace + non-whitespace + trailing whitespace.
+  // Whitespace stays glued to its adjacent word so it doesn't act as a free
+  // anchor that splits the diff.
+  if (!s) return [];
+  return s.match(/\s*\S+\s*/g) || [];
+}
+
+function wordDiff(oldText, newText) {
+  const A = diffTokenize(oldText), B = diffTokenize(newText);
+  const m = A.length, n = B.length;
+  const dp = Array.from({length: m + 1}, () => new Int32Array(n + 1));
+  for (let i = m - 1; i >= 0; i--) {
+    for (let j = n - 1; j >= 0; j--) {
+      dp[i][j] = A[i] === B[j] ? dp[i + 1][j + 1] + 1 : Math.max(dp[i + 1][j], dp[i][j + 1]);
+    }
+  }
+  const segs = [];
+  let i = 0, j = 0;
+  while (i < m && j < n) {
+    if (A[i] === B[j]) { segs.push({k: 'eq', t: A[i]}); i++; j++; }
+    else if (dp[i + 1][j] >= dp[i][j + 1]) { segs.push({k: 'del', t: A[i]}); i++; }
+    else { segs.push({k: 'add', t: B[j]}); j++; }
+  }
+  while (i < m) segs.push({k: 'del', t: A[i++]});
+  while (j < n) segs.push({k: 'add', t: B[j++]});
+
+  // Post-pass: inside each contiguous non-equal run, gather all dels first,
+  // then all adds. This converts "del add del add" into "del del add add" so
+  // a multi-word replacement reads as one block of removed text followed by
+  // one block of inserted text.
+  const grouped = [];
+  let k = 0;
+  while (k < segs.length) {
+    if (segs[k].k === 'eq') { grouped.push(segs[k]); k++; continue; }
+    let endK = k;
+    let dels = '', adds = '';
+    while (endK < segs.length && segs[endK].k !== 'eq') {
+      if (segs[endK].k === 'del') dels += segs[endK].t; else adds += segs[endK].t;
+      endK++;
+    }
+    if (dels) grouped.push({k: 'del', t: dels});
+    if (adds) grouped.push({k: 'add', t: adds});
+    k = endK;
+  }
+  // Coalesce adjacent eq segments (post-grouping no eq is split, but be safe).
+  const out = [];
+  for (const s of grouped) {
+    if (out.length && out[out.length - 1].k === s.k) out[out.length - 1].t += s.t;
+    else out.push({k: s.k, t: s.t});
+  }
+  return out;
+}
+
+function renderDiff(oldText, newText) {
+  if (oldText === newText) {
+    return `<div class="diff diff-nochange"><span class="d-eq">${escapeHtml(newText)}</span></div>`;
+  }
+  if (newText === "") {
+    return `<div class="diff"><span class="d-del">${escapeHtml(oldText)}</span></div>`;
+  }
+  if (oldText === "") {
+    return `<div class="diff"><span class="d-add">${escapeHtml(newText)}</span></div>`;
+  }
+  const segs = wordDiff(oldText, newText);
+  const html = segs.map(s => {
+    const cls = s.k === 'eq' ? 'd-eq' : (s.k === 'add' ? 'd-add' : 'd-del');
+    return `<span class="${cls}">${escapeHtml(s.t)}</span>`;
+  }).join('');
+  return `<div class="diff">${html}</div>`;
 }
 
 // -- TTS via browser SpeechSynthesis -----------------------------------------
@@ -598,27 +805,97 @@ async function renderFile() {
     } else if (b.kind === "other") {
       html += `<div class="block other"><pre>${escapeHtml(b.text)}</pre></div>`;
     } else {
+      const extras = Array.isArray(b.extra_edits) ? b.extra_edits : [];
+      const incoming = Array.isArray(b.incoming_edits) ? b.incoming_edits : [];
+
+      // Helper: normalise a suggestion field (string | string[] | null) to
+      // an array of paragraph strings. null/undefined/[] -> []; empty
+      // string is a valid suggestion meaning "delete the paragraph".
+      const normParts = (val) => {
+        if (val === null || val === undefined) return [];
+        if (Array.isArray(val)) return val.filter(p => typeof p === "string");
+        if (typeof val === "string") return [val];
+        return [];
+      };
+
+      // Compute hasSuggestion from normalised content, not from raw truthiness
+      // (an empty array is truthy in JS).
+      const hasPrimary = normParts(b.suggestion).length > 0;
+      const hasExtras = extras.some(e => normParts(e.new_text).length > 0);
+      const hasSuggestion = hasPrimary || hasExtras;
+
       const cls = ["block", "paragraph"];
-      if (b.suggestion) cls.push("has-suggestion");
+      if (hasSuggestion) cls.push("has-suggestion");
       else if (b.feedback) cls.push("has-feedback");
+      if (incoming.length) cls.push("target-of-extra");
+
       const summaryHTML = b.summary
         ? `<div class="summary">${escapeHtml(b.summary)}</div>`
         : `<div class="summary missing">(no summary yet - ask Claude to populate state.json)</div>`;
-      const suggestionHTML = b.suggestion
+
+      let extrasHTML = "";
+      if (extras.length) {
+        extrasHTML = extras.map((e, idx) => {
+          const tgt = e.target_text || "";
+          const newParts = normParts(e.new_text);
+          const newJoined = newParts.join("\n\n");
+          const labelTxt = e.label
+            ? escapeHtml(e.label)
+            : (tgt ? escapeHtml(tgt.slice(0, 80) + (tgt.length > 80 ? "..." : "")) : `Extra edit ${idx + 1}`);
+          const tgtAttr = encodeURIComponent(tgt);
+          const newAttr = encodeURIComponent(newJoined);
+          const splitNote = newParts.length > 1
+            ? ` <em class="split-note">(splits into ${newParts.length} paragraphs)</em>`
+            : (newJoined === "" ? ` <em class="split-note">(deletes paragraph)</em>` : "");
+          return `<div class="extra-edit" data-extra-idx="${idx}" data-target="${tgtAttr}" data-new="${newAttr}">
+                    <div class="head">Also edits: <strong>${labelTxt}</strong>${splitNote}</div>
+                    ${renderDiff(tgt, newJoined)}
+                  </div>`;
+        }).join("");
+      }
+
+      const primaryParts = normParts(b.suggestion);
+      const primaryJoined = primaryParts.join("\n\n");
+      const primarySplitNote = primaryParts.length > 1
+        ? `<em class="split-note">(splits this paragraph into ${primaryParts.length})</em>`
+        : (primaryParts.length === 1 && primaryJoined === ""
+            ? `<em class="split-note">(deletes this paragraph)</em>`
+            : "");
+      const primarySugHTML = primaryParts.length
+        ? `<div class="primary-suggestion" data-new="${encodeURIComponent(primaryJoined)}">
+             ${primarySplitNote ? `<div class="part-label">${primarySplitNote}</div>` : ""}
+             ${renderDiff(b.text, primaryJoined)}
+           </div>`
+        : "";
+
+      const suggestionHTML = hasSuggestion
         ? `<div class="suggestion">
-             <div class="label">Suggested revision (drafted by Claude)</div>
-             ${renderedBlock(b.suggestion, "suggestion")}
-             <button class="apply">Apply</button>
+             <div class="label">Suggested revision (drafted by Claude)${extras.length ? ` &middot; replaces ${1 + extras.length} paragraphs` : ""}</div>
+             ${primarySugHTML}
+             ${extrasHTML}
+             <button class="apply">Apply${extras.length ? " all" : ""}</button>
              <button class="reject">Reject</button>
            </div>`
         : (b.feedback
             ? `<div class="pending-note">Feedback saved. Ask Claude to process feedback-app/state.json, then click Refresh.</div>`
             : "");
+
+      const incomingHTML = incoming.length
+        ? incoming.map(inc => {
+            const ctx = inc.source_context ? escapeHtml(inc.source_context) : "another paragraph";
+            const lbl = inc.label ? ` (${escapeHtml(inc.label)})` : "";
+            return `<div class="incoming-edit">
+                      &#9432; This paragraph will also be rewritten when you Apply the suggestion on
+                      <a class="goto-source" data-source-hash="${escapeHtml(inc.source_hash)}"><strong>${ctx}</strong></a>${lbl}.
+                    </div>`;
+          }).join("")
+        : "";
       html += `
         <div class="${cls.join(" ")}" data-idx="${i}" data-hash="${escapeHtml(b.hash)}">
           <div class="text-col">
             <div class="ctx">${escapeHtml(b.context)}</div>
             ${summaryHTML}
+            ${incomingHTML}
             ${renderedBlock(b.text, "paragraph")}
           </div>
           <div class="feedback-col">
@@ -645,6 +922,12 @@ async function renderFile() {
     const rejectBtn = $(".reject", block);
     if (applyBtn) applyBtn.addEventListener("click", () => applySuggestion(block));
     if (rejectBtn) rejectBtn.addEventListener("click", () => rejectSuggestion(block));
+    $$(".goto-source", block).forEach(link => {
+      link.addEventListener("click", () => {
+        const target = document.querySelector(`.block.paragraph[data-hash="${link.dataset.sourceHash}"]`);
+        if (target) target.scrollIntoView({ behavior: "smooth", block: "center" });
+      });
+    });
     $$(".show-source", block).forEach(toggle => {
       toggle.addEventListener("click", () => {
         // The source <pre> is the next sibling of the .row-actions wrapper.
@@ -676,11 +959,12 @@ async function saveFeedback(block) {
   const btn = $(".save", block);
   btn.disabled = true;
   try {
-    await fetchJSON("/api/feedback", {
+    const res = await fetchJSON("/api/feedback", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ file: filePath, hash, paragraph: original, context, feedback: fb }),
     });
+    if (res && res.hash) block.dataset.hash = res.hash;
     msg(block, "ok", "Feedback saved. Ask Claude to process feedback-app/state.json.");
     block.classList.add("has-feedback");
   } catch (err) {
@@ -712,37 +996,47 @@ async function clearFeedback(block) {
 
 async function applySuggestion(block) {
   const oldText = $(".rendered[data-original]", block).dataset.original;
-  const newText = $(".rendered[data-suggested]", block).dataset.suggested;
   const hash = block.dataset.hash;
+
+  // Build the edit list. The primary suggestion's joined text lives on
+  // .primary-suggestion's data-new attribute (the diff view above replaced
+  // the per-part DOM nodes). Each extra-edit div carries its own
+  // {data-target, data-new} pair.
+  const edits = [];
+  const primaryEl = $(".primary-suggestion", block);
+  if (primaryEl) {
+    const newText = decodeURIComponent(primaryEl.dataset.new || "");
+    edits.push({ old: oldText, new: newText });
+  }
+  $$(".extra-edit", block).forEach(el => {
+    const tgt = decodeURIComponent(el.dataset.target || "");
+    const nw  = decodeURIComponent(el.dataset.new || "");
+    if (tgt) edits.push({ old: tgt, new: nw });
+  });
+
+  if (!edits.length) {
+    msg(block, "err", "Nothing to apply.");
+    return;
+  }
+
   const btn = $(".apply", block);
+  const originalLabel = btn.textContent;
   btn.disabled = true;
   btn.textContent = "Applying...";
   try {
     await fetchJSON("/api/apply", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ file: filePath, hash, old: oldText, new: newText }),
+      body: JSON.stringify({ file: filePath, hash, edits }),
     });
-    const origRendered = $(".rendered[data-original]", block);
-    const origSource = $(".text-col pre.source", block);
-    const escapedNew = escapeHtml(newText);
-    origRendered.dataset.original = newText;
-    origRendered.innerHTML = renderLatex(escapedNew);
-    if (origSource) origSource.textContent = newText;
-    block.classList.remove("has-suggestion", "has-feedback");
-    block.classList.add("applied");
-    const sug = $(".suggestion", block);
-    if (sug) sug.remove();
-    $("textarea", block).value = "";
-    const sumSlot = $(".summary", block);
-    if (sumSlot) {
-      sumSlot.textContent = "(summary stale - paragraph changed; ask Claude to re-summarize)";
-      sumSlot.classList.add("missing");
-    }
-    msg(block, "ok", "Applied to file.");
+    msg(block, "ok", `Applied ${edits.length} edit(s). Reloading...`);
+    // A full reload is the simplest way to refresh every affected block's
+    // data-hash, drop the source entry's UI, and clear any incoming-edit
+    // notices on target paragraphs.
+    setTimeout(() => location.reload(), 350);
   } catch (err) {
     btn.disabled = false;
-    btn.textContent = "Apply";
+    btn.textContent = originalLabel;
     msg(block, "err", err.message);
   }
 }
@@ -755,11 +1049,9 @@ async function rejectSuggestion(block) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ file: filePath, hash }),
     });
-    block.classList.remove("has-suggestion", "has-feedback");
-    const sug = $(".suggestion", block);
-    if (sug) sug.remove();
-    $("textarea", block).value = "";
-    msg(block, "ok", "Rejected.");
+    msg(block, "ok", `Rejected. Reloading...`);
+    // Reload so any "incoming edit" notices on other paragraphs disappear.
+    setTimeout(() => location.reload(), 250);
   } catch (err) {
     msg(block, "err", err.message);
   }
@@ -858,15 +1150,15 @@ class Handler(http.server.BaseHTTPRequestHandler):
 
         if path == "/api/feedback":
             file_rel = data.get("file", "")
-            h = data.get("hash", "")
+            client_hash = data.get("hash", "")
             paragraph = data.get("paragraph", "")
             context = data.get("context", "")
             feedback = data.get("feedback", "")
-            if not file_rel or not h or not paragraph:
-                self._json(400, {"error": "Missing file, hash, or paragraph."})
+            if not file_rel or not paragraph:
+                self._json(400, {"error": "Missing file or paragraph."})
                 return
-            save_feedback(file_rel, h, paragraph, context, feedback)
-            self._json(200, {"ok": True})
+            canonical_hash = save_feedback(file_rel, client_hash, paragraph, context, feedback)
+            self._json(200, {"ok": True, "hash": canonical_hash})
             return
 
         if path == "/api/reject":
@@ -882,12 +1174,20 @@ class Handler(http.server.BaseHTTPRequestHandler):
         if path == "/api/apply":
             file_rel = data.get("file", "")
             h = data.get("hash", "")
-            old_text = data.get("old", "")
-            new_text = data.get("new", "")
-            if not file_rel or not h or not old_text or not new_text:
-                self._json(400, {"error": "Missing file, hash, old, or new."})
+            edits = data.get("edits")
+            if not edits:
+                # Backward compat: single-paragraph form
+                old_text = data.get("old", "")
+                new_text = data.get("new", "")
+                if old_text and new_text is not None:
+                    edits = [{"old": old_text, "new": new_text}]
+            if not file_rel or not h or not edits:
+                self._json(400, {"error": "Missing file, hash, or edits."})
                 return
-            ok, err = apply_replacement(file_rel, h, old_text, new_text)
+            if not isinstance(edits, list):
+                self._json(400, {"error": "edits must be a list."})
+                return
+            ok, err = apply_edits(file_rel, h, edits)
             if not ok:
                 self._json(409, {"error": err})
                 return

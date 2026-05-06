@@ -1,11 +1,9 @@
 # A-Grade Rubric — Ressursplanlegger Bachelor Thesis
 
-> This is the primary quality gate. Claude reads this before every output.
-> Every section produced must be evaluated against these criteria.
-> If a section does not meet A criteria, revise it before outputting.
+> The grading target the thesis is judged against. Read this before any revision pass.
+> Every change must move the affected section toward these criteria.
 >
-> Source: NTNU data engineering bachelor grading standards (general).
-> Complemented by evaluation/grading-guidelines.md (official NRT sensor criteria, now filled).
+> Source: NTNU data engineering bachelor grading standards. Some entries reference an earlier `evaluation/reference-thesis-analysis.md` that has since been removed; the patterns those entries name are still operative — they live in this file's tables and in `context/lessons-learned.md`.
 
 ---
 

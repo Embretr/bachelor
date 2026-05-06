@@ -4,11 +4,11 @@
 >
 > **Workflow:**
 > 1. Log every directive here verbatim, dated, with the section or scope it touches.
-> 2. Generalisable rules (those that apply beyond the immediate section) are mirrored to `evaluation/review/lessons-learned.md` so the writer + reviewer agents enforce them automatically. Cross-link both directions.
-> 3. Section-specific calibration is mirrored to the relevant block in `context/outline.md` so the writer sees it at draft time.
+> 2. Generalisable rules (those that apply beyond the immediate section) are mirrored to `context/lessons-learned.md` so revisions enforce them automatically. Cross-link both directions.
+> 3. Section-specific directives are applied directly to the target section during the next revision pass.
 > 4. Never delete entries. Strike through and date the correction if a directive is later revised.
 >
-> Owner: Mikael. Co-readable by Embret. Read at session start when working on a chapter the supervisor has commented on.
+> Read at session start when working on a chapter the supervisor has commented on. The "Mirrored to" column on older entries refers to a deleted `outline.md`; treat such pointers as historical — the operative form of every generalisable directive is the corresponding rule in `context/lessons-learned.md`.
 
 ---
 
