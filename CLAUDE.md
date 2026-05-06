@@ -200,6 +200,48 @@ Do not propose trivial changes (spelling, formatting) — only changes that affe
 
 ---
 
+## Paragraph Feedback Loop (`feedback-app/`)
+
+The web app at `feedback-app/server.py` lets the user save per-paragraph feedback and one-sentence summaries to `feedback-app/state.json`. It does not call any LLM — Claude (in a CLI session) is the worker.
+
+**State file shape** (`feedback-app/state.json`):
+
+```json
+{
+  "result/chapters/ch2/ch2-theory.tex": {
+    "<16-char-paragraph-hash>": {
+      "context":    "Theory > Resource Scheduling",
+      "paragraph":  "...full paragraph text as it stands in the .tex file...",
+      "summary":    null | "One-sentence summary of what this paragraph informs.",
+      "feedback":   null | "User's feedback text.",
+      "suggestion": null | "Claude-drafted LaTeX rewrite reflecting the feedback.",
+      "status":     null | "pending" | "ready"
+    }
+  }
+}
+```
+
+`hash` is `sha256(paragraph_text)[:16]`. When the user applies a suggestion, the entry is removed and the `.tex` file is updated. When a paragraph is later edited, its hash changes, which is the correct invalidation signal — the old summary no longer applies.
+
+**When the user asks "process the pending feedback"** (or any equivalent phrasing referring to this loop), Claude:
+
+1. Reads `feedback-app/state.json`.
+2. For every entry where `feedback` is set and `suggestion` is null/missing:
+   - Drafts a LaTeX rewrite that applies the user's feedback to `paragraph`.
+   - Obeys all writing rules from this `CLAUDE.md`: no em dashes, plain academic English, impersonal voice, anchor-concept rules, preserved LaTeX commands (`\textcite`, `\parencite`, `\Cref`, `\textit`, math, etc.), no new headings/labels.
+   - Makes only the changes the feedback requests; does not refactor unrelated wording.
+   - Writes the rewrite into the entry's `suggestion` field, sets `status` to `"ready"`.
+3. For every entry where `summary` is null/missing and `paragraph` exists:
+   - Writes a single sentence (max 20 words, plain English) describing what the paragraph informs the reader of, into the `summary` field.
+4. Writes `state.json` back (preserving JSON formatting, UTF-8).
+5. Reports counts: how many suggestions drafted, how many summaries added.
+
+The user then refreshes the web app, reviews each suggestion, and clicks Apply or Reject. Claude does **not** touch `.tex` files in this loop — the web app's Apply button does that.
+
+**To add summaries for paragraphs the user has not yet given feedback on:** Claude can be asked "summarize the paragraphs in `<file>`". Parse the file with the same paragraph splitter the server uses (split on blank lines, skip heading-only / comment-only chunks), compute each paragraph's 16-char hash, and create entries in `state.json` with `summary` filled in. Do not invent feedback or suggestions on paragraphs the user has not commented on.
+
+---
+
 ## What Claude Must Never Do
 
 - Invent references, citations, or data — use only sources in `result/references.bib`
