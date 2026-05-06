@@ -1,0 +1,33 @@
+@article{peffers2007dsrm,
+  author  = {Peffers, Ken and Tuunanen, Tuure and Rothenberger, Marcus A. and Chatterjee, Samir},
+  title   = {A Design Science Research Methodology for Information Systems Research},
+  journal = {Journal of Management Information Systems},
+  year    = {2007},
+  volume  = {24},
+  number  = {3},
+  pages   = {45--77},
+  doi     = {10.2753/MIS0742-1222240302}
+}
+
+@article{hevner2007threecycle,
+  author  = {Hevner, Alan R.},
+  title   = {A Three Cycle View of Design Science Research},
+  journal = {Scandinavian Journal of Information Systems},
+  year    = {2007},
+  volume  = {19},
+  number  = {2},
+  pages   = {87--92},
+  url     = {https://aisel.aisnet.org/sjis/vol19/iss2/4/}
+}
+
+@article{orlikowski1991studying,
+  author  = {Orlikowski, Wanda J. and Baroudi, Jack J.},
+  title   = {Studying Information Technology in Organizations: Research Approaches and Assumptions},
+  journal = {Information Systems Research},
+  year    = {1991},
+  volume  = {2},
+  number  = {1},
+  pages   = {1--28},
+  doi     = {10.1287/isre.2.1.1}
+}
+
