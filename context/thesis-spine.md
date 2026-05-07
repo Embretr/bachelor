@@ -15,16 +15,16 @@ Norwegian transport companies operate without systematic visibility into resourc
 
 ## The Research Question
 
-> How can an algorithm-assisted planning platform automate as much of the traffic coordinator's planning work as possible and improve resource utilization in Admmit's customer companies (reducing overtime, idle time between assignments, and uneven driver load), while preserving the tacit knowledge the coordinator brings to the work and the control they hold over every assignment?
+> To what extent can an algorithm-assisted planning platform automate the traffic coordinator's planning work in Admmit's customer companies in a way that improves resource utilization (reducing overtime, idle time between assignments, and uneven driver load) and is perceived as useful by the coordinator who runs it?
 
-The RQ frames the work as a balance: automation that delivers utilization gains for the company is the means and end; preservation of tacit knowledge and override authority is the constraint both must respect. Two failure modes, both named in §1.3 framing, are out of scope as answers: a system that automates everything and leaves the coordinator nothing meaningful to do, and a system that leaves the coordinator fully in charge but moves no numbers and adds nothing.
+The RQ frames the work as a balance between two simultaneous demands: utilization gains the company can measure (overtime, idle time, uneven load), and a workflow the coordinator who runs it perceives as useful. The "preserving tacit knowledge and authority" clause carried in earlier RQ wordings (struck 2026-05-07) is now implicit: a system the coordinator perceives as useful is, by construction, one that has not displaced the tacit knowledge or the override authority on which their role depends. Two failure modes are out of scope as answers: a system that automates everything and leaves the coordinator with nothing meaningful to do (and so will not be perceived as useful), and a system that leaves the coordinator fully in charge but moves no numbers.
 
 ### Sub-questions the thesis must answer
 
 Each sub-question is designed to be quotable verbatim as a single-line block quote in Chapter 6, answerable in one paragraph traceable to a specific Discussion anchor sub-section, and bounded by named limitations from §5.4. Updated 2026-05-06 to align with the reframed RQ; previous SQ wordings are recorded in `context/supervisor-log.md` 2026-05-06.
 
 1. **SQ1** — *To what extent does RP reduce overtime, idle time, and uneven driver load below the level produced by current planning practice in Admmit's customer companies?* → answered in Ch 5.1.1 (Efficiency) → bounded by L1, L2, L3, L4, L5, L6, L7
-2. **SQ2** — *Through what kind of interface and process can the traffic coordinator review and override every algorithm-generated assignment, applying tacit knowledge the algorithm cannot see, without making the planning workflow heavier than current practice?* → answered in Ch 5.1.2 (Trust/control) → bounded by L8, L10
+2. **SQ2** — *Through what kind of interface and process can the traffic coordinator review and override every algorithm-generated assignment without making the planning workflow heavier than current practice?* → answered in Ch 5.1.2 (Trust/control) → bounded by L8, L10
 3. **SQ3** — *Through which configurable elements can RP serve companies that differ in operational rules, fleet size, and planning horizon, without changes to the code?* → answered in Ch 5.1.3 (Adaptability) and cross-anchor → bounded by L9, L11, L12
 
 ---

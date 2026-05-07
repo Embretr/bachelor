@@ -280,6 +280,62 @@ def save_feedback(file_rel: str, client_hash: str, paragraph: str, context: str,
     return correct_hash
 
 
+def save_feedback_bulk(file_rel: str, feedback: str, skip_existing: bool):
+    """Apply the same feedback prompt to every paragraph in `file_rel`.
+
+    Skips any paragraph that already has a Claude-drafted suggestion, so
+    bulk-applying a new prompt never destroys ready-to-apply work. If
+    `skip_existing` is true, also skips paragraphs that already carry
+    per-paragraph feedback.
+
+    Returns counts: {set, skipped_existing, skipped_has_suggestion, total}.
+    Returns None if the file is invalid or outside the repo.
+    """
+    full_path = (REPO_ROOT / file_rel).resolve()
+    if not str(full_path).startswith(str(REPO_ROOT)) or not full_path.exists():
+        return None
+
+    text = full_path.read_text(encoding="utf-8")
+    blocks = parse_blocks(text)
+
+    set_count = 0
+    skipped_existing = 0
+    skipped_has_suggestion = 0
+    total = 0
+
+    with FILE_LOCK:
+        state = load_state()
+        fs = file_state(state, file_rel)
+        for b in blocks:
+            if b["kind"] != "paragraph":
+                continue
+            total += 1
+            h = paragraph_hash(b["text"])
+            entry = fs.setdefault(h, {})
+
+            has_suggestion = bool(entry.get("suggestion") or entry.get("extra_edits"))
+            if has_suggestion:
+                skipped_has_suggestion += 1
+                continue
+            if skip_existing and entry.get("feedback"):
+                skipped_existing += 1
+                continue
+
+            entry["context"] = b["context"]
+            entry["paragraph"] = b["text"]
+            entry["feedback"] = feedback
+            entry["status"] = "pending"
+            set_count += 1
+        save_state(state)
+
+    return {
+        "set": set_count,
+        "skipped_existing": skipped_existing,
+        "skipped_has_suggestion": skipped_has_suggestion,
+        "total": total,
+    }
+
+
 def reject_entry(file_rel: str, h: str):
     """Drop feedback, suggestion, and any extra_edits. Keep the summary."""
     with FILE_LOCK:
@@ -361,6 +417,15 @@ INDEX_HTML = r"""<!doctype html>
   .badge.ready { background: #dbeafe; color: #1e40af; }
   .protocol { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 0.6rem 0.9rem; margin-bottom: 1rem; font-size: 0.85rem; color: #334155; }
   .protocol code { background: #e2e8f0; padding: 0 0.25rem; border-radius: 3px; font-family: ui-monospace, monospace; font-size: 0.85em; }
+  .bulk-fb { background: #fef9c3; border: 1px solid #fde68a; border-radius: 6px; padding: 0.7rem 0.9rem; margin-bottom: 1rem; }
+  .bulk-fb-label { font-weight: 600; font-size: 0.85rem; color: #713f12; margin-bottom: 0.4rem; }
+  .bulk-fb-hint { font-size: 0.78rem; color: #92591b; margin-bottom: 0.45rem; line-height: 1.45; }
+  .bulk-fb textarea { width: 100%; min-height: 4rem; resize: vertical; font: inherit; padding: 0.4rem 0.5rem; box-sizing: border-box; border: 1px solid #fde68a; border-radius: 4px; }
+  .bulk-fb-row { display: flex; align-items: center; flex-wrap: wrap; gap: 0.6rem; margin-top: 0.45rem; }
+  .bulk-fb label.skip-toggle { font-size: 0.82rem; color: #713f12; cursor: pointer; }
+  .bulk-fb-status { font-size: 0.82rem; color: #6b7280; }
+  .bulk-fb button { background: #ca8a04; color: #fff; border: 1px solid #a16207; }
+  .bulk-fb button:hover:not(:disabled) { background: #a16207; }
   .files { list-style: none; padding: 0; margin: 0; }
   .files li { margin: 0.35rem 0; }
   .files a { display: inline-block; padding: 0.4rem 0.6rem; border: 1px solid #ddd; border-radius: 4px; color: #1d4ed8; text-decoration: none; font-family: ui-monospace, monospace; font-size: 0.85rem; }
@@ -747,6 +812,26 @@ async function fetchJSON(url, opts = {}) {
   return data;
 }
 
+function bulkFeedbackBar() {
+  return `
+    <div class="bulk-fb">
+      <div class="bulk-fb-label">Apply feedback to every paragraph in this chapter</div>
+      <div class="bulk-fb-hint">
+        One prompt, every paragraph. Useful for chapter-wide passes such as "compare each
+        paragraph against its summary, remove unnecessary sentences, and rewrite to be
+        concrete to its main message". Paragraphs that already have a Claude-drafted
+        suggestion are always skipped so ready-to-apply work is never overwritten.
+      </div>
+      <textarea id="bulk-fb-text" placeholder="Type a prompt to apply to every paragraph..."></textarea>
+      <div class="bulk-fb-row">
+        <label class="skip-toggle"><input type="checkbox" id="bulk-fb-skip" checked> Skip paragraphs that already have feedback</label>
+        <button id="bulk-fb-apply" class="primary">Apply to all paragraphs</button>
+        <span class="bulk-fb-status"></span>
+      </div>
+    </div>
+  `;
+}
+
 function protocolBox(counts) {
   const c = counts || { pending: 0, ready: 0, summaries: 0, total: 0 };
   return `
@@ -795,6 +880,7 @@ async function renderFile() {
     </header>
     ${ttsBar()}
     ${protocolBox(counts)}
+    ${bulkFeedbackBar()}
   `;
 
   if (!blocks.length) html += `<p class="empty">No blocks parsed.</p>`;
@@ -915,6 +1001,9 @@ async function renderFile() {
 
   $("#app").innerHTML = html;
 
+  const bulkBtn = document.getElementById("bulk-fb-apply");
+  if (bulkBtn) bulkBtn.addEventListener("click", submitBulkFeedback);
+
   $$(".block.paragraph").forEach(block => {
     $(".save", block).addEventListener("click", () => saveFeedback(block));
     $(".clear-fb", block).addEventListener("click", () => clearFeedback(block));
@@ -945,6 +1034,55 @@ async function renderFile() {
 
   wireTTS();
   window.addEventListener("beforeunload", stopSpeaking);
+}
+
+async function submitBulkFeedback() {
+  const ta = document.getElementById("bulk-fb-text");
+  const skipBox = document.getElementById("bulk-fb-skip");
+  const btn = document.getElementById("bulk-fb-apply");
+  const statusEl = document.querySelector(".bulk-fb-status");
+  if (!ta || !btn || !statusEl) return;
+
+  const fb = ta.value.trim();
+  if (!fb) {
+    statusEl.textContent = "Type a prompt first.";
+    statusEl.style.color = "#b91c1c";
+    return;
+  }
+
+  const note = skipBox && skipBox.checked
+    ? " on every paragraph that does not already have feedback"
+    : " on every paragraph (overwriting any existing feedback)";
+  if (!confirm(`Apply this feedback${note}? Paragraphs with a ready Claude suggestion are always skipped.`)) {
+    return;
+  }
+
+  btn.disabled = true;
+  statusEl.textContent = "Applying...";
+  statusEl.style.color = "#6b7280";
+
+  try {
+    const res = await fetchJSON("/api/feedback-bulk", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        file: filePath,
+        feedback: fb,
+        skip_existing: skipBox ? skipBox.checked : true,
+      }),
+    });
+    statusEl.textContent =
+      `Set on ${res.set} of ${res.total} paragraphs ` +
+      `(skipped: ${res.skipped_existing} with existing feedback, ` +
+      `${res.skipped_has_suggestion} with a ready suggestion). Reloading...`;
+    statusEl.style.color = "#065f46";
+    setTimeout(() => location.reload(), 1500);
+  } catch (err) {
+    statusEl.textContent = err.message;
+    statusEl.style.color = "#b91c1c";
+  } finally {
+    btn.disabled = false;
+  }
 }
 
 async function saveFeedback(block) {
@@ -1159,6 +1297,20 @@ class Handler(http.server.BaseHTTPRequestHandler):
                 return
             canonical_hash = save_feedback(file_rel, client_hash, paragraph, context, feedback)
             self._json(200, {"ok": True, "hash": canonical_hash})
+            return
+
+        if path == "/api/feedback-bulk":
+            file_rel = data.get("file", "")
+            feedback = data.get("feedback", "")
+            skip_existing = bool(data.get("skip_existing", True))
+            if not file_rel or not feedback.strip():
+                self._json(400, {"error": "Missing file or feedback."})
+                return
+            result = save_feedback_bulk(file_rel, feedback, skip_existing)
+            if result is None:
+                self._json(400, {"error": "Invalid file path."})
+                return
+            self._json(200, {"ok": True, **result})
             return
 
         if path == "/api/reject":
