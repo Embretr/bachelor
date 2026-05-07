@@ -15,15 +15,17 @@ Norwegian transport companies operate without systematic visibility into resourc
 
 ## The Research Question
 
-> How can an algorithm-assisted resource planning platform improve resource utilization in Norwegian transport companies (reducing overtime, idle time between assignments, and uneven driver load) while remaining accountable to the traffic coordinator who operates it?
+> How can an algorithm-assisted planning platform automate as much of the traffic coordinator's planning work as possible and improve resource utilization in Admmit's customer companies (reducing overtime, idle time between assignments, and uneven driver load), while preserving the tacit knowledge the coordinator brings to the work and the control they hold over every assignment?
+
+The RQ frames the work as a balance: automation that delivers utilization gains for the company is the means and end; preservation of tacit knowledge and override authority is the constraint both must respect. Two failure modes, both named in §1.3 framing, are out of scope as answers: a system that automates everything and leaves the coordinator nothing meaningful to do, and a system that leaves the coordinator fully in charge but moves no numbers and adds nothing.
 
 ### Sub-questions the thesis must answer
 
-Each sub-question is designed to be quotable verbatim as a single-line block quote in Chapter 6, answerable in one paragraph traceable to a specific Discussion anchor sub-section, and bounded by named limitations from §5.4.
+Each sub-question is designed to be quotable verbatim as a single-line block quote in Chapter 6, answerable in one paragraph traceable to a specific Discussion anchor sub-section, and bounded by named limitations from §5.4. Updated 2026-05-06 to align with the reframed RQ; previous SQ wordings are recorded in `context/supervisor-log.md` 2026-05-06.
 
-1. **SQ1** — *How is resource-utilization visibility distributed across operator and owner stakeholders in current Norwegian transport-company planning practice?* → answered in Ch 5.1.1 (Efficiency) → bounded by L1, L2, L3, L4
-2. **SQ2** — *How can an algorithm-assisted planning system be designed so that automated optimisation improves resource utilization while remaining operable and overridable by the traffic coordinator?* → answered in Ch 5.1.2 (Trust/control) → bounded by L8, L10
-3. **SQ3** — *To what extent and under what limitations does Ressursplanlegger demonstrate measurable improvement in resource utilization?* → answered in Ch 5.1.3 (Adaptability) and cross-anchor → bounded by L5, L6, L7, L9, L11, L12
+1. **SQ1** — *To what extent does RP reduce overtime, idle time, and uneven driver load below the level produced by current planning practice in Admmit's customer companies?* → answered in Ch 5.1.1 (Efficiency) → bounded by L1, L2, L3, L4, L5, L6, L7
+2. **SQ2** — *Through what kind of interface and process can the traffic coordinator review and override every algorithm-generated assignment, applying tacit knowledge the algorithm cannot see, without making the planning workflow heavier than current practice?* → answered in Ch 5.1.2 (Trust/control) → bounded by L8, L10
+3. **SQ3** — *Through which configurable elements can RP serve companies that differ in operational rules, fleet size, and planning horizon, without changes to the code?* → answered in Ch 5.1.3 (Adaptability) and cross-anchor → bounded by L9, L11, L12
 
 ---
 
@@ -32,7 +34,7 @@ Each sub-question is designed to be quotable verbatim as a single-line block quo
 The thesis argument turns on three named concepts. Every chapter must reference at least one. Discussion (Ch 5) and Conclusion (Ch 6) MUST organise their findings under them. Anchor names are locked English proper nouns used consistently across the thesis — never re-translated to Norwegian, never split, never paraphrased (e.g. "Trust/control" is the unit, not "control" alone). Synonyms ("effektivitet", "tillit/kontroll", "tilpasningsdyktighet", "fleksibilitet", "skalerbarhet", "human control", "operator oversight", "trust calibration") drift the spine and must be flagged by reviewers.
 
 1. **Efficiency** — improved resource utilization across three concrete dimensions: reduced overtime, reduced idle time between assignments, and reduced uneven load between drivers. Visibility into current utilization is the precondition for optimization; the system's primary value is making invisible patterns legible to coordinator and owner.
-2. **Trust/control** — the coordinator's ability to inspect, modify, accept, or reject any algorithm-generated assignment. Trust and control are inseparable: trust is built through demonstrable control. Use the compound term verbatim.
+2. **Trust/control** — the coordinator's authority to review and override any algorithm-generated assignment, applying the tacit knowledge the algorithm cannot see. Trust and control are inseparable: trust is built through demonstrable control. Use the compound term verbatim. (The earlier "inspect, modify, accept, or reject" gloss was retired 2026-05-06; see `context/lessons-learned.md` *Don't list the four Trust/control actions* and the supersession note on Sub-clause C.)
 3. **Adaptability** — capacity to function meaningfully across companies with materially different operational rules, fleet composition, and assignment criteria. Distinct from "skalerbarhet" (which concerns volume).
 
 ---
@@ -74,20 +76,25 @@ Previous revision 2026-04-30: Sharpened RQ + locked anchor concepts (Efficiency 
 Review again after Chapter 4 is drafted — if findings shift the argument, update the spine before writing Chapter 5.
 
 <!--
-Sub-question trace plan (verified by task 12 outline rebuild):
-SQ1 → §5.1.1 Efficiency
+Sub-question trace plan (updated 2026-05-06 to reflect reframed RQ + SQs):
+SQ1 (utilization-improvement question) → §5.1.1 Efficiency
       → bounded by L1 (sample size, 7 interviews),
                     L2 (self-selection bias — Admmit customers only),
                     L3 (author affiliation with Admmit),
-                    L4 (interview-guide coverage gap)
-SQ2 → §5.1.2 Trust/control
+                    L4 (interview-guide coverage gap),
+                    L5 (synthetic benchmarks, not production data),
+                    L6 (no real-world deployment),
+                    L7 (no empirical comparison against existing TMS)
+SQ2 (review-and-override question; tacit-knowledge channel) → §5.1.2 Trust/control
       → bounded by L8 (no user testing with coordinators),
                     L10 (HITL as Admmit mandate, not validated level)
-SQ3 → §5.1.3 Adaptability (primary) + cross-anchor (Efficiency, Trust/control)
-      → bounded by L5 (synthetic benchmarks, not production data),
-                    L6 (no real-world deployment),
-                    L7 (no empirical comparison against existing TMS),
-                    L9 (algorithm evaluation against own benchmarks only),
+SQ3 (per-company configurability question) → §5.1.3 Adaptability (primary) + cross-anchor (Efficiency, Trust/control)
+      → bounded by L9 (algorithm evaluation against own benchmarks only),
                     L11 (single domain — Norwegian transport),
                     L12 (boundary cases described, not quantified)
+
+Pre-2026-05-06 SQ wording (preserved here for trace; the operative SQs are the bullets above):
+- SQ1 (old): "How is resource-utilization visibility distributed across operator and owner stakeholders in current Norwegian transport-company planning practice?"
+- SQ2 (old): "How can an algorithm-assisted planning system be designed so that automated optimisation improves resource utilization while remaining operable and overridable by the traffic coordinator?"
+- SQ3 (old): "To what extent and under what limitations does Ressursplanlegger demonstrate measurable improvement in resource utilization?"
 -->
