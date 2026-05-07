@@ -256,82 +256,266 @@
     }
   },
   "result/chapters/ch1/ch1-introduction.tex": {
-    "1788ebb63446b73e": {
-      "context": "Introduction",
-      "paragraph": "Norwegian transport companies move large volumes of goods every day. In 2025, these companies carried about 252 million tonnes on behalf of their customers \\parencite{ssb2026godstransport}. Behind every load, in every transport company, a person called the traffic coordinator decides who drives what, in which vehicle, and when. These are large decisions, made dozens of times a day, and they have a substantial impact on the company. Drivers can only work so many hours before overtime kicks in; assigning one already close to that cap means the load is paid at overtime rates, which raises costs and lowers profits. Vehicles and drivers only earn money when they are working; long gaps between assignments mean the company keeps paying for them while they sit idle, and revenue drops. Some routes are harder than others, whether long, late, or unpopular; if the same few drivers get the hardest ones week after week, fairness erodes and employee satisfaction drops.",
-      "feedback": "i like the flow of this paragraph now. One thing to change is the last example, it is not real and our solution doesnt cover this. remove it. You can instead add a narrowing sentence that summarizes the importance of the resource scheduling, and the impact it has on the company.",
-      "status": "ready",
-      "suggestion": "Norwegian transport companies move large volumes of goods every day. In 2025, these companies carried about 252 million tonnes on behalf of their customers \\parencite{ssb2026godstransport}. Behind every load, in every transport company, a person called the traffic coordinator decides who drives what, in which vehicle, and when. These are large decisions, made dozens of times a day, and they have a substantial impact on the company. Drivers can only work so many hours before overtime kicks in; assigning one already close to that cap means the load is paid at overtime rates, which raises costs and lowers profits. Vehicles and drivers only earn money when they are working; long gaps between assignments mean the company keeps paying for them while they sit idle, and revenue drops. Resource scheduling is therefore where a transport company's daily operating margin is decided: better assignments mean lower overtime, less idle time, and higher utilisation of the vehicles and drivers the company already pays for."
-    },
-    "e0cc742248e65bfe": {
-      "context": "Introduction > Anchor Concepts > Efficiency",
-      "paragraph": "The system has to help the company make better use of its drivers and vehicles. Three things should improve: drivers should run less overtime, they should spend less time waiting between assignments, and the work should be shared more evenly across the team. Before the system can improve any of these, it first has to make them easy to see for the coordinator and for the owner. The data is already in the company, but no one can read it at a glance today.",
-      "summary": "Defines Efficiency as improved utilization, with visibility of the measures as the precondition for any improvement.",
+    "3f1fc5d9b0973b56": {
+      "context": "Introduction > The Problem",
+      "paragraph": "Consider a small transport business consisting of one owner-operator and one vehicle. The work is straightforward at the outset. When a customer calls with goods to be moved, the operator checks the calendar, accepts the job if time is available, and turns it down if it is not. One delivery follows another, and the day arranges itself around what comes in.",
+      "summary": "Sets up the example: a one-person, one-vehicle transport business taking jobs as the phone rings.",
       "feedback": null,
       "suggestion": null,
+      "extra_edits": null,
       "status": null
     },
-    "23054b51408332ee": {
-      "context": "Introduction > Anchor Concepts > Trust/control",
-      "paragraph": "The coordinator has to stay in charge of every assignment the algorithm proposes. For each one, the coordinator should be able to look at it, change it, accept it, or reject it before it takes effect. Trust in the algorithm grows over time, but only if the coordinator can see what it does and change it when needed. A system that made the plans on its own and left the coordinator with no way to step in would not work in the kind of company this thesis is built for.",
-      "summary": "Defines Trust/control as the coordinator's authority to inspect, modify, accept, or reject every assignment.",
+    "34fffe5dcf05e2a8": {
+      "context": "Introduction > The Problem",
+      "paragraph": "Simplicity disappears as soon as two requests collide. If two customers require their goods moved at the same hour, only one can be served. A natural response is to accept the higher-paying job and refuse the other. Suppose, however, that a third call arrives later in the day for a short delivery that would fit alongside the cheaper job that was earlier turned down. The operator who had accepted both short jobs would have earned more than the operator who accepted the single larger one, and would also have retained both customers. From this point onwards, decisions can no longer be made one call at a time. The day becomes a puzzle to be filled.",
+      "summary": "Two simultaneous calls force a price-based choice; a third call later reveals optimisation by combining short jobs.",
       "feedback": null,
       "suggestion": null,
+      "extra_edits": null,
       "status": null
     },
-    "28b1afece31cdd3a": {
-      "context": "Introduction > Anchor Concepts > Adaptability",
-      "paragraph": "The same system has to work for very different companies without being rebuilt each time. Transport companies vary a lot: a small operator with around ten drivers does not run the same way as a firm with forty-five vehicles split across three departments. The system has to fit both, with the rules and priorities adjusted per company in the settings rather than in the code itself.",
-      "summary": "Defines Adaptability as the system fitting different company sizes and rules through configuration rather than code changes.",
+    "55ce0f93a1e1cc77": {
+      "context": "Introduction > The Problem",
+      "paragraph": "Other considerations press on the puzzle, and they fall into two kinds. The first are \\emph{soft constraints}, also called priorities: the operator may prefer to avoid out-of-town runs that conflict with family commitments, retain the customer who calls every Friday, or favour jobs in a familiar area. Soft constraints shape which orders are accepted and how the day is arranged, but any of them can give way when a better job arrives. The second kind are \\emph{hard constraints}, and these do not give way: the legal limit on consecutive driving hours, the capacity of the vehicle, and the customer's delivery window are rules the operator cannot break regardless of what a job pays. The operator is now optimising. Arranging a working day so that revenue is high, hard constraints are respected, and soft constraints are honoured is, in substance, an optimisation problem with multiple competing objectives.",
+      "summary": "Names soft constraints (priorities that can give way) and hard constraints (rules that cannot), then names the practice as optimisation.",
       "feedback": null,
       "suggestion": null,
+      "extra_edits": null,
       "status": null
     },
-    "0f4af03e4b7c52e7": {
+    "936a5fb8b1d48062": {
+      "context": "Introduction > The Problem",
+      "paragraph": "The problem changes shape when the business grows. A second vehicle and a second driver double the calendar. Each incoming call demands not only a yes or no, but an assignment: which driver, with which vehicle, on which order. The matching has to respect everything that already mattered for one driver, together with the additional rule that two assignments cannot be made to the same driver at the same time. New soft and hard constraints also enter. One driver prefers not to start the day on the north side of the city, but will if a heavier job is waiting there. The other holds the licence required for transporting dangerous chemicals, and is the only one of the two who can take the load of paint thinner that arrives every Wednesday. The puzzle now has two columns and a richer set of pieces.",
+      "summary": "Business grows to two vehicles; assignment problem appears, with new soft preferences and hard licence rules.",
+      "feedback": null,
+      "suggestion": null,
+      "extra_edits": null,
+      "status": null
+    },
+    "1eac8e81dd48a349": {
+      "context": "Introduction > The Problem",
+      "paragraph": "The same problem at the scale of, for instance, one hundred drivers, fifty vehicles, and a thousand orders a week no longer fits on a single desk. Companies in roughly that range, tens to hundreds of drivers and dozens of vehicles handling hundreds to thousands of orders a week, are the ones this thesis is concerned with, and they correspond to the customer base of Admmit, the Norwegian software firm that offered the thesis as a bachelor task. The owner of such a company has long since stepped out of the cab. A new role has appeared, sitting between the customers ringing in and the drivers behind the wheel, whose entire day is the puzzle: a traffic coordinator. They choose who drives what, in which vehicle, and when, and they do so against the same kinds of soft and hard constraints that mattered when there was one vehicle, only multiplied across the fleet.",
+      "summary": "At fleet scale the puzzle leaves one desk; the traffic coordinator role appears; the size range Admmit's customers occupy is named.",
+      "feedback": null,
+      "suggestion": null,
+      "extra_edits": null,
+      "status": null
+    },
+    "d831b8eda5bf02e4": {
+      "context": "Introduction > The Problem",
+      "paragraph": "Coordinators of this kind sit in transport companies across the country. In 2025, Norwegian transport companies moved approximately 252 million tonnes of goods on behalf of their customers \\parencite{ssb2026godstransport}. Behind every load, a traffic coordinator made the same kind of decision the one-vehicle operator made, only at greater scale and under tighter time pressure. Those decisions add up directly on the company's bottom line: a driver assigned past the weekly hours cap turns the next load into overtime, a vehicle and its driver waiting between two assignments incur cost without producing revenue, and the heaviest workload concentrated on the same few drivers week after week produces fatigue and turnover.",
+      "summary": "Coordinators sit nationwide; their decisions add up directly on the company's bottom line through overtime, idle, fatigue, and turnover.",
+      "feedback": null,
+      "suggestion": null,
+      "extra_edits": null,
+      "status": null
+    },
+    "dd13534ee5b04f7a": {
+      "context": "Introduction > The Problem",
+      "paragraph": "At a hundred vehicles, the puzzle the one-vehicle operator could carry in their head no longer fits there. To know whether a driver is close to the weekly hours cap, the coordinator opens the timesheet. To know whether the right vehicle is free at the right hour, they check the order tool. To know whether the Friday regular has already been promised a slot, they consult their own memory. The data needed for a good plan lives in four places at once, and no view assembles it. A further part of it lives nowhere at all: which routes are difficult and who is familiar with them, which licence allows which load, which vehicle suits which job, which customer must not be refused. These are the multi-driver counterpart of the family commitments and weekly regulars that shaped the one-vehicle case. Knowledge of this kind, acquired on the job and rarely written down, is termed \\emph{tacit knowledge}. It is what no system can read from a screen, and it is what makes the coordinator irreplaceable.",
+      "summary": "Visibility gap and tacit knowledge: planning data lives in four places, and the rest only in the coordinator's head.",
+      "feedback": null,
+      "suggestion": null,
+      "extra_edits": null,
+      "status": null
+    },
+    "a2ae8aec2f0e29b8": {
+      "context": "Introduction > The Problem",
+      "paragraph": "The software the coordinator currently operates does not close the remaining gap. The two commercial Norwegian Transport Management Systems (TMS) named by the interviewed companies, Timpex and Opter, handle order management and invoicing, but neither produces an assignment plan automatically. They scale the operator's record-keeping to a fleet, but stop there. Other companies plan from internal tools, spreadsheets, memory, or telephone calls. None of the systems in current use takes on the assignment planning itself: the decision of which driver and vehicle perform which order. That is the gap a planning system would have to fill.",
+      "summary": "Existing software (Timpex, Opter, internal tools) covers orders and invoicing but leaves assignment planning to the coordinator.",
+      "feedback": null,
+      "suggestion": null,
+      "extra_edits": null,
+      "status": null
+    },
+    "e6fc41643cc97cb1": {
+      "context": "Introduction > The Problem",
+      "paragraph": "What the coordinator does mentally is, in effect, an algorithm. Rules such as ``this driver is close to overtime, assign the load to another'' or ``this vehicle is too small for that pallet count, substitute it'' are applied repeatedly, yet they are never written down, compared against alternatives, or refined between shifts. A computer can apply the same rules at greater scale, hold more constraints in view simultaneously, and search through more candidate plans than a person can in comparable time. The aim is not to replace the coordinator, but to take the part of the puzzle a computer can solve and leave the part that depends on tacit knowledge to the person who carries it.",
+      "summary": "The coordinator's mental rules are already an algorithm; a computer can run them at greater scale alongside the coordinator.",
+      "feedback": null,
+      "suggestion": null,
+      "extra_edits": null,
+      "status": null
+    },
+    "f7668577fef5f65a": {
+      "context": "Introduction > The Solution",
+      "paragraph": "This thesis concerns precisely that division of labour. Ressursplanlegger (hereafter RP) is the artefact it builds and evaluates. RP is an algorithm-assisted planning platform. An algorithm reads a company's drivers, vehicles, and orders, and proposes a plan covering a horizon set by the coordinator. The coordinator opens the proposal in a calendar-style view and reviews each assignment, free to change or remove any of them. The plan takes effect only after the coordinator approves it.",
+      "summary": "Introduces RP: an algorithm-assisted planning platform whose plans the coordinator reviews before they take effect.",
+      "feedback": null,
+      "suggestion": null,
+      "extra_edits": null,
+      "status": null
+    },
+    "51390e1a4bb4bead": {
+      "context": "Introduction > The Solution",
+      "paragraph": "Three concerns recurred often enough across the interviews with traffic coordinators and the dialogue with Admmit to be drawn out as guiding concepts for the rest of the project. \\textbf{Efficiency} is what RP must measurably improve; \\textbf{Trust/control} is what RP must preserve in the coordinator's hands; \\textbf{Adaptability} is what RP must support across companies. The rest of this section develops each in turn.",
+      "summary": "Names the three anchor concepts and the role each plays: improve, preserve, and support across companies.",
+      "feedback": null,
+      "suggestion": null,
+      "extra_edits": null,
+      "status": null
+    },
+    "1d3c71f495d022ac": {
+      "context": "Introduction > The Solution > Efficiency",
+      "paragraph": "The owner of the hundred-vehicle business asks a simple question at the end of every week. How much overtime did the company run? How many vehicle-hours sat idle between assignments? Was the workload spread evenly across the drivers, or did the same few people carry the weight again? The information required to answer is in the company's systems, yet no single view assembles it. Efficiency is the question of whether RP makes those quantities visible, and whether, once they are visible, the coordinator can move them in the right direction: less overtime, less idle time between assignments, and a more even distribution of work across the team.",
+      "summary": "Defines Efficiency through the owner's end-of-week ledger: less overtime, idle time, and uneven workload, made visible first.",
+      "feedback": null,
+      "suggestion": null,
+      "extra_edits": null,
+      "status": null
+    },
+    "5aa8fb0b841b84f0": {
+      "context": "Introduction > The Solution > Trust/control",
+      "paragraph": "The one-vehicle operator inspected every job before accepting it. The coordinator of a hundred-vehicle fleet cannot examine a thousand jobs a week one by one, yet a system that issued plans without their approval would not be acceptable to them either. Every plan the algorithm proposes is reviewed by the coordinator before it takes effect, because trust in the algorithm grows only where control over it is real.",
+      "summary": "Defines Trust/control: every plan is reviewed by the coordinator because trust grows only where control is real.",
+      "feedback": null,
+      "suggestion": null,
+      "extra_edits": null,
+      "status": null
+    },
+    "e66c6cb48f9dce92": {
+      "context": "Introduction > The Solution > Adaptability",
+      "paragraph": "Two transport companies of comparable size may operate on entirely different rules. The first has ten drivers working from a single depot and plans one day at a time; the second has several dozen vehicles distributed across multiple branches and plans a week ahead. The first values keeping every driver busy above all else; the second values keeping the same crews together for repeat customers. Adaptability is the capacity of the system to fit both, with operational rules and priorities adjusted per company through configuration rather than through changes to the code.",
+      "summary": "Defines Adaptability: the same system fits different companies through per-company configuration rather than code changes.",
+      "feedback": null,
+      "suggestion": null,
+      "extra_edits": null,
+      "status": null
+    },
+    "abc0394f905b6669": {
       "context": "Introduction > Research Questions",
-      "paragraph": "\\begin{quote}\nHow can an algorithm-assisted resource planning platform improve resource utilization in Norwegian transport companies (reducing overtime, idle time between assignments, and uneven driver load) while remaining accountable to the traffic coordinator who operates it?\n\\end{quote}",
-      "summary": "States the main research question verbatim.",
+      "paragraph": "The puzzle from \\Cref{sec:problem} supplies the questions this thesis must answer.",
+      "summary": "Single-sentence opener tying the research questions back to the puzzle from the previous section.",
       "feedback": null,
       "suggestion": null,
+      "extra_edits": null,
       "status": null
     },
-    "a4dd4762c04efb9e": {
+    "a62fc91bca18e916": {
       "context": "Introduction > Research Questions",
-      "paragraph": "Three sub-questions break the main question into smaller pieces that can be answered later in the thesis.",
-      "summary": "Introduces the three sub-questions that decompose the main research question.",
+      "paragraph": "\\begin{quote}\nTo what extent can an algorithm-assisted planning platform automate the traffic coordinator's planning work in Admmit's customer companies in a way that improves resource utilization (reducing overtime, idle time between assignments, and uneven driver load) and is perceived as useful by the coordinator who runs it?\n\\end{quote}",
+      "summary": "States the main research question (block quote): utility-perceived-by-coordinator + utilization gain + tacit-knowledge preservation.",
       "feedback": null,
       "suggestion": null,
+      "extra_edits": null,
       "status": null
     },
-    "fc332c747cf65849": {
-      "context": "Introduction > Background and Motivation",
-      "paragraph": "The reason the visibility gap and the open planning step have not been closed already is that current planning practice in Norwegian transport companies leans heavily on what the coordinator carries in their head, and the software available to them does not cover the planning step at all. Coordinators carry much of what is needed to plan well in their heads: who holds the right licence for which load, who knows the difficult routes, who is close to the overtime ceiling, which vehicle suits which job. This kind of knowledge, learned on the job and rarely written down, is called tacit knowledge, and it works only as long as the same coordinator stays in the role. The software they work alongside does not fill in for that knowledge. The two commercial Norwegian Transport Management Systems (TMS) named by interviewees, Timpex and Opter, handle order management and invoicing well, but neither generates assignment plans on its own, and Timpex is described as slow under heavy use. The other interviewed companies plan from internal tools, spreadsheets, memory, or the phone. None of the systems in current use takes on the assignment step itself: deciding which driver and vehicle perform which order. That is the gap a planning system would have to fill.",
-      "feedback": "assignment step -> assignment planning",
-      "status": "pending"
+    "a54d5ac4aec87597": {
+      "context": "Introduction > Research Questions",
+      "paragraph": "The main question is one of balance. The more of the planning work RP can take on, the more it can move the company's utilization numbers and the more useful it becomes to the coordinator who runs it; if it takes on too much, or takes it on in the wrong way, it begins to erode the tacit knowledge and override authority that make the coordinator irreplaceable. The question is therefore not whether to automate, but how far automation can go before it costs more than it gives.",
+      "summary": "Frames the main question as a balance: more automation is more useful, too much erodes tacit knowledge and authority.",
+      "feedback": null,
+      "suggestion": null,
+      "extra_edits": null,
+      "status": null
     },
-    "121d153f10485219": {
-      "context": "Introduction > Background and Motivation",
-      "paragraph": "The interviews with traffic coordinators put both requirements in front of the people who would actually run the system, and the answers came back consistent with them. Coordinators confirmed the requirements made sense and added an observation of their own that pointed in the same direction: today they have no overview of utilisation across drivers and vehicles, and they want to keep control of every assignment made on their behalf. Several said directly that they would welcome an algorithm proposing the day's assignments. Others were more cautious, pointing to the unpredictability of transport work as a reason to keep human judgement at the centre of every decision. No coordinator opposed an algorithm proposing assignments; what each insisted on was the right to override. The split between the firm and the owners articulating the demand for automation and the coordinators who must operate the result day to day is the structural pattern \\textcite{bainbridge1983ironies} describes in \\emph{Ironies of Automation}, and it runs across the empirical foundation of this thesis.",
-      "feedback": "this one also starts too abrupt. need a way to say to the user why we are intriducing this fact, inn the first sentence.",
-      "status": "pending"
+    "94c28171dd8da62b": {
+      "context": "Introduction > Research Questions",
+      "paragraph": "\\begin{quote}\n\\textbf{SQ1}: To what extent does RP reduce overtime, idle time, and uneven driver load below the level produced by current planning practice in Admmit's customer companies?\n\\end{quote}",
+      "summary": "States SQ1 (block quote).",
+      "feedback": null,
+      "suggestion": null,
+      "extra_edits": null,
+      "status": null
     },
-    "3b18ce96c75ff1ef": {
-      "context": "Introduction > Background and Motivation",
-      "paragraph": "The data the previous paragraph described is already in the company's systems, and the technology to plan that data automatically already exists; the open question is what shape such a system should take to be acceptable to the coordinator who would have to run it. Admmit, the Norwegian software firm that offered this thesis as a bachelor task, has worked with transport-company owners for years; their main objective for any such system is to improve resource utilization for their transport-company customers, on the grounds that better-balanced plans cut overtime and idle hours and raise the company's earnings. Two requirements translate that objective into something the day-to-day user can accept. The first is a Human-in-the-Loop (HITL) operating model, so the coordinator can inspect, modify, accept, or reject every algorithm-generated assignment before it takes effect. The second is a multi-tenant architecture, in which a single deployed system serves several customer companies at once with their data and rules kept separate.",
-      "feedback": "the first sentence is diffuse.  it doesnt make sense. make even simpler to understand and. \n\nAdmmit, the Norwegian software firm that offered this thesis as a bachelor task, is already introduced. \n\nforklar multi tenant even better. \n\nAlgorithm generated assignment. is mentioned too abruptly.",
-      "status": "pending"
+    "71d6e35eb1f76844": {
+      "context": "Introduction > Research Questions",
+      "paragraph": "SQ1 is the Efficiency side of the balance: do the owner's end-of-week numbers come down once the coordinator works from RP rather than from the present mix of order tools, spreadsheets, and memory? It is answered in §5.1.1 against a benchmark of synthetic datasets that approximate the fleet ranges of the interviewed companies, with the comparison baseline drawn from the interview accounts of how planning is done at present.",
+      "summary": "Locates SQ1 as the Efficiency side and forwards to §5.1.1's synthetic benchmark and interview-derived baseline.",
+      "feedback": null,
+      "suggestion": null,
+      "extra_edits": null,
+      "status": null
     },
-    "8384b805a6060799": {
-      "context": "Introduction > Background and Motivation",
-      "paragraph": "Norwegian transport companies move large volumes of goods every day. In 2025, these companies carried about 252 million tonnes on behalf of their customers, almost all of it within Norway \\parencite{ssb2026godstransport}. Behind every load, in every transport company, a person called the traffic coordinator decides who drives what, in which vehicle, and when. These are large decisions, made dozens of times a day, and the choices the coordinator makes go directly to the company's results. Assigning a driver who is already close to the weekly hours cap turns the next load into overtime, which lifts cost and cuts margin. Letting a vehicle and its driver wait between two assignments means the company keeps paying for them while they earn nothing. Concentrating the heaviest workload on the same few drivers week after week wears them down and lowers employee satisfaction. Each of these is a specific choice, and together they roll up to the kind of outcomes a transport-company owner cares about. How that choice is made today, and what tools support or constrain it, was explored through interviews with traffic coordinators in Norwegian transport companies and through an ongoing dialogue with Admmit, the Norwegian software firm that offered this thesis as a bachelor task. Across those conversations, the same pattern surfaced. The information needed to track resource utilization is in the company's systems, but it is spread across an order tool, a timesheet, the coordinator's spreadsheets, and the coordinator's memory, and it is hard to pull together into a single working overview. The coordinator can answer any specific question about a specific driver but cannot easily step back and see how the week as a whole is shaping up for the team. The thesis takes this as its starting point: making the data already in the company's systems easy to read at a glance, and using that data to propose a balanced plan the coordinator can review and adjust.",
-      "feedback": "252 million tonnes doesnt sound like a lot.",
-      "status": "pending"
+    "81601f7371e06bf0": {
+      "context": "Introduction > Research Questions",
+      "paragraph": "\\begin{quote}\n\\textbf{SQ2}: Through what kind of interface and process can the traffic coordinator review and override every algorithm-generated assignment without making the planning workflow heavier than current practice?\n\\end{quote}",
+      "summary": "States SQ2 (block quote).",
+      "feedback": null,
+      "suggestion": null,
+      "extra_edits": null,
+      "status": null
     },
-    "7939187453c440f2": {
-      "context": "Introduction > Background and Motivation",
-      "paragraph": "Ressursplanlegger (hereafter RP) is the artefact this thesis builds and evaluates around exactly that opportunity. RP is an algorithm-assisted planning platform: an algorithm proposes a plan for a given day, week, or longer horizon, and a drag-and-drop timeline lets the coordinator inspect, modify, accept, or reject every algorithm-generated assignment before it takes effect. Three different optimisation engines sit behind the proposal, each suited to a different point on the speed-and-quality trade-off, and the same artefact can be tuned per customer company through configurable preference weights without code changes. The work behind RP took those underlying algorithms, which on their own produce only a list of assignments, and built around them the timeline, the override controls, and the conflict view a coordinator needs to actually use the result. RP is not a Transport Management System in the sense Timpex and Opter are: it does not handle order management or invoicing. It addresses the planning step those systems leave open.",
-      "feedback": "det er ikke klart hva vi kommer til å gjøre selv fra introen.",
-      "status": "pending"
+    "8412291e08647a29": {
+      "context": "Introduction > Research Questions",
+      "paragraph": "SQ2 is the Trust/control side of the balance: how can the inspection the one-vehicle operator performed by reflex be reproduced for the coordinator of a fleet, when there are a thousand jobs a week and much of what argues for or against the algorithm's choice is knowledge the algorithm cannot read off the screen? It is answered in §5.1.2 by examining the timeline, the override controls, and the conflict view in RP.",
+      "summary": "Locates SQ2 as the Trust/control side and forwards to §5.1.2's interface examination.",
+      "feedback": null,
+      "suggestion": null,
+      "extra_edits": null,
+      "status": null
+    },
+    "dda63fb95aefe930": {
+      "context": "Introduction > Research Questions",
+      "paragraph": "\\begin{quote}\n\\textbf{SQ3}: Through which configurable elements can RP serve companies that differ in operational rules, fleet size, and planning horizon, without changes to the code?\n\\end{quote}",
+      "summary": "States SQ3 (block quote).",
+      "feedback": null,
+      "suggestion": null,
+      "extra_edits": null,
+      "status": null
+    },
+    "50981c6b684fa08e": {
+      "context": "Introduction > Research Questions",
+      "paragraph": "SQ3 is the Adaptability question: what has to be configurable for RP to fit the ten-driver depot and the multi-branch fleet without changes to the code? It is answered in §5.1.3 against the per-company configuration of soft-constraint weights and the planning horizon set in the dashboard.",
+      "summary": "Locates SQ3 as the Adaptability question and forwards to §5.1.3's per-company weights and horizon configuration.",
+      "feedback": null,
+      "suggestion": null,
+      "extra_edits": null,
+      "status": null
+    },
+    "37235e0a67e9602f": {
+      "context": "Introduction > Scope and Delimitations",
+      "paragraph": "RP fills the step between the order book and the drivers' day: the conversion of a list of orders for a given period into a concrete plan that specifies who drives what, in which vehicle, and when. The length of that period is set by the coordinator and ranges from at least a single day to a week or longer, since the companies the system has to accommodate do not all plan on the same horizon. Around that core, the system holds the information the planning step requires: which drivers are employed and what they are qualified to do, which vehicles the company has and what each can carry, and when employees are working and when they are not.",
+      "summary": "Defines RP's scope: turning orders for a chosen period into a concrete plan, plus the supporting data model.",
+      "feedback": null,
+      "suggestion": null,
+      "extra_edits": null,
+      "status": null
+    },
+    "f3cb1030a4cee52a": {
+      "context": "Introduction > Scope and Delimitations",
+      "paragraph": "The plan itself is produced by an automated solver. The coordinator picks which solver runs and how long it is allowed to search: a tight time budget returns a quicker, less thoroughly searched plan, suited to the morning rush; a longer budget returns a more thoroughly searched one, suited to the previous evening's planning session.",
+      "summary": "The coordinator picks which solver runs and how long it is allowed to search; tight budget vs longer budget.",
+      "feedback": null,
+      "suggestion": null,
+      "extra_edits": null,
+      "status": null
+    },
+    "8de44ccb2717a853": {
+      "context": "Introduction > Scope and Delimitations",
+      "paragraph": "The priorities the solver weighs against each other are tuned per company. The cost of overtime relative to idle time, the strength with which workload should balance across drivers, and the value of keeping a job within a driver's home region are exposed in the dashboard as configurable weights. The owner who cares most about overtime sets one weighting; the owner who cares most about even workloads sets another. The same algorithm, run on the same data, returns different plans for the two companies because the two companies have asked it to optimise different things.",
+      "summary": "The solver's priority weights are configurable per company; same algorithm and data return different plans for different priorities.",
+      "feedback": null,
+      "suggestion": null,
+      "extra_edits": null,
+      "status": null
+    },
+    "d7edf8a6f3567511": {
+      "context": "Introduction > Scope and Delimitations",
+      "paragraph": "Several capabilities are deliberately out of scope and warrant explicit naming, since they came up early in the project and could otherwise be assumed by default. RP is not a driver-facing application and does not push notifications to drivers; it is a planning tool, not a dispatch tool, and the message that reaches the driver's phone remains the responsibility of whatever order tool the company already operates. It does not handle billing or invoicing, which Timpex and Opter already cover, and bridging the two is a project of its own. It addresses Norwegian transport only, since the regulatory frame is national. It does not track vehicles in real time on the road; it plans the day, it does not monitor the day's execution. It does not attempt to plan the order in which a single driver should visit a list of stops, sometimes called the Vehicle Routing Problem (VRP), since the question RP answers is who does what, not in which order. Finally, it does not permit the algorithm to operate without a human in the loop; this is a fixed Admmit requirement, not a configurable setting.",
+      "summary": "Names what RP deliberately does not do: dispatch, billing, real-time tracking, vehicle routing, autonomous operation.",
+      "feedback": null,
+      "suggestion": null,
+      "extra_edits": null,
+      "status": null
+    },
+    "20e4a1993652a94d": {
+      "context": "Introduction > Approach",
+      "paragraph": "RP was built in stages, starting from the bachelor task Admmit offered. The task came with two requirements set by Admmit on behalf of its customers: that an algorithm propose the plan, and that a human-in-the-loop workflow leave the coordinator in charge of every assignment. The shape of the planning problem itself, beyond those two requirements, was open at the start. To fill it in, the project included an outreach phase: a set of interviews with traffic coordinators in Norwegian transport companies, conducted alongside an ongoing dialogue with Admmit. From those conversations the visibility gap, the role of tacit knowledge, and the limits of the existing software described in \\Cref{sec:problem} were learned, together with what coordinators would and would not accept from an algorithm.",
+      "summary": "RP began as a bachelor task from Admmit with two fixed requirements; the outreach phase grounded the open shape of the problem.",
+      "feedback": null,
+      "suggestion": null,
+      "extra_edits": null,
+      "status": null
+    },
+    "b8d521f90618ebca": {
+      "context": "Introduction > Approach",
+      "paragraph": "The design and construction of RP followed a Design Science Research approach: an artefact built to address a practical problem, evaluated against the problem it was built to address, refined across iterations, and reflected on in writing. The balance the main question asks for, between automation and the coordinator's tacit knowledge, is itself difficult to calibrate from the outside; with more time the project would have run a second round of interviews and a fuller iteration cycle on the trust-and-control surface, testing the balance against operating coordinators rather than against the team's own reading of the first-round transcripts. \\Cref{chap:method} describes the method and the iterations in full.\n",
+      "summary": "RP followed a Design Science Research approach; the trust-and-control balance would have benefited from a second iteration round.",
+      "feedback": null,
+      "suggestion": null,
+      "extra_edits": null,
+      "status": null
     }
   }
 }
