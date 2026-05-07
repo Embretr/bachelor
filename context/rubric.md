@@ -27,19 +27,20 @@
 
 **An A introduction:**
 - **Anchor coherence:** Names the three anchor concepts (Efficiency, Trust/control, Adaptability) verbatim in §1.2 with brief definitions; these exact names recur in Discussion and Conclusion without synonyms.
-- **Visibility-gap opening:** First paragraph leads with a concrete Norwegian transport-sector fact and the resource-utilization visibility gap, not generic preamble ("the transport sector's role in Norway", "in today's digital world").
-- States the problem in one crisp sentence — what, for whom, and why it matters — in the first paragraph
-- Motivates the problem with concrete evidence (scale, cost, or observed inefficiency), not just assertion
-- Research question is narrow, answerable, and directly traceable to the problem statement
-- Sub-questions are additive — each covers a distinct dimension not covered by the main RQ; each is quotable as a single-line block quote in Ch 6
-- Scope delimiters have explicit justifications — "X is out of scope because Y", not just a list
-- Chapter structure section reads as a logical chain, not a table of contents
+- **Story-first opening (supervisor 2026-05-06):** §1.1 opens with a running example that scales (one operator → second vehicle → fleet → traffic coordinator) before any technical term lands. The visibility gap, tacit knowledge, and the existing-software gap each arrive through that example rather than as freestanding claims. A reader without domain background can follow §1.1 from beginning to end.
+- **Three-act flow (problem → solution → approach):** §1.1 sets up the puzzle; §1.2–§1.4 introduce RP, the anchors, the RQ, and the scope as the answer; §1.5 names the framgangsmåte. No section acts on more than one of the three roles.
+- **Concrete-before-abstract on every key term:** Soft and hard constraints, optimisation, tacit knowledge, and the visibility gap each appear after the situation that motivates them, never as cold definitions.
+- **RQ + SQs in the locked utility-and-balance form:** The main question pairs measurable utilization gain with coordinator-perceived utility. Each SQ is quotable as a single-line block quote in Ch 6 and maps cleanly to one anchor (SQ1 → Efficiency, SQ2 → Trust/control, SQ3 → Adaptability).
+- Scope delimiters have explicit justifications — "X is out of scope because Y", not just a list.
+- Approach section names the bachelor task origin, the outreach phase, and the DSR commitment with a forward pointer to Ch 3.
 
 **Red flags that signal B or lower:**
 - "The purpose of this thesis is to explore..." — too vague
 - Research question is not a question or cannot be definitively answered
 - Scope section lists what is excluded without explaining why
-- First paragraph does not establish the problem — starts with context instead
+- First paragraph opens at the technical level (e.g. "Resource scheduling is a class of problem...") rather than at the example
+- Anchor concepts are introduced as a list of three abstract concerns rather than as guiding rules drawn from the empirical work
+- The four-action recital "inspect, modify, accept, or reject" appears anywhere in the chapter
 
 ---
 
@@ -111,7 +112,7 @@
 
 **An A discussion chapter:**
 - **Anchor-organised primary findings:** §5.1 contains exactly three sub-sections, one per locked anchor (5.1.1 Efficiency, 5.1.2 Trust/control, 5.1.3 Adaptability). Anchor names are used verbatim — no synonyms ("kontroll" alone, "fleksibilitet", "skalerbarhet", "human control"). Each sub-section has a `MUST ANCHOR` marker tied to exactly one anchor.
-- **Operator-vs-owner asymmetry framed inside §5.1.1:** The asymmetry is the interpretive frame for the visibility-gap finding — owners demand utilization optimization, coordinators do not articulate this need themselves. Bainbridge's *ironies of automation* is cited here.
+- **Operator-vs-owner asymmetry framed inside §5.1.1:** The asymmetry is named as one observed structural pattern in how the demand for automation is articulated — Admmit and the transport-company owners articulate utilization optimization as a goal that the operating coordinators do not articulate in the same words, even though several coordinators welcomed an algorithm proposing assignments. Bainbridge's *ironies of automation* is cited here. The asymmetry is structural, not unanimous; do not write "coordinators do not want this" or any equivalent that contradicts the interview record.
 - **Three-layer HITL applied in §5.1.2:** Bainbridge frames operator authority over override; Hoff & Bashir's dimensional model of trust antecedents explains how trust forms over use; Miller motivates explanation/transparency as a design requirement.
 - **Hierarchical limitations (L1–L12), each named:** §5.4 contains three named sub-subsections — Empirical Foundation (L1, L2, L3, L4), Validation and Artefact (L5–L9), Conceptual and Methodological (L10, L11, L12). Each L# is a named paragraph or `\paragraph{}`, not a buried sentence. An L#-to-SQ mapping appears at the top of §5.4.
 - **Deviations and Methodology Reflection as named sections:** §5.5 names plan-vs-reality differences explicitly. §5.6 contains a self-critical paragraph naming the actual weak spot in the method (e.g., small sample, synthetic-only validation, dev-team = research-team).
@@ -135,7 +136,7 @@
 **An A conclusion:**
 - **RQ block-quote pattern:** Each sub-question is reproduced verbatim as a single-line block quote, then answered in one discrete paragraph with no new material. Three SQs → three paragraphs. Each paragraph carries a `MUST TRACE` to the originating Ch 5 sub-section AND names the anchor it serves.
 - **Limitation-grounded Future Work:** Each Future Work item cites a specific named limitation from §5.4 (e.g., "addresses L8 — no user testing with coordinators"). Generic items without a named limitation grounding are red flags.
-- **Closing domain claim:** Final sentence makes a claim about algorithm-assisted planning under stakeholder asymmetry in Norwegian transport, not just about the artefact ("Ressursplanlegger does X").
+- **Closing domain claim:** Final sentence makes a claim about the balance the RQ asks for — that algorithm-assisted planning at the scale of Admmit's customer companies is feasible inside a single deployable artefact when automation is bounded by review-and-override authority and per-company configurability — not just about the artefact ("Ressursplanlegger does X"). The claim names the conditions under which the balance is achievable, not the artefact's name.
 - First paragraph summarises the thesis in 3–5 sentences — problem, method, finding, implication
 - No new analysis or claims are introduced
 
@@ -205,19 +206,19 @@ If the answer to any of these is "no" or "I'm not sure" — fix it first.
 
 ---
 
-## Score Template for Quality Agent
+## Self-evaluation score template
 
-When evaluating a chapter, score each criterion:
+The original review pipeline that used this template (the quality agent under `.claude/agents/`) was retired in the 2026-05-06 cleanup. The template is kept here as a self-evaluation aid: when reading a drafted chapter against the criteria above, score each criterion in this form to keep the assessment specific.
 
 ```
-Criterion: [name]
+Criterion: [name from the relevant chapter section above]
 Grade:     A / B / C / Cannot assess yet
 Strength:  [specific quote or observation]
 Weakness:  [specific quote or gap]
 One fix:   [single concrete action]
 ```
 
-End with:
+Close with:
 - Overall estimated grade for this chapter
 - Single most important thing to fix before submission
 - Whether this chapter, as written, would pull the thesis grade up or down

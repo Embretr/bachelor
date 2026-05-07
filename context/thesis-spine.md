@@ -9,7 +9,7 @@
 
 ## The Problem
 
-Norwegian transport companies operate without systematic visibility into resource utilization: overtime is handled reactively, and load balancing across drivers depends on traffic coordinators' memory and intuition rather than any structured overview. Demand for algorithm-assisted planning thus comes primarily from owners and the business side, not from the coordinators who must operate any such system — a configuration that mirrors Bainbridge's (1983) *ironies of automation*. Tacit knowledge dependency and slow legacy software are downstream consequences of this visibility gap, not its origin.
+The traffic coordinator at a fleet-scale Norwegian transport company solves an optimisation puzzle every working day: matching drivers and vehicles to a stream of incoming orders under hard rules (driving-hours law, vehicle capacity, customer time windows) and soft priorities (workload balance, driver preferences, customer continuity). Two structural features make the puzzle hard to support with software. First, the data needed to plan well is present in the company's systems but distributed across several tools and the coordinator's memory, with no view that assembles it; this is the *visibility gap*. Second, much of what argues for or against any specific assignment is *tacit knowledge* the coordinator carries that no current system can read off the screen. Existing Transport Management Systems (Timpex, Opter, internal tools) cover order management and invoicing but leave the assignment-planning step itself to the coordinator. The demand for an algorithm-assisted system that fills that gap is articulated jointly by Admmit (relaying the owner-side request for utilization optimization) and by the interviewed coordinators (who welcomed an algorithm proposing assignments under conditions that keep them in charge of the result). The structural pattern in which the parties specifying automation are not the same as the parties operating it (Bainbridge 1983, *Ironies of Automation*) frames the design constraint that follows from this configuration: any system proposed must be operable by, and useful to, the coordinator who runs it.
 
 ---
 
@@ -42,22 +42,22 @@ The thesis argument turns on three named concepts. Every chapter must reference 
 ## The Argument — One Sentence Per Chapter
 
 **Chapter 1 — Introduction:**
-Norwegian transport companies operate without systematic visibility into resource utilization, a gap whose articulation skews toward owners rather than the coordinators who must operate any algorithm-assisted system — the configuration Bainbridge's *ironies of automation* anticipates, and the configuration Ressursplanlegger is designed to address.
+A running example scaling from one operator to a fleet introduces the planning puzzle, the visibility gap, and the role of tacit knowledge; Ressursplanlegger is then named as the artefact this thesis builds and evaluates to support the coordinator's work, and the three anchors (Efficiency, Trust/control, Adaptability) frame what such support has to deliver.
 
 **Chapter 2 — Theory:**
-Resource scheduling under utilization-oriented constraints, a five-layer human-in-the-loop theory (Parasuraman's automation taxonomy, Bainbridge's operator-vs-owner framing, Hoff and Bashir's trust-calibration model, Miller's explanation-as-interface, and Lee and See's trust foundation), and Design Science Research provide the theoretical foundation; vehicle routing theory is referenced only to delimit and TMS-as-category is used to position the gap the artefact fills.
+Four theoretical foundations support the rest of the thesis: resource scheduling under utilization-oriented constraints, with §2.2 layering five HITL sources (Parasuraman's automation taxonomy, Bainbridge's operator-vs-owner framing, Hoff and Bashir's trust-calibration model, Miller's explanation-as-interface, and Lee and See's trust foundation); Transport Management Systems used to position RP inside the existing software category and identify the planning gap RP fills; and Design Science Research as the paradigm under which both the artefact and the knowledge claims are made.
 
 **Chapter 3 — Methodology:**
 A Design Science Research process applied through Peffers' six DSRM activities — anchored in the project's origin in Admmit's bachelor task, semi-structured interviews with seven traffic coordinators contacted on the team's own initiative, eight named iterations of the artefact, and a separate evaluation framework that benchmarks solver approaches under realistic constraint combinations — establishes how the research was conducted.
 
 **Chapter 4 — Findings:**
-Interview themes surface the resource-utilization visibility gap and the operator-vs-owner asymmetry that makes it a finding worth surfacing, and Ressursplanlegger embodies the locked design qualities as a Next.js + tRPC + PostgreSQL platform with a multi-engine solver layer (greedy / OR-Tools CP-SAT / Timefold) and a human-in-the-loop drag-and-drop timeline, with a DSR Artifacts mapping linking each project artefact to its category.
+Interview themes surface the resource-utilization visibility gap and the role of tacit knowledge in the coordinator's daily work, alongside operator-vs-owner asymmetry as one observed structural pattern in how the demand for automation is articulated; Ressursplanlegger embodies the locked design qualities as a Next.js + tRPC + PostgreSQL platform with a multi-engine solver layer (greedy / OR-Tools CP-SAT / Timefold) and a human-in-the-loop drag-and-drop timeline, with a DSR Artifacts mapping linking each project artefact to its category.
 
 **Chapter 5 — Discussion:**
 Organised under the three locked anchors — Efficiency (visibility gap, operator-vs-owner asymmetry, multi-engine "How-not-Of" benchmark), Trust/control (three-layer HITL applied to override authority and tacit knowledge), Adaptability (cross-company adaptability via configurable constraint weights) — the discussion names twelve hierarchical limitations (L1–L12), explicit deviations from plan, and a self-critical methodology reflection.
 
 **Chapter 6 — Conclusion:**
-Each sub-question is quoted verbatim and answered in a single paragraph tied to the anchor it serves, with Future Work grounded in specific named limitations and a closing claim about algorithm-assisted planning under stakeholder asymmetry in Norwegian transport.
+Each sub-question is quoted verbatim and answered in a single paragraph tied to the anchor it serves, with Future Work grounded in specific named limitations and a closing claim about the balance between automation and the coordinator's perceived utility — that algorithm-assisted planning at the scale of Admmit's customer companies is feasible inside a single deployable artefact when automation is bounded by review-and-override authority and configurability per company.
 
 ---
 
