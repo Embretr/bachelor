@@ -500,6 +500,161 @@ INDEX_HTML = r"""<!doctype html>
   .err { color: #b91c1c; margin-top: 0.4rem; font-size: 0.83rem; }
   .ok { color: #15803d; margin-top: 0.4rem; font-size: 0.83rem; }
   .empty { color: #6b7280; padding: 1rem 0; }
+
+  /* Suggestion-row spans both columns of the .block.paragraph grid. */
+  .suggestion-row { grid-column: 1 / -1; margin-top: 0.4rem; }
+
+  /* Per-hunk accept/reject controls inside a diff. */
+  .hunk { position: relative; padding: 0 0.05em; border-radius: 2px; }
+  .hunk[data-state="rejected"] .d-add { display: none; }
+  .hunk[data-state="rejected"] .d-del { background: #fef9c3; color: #713f12; text-decoration: none; }
+  .hunk-toggle {
+    display: inline-block;
+    margin: 0 0 0 0.15em;
+    padding: 0 0.35em;
+    font-size: 0.72em;
+    line-height: 1.5;
+    border: 1px solid #cbd5e1;
+    background: #fff;
+    border-radius: 3px;
+    cursor: pointer;
+    vertical-align: 0.05em;
+    user-select: none;
+    color: #475569;
+  }
+  .hunk-toggle:hover { background: #f1f5f9; color: #1e293b; }
+  .hunk[data-state="rejected"] .hunk-toggle { background: #fde68a; border-color: #facc15; color: #713f12; }
+  .hunk-summary { font-size: 0.74rem; color: #6b5800; margin: 0.3rem 0 0; }
+  .hunk-summary strong { color: #92400e; }
+
+  /* View-mode toggle in the header. */
+  .mode-toggle { display: inline-flex; margin-left: auto; }
+  .mode-btn { margin: 0; padding: 0.28rem 0.7rem; font-size: 0.78rem; border: 1px solid #d1d5db; background: #fff; cursor: pointer; color: #374151; }
+  .mode-btn:first-child { border-radius: 4px 0 0 4px; }
+  .mode-btn:last-child { border-radius: 0 4px 4px 0; border-left: 0; }
+  .mode-btn.active { background: #2563eb; color: #fff; border-color: #2563eb; }
+  .mode-btn:hover:not(.active) { background: #f3f4f6; }
+
+  /* Text mode: prose on the left, compact feedback box in the right margin.
+     The grid keeps the prose column at a comfortable reading width while
+     each paragraph carries its own feedback control aligned beside it. */
+  body.mode-text { max-width: 1060px; }
+  body.mode-text .protocol,
+  body.mode-text .bulk-fb,
+  body.mode-text .tts-bar { display: none; }
+  body.mode-text .block.paragraph {
+    display: grid;
+    grid-template-columns: 1fr 260px;
+    grid-template-areas:
+      "text feedback"
+      "suggestion feedback";
+    gap: 0.45rem 1rem;
+    align-items: start;
+    border: none;
+    box-shadow: none;
+    background: transparent;
+    padding: 0;
+    margin: 0 0 1rem 0;
+    border-radius: 0;
+  }
+  body.mode-text .block.paragraph.has-suggestion {
+    grid-template-areas: "suggestion feedback";
+  }
+  body.mode-text .block.paragraph .text-col { grid-area: text; min-width: 0; }
+  body.mode-text .block.paragraph .feedback-col { grid-area: feedback; display: block; min-width: 0; }
+  body.mode-text .block.paragraph .suggestion-row { grid-area: suggestion; min-width: 0; }
+  body.mode-text .block.paragraph.has-suggestion {
+    border-left: 3px solid #3b82f6;
+    padding-left: 0.7rem;
+  }
+  body.mode-text .block.paragraph.has-feedback {
+    border-left: 3px solid #fbbf24;
+    padding-left: 0.7rem;
+  }
+  /* Compact feedback box in text mode. */
+  body.mode-text .feedback-col {
+    font-size: 0.8rem;
+    padding-top: 0.15rem;
+  }
+  body.mode-text .feedback-col > .ctx {
+    font-size: 0.62rem;
+    margin-bottom: 0.2rem;
+  }
+  body.mode-text .feedback-col textarea {
+    min-height: 56px;
+    font-size: 0.8rem;
+    padding: 0.3rem 0.4rem;
+  }
+  body.mode-text .feedback-col button {
+    font-size: 0.72rem;
+    padding: 0.2rem 0.45rem;
+    margin-top: 0.3rem;
+  }
+  body.mode-text .feedback-col .pending-note {
+    font-size: 0.74rem;
+    padding: 0.3rem 0.4rem;
+  }
+
+  /* The .summary-tm copy lives inside .feedback-col so we can show it in
+     text mode beneath the feedback input. In paragraph mode the original
+     copy on the left already does that job, so this one is hidden. */
+  .summary-tm { display: none; }
+  body.mode-text .feedback-col .summary-tm {
+    display: block;
+    margin-top: 0.5rem;
+    font-size: 0.74rem;
+    padding: 0.3rem 0.45rem;
+    line-height: 1.4;
+  }
+  body.mode-text .block.paragraph .text-col > .ctx,
+  body.mode-text .block.paragraph .text-col > .summary,
+  body.mode-text .block.paragraph .text-col .row-actions { display: none; }
+  body.mode-text .block.paragraph .text-col pre.source { display: none; }
+  body.mode-text .text-col .rendered { font-size: 1.02rem; line-height: 1.7; }
+  body.mode-text .block.heading { background: transparent; border: none; padding: 1.1rem 0 0.3rem; }
+  body.mode-text .block.heading pre { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 1.05rem; font-weight: 600; color: #111827; }
+  body.mode-text .block.other { display: none; }
+  body.mode-text .suggestion-row { margin-top: 0.5rem; }
+
+  /* Text mode + has a suggestion: hide the original paragraph card and let
+     the suggestion-row's git-style diff stand in its place as flowing prose.
+     The diff still shows every change inline (deleted text struck through,
+     inserted text highlighted), so the reader sees what's swapping where.
+     Hunk toggles remain clickable for per-change accept/reject. */
+  body.mode-text .block.paragraph.has-suggestion .text-col { display: none; }
+  body.mode-text .block.paragraph.has-suggestion .suggestion-row { margin-top: 0; }
+  body.mode-text .suggestion-row .suggestion {
+    background: transparent;
+    border: 0;
+    padding: 0;
+    margin: 0;
+  }
+  body.mode-text .suggestion-row .label,
+  body.mode-text .suggestion-row .hunk-summary,
+  body.mode-text .suggestion-row .part-label { display: none; }
+  body.mode-text .suggestion-row .diff {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.02rem;
+    line-height: 1.7;
+    color: #111827;
+    background: transparent;
+    padding: 0;
+    margin: 0;
+  }
+  body.mode-text .suggestion-row .d-eq { color: #111827; }
+  body.mode-text .hunk-toggle {
+    font-size: 0.65em;
+    padding: 0 0.3em;
+    margin-left: 0.15em;
+    opacity: 0.55;
+  }
+  body.mode-text .hunk-toggle:hover { opacity: 1; }
+  body.mode-text .suggestion-row button.apply,
+  body.mode-text .suggestion-row button.reject {
+    margin-top: 0.4rem;
+    font-size: 0.75rem;
+    padding: 0.22rem 0.55rem;
+  }
 </style>
 </head>
 <body>
@@ -673,22 +828,121 @@ function wordDiff(oldText, newText) {
   return out;
 }
 
+// Group a flat diff segment list into hunks: each contiguous run of non-eq
+// segments collapses into one {kind:'hunk', del, add} entry. Eq segments pass
+// through unchanged. This is what enables per-hunk accept/reject in the UI.
+function groupHunks(segs) {
+  const out = [];
+  let cur = null;
+  for (const s of segs) {
+    if (s.k === 'eq') {
+      if (cur) { out.push(cur); cur = null; }
+      out.push({ kind: 'eq', t: s.t });
+    } else {
+      if (!cur) cur = { kind: 'hunk', del: '', add: '' };
+      if (s.k === 'del') cur.del += s.t;
+      else cur.add += s.t;
+    }
+  }
+  if (cur) out.push(cur);
+  return out;
+}
+
+// Renders a diff as a sequence of eq spans and hunk wrappers. Each hunk
+// carries data-old/data-new/data-state and a toggle button so the user can
+// accept or reject that single change. `applySuggestion` later walks the
+// rendered DOM to assemble the merged text from per-hunk states.
 function renderDiff(oldText, newText) {
   if (oldText === newText) {
-    return `<div class="diff diff-nochange"><span class="d-eq">${escapeHtml(newText)}</span></div>`;
+    return `<div class="diff diff-nochange"><span class="d-eq" data-text="${encodeURIComponent(newText)}">${escapeHtml(newText)}</span></div>`;
   }
+  const enc = encodeURIComponent;
   if (newText === "") {
-    return `<div class="diff"><span class="d-del">${escapeHtml(oldText)}</span></div>`;
+    return `<div class="diff hunked">
+      <span class="hunk" data-hunk-idx="0" data-state="accepted" data-old="${enc(oldText)}" data-new="">
+        <span class="d-del">${escapeHtml(oldText)}</span><button class="hunk-toggle" type="button" title="Click to keep original (reject this deletion)">&#10005;</button>
+      </span>
+    </div>`;
   }
   if (oldText === "") {
-    return `<div class="diff"><span class="d-add">${escapeHtml(newText)}</span></div>`;
+    return `<div class="diff hunked">
+      <span class="hunk" data-hunk-idx="0" data-state="accepted" data-old="" data-new="${enc(newText)}">
+        <span class="d-add">${escapeHtml(newText)}</span><button class="hunk-toggle" type="button" title="Click to reject this insertion">&#10005;</button>
+      </span>
+    </div>`;
   }
   const segs = wordDiff(oldText, newText);
-  const html = segs.map(s => {
-    const cls = s.k === 'eq' ? 'd-eq' : (s.k === 'add' ? 'd-add' : 'd-del');
-    return `<span class="${cls}">${escapeHtml(s.t)}</span>`;
+  const hunks = groupHunks(segs);
+  let hunkIdx = 0;
+  const html = hunks.map(h => {
+    if (h.kind === 'eq') {
+      return `<span class="d-eq" data-text="${enc(h.t)}">${escapeHtml(h.t)}</span>`;
+    }
+    const idx = hunkIdx++;
+    const oldH = h.del ? `<span class="d-del">${escapeHtml(h.del)}</span>` : '';
+    const newH = h.add ? `<span class="d-add">${escapeHtml(h.add)}</span>` : '';
+    return `<span class="hunk" data-hunk-idx="${idx}" data-state="accepted" data-old="${enc(h.del)}" data-new="${enc(h.add)}">${oldH}${newH}<button class="hunk-toggle" type="button" title="Click to keep original (reject this change)">&#10005;</button></span>`;
   }).join('');
-  return `<div class="diff">${html}</div>`;
+  return `<div class="diff hunked">${html}</div>`;
+}
+
+// Walk a rendered diff DOM and emit the merged paragraph text, picking
+// add-text for accepted hunks and del-text (the original) for rejected ones.
+// Eq spans contribute their data-text verbatim so whitespace round-trips.
+function rebuildMergedFromDiff(diffEl) {
+  if (!diffEl) return null;
+  if (diffEl.classList.contains('diff-nochange')) {
+    const eq = diffEl.querySelector('.d-eq');
+    return eq ? decodeURIComponent(eq.dataset.text || '') : '';
+  }
+  let out = '';
+  for (const node of diffEl.childNodes) {
+    if (node.nodeType !== 1) continue;
+    if (node.classList.contains('d-eq')) {
+      out += decodeURIComponent(node.dataset.text || '');
+    } else if (node.classList.contains('hunk')) {
+      const state = node.dataset.state || 'accepted';
+      const oldT = decodeURIComponent(node.dataset.old || '');
+      const newT = decodeURIComponent(node.dataset.new || '');
+      out += (state === 'rejected') ? oldT : newT;
+    }
+  }
+  return out;
+}
+
+// Attach click handlers to all hunk toggles inside a root and update the
+// per-suggestion summary line ("3 of 5 changes accepted"). Idempotent: safe
+// to call after every full re-render.
+function wireHunks(root) {
+  $$('.hunk-toggle', root || document).forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const hunk = btn.closest('.hunk');
+      if (!hunk) return;
+      const cur = hunk.dataset.state === 'rejected' ? 'rejected' : 'accepted';
+      const next = cur === 'accepted' ? 'rejected' : 'accepted';
+      hunk.dataset.state = next;
+      btn.innerHTML = next === 'accepted' ? '&#10005;' : '&#8635;';
+      btn.title = next === 'accepted'
+        ? 'Click to keep original (reject this change)'
+        : 'Click to apply this change';
+      const sug = hunk.closest('.suggestion');
+      if (sug) updateHunkSummary(sug);
+    });
+  });
+  $$('.suggestion', root || document).forEach(updateHunkSummary);
+}
+
+function updateHunkSummary(sug) {
+  const summary = sug.querySelector('.hunk-summary');
+  const hunks = $$('.hunk', sug);
+  if (!summary || !hunks.length) return;
+  const accepted = hunks.filter(h => (h.dataset.state || 'accepted') !== 'rejected').length;
+  const total = hunks.length;
+  summary.innerHTML = total === 1
+    ? `<strong>${accepted ? 'Accepting' : 'Rejecting'}</strong> the single change in this rewrite.`
+    : `<strong>${accepted} of ${total}</strong> changes will be applied. Click <span class="hunk-toggle" style="cursor:default;">&#10005;</span> on a change to keep the original wording instead.`;
 }
 
 // -- TTS via browser SpeechSynthesis -----------------------------------------
@@ -812,6 +1066,34 @@ async function fetchJSON(url, opts = {}) {
   return data;
 }
 
+function modeToggleHTML() {
+  return `
+    <div class="mode-toggle" role="tablist" aria-label="View mode">
+      <button class="mode-btn" type="button" data-mode="paragraph" role="tab" title="Two-column cards with feedback inputs">Paragraph</button>
+      <button class="mode-btn" type="button" data-mode="text" role="tab" title="Continuous prose, suggestions inline">Text</button>
+    </div>
+  `;
+}
+
+function applyMode(mode) {
+  const m = mode === 'text' ? 'text' : 'paragraph';
+  document.body.classList.toggle('mode-text', m === 'text');
+  $$('.mode-btn').forEach(b => b.classList.toggle('active', b.dataset.mode === m));
+  try { localStorage.setItem('view-mode', m); } catch (e) {}
+  // In text mode, kill any active TTS so navigating away doesn't leave a
+  // hidden Read-aloud button still speaking.
+  if (m === 'text') stopSpeaking();
+}
+
+function wireModeToggle() {
+  let initial = 'paragraph';
+  try { initial = localStorage.getItem('view-mode') || 'paragraph'; } catch (e) {}
+  applyMode(initial);
+  $$('.mode-btn').forEach(b => {
+    b.addEventListener('click', () => applyMode(b.dataset.mode));
+  });
+}
+
 function bulkFeedbackBar() {
   return `
     <div class="bulk-fb">
@@ -877,6 +1159,7 @@ async function renderFile() {
       <span style="font-family: ui-monospace, monospace; font-size: 0.9rem;">${escapeHtml(filePath)}</span>
       <span class="meta">${totalParagraphs} paragraphs</span>
       <button class="refresh" onclick="location.reload()">Refresh</button>
+      ${modeToggleHTML()}
     </header>
     ${ttsBar()}
     ${protocolBox(counts)}
@@ -959,12 +1242,14 @@ async function renderFile() {
              <div class="label">Suggested revision (drafted by Claude)${extras.length ? ` &middot; replaces ${1 + extras.length} paragraphs` : ""}</div>
              ${primarySugHTML}
              ${extrasHTML}
-             <button class="apply">Apply${extras.length ? " all" : ""}</button>
+             <div class="hunk-summary"></div>
+             <button class="apply">Apply${extras.length ? " accepted (all)" : " accepted"}</button>
              <button class="reject">Reject</button>
            </div>`
-        : (b.feedback
-            ? `<div class="pending-note">Feedback saved. Ask Claude to process feedback-app/state.json, then click Refresh.</div>`
-            : "");
+        : "";
+      const pendingNoteHTML = (!hasSuggestion && b.feedback)
+        ? `<div class="pending-note">Feedback saved. Ask Claude to process feedback-app/state.json, then click Refresh.</div>`
+        : "";
 
       const incomingHTML = incoming.length
         ? incoming.map(inc => {
@@ -991,9 +1276,11 @@ async function renderFile() {
               <button class="primary save">Save feedback</button>
               <button class="clear-fb">Clear</button>
             </div>
-            ${suggestionHTML}
+            ${pendingNoteHTML}
             <div class="msg-slot"></div>
+            ${summaryHTML.replace('class="summary"', 'class="summary summary-tm"').replace('class="summary missing"', 'class="summary missing summary-tm"')}
           </div>
+          ${suggestionHTML ? `<div class="suggestion-row">${suggestionHTML}</div>` : ""}
         </div>
       `;
     }
@@ -1033,6 +1320,9 @@ async function renderFile() {
   });
 
   wireTTS();
+  wireHunks(document);
+  wireModeToggle();
+  restoreScrollIfPending();
   window.addEventListener("beforeunload", stopSpeaking);
 }
 
@@ -1132,23 +1422,48 @@ async function clearFeedback(block) {
   }
 }
 
+// Save the current scroll position before a reload so the page can resume
+// where the user was after Accept / Reject re-renders the file. Browsers
+// usually try to restore scroll, but our DOM mutates enough between renders
+// that they often give up and snap to top. sessionStorage carries the value
+// across the navigation cleanly.
+function preserveScrollAcrossReload() {
+  try { sessionStorage.setItem("fb-scroll", String(window.scrollY)); } catch (e) {}
+}
+function restoreScrollIfPending() {
+  try {
+    const v = sessionStorage.getItem("fb-scroll");
+    if (v === null) return;
+    sessionStorage.removeItem("fb-scroll");
+    const y = parseInt(v, 10);
+    if (Number.isFinite(y)) window.scrollTo(0, y);
+  } catch (e) {}
+}
+
 async function applySuggestion(block) {
   const oldText = $(".rendered[data-original]", block).dataset.original;
   const hash = block.dataset.hash;
 
-  // Build the edit list. The primary suggestion's joined text lives on
-  // .primary-suggestion's data-new attribute (the diff view above replaced
-  // the per-part DOM nodes). Each extra-edit div carries its own
-  // {data-target, data-new} pair.
+  // Build the edit list. For each suggestion container, the rendered diff
+  // carries the per-hunk state; rebuildMergedFromDiff walks it and emits the
+  // merged text honouring accept/reject toggles. If no diff is found (legacy
+  // path), fall back to the data-new attribute (whole-paragraph swap).
   const edits = [];
   const primaryEl = $(".primary-suggestion", block);
   if (primaryEl) {
-    const newText = decodeURIComponent(primaryEl.dataset.new || "");
+    const diffEl = primaryEl.querySelector(".diff");
+    const merged = rebuildMergedFromDiff(diffEl);
+    const newText = (merged !== null && merged !== undefined)
+      ? merged
+      : decodeURIComponent(primaryEl.dataset.new || "");
     edits.push({ old: oldText, new: newText });
   }
   $$(".extra-edit", block).forEach(el => {
     const tgt = decodeURIComponent(el.dataset.target || "");
-    const nw  = decodeURIComponent(el.dataset.new || "");
+    const fallback = decodeURIComponent(el.dataset.new || "");
+    const diffEl = el.querySelector(".diff");
+    const merged = rebuildMergedFromDiff(diffEl);
+    const nw = (merged !== null && merged !== undefined) ? merged : fallback;
     if (tgt) edits.push({ old: tgt, new: nw });
   });
 
@@ -1170,7 +1485,9 @@ async function applySuggestion(block) {
     msg(block, "ok", `Applied ${edits.length} edit(s). Reloading...`);
     // A full reload is the simplest way to refresh every affected block's
     // data-hash, drop the source entry's UI, and clear any incoming-edit
-    // notices on target paragraphs.
+    // notices on target paragraphs. Save scroll position so we don't snap
+    // back to the top of the chapter on reload.
+    preserveScrollAcrossReload();
     setTimeout(() => location.reload(), 350);
   } catch (err) {
     btn.disabled = false;
@@ -1189,6 +1506,7 @@ async function rejectSuggestion(block) {
     });
     msg(block, "ok", `Rejected. Reloading...`);
     // Reload so any "incoming edit" notices on other paragraphs disappear.
+    preserveScrollAcrossReload();
     setTimeout(() => location.reload(), 250);
   } catch (err) {
     msg(block, "err", err.message);
