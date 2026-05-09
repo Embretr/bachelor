@@ -272,262 +272,165 @@
     "3f1fc5d9b0973b56": {
       "context": "Introduction > The Problem",
       "paragraph": "Consider a small transport business consisting of one owner-operator and one vehicle. The work is straightforward at the outset. When a customer calls with goods to be moved, the operator checks the calendar, accepts the job if time is available, and turns it down if it is not. One delivery follows another, and the day arranges itself around what comes in.",
-      "summary": "Sets up the example: a one-person, one-vehicle transport business taking jobs as the phone rings.",
-      "feedback": null,
-      "suggestion": null,
-      "extra_edits": null,
+      "summary": "Chapter intro vignette + sector context, currently nested inside §1.1 The Problem.",
+      "status": null
+    }
+  },
+  "result/chapters/ch3/ch3-method.tex": {
+    "f363ee82bc42afeb": {
+      "context": "Methodology > Method Theory: DSR + DSRM Applied",
+      "paragraph": "The methodology used in this thesis is \\textcite{peffers2007dsrm}'s Design Science Research Methodology (DSRM), which structures DSR as six activities: problem identification and motivation, objectives for a solution, design and development, demonstration, evaluation, and communication \\parencite[p.~46]{peffers2007dsrm}. Peffers note that the activities are nominally sequential rather than strictly so; researchers are not expected to walk in order from activity 1 through activity 6 \\parencite[p.~56]{peffers2007dsrm}.",
+      "summary": "DSRM structures DSR as six nominally sequential activities; researchers are not expected to walk them strictly in order.",
       "status": null
     },
-    "34fffe5dcf05e2a8": {
-      "context": "Introduction > The Problem",
-      "paragraph": "Simplicity disappears as soon as two requests collide. If two customers require their goods moved at the same hour, only one can be served. A natural response is to accept the higher-paying job and refuse the other. Suppose, however, that a third call arrives later in the day for a short delivery that would fit alongside the cheaper job that was earlier turned down. The operator who had accepted both short jobs would have earned more than the operator who accepted the single larger one, and would also have retained both customers. From this point onwards, decisions can no longer be made one call at a time. The day becomes a puzzle to be filled.",
-      "summary": "Two simultaneous calls force a price-based choice; a third call later reveals optimisation by combining short jobs.",
-      "feedback": null,
+    "d12d55a0f9cdbad8": {
+      "context": "Methodology > Data Collection",
+      "paragraph": "The interviews were conducted as an industry consultation, not as formal academic research, and that framing has ethical consequences worth stating directly. The project ran under Admmit's bachelor task brief and NTNU institutional supervision, and on that basis no Sikt registration was sought. (Sikt is Norway's national agency for shared services in research and education.) The conversations covered work practices, system use, and assignment criteria only. No special-category personal data was collected. Special-category here is the GDPR term for sensitive data such as health, ethnicity, and political views; none of that was discussed. Consent was implicit: participants agreed to take the call and answer questions. The consultation framing makes that acceptable given the absence of sensitive data and the professional context, but no formal consent form was administered, and recording proceeded without an explicit pre-recording consent step. No formal anonymisation protocol was applied for the same reason: the seven coordinators are professionals speaking about their working practices, not research participants whose personal data is being processed. Only Timpex and Opter, the two commercial vendors named in the consultation pool, are named in the thesis. The seven interviewed companies are referenced generically by size, sector, and system maturity. Recordings and transcriptions are stored locally on the project author's device, accessible only to the author and supervisor, and will be deleted after submission and grading. The researcher--developer overlap and the informal study procedures that follow from this consultation framing are named together as L3 in \\Cref{sec:limitations}.",
+      "summary": "Interviews were treated as industry consultation under NTNU supervision: no Sikt registration, implicit consent, no special-category data.",
+      "feedback": "Real ethical clarity needed before a clean rewrite is possible. Two sentences hedge:\n(1) 'On that basis no Sikt registration was sought.' Did NTNU institutional supervision confirm this, or did the team decide based on the consultation framing? If NTNU confirmed: state it directly ('After consultation with NTNU institutional supervision, no Sikt registration was sought'). If the team decided unilaterally: state that, and L3 in §5.4 needs to carry the weight.\n(2) 'Recording proceeded without an explicit pre-recording consent step.' Did participants know they were being recorded? If yes (verbal at recording time): say so -- that is verbal consent and worth naming. If no: that is a real problem and L3 must carry it.\nUntil those two facts are clear, suggestion left null. Tighten the order so the conditions justify the implicit consent in the same sentence once facts are settled.",
       "suggestion": null,
-      "extra_edits": null,
+      "status": "pending"
+    },
+    "aa9e110219434c8f": {
+      "context": "Methodology > Iterative Development Process > Configurable Soft-constraint Weights",
+      "paragraph": "\\begin{description}\n  \\item[Origin.] Designer and architectural. The iteration delivers the Adaptability anchor that the project committed to from the start through the Admmit-mandated multi-tenant architecture. The specific weight set was chosen by the designers, not interview-validated as the right set.\n  \\item[Tried.] A per-company weight configuration UI for soft constraints: workload balance, vehicle preference, transitions between consecutive assignments, priority, and employee preferences. Each weight flows into the CP-SAT objective function so that the same engine produces different plans for different companies without code changes.\n  \\item[Why.] The interviews confirmed that assignment criteria differ materially across companies. Some companies weight workload balance highly. Others prioritise vehicle--driver continuity or route familiarity. Adaptability means the same artefact must serve materially different operational rules within a single deployed instance.\n  \\item[What happened.] User-chosen weight combinations were hard to validate against pathological cases. Weights summing to zero produced unstable rankings, and one weight dominating the others produced plans that satisfied a single criterion at the cost of all others. The user-experience (UX) challenge was explaining what each weight actually means to a coordinator who does not work in optimisation vocabulary.\n  \\item[Learned.] Configurability for soft weights is a partial realisation of Adaptability. Hard constraints, status workflow definitions, and per-company assignment-rule taxonomies remain hard-coded; broader configurability of those layers is named as a gap in \\Cref{sec:limitations} and forwarded to future work in \\Cref{sec:future-work}.\n  \\item[Next.] With eight iterations of artefact in place, the methodological question becomes how to test whether the artefact meets the locked anchors. That question is answered in \\Cref{sec:evaluation-framework}.\n\\end{description}",
+      "summary": "Iteration 8 added per-company configurable soft-constraint weights, partially realising the Adaptability anchor.",
       "status": null
     },
-    "55ce0f93a1e1cc77": {
-      "context": "Introduction > The Problem",
-      "paragraph": "Other considerations press on the puzzle, and they fall into two kinds. The first are \\emph{soft constraints}, also called priorities: the operator may prefer to avoid out-of-town runs that conflict with family commitments, retain the customer who calls every Friday, or favour jobs in a familiar area. Soft constraints shape which orders are accepted and how the day is arranged, but any of them can give way when a better job arrives. The second kind are \\emph{hard constraints}, and these do not give way: the legal limit on consecutive driving hours, the capacity of the vehicle, and the customer's delivery window are rules the operator cannot break regardless of what a job pays. The operator is now optimising. Arranging a working day so that revenue is high, hard constraints are respected, and soft constraints are honoured is, in substance, an optimisation problem with multiple competing objectives.",
-      "summary": "Names soft constraints (priorities that can give way) and hard constraints (rules that cannot), then names the practice as optimisation.",
+    "79782ea0a5a1b596": {
+      "context": "Methodology > Defining the Task",
+      "paragraph": "Admmit, a Norwegian software firm building products for the transport sector, offered a bachelor task through NTNU under project code OPG29. The task description asked for a working prototype of a planning platform that could help Norwegian traffic coordinators assign drivers and vehicles to the day's transport assignments. The two-student team accepted the task and committed to delivering both the artefact, named RP, and the thesis that surrounds it. From that point onwards, two workstreams ran in parallel: building the platform and conducting the research that would inform its design.",
+      "summary": "Admmit gave NTNU a bachelor task; the two-student team accepted and ran build and research workstreams in parallel.",
+      "feedback": "havent we already defined RP?",
+      "suggestion": null,
+      "status": "pending"
+    },
+    "0eaf7ffb53b1d792": {
+      "context": "Methodology > Defining the Task",
+      "paragraph": "The task description fixed the topic but not the empirical foundation, and the team needed answers before any planning interface could be designed responsibly. Two questions in particular: how do Norwegian traffic coordinators actually plan a day's assignments, and what software, if any, do they use today? Neither question could be answered from the desk. The team turned to Admmit's customer roster, called seven traffic coordinators and transport managers directly, and conducted brief semi-structured calls of roughly fifteen minutes each. The calls were spread across the first half of March 2026 rather than compressed into one day; each call was conducted on its own, and the team adjusted prompts and reflected between calls so that gaps in earlier conversations could be probed in later ones. Vendor names surfaced gradually through \"what tools do you use\" questions: several companies described mixes rather than single-vendor adoption, with Timpex, Opter, and internal tools appearing in different combinations across the seven companies interviewed.",
+      "summary": "Seven coordinators were called in March 2026 to learn how planning is done today and which tools they use.",
+      "feedback": "dont mention 7 directly ever in the bachelros thesis.",
+      "suggestion": null,
+      "status": "pending"
+    },
+    "d84a64a974f57556": {
+      "context": "Methodology > Defining the Task",
+      "paragraph": "Admmit had already specified two requirements before the first call. The first was Human-in-the-Loop (HITL) operation: the algorithm proposes a plan, and the coordinator can review and override every assignment in it. The second was a multi-tenant architecture, meaning one deployed system serving several customer companies, with each company's data and configuration isolated from the others. The seven coordinators voiced a clear preference for a system that suggests a plan they can correct rather than one that decides for them, which matched the HITL requirement. Their accounts of differing operational rules across companies matched the case for the multi-tenant architecture. Admmit had the requirements; the seven companies interviewed validated them.",
+      "summary": "Admmit had pre-specified HITL and multi-tenant requirements; the seven interviewed coordinators validated both.",
       "feedback": null,
       "suggestion": null,
-      "extra_edits": null,
       "status": null
     },
-    "936a5fb8b1d48062": {
-      "context": "Introduction > The Problem",
-      "paragraph": "The problem changes shape when the business grows. A second vehicle and a second driver double the calendar. Each incoming call demands not only a yes or no, but an assignment: which driver, with which vehicle, on which order. The matching has to respect everything that already mattered for one driver, together with the additional rule that two assignments cannot be made to the same driver at the same time. New soft and hard constraints also enter. One driver prefers not to start the day on the north side of the city, but will if a heavier job is waiting there. The other holds the licence required for transporting dangerous chemicals, and is the only one of the two who can take the load of paint thinner that arrives every Wednesday. The puzzle now has two columns and a richer set of pieces.",
-      "summary": "Business grows to two vehicles; assignment problem appears, with new soft preferences and hard licence rules.",
+    "e519f92230a6a351": {
+      "context": "Methodology > Data Collection",
+      "paragraph": "The seven coordinators were selected purposively from Admmit's customer roster rather than through a public call. The project required coordinators in the planning role at companies where algorithm-assisted planning is plausibly relevant, and Admmit's customer base supplied that population directly. The companies span small operators with around eight to twenty drivers up to a multi-department fleet of around forty-five vehicles, range geographically from Bergen and Mo i Rana to Lakselv and Tana, and cover the systems used in the field: Timpex, Opter, internal or custom tools, and fully manual planning. The self-selection that follows from recruiting through Admmit's customer roster is a known limitation on the empirical foundation, named as L2 in \\Cref{sec:limitations}.",
+      "summary": "Coordinators were purposively recruited from Admmit's customer roster, spanning fleet size, geography, and system maturity.",
       "feedback": null,
       "suggestion": null,
-      "extra_edits": null,
       "status": null
     },
-    "1eac8e81dd48a349": {
-      "context": "Introduction > The Problem",
-      "paragraph": "The same problem at the scale of, for instance, one hundred drivers, fifty vehicles, and a thousand orders a week no longer fits on a single desk. Companies in roughly that range, tens to hundreds of drivers and dozens of vehicles handling hundreds to thousands of orders a week, are the ones this thesis is concerned with, and they correspond to the customer base of Admmit, the Norwegian software firm that offered the thesis as a bachelor task. The owner of such a company has long since stepped out of the cab. A new role has appeared, sitting between the customers ringing in and the drivers behind the wheel, whose entire day is the puzzle: a traffic coordinator. They choose who drives what, in which vehicle, and when, and they do so against the same kinds of soft and hard constraints that mattered when there was one vehicle, only multiplied across the fleet.",
-      "summary": "At fleet scale the puzzle leaves one desk; the traffic coordinator role appears; the size range Admmit's customers occupy is named.",
+    "3d8122bf17f37cc5": {
+      "context": "Methodology > Data Collection",
+      "paragraph": "The seven calls were conducted by phone across the first half of March 2026, in Norwegian. Each call lasted approximately fifteen minutes, for a cumulative interview time of roughly 105 minutes. The calls were spread across multiple days rather than compressed into one window, so the team could adjust prompts between calls and probe gaps in earlier conversations later on. Phone was the practical choice given the geographic spread of the coordinators (Bergen, Mo i Rana, Lakselv, Tana) and the brief format the consultation could realistically ask of working coordinators recruited cold. Norwegian was chosen as the working language because all seven coordinators were native speakers, and the topic vocabulary (TMS terminology, regulatory references, sick-leave handling) is naturally expressed in Norwegian. The fifteen-minute target balanced cross-topic coverage against the realistic attention budget of a working day. The brief duration is named alongside the sample size as L1 in \\Cref{sec:limitations}.",
+      "summary": "Calls were conducted by phone in Norwegian over March 2026, fifteen minutes each, with brief duration named as L1.",
       "feedback": null,
       "suggestion": null,
-      "extra_edits": null,
       "status": null
     },
-    "d831b8eda5bf02e4": {
-      "context": "Introduction > The Problem",
-      "paragraph": "Coordinators of this kind sit in transport companies across the country. In 2025, Norwegian transport companies moved approximately 252 million tonnes of goods on behalf of their customers \\parencite{ssb2026godstransport}. Behind every load, a traffic coordinator made the same kind of decision the one-vehicle operator made, only at greater scale and under tighter time pressure. Those decisions add up directly on the company's bottom line: a driver assigned past the weekly hours cap turns the next load into overtime, a vehicle and its driver waiting between two assignments incur cost without producing revenue, and the heaviest workload concentrated on the same few drivers week after week produces fatigue and turnover.",
-      "summary": "Coordinators sit nationwide; their decisions add up directly on the company's bottom line through overtime, idle, fatigue, and turnover.",
+    "65a7949e7cb2aec9": {
+      "context": "Methodology > Data Analysis",
+      "paragraph": "Thematic analysis was the approach the team used to turn the interview audio into themes the project could act on. \\textcite{braun2006thematic} present thematic analysis (TA) as a flexible qualitative method that codes statements into themes through repeated readings of the material. It was chosen for its theoretical flexibility within the DSR frame \\parencite[p.~81]{braun2006thematic} and its accessibility to a small research team conducting analysis as one component of a larger DSR Problem-Identification activity \\parencite[p.~77]{braun2006thematic}. The analysis was conducted in the six phases Braun and Clarke specify: familiarisation, initial coding, theme search, theme review, theme definition, and report production \\parencite[p.~87]{braun2006thematic}.",
+      "summary": "Thematic analysis was chosen for its flexibility within DSR, conducted in Braun and Clarke's six phases.",
       "feedback": null,
       "suggestion": null,
-      "extra_edits": null,
       "status": null
     },
-    "dd13534ee5b04f7a": {
-      "context": "Introduction > The Problem",
-      "paragraph": "At a hundred vehicles, the puzzle the one-vehicle operator could carry in their head no longer fits there. To know whether a driver is close to the weekly hours cap, the coordinator opens the timesheet. To know whether the right vehicle is free at the right hour, they check the order tool. To know whether the Friday regular has already been promised a slot, they consult their own memory. The data needed for a good plan lives in four places at once, and no view assembles it. A further part of it lives nowhere at all: which routes are difficult and who is familiar with them, which licence allows which load, which vehicle suits which job, which customer must not be refused. These are the multi-driver counterpart of the family commitments and weekly regulars that shaped the one-vehicle case. Knowledge of this kind, acquired on the job and rarely written down, is termed \\emph{tacit knowledge}. It is what no system can read from a screen, and it is what makes the coordinator irreplaceable.",
-      "summary": "Visibility gap and tacit knowledge: planning data lives in four places, and the rest only in the coordinator's head.",
+    "eff00f59dec03bcf": {
+      "context": "Methodology > Data Analysis",
+      "paragraph": "Braun and Clarke's own examples are drawn from psychology and gender studies. The application here is to brief semi-structured consultations with traffic coordinators inside a DSR Problem-Identification activity, not to standalone qualitative research. The six-phase guide transfers across that domain gap by treating each transcript as a data item and the seven transcripts together as the data set.",
+      "summary": "Braun and Clarke's six-phase guide transfers from psychology and gender studies to brief consultations inside a DSR Problem-Identification activity.",
       "feedback": null,
       "suggestion": null,
-      "extra_edits": null,
       "status": null
     },
-    "a2ae8aec2f0e29b8": {
-      "context": "Introduction > The Problem",
-      "paragraph": "The software the coordinator currently operates does not close the remaining gap. The two commercial Norwegian Transport Management Systems (TMS) named by the interviewed companies, Timpex and Opter, handle order management and invoicing, but neither produces an assignment plan automatically. They scale the operator's record-keeping to a fleet, but stop there. Other companies plan from internal tools, spreadsheets, memory, or telephone calls. None of the systems in current use takes on the assignment planning itself: the decision of which driver and vehicle perform which order. That is the gap a planning system would have to fill.",
-      "summary": "Existing software (Timpex, Opter, internal tools) covers orders and invoicing but leaves assignment planning to the coordinator.",
+    "e6a38563db1bf1c6": {
+      "context": "Methodology > Data Analysis",
+      "paragraph": "The analysis carries the limitations of its inputs and its frame, named as L1 and L2 in \\Cref{sec:data-collection} and catalogued in full in \\Cref{sec:limitations}. The themes are accordingly bounded to the seven interviewed companies and are not a basis for generalising to Norwegian transport more broadly.",
+      "summary": "The analysis carries the L1 and L2 limitations of its inputs and is bounded to the seven interviewed companies.",
       "feedback": null,
       "suggestion": null,
-      "extra_edits": null,
       "status": null
     },
-    "e6fc41643cc97cb1": {
-      "context": "Introduction > The Problem",
-      "paragraph": "What the coordinator does mentally is, in effect, an algorithm. Rules such as ``this driver is close to overtime, assign the load to another'' or ``this vehicle is too small for that pallet count, substitute it'' are applied repeatedly, yet they are never written down, compared against alternatives, or refined between shifts. A computer can apply the same rules at greater scale, hold more constraints in view simultaneously, and search through more candidate plans than a person can in comparable time. The aim is not to replace the coordinator, but to take the part of the puzzle a computer can solve and leave the part that depends on tacit knowledge to the person who carries it.",
-      "summary": "The coordinator's mental rules are already an algorithm; a computer can run them at greater scale alongside the coordinator.",
+    "299a8d7a2abe5fab": {
+      "context": "Methodology > Iterative Development Process > Schema and Timeline Scaffolding",
+      "paragraph": "\\begin{description}\n  \\item[Origin.] Admmit-mandate (multi-tenant architecture) combined with designer-technical exploration of the data model and a read-only timeline UI (user interface).\n  \\item[Tried.] A core entity model covering employees, vehicles, assignments, certifications, weekly work schedules, and time-off. Multi-tenant data isolation was enforced at the data layer, with every query scoped by \\texttt{companyId}. A read-only Gantt-style timeline rendered existing assignments without any optimisation step.\n  \\item[Why.] Later solver iterations need a structured substrate to operate over. The multi-tenant boundary must be enforced at the data layer because Admmit's customer structure means each transport company would consume the artefact independently; bolting tenancy on later would risk cross-tenant leakage on every new query path.\n  \\item[What happened.] The substrate was adequate for the simplest assignment heuristic but required revision once constraint-solver formalisation exposed gaps in the data model. Explicit time-off windows, certificate-expiry as a queryable date, and per-day work-schedule entries became necessary only after the heuristic showed what the solver would need to reason about.\n  \\item[Learned.] Schema-first discipline reduces rework but cannot fully anticipate solver requirements. The substrate is itself an iteration, not a one-shot setup.\n  \\item[Next.] With the substrate stable enough to support a real assignment step, the next iteration attempted the simplest possible assignment heuristic.\n\\end{description}",
+      "summary": "Iteration 1 built the multi-tenant data substrate and a read-only Gantt timeline before any solver step.",
       "feedback": null,
       "suggestion": null,
-      "extra_edits": null,
       "status": null
     },
-    "f7668577fef5f65a": {
-      "context": "Introduction > The Solution",
-      "paragraph": "This thesis concerns precisely that division of labour. Ressursplanlegger (hereafter RP) is the artefact it builds and evaluates. RP is an algorithm-assisted planning platform. An algorithm reads a company's drivers, vehicles, and orders, and proposes a plan covering a horizon set by the coordinator. The coordinator opens the proposal in a calendar-style view and reviews each assignment, free to change or remove any of them. The plan takes effect only after the coordinator approves it.",
-      "summary": "Introduces RP: an algorithm-assisted planning platform whose plans the coordinator reviews before they take effect.",
+    "6edd77ffa1dafe73": {
+      "context": "Methodology > Iterative Development Process > Single-engine Baseline (greedy)",
+      "paragraph": "\\begin{description}\n  \\item[Origin.] Designer-technical exploration.\n  \\item[Tried.] A priority-sorted greedy first-fit assignment heuristic. Assignments were sorted by priority, walked through in order, and each was given the first feasible driver and vehicle combination found.\n  \\item[Why.] An instant baseline that produces a feasible plan provides a reference point for measuring richer-solver gains, and gives the coordinator immediate feedback while drag-and-drop edits happen.\n  \\item[What happened.] The heuristic worked on small instances of fewer than thirty assignments. On larger instances, priority-sorted greedy committed early to locally optimal but globally suboptimal choices, blocking later high-priority assignments and producing avoidable idle time and overtime.\n  \\item[Learned.] The greedy heuristic's quality limit is structural rather than tunable: reordering the priority comparator cannot break out of it because the heuristic lacks both constraint propagation and a global view of the day.\n  \\item[Next.] Introduce a complete solver that can reason about all assignments simultaneously.\n\\end{description}",
+      "summary": "Iteration 2 implemented a priority-sorted greedy heuristic, which committed early and produced avoidable idle time on larger instances.",
       "feedback": null,
       "suggestion": null,
-      "extra_edits": null,
       "status": null
     },
-    "51390e1a4bb4bead": {
-      "context": "Introduction > The Solution",
-      "paragraph": "Three concerns recurred often enough across the interviews with traffic coordinators and the dialogue with Admmit to be drawn out as guiding concepts for the rest of the project. \\textbf{Efficiency} is what RP must measurably improve; \\textbf{Trust/control} is what RP must preserve in the coordinator's hands; \\textbf{Adaptability} is what RP must support across companies. The rest of this section develops each in turn.",
-      "summary": "Names the three anchor concepts and the role each plays: improve, preserve, and support across companies.",
+    "4bf7ee7d0767db91": {
+      "context": "Methodology > Iterative Development Process > Constraint Generalisation (CP-SAT)",
+      "paragraph": "\\begin{description}\n  \\item[Origin.] Designer-technical exploration.\n  \\item[Tried.] The Google OR-Tools CP-SAT solver with explicit hard constraints (competencies, availability, no double-booking, vehicle type) and weighted soft constraints (workload balance, vehicle preference, transitions, priority, employee preferences) combined under an objective function that maximises scheduled assignments minus weighted soft-constraint violations.\n  \\item[Why.] Constraint programming is well-suited to assignment problems with combinations of hard and soft constraints, and CP-SAT specifically returns near-optimal solutions within a configurable time budget. That property matters for an HITL interface where the coordinator is waiting on the solver.\n  \\item[What happened.] The solver returned near-optimal solutions on small to medium instances within a thirty-to-sixty-second time limit. Quality degraded on larger instances when the time limit bound: the solver returned the best feasible solution found rather than the optimum. Modelling complexity was higher than for the heuristic, and several iterations were needed to get the hard-versus-soft mapping correct.\n  \\item[Learned.] CP-SAT covers the medium-instance gap that the greedy heuristic could not, but introduces a scaling boundary that motivates a third engine for larger instances.\n  \\item[Next.] Add a third engine for large instances and a mechanism for comparing the three under matched conditions.\n\\end{description}",
+      "summary": "Iteration 3 added an OR-Tools CP-SAT solver with explicit hard and weighted soft constraints under a single objective function.",
       "feedback": null,
       "suggestion": null,
-      "extra_edits": null,
       "status": null
     },
-    "1d3c71f495d022ac": {
-      "context": "Introduction > The Solution > Efficiency",
-      "paragraph": "The owner of the hundred-vehicle business asks a simple question at the end of every week. How much overtime did the company run? How many vehicle-hours sat idle between assignments? Was the workload spread evenly across the drivers, or did the same few people carry the weight again? The information required to answer is in the company's systems, yet no single view assembles it. Efficiency is the question of whether RP makes those quantities visible, and whether, once they are visible, the coordinator can move them in the right direction: less overtime, less idle time between assignments, and a more even distribution of work across the team.",
-      "summary": "Defines Efficiency through the owner's end-of-week ledger: less overtime, idle time, and uneven workload, made visible first.",
+    "a2bb708fb97eb815": {
+      "context": "Methodology > Iterative Development Process > HITL Interface",
+      "paragraph": "\\begin{description}\n  \\item[Origin.] Mixed: Admmit-mandate combined with interview-validated direction. The drag-and-drop interaction style was confirmed by coordinator consensus that the system should suggest a plan the coordinator can correct, not replace the coordinator.\n  \\item[Tried.] A Gantt-style drag-and-drop assignment UI, an explicit inspect / modify / accept / reject control on every algorithm-generated suggestion, and a thin post-hoc constraint check that flagged basic feasibility violations such as over-booking and missing competence.\n  \\item[Why.] HITL was Admmit's requirement from project start, and the interviews validated the necessity through a coordinator consensus that automated planning must be correctable rather than authoritative. Without an interactive override path, the coordinator would have authority in principle but no way to exercise it on the timeline they actually work with.\n  \\item[What happened.] Drag-and-drop worked. State consistency between optimistic UI updates and server mutations occasionally produced stale conflict displays, where the timeline showed a violation the server had already resolved, and required a refresh hook on assignment updates. The thin post-hoc check caught the most common conflicts but was clearly insufficient for the range of edge cases the coordinator would encounter.\n  \\item[Learned.] The HITL interface needs richer real-time feedback than a thin post-hoc check provides. Coordinator authority over plan content is meaningful only when the system shows what to act on; an empty timeline the coordinator edits blindly delivers Trust/control only on paper.\n  \\item[Next.] Expand the post-hoc check into a full deviation taxonomy that materialises the constraints the coordinator would otherwise have to remember.\n\\end{description}",
+      "summary": "Iteration 5 built the Gantt drag-and-drop HITL interface with a thin post-hoc constraint check that proved insufficient.",
       "feedback": null,
       "suggestion": null,
-      "extra_edits": null,
       "status": null
     },
-    "5aa8fb0b841b84f0": {
-      "context": "Introduction > The Solution > Trust/control",
-      "paragraph": "The one-vehicle operator inspected every job before accepting it. The coordinator of a hundred-vehicle fleet cannot examine a thousand jobs a week one by one, yet a system that issued plans without their approval would not be acceptable to them either. Every plan the algorithm proposes is reviewed by the coordinator before it takes effect, because trust in the algorithm grows only where control over it is real.",
-      "summary": "Defines Trust/control: every plan is reviewed by the coordinator because trust grows only where control is real.",
+    "8e68971741962863": {
+      "context": "Methodology > Evaluation Framework",
+      "paragraph": "The framework that tests RP's claims is asymmetric on purpose. Some claims are tested directly, through the multi-engine benchmark; others are accepted as inputs the framework does not itself test, following the position carried through \\Cref{sec:iter-multiengine}.",
+      "summary": "The evaluation framework is asymmetric on purpose: some claims are tested directly, others are accepted as inputs.",
       "feedback": null,
       "suggestion": null,
-      "extra_edits": null,
       "status": null
     },
-    "e66c6cb48f9dce92": {
-      "context": "Introduction > The Solution > Adaptability",
-      "paragraph": "Two transport companies of comparable size may operate on entirely different rules. The first has ten drivers working from a single depot and plans one day at a time; the second has several dozen vehicles distributed across multiple branches and plans a week ahead. The first values keeping every driver busy above all else; the second values keeping the same crews together for repeat customers. Adaptability is the capacity of the system to fit both, with operational rules and priorities adjusted per company through configuration rather than through changes to the code.",
-      "summary": "Defines Adaptability: the same system fits different companies through per-company configuration rather than code changes.",
+    "4d893e3826f2806b": {
+      "context": "Methodology > Evaluation Framework",
+      "paragraph": "Each of the three anchors is tested to a different extent, and the coverage is asymmetric across them. \\textbf{Efficiency} is the most directly tested anchor. The multi-engine benchmark is the validation instrument designed for it, comparing scheduled-assignment count, soft-constraint penalty, and runtime-within-budget across the greedy heuristic, OR-Tools CP-SAT, and Timefold metaheuristic on identical problem instances. \\textbf{Adaptability} is tested only indirectly. The requirements traceability matrix records that the per-company configurable weight interface (\\Cref{sec:iter-weights}) is implemented and verified during development, but no benchmark compares the artefact's behaviour across two genuinely different operational rulebooks. \\textbf{Trust/control} is also tested only partially. The inspect / modify / accept / reject flow is implemented, but it has not been user-tested with traffic coordinators, and that gap is forwarded to L8 in \\Cref{sec:limitations}.",
+      "summary": "Efficiency is tested directly through the multi-engine benchmark; Adaptability and Trust/control are tested only indirectly or partially.",
       "feedback": null,
       "suggestion": null,
-      "extra_edits": null,
       "status": null
     },
-    "abc0394f905b6669": {
-      "context": "Introduction > Research Questions",
-      "paragraph": "The puzzle from \\Cref{sec:problem} supplies the questions this thesis must answer.",
-      "summary": "Single-sentence opener tying the research questions back to the puzzle from the previous section.",
+    "9d978b7b68a9873b": {
+      "context": "Methodology > Evaluation Framework",
+      "paragraph": "The requirements traceability matrix is the coverage check rather than a quality validation. For each functional requirement in the FK-01 to FK-42 range, the matrix records two things: whether it is implemented in the deployed codebase, and whether its behaviour was verified during development. ``Verified during development'' is a narrower claim than passing an automated test suite, and it is the honest one to make: thirty-six of the thirty-seven in-scope functional requirements are implemented and developer-verified, one is partial (FK-30, driving and rest-time status), and the five out-of-scope requirements (FK-38 through FK-42) are documented as future work. The absence of a formal automated test suite is itself a non-functional gap, named as L9 in \\Cref{sec:limitations}. The traceability matrix's role is to make coverage visible, not to substitute for the testing that L9 acknowledges is missing.",
+      "summary": "The requirements traceability matrix records implementation and developer-verified behaviour for each functional requirement, making coverage visible.",
       "feedback": null,
       "suggestion": null,
-      "extra_edits": null,
       "status": null
     },
-    "a62fc91bca18e916": {
-      "context": "Introduction > Research Questions",
-      "paragraph": "\\begin{quote}\nTo what extent can an algorithm-assisted planning platform automate the traffic coordinator's planning work in Admmit's customer companies in a way that improves resource utilization (reducing overtime, idle time between assignments, and uneven driver load) and is perceived as useful by the coordinator who runs it?\n\\end{quote}",
-      "summary": "States the main research question (block quote): utility-perceived-by-coordinator + utilization gain + tacit-knowledge preservation.",
+    "b99dda6ef6688323": {
+      "context": "Methodology > Validity and Reliability",
+      "paragraph": "Relevance and validity bound the interview component first. The seven coordinators were a purposive sample matched to the research question, which asks about coordinator experience of the visibility gap rather than its prevalence in Norwegian transport. \\textcite[p.~485]{malterud2001lancet} treats purposive sampling as the appropriate strategy for qualitative inquiry. Validity within that sample rests on triangulation across the seven calls: the visibility gap and the operator-vs-owner asymmetry surfaced across companies of different size and system maturity rather than from any single coordinator. The findings transfer in Malterud's bounded sense of applicability within a specified setting rather than to the population at large \\parencite[p.~486]{malterud2001lancet}, and the bounds are named as L1 (sample size, brief duration) and L2 (self-selection from Admmit's customer roster) in \\Cref{sec:limitations}.",
+      "summary": "Relevance and validity bound the interview component through purposive sampling and triangulation across the seven calls.",
       "feedback": null,
       "suggestion": null,
-      "extra_edits": null,
       "status": null
     },
-    "a54d5ac4aec87597": {
-      "context": "Introduction > Research Questions",
-      "paragraph": "The main question is one of balance. The more of the planning work RP can take on, the more it can move the company's utilization numbers and the more useful it becomes to the coordinator who runs it; if it takes on too much, or takes it on in the wrong way, it begins to erode the tacit knowledge and override authority that make the coordinator irreplaceable. The question is therefore not whether to automate, but how far automation can go before it costs more than it gives.",
-      "summary": "Frames the main question as a balance: more automation is more useful, too much erodes tacit knowledge and authority.",
+    "b8d106c4e58c3303": {
+      "context": "Methodology > Validity and Reliability",
+      "paragraph": "Validity for the system component is narrower. Two instruments carry it, both set out in \\Cref{sec:evaluation-framework}: the requirements traceability matrix that records implementation and developer-verified behaviour for each functional requirement, and the multi-engine benchmark that compares the three engines on identical synthetic instances. Together they validate the artefact in Wieringa's sense (predicting how it would behave once deployed) rather than evaluating it in deployment (see \\Cref{sec:dsr}). The gaps that bound this validation (no production deployment, no user testing of the override flow, no automated test suite) are forwarded as L6, L8, and L9 in \\Cref{sec:limitations}.",
+      "summary": "Validity for the system component rests on the requirements traceability matrix and the multi-engine benchmark together.",
       "feedback": null,
       "suggestion": null,
-      "extra_edits": null,
-      "status": null
-    },
-    "94c28171dd8da62b": {
-      "context": "Introduction > Research Questions",
-      "paragraph": "\\begin{quote}\n\\textbf{SQ1}: To what extent does RP reduce overtime, idle time, and uneven driver load below the level produced by current planning practice in Admmit's customer companies?\n\\end{quote}",
-      "summary": "States SQ1 (block quote).",
-      "feedback": null,
-      "suggestion": null,
-      "extra_edits": null,
-      "status": null
-    },
-    "71d6e35eb1f76844": {
-      "context": "Introduction > Research Questions",
-      "paragraph": "SQ1 is the Efficiency side of the balance: do the owner's end-of-week numbers come down once the coordinator works from RP rather than from the present mix of order tools, spreadsheets, and memory? It is answered in §5.1.1 against a benchmark of synthetic datasets that approximate the fleet ranges of the interviewed companies, with the comparison baseline drawn from the interview accounts of how planning is done at present.",
-      "summary": "Locates SQ1 as the Efficiency side and forwards to §5.1.1's synthetic benchmark and interview-derived baseline.",
-      "feedback": null,
-      "suggestion": null,
-      "extra_edits": null,
-      "status": null
-    },
-    "81601f7371e06bf0": {
-      "context": "Introduction > Research Questions",
-      "paragraph": "\\begin{quote}\n\\textbf{SQ2}: Through what kind of interface and process can the traffic coordinator review and override every algorithm-generated assignment without making the planning workflow heavier than current practice?\n\\end{quote}",
-      "summary": "States SQ2 (block quote).",
-      "feedback": null,
-      "suggestion": null,
-      "extra_edits": null,
-      "status": null
-    },
-    "8412291e08647a29": {
-      "context": "Introduction > Research Questions",
-      "paragraph": "SQ2 is the Trust/control side of the balance: how can the inspection the one-vehicle operator performed by reflex be reproduced for the coordinator of a fleet, when there are a thousand jobs a week and much of what argues for or against the algorithm's choice is knowledge the algorithm cannot read off the screen? It is answered in §5.1.2 by examining the timeline, the override controls, and the conflict view in RP.",
-      "summary": "Locates SQ2 as the Trust/control side and forwards to §5.1.2's interface examination.",
-      "feedback": null,
-      "suggestion": null,
-      "extra_edits": null,
-      "status": null
-    },
-    "dda63fb95aefe930": {
-      "context": "Introduction > Research Questions",
-      "paragraph": "\\begin{quote}\n\\textbf{SQ3}: Through which configurable elements can RP serve companies that differ in operational rules, fleet size, and planning horizon, without changes to the code?\n\\end{quote}",
-      "summary": "States SQ3 (block quote).",
-      "feedback": null,
-      "suggestion": null,
-      "extra_edits": null,
-      "status": null
-    },
-    "50981c6b684fa08e": {
-      "context": "Introduction > Research Questions",
-      "paragraph": "SQ3 is the Adaptability question: what has to be configurable for RP to fit the ten-driver depot and the multi-branch fleet without changes to the code? It is answered in §5.1.3 against the per-company configuration of soft-constraint weights and the planning horizon set in the dashboard.",
-      "summary": "Locates SQ3 as the Adaptability question and forwards to §5.1.3's per-company weights and horizon configuration.",
-      "feedback": null,
-      "suggestion": null,
-      "extra_edits": null,
-      "status": null
-    },
-    "37235e0a67e9602f": {
-      "context": "Introduction > Scope and Delimitations",
-      "paragraph": "RP fills the step between the order book and the drivers' day: the conversion of a list of orders for a given period into a concrete plan that specifies who drives what, in which vehicle, and when. The length of that period is set by the coordinator and ranges from at least a single day to a week or longer, since the companies the system has to accommodate do not all plan on the same horizon. Around that core, the system holds the information the planning step requires: which drivers are employed and what they are qualified to do, which vehicles the company has and what each can carry, and when employees are working and when they are not.",
-      "summary": "Defines RP's scope: turning orders for a chosen period into a concrete plan, plus the supporting data model.",
-      "feedback": null,
-      "suggestion": null,
-      "extra_edits": null,
-      "status": null
-    },
-    "f3cb1030a4cee52a": {
-      "context": "Introduction > Scope and Delimitations",
-      "paragraph": "The plan itself is produced by an automated solver. The coordinator picks which solver runs and how long it is allowed to search: a tight time budget returns a quicker, less thoroughly searched plan, suited to the morning rush; a longer budget returns a more thoroughly searched one, suited to the previous evening's planning session.",
-      "summary": "The coordinator picks which solver runs and how long it is allowed to search; tight budget vs longer budget.",
-      "feedback": null,
-      "suggestion": null,
-      "extra_edits": null,
-      "status": null
-    },
-    "8de44ccb2717a853": {
-      "context": "Introduction > Scope and Delimitations",
-      "paragraph": "The priorities the solver weighs against each other are tuned per company. The cost of overtime relative to idle time, the strength with which workload should balance across drivers, and the value of keeping a job within a driver's home region are exposed in the dashboard as configurable weights. The owner who cares most about overtime sets one weighting; the owner who cares most about even workloads sets another. The same algorithm, run on the same data, returns different plans for the two companies because the two companies have asked it to optimise different things.",
-      "summary": "The solver's priority weights are configurable per company; same algorithm and data return different plans for different priorities.",
-      "feedback": null,
-      "suggestion": null,
-      "extra_edits": null,
-      "status": null
-    },
-    "d7edf8a6f3567511": {
-      "context": "Introduction > Scope and Delimitations",
-      "paragraph": "Several capabilities are deliberately out of scope and warrant explicit naming, since they came up early in the project and could otherwise be assumed by default. RP is not a driver-facing application and does not push notifications to drivers; it is a planning tool, not a dispatch tool, and the message that reaches the driver's phone remains the responsibility of whatever order tool the company already operates. It does not handle billing or invoicing, which Timpex and Opter already cover, and bridging the two is a project of its own. It addresses Norwegian transport only, since the regulatory frame is national. It does not track vehicles in real time on the road; it plans the day, it does not monitor the day's execution. It does not attempt to plan the order in which a single driver should visit a list of stops, sometimes called the Vehicle Routing Problem (VRP), since the question RP answers is who does what, not in which order. Finally, it does not permit the algorithm to operate without a human in the loop; this is a fixed Admmit requirement, not a configurable setting.",
-      "summary": "Names what RP deliberately does not do: dispatch, billing, real-time tracking, vehicle routing, autonomous operation.",
-      "feedback": null,
-      "suggestion": null,
-      "extra_edits": null,
-      "status": null
-    },
-    "20e4a1993652a94d": {
-      "context": "Introduction > Approach",
-      "paragraph": "RP was built in stages, starting from the bachelor task Admmit offered. The task came with two requirements set by Admmit on behalf of its customers: that an algorithm propose the plan, and that a human-in-the-loop workflow leave the coordinator in charge of every assignment. The shape of the planning problem itself, beyond those two requirements, was open at the start. To fill it in, the project included an outreach phase: a set of interviews with traffic coordinators in Norwegian transport companies, conducted alongside an ongoing dialogue with Admmit. From those conversations the visibility gap, the role of tacit knowledge, and the limits of the existing software described in \\Cref{sec:problem} were learned, together with what coordinators would and would not accept from an algorithm.",
-      "summary": "RP began as a bachelor task from Admmit with two fixed requirements; the outreach phase grounded the open shape of the problem.",
-      "feedback": null,
-      "suggestion": null,
-      "extra_edits": null,
-      "status": null
-    },
-    "b8d521f90618ebca": {
-      "context": "Introduction > Approach",
-      "paragraph": "The design and construction of RP followed a Design Science Research approach: an artefact built to address a practical problem, evaluated against the problem it was built to address, refined across iterations, and reflected on in writing. The balance the main question asks for, between automation and the coordinator's tacit knowledge, is itself difficult to calibrate from the outside; with more time the project would have run a second round of interviews and a fuller iteration cycle on the trust-and-control surface, testing the balance against operating coordinators rather than against the team's own reading of the first-round transcripts. \\Cref{chap:method} describes the method and the iterations in full.\n",
-      "summary": "RP followed a Design Science Research approach; the trust-and-control balance would have benefited from a second iteration round.",
-      "feedback": null,
-      "suggestion": null,
-      "extra_edits": null,
       "status": null
     }
   }

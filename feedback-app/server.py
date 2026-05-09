@@ -432,7 +432,8 @@ INDEX_HTML = r"""<!doctype html>
   .files a:hover { background: #f3f4f6; }
   .block { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 0.85rem 0; padding: 0.85rem; border: 1px solid #e5e7eb; border-radius: 6px; background: #fff; }
   .block.heading { display: block; background: #faf7e8; border-color: #e7d99a; padding: 0.55rem 0.85rem; }
-  .block.heading pre { margin: 0; font-family: ui-monospace, monospace; font-size: 0.85rem; white-space: pre-wrap; }
+  .block.heading pre.source { margin: 0; font-family: ui-monospace, monospace; font-size: 0.85rem; white-space: pre-wrap; }
+  .block.heading .rendered { display: none; }
   .block.has-feedback { border-color: #fbbf24; }
   .block.has-suggestion { border-color: #3b82f6; box-shadow: 0 0 0 1px #3b82f6 inset; }
   .block.applied { background: #effaf3; border-color: #86c599; }
@@ -612,7 +613,13 @@ INDEX_HTML = r"""<!doctype html>
   body.mode-text .block.paragraph .text-col pre.source { display: none; }
   body.mode-text .text-col .rendered { font-size: 1.02rem; line-height: 1.7; }
   body.mode-text .block.heading { background: transparent; border: none; padding: 1.1rem 0 0.3rem; }
-  body.mode-text .block.heading pre { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 1.05rem; font-weight: 600; color: #111827; }
+  body.mode-text .block.heading > .ctx,
+  body.mode-text .block.heading pre.source { display: none; }
+  body.mode-text .block.heading .rendered { display: block; font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-weight: 700; color: #111827; line-height: 1.3; }
+  body.mode-text .block.heading.level-chapter .rendered { font-size: 1.7rem; margin-top: 1.4rem; }
+  body.mode-text .block.heading.level-section .rendered { font-size: 1.35rem; margin-top: 1.0rem; }
+  body.mode-text .block.heading.level-subsection .rendered { font-size: 1.1rem; margin-top: 0.6rem; }
+  body.mode-text .block.heading.level-subsubsection .rendered { font-size: 0.98rem; margin-top: 0.4rem; }
   body.mode-text .block.other { display: none; }
   body.mode-text .suggestion-row { margin-top: 0.5rem; }
 
@@ -1170,7 +1177,9 @@ async function renderFile() {
 
   blocks.forEach((b, i) => {
     if (b.kind === "heading") {
-      html += `<div class="block heading"><div class="ctx">${escapeHtml(b.level)}</div><pre>${escapeHtml(b.text)}</pre></div>`;
+      const titleMatch = b.text.match(/\\(?:chapter|section|subsection|subsubsection)\{([^}]*)\}/);
+      const title = titleMatch ? titleMatch[1] : b.text;
+      html += `<div class="block heading level-${escapeHtml(b.level)}"><div class="ctx">${escapeHtml(b.level)}</div><div class="rendered">${escapeHtml(title)}</div><pre class="source">${escapeHtml(b.text)}</pre></div>`;
     } else if (b.kind === "other") {
       html += `<div class="block other"><pre>${escapeHtml(b.text)}</pre></div>`;
     } else {
