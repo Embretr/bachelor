@@ -272,8 +272,322 @@
     "3f1fc5d9b0973b56": {
       "context": "Introduction > The Problem",
       "paragraph": "Consider a small transport business consisting of one owner-operator and one vehicle. The work is straightforward at the outset. When a customer calls with goods to be moved, the operator checks the calendar, accepts the job if time is available, and turns it down if it is not. One delivery follows another, and the day arranges itself around what comes in.",
-      "summary": "Chapter intro vignette + sector context, currently nested inside §1.1 The Problem.",
-      "status": null
+      "summary": null,
+      "feedback": null,
+      "suggestion": "Consider a small transport business: one owner-operator, one vehicle. When a customer calls with goods to be moved, the operator checks the calendar, accepts the job if time is available, and refuses it if not. Simplicity disappears as soon as two requests collide. If two customers want their goods moved at the same hour, only one can be served, and accepting the higher-paying job seems natural. But suppose a third call later in the day fits alongside the cheaper job that was refused: the operator who accepted both short jobs earns more than the one who took the single bigger one, and keeps both customers. Decisions can no longer be made one call at a time.",
+      "status": "ready",
+      "extra_edits": [
+        {
+          "target_text": "\n\nSimplicity disappears as soon as two requests collide. If two customers require their goods moved at the same hour, only one can be served. A natural response is to accept the higher-paying job and refuse the other. Suppose, however, that a third call arrives later in the day for a short delivery that would fit alongside the cheaper job that was earlier turned down. The operator who had accepted both short jobs would have earned more than the operator who accepted the single larger one, and would also have retained both customers. From this point onwards, decisions can no longer be made one call at a time. The day becomes a puzzle to be filled.",
+          "new_text": "",
+          "label": "Delete Old 2 (collision) after merging into Old 1 (vignette)"
+        }
+      ],
+      "explanation": "Per-paragraph rewrite (A-thesis voice: faster, less bullshit). CONSOLIDATES two paragraphs into one, applying this diff also deletes the consumed paragraph. Anchor terms verbatim. No em dashes. Consolidates Old 1 (vignette) + Old 2 (collision) into one paragraph. Applying THIS entry's extra_edit deletes the consumed paragraph."
+    },
+    "34fffe5dcf05e2a8": {
+      "context": "Introduction > The Problem",
+      "paragraph": "Simplicity disappears as soon as two requests collide. If two customers require their goods moved at the same hour, only one can be served. A natural response is to accept the higher-paying job and refuse the other. Suppose, however, that a third call arrives later in the day for a short delivery that would fit alongside the cheaper job that was earlier turned down. The operator who had accepted both short jobs would have earned more than the operator who accepted the single larger one, and would also have retained both customers. From this point onwards, decisions can no longer be made one call at a time. The day becomes a puzzle to be filled.",
+      "summary": null,
+      "feedback": null,
+      "suggestion": null,
+      "status": "pending",
+      "extra_edits": [],
+      "explanation": "CONSUMED by Old 1 (vignette) (hash 3f1fc5d9). Apply Old 1 (vignette)'s diff instead, it carries the merged content and an extra_edit that deletes this paragraph."
+    },
+    "55ce0f93a1e1cc77": {
+      "context": "Introduction > The Problem",
+      "paragraph": "Other considerations press on the puzzle, and they fall into two kinds. The first are \\emph{soft constraints}, also called priorities: the operator may prefer to avoid out-of-town runs that conflict with family commitments, retain the customer who calls every Friday, or favour jobs in a familiar area. Soft constraints shape which orders are accepted and how the day is arranged, but any of them can give way when a better job arrives. The second kind are \\emph{hard constraints}, and these do not give way: the legal limit on consecutive driving hours, the capacity of the vehicle, and the customer's delivery window are rules the operator cannot break regardless of what a job pays. The operator is now optimising. Arranging a working day so that revenue is high, hard constraints are respected, and soft constraints are honoured is, in substance, an optimisation problem with multiple competing objectives.",
+      "summary": null,
+      "feedback": null,
+      "suggestion": "Other considerations press on the puzzle, and they fall into two kinds. \\emph{Soft constraints}, also called priorities, are preferences the operator follows where possible: avoid out-of-town runs that conflict with family commitments, retain a Friday regular, favour familiar areas. Any of them can give way when a better job arrives. \\emph{Hard constraints} do not give way: the legal limit on consecutive driving hours, the capacity of the vehicle, the customer's delivery window. Arranging a working day so that revenue is high, hard constraints are respected, and soft constraints are honoured is an optimisation problem with multiple competing objectives.",
+      "status": "ready",
+      "explanation": "Per-paragraph rewrite (A-thesis voice: faster, less bullshit). Anchor terms (Efficiency/Trust/control/Adaptability) verbatim. No em dashes. Hard/soft constraints definitions stay verbatim (downstream-referenced). Cut 'in substance'."
+    },
+    "936a5fb8b1d48062": {
+      "context": "Introduction > The Problem",
+      "paragraph": "The problem changes shape when the business grows. A second vehicle and a second driver double the calendar. Each incoming call demands not only a yes or no, but an assignment: which driver, with which vehicle, on which order. The matching has to respect everything that already mattered for one driver, together with the additional rule that two assignments cannot be made to the same driver at the same time. New soft and hard constraints also enter. One driver prefers not to start the day on the north side of the city, but will if a heavier job is waiting there. The other holds the licence required for transporting dangerous chemicals, and is the only one of the two who can take the load of paint thinner that arrives every Wednesday. The puzzle now has two columns and a richer set of pieces.",
+      "summary": null,
+      "feedback": null,
+      "suggestion": "The problem changes shape when the business grows. A second vehicle and a second driver double the calendar: each incoming call demands not a yes or no but an assignment, with the rule that two assignments cannot go to the same driver at the same time. New constraints enter, like one driver who holds the licence for transporting dangerous chemicals and is the only one who can take the load of paint thinner that arrives every Wednesday. At the scale of one hundred drivers, fifty vehicles, and a thousand orders a week, the puzzle no longer fits on a single desk. Companies in this range, tens to hundreds of drivers and dozens of vehicles, are the ones this thesis is concerned with; they correspond to the customer base of Admmit, the Norwegian software firm that offered the thesis as a bachelor task. The owner of such a company has long since stepped out of the cab, and a new role sits between the customers ringing in and the drivers behind the wheel: a traffic coordinator, whose entire day is the puzzle.",
+      "status": "ready",
+      "extra_edits": [
+        {
+          "target_text": "\n\nThe same problem at the scale of, for instance, one hundred drivers, fifty vehicles, and a thousand orders a week no longer fits on a single desk. Companies in roughly that range, tens to hundreds of drivers and dozens of vehicles handling hundreds to thousands of orders a week, are the ones this thesis is concerned with, and they correspond to the customer base of Admmit, the Norwegian software firm that offered the thesis as a bachelor task. The owner of such a company has long since stepped out of the cab. A new role has appeared, sitting between the customers ringing in and the drivers behind the wheel, whose entire day is the puzzle: a traffic coordinator. They choose who drives what, in which vehicle, and when, and they do so against the same kinds of soft and hard constraints that mattered when there was one vehicle, only multiplied across the fleet.",
+          "new_text": "",
+          "label": "Delete Old 5 (scale + Admmit + coordinator) after merging into Old 4 (second vehicle)"
+        }
+      ],
+      "explanation": "Per-paragraph rewrite (A-thesis voice: faster, less bullshit). CONSOLIDATES two paragraphs into one, applying this diff also deletes the consumed paragraph. Anchor terms verbatim. No em dashes. Consolidates Old 4 (second vehicle) + Old 5 (scale + Admmit + coordinator) into one paragraph. Applying THIS entry's extra_edit deletes the consumed paragraph."
+    },
+    "1eac8e81dd48a349": {
+      "context": "Introduction > The Problem",
+      "paragraph": "The same problem at the scale of, for instance, one hundred drivers, fifty vehicles, and a thousand orders a week no longer fits on a single desk. Companies in roughly that range, tens to hundreds of drivers and dozens of vehicles handling hundreds to thousands of orders a week, are the ones this thesis is concerned with, and they correspond to the customer base of Admmit, the Norwegian software firm that offered the thesis as a bachelor task. The owner of such a company has long since stepped out of the cab. A new role has appeared, sitting between the customers ringing in and the drivers behind the wheel, whose entire day is the puzzle: a traffic coordinator. They choose who drives what, in which vehicle, and when, and they do so against the same kinds of soft and hard constraints that mattered when there was one vehicle, only multiplied across the fleet.",
+      "summary": null,
+      "feedback": null,
+      "suggestion": null,
+      "status": "pending",
+      "extra_edits": [],
+      "explanation": "CONSUMED by Old 4 (second vehicle) (hash 936a5fb8). Apply Old 4 (second vehicle)'s diff instead, it carries the merged content and an extra_edit that deletes this paragraph."
+    },
+    "d831b8eda5bf02e4": {
+      "context": "Introduction > The Problem",
+      "paragraph": "Coordinators of this kind sit in transport companies across the country. In 2025, Norwegian transport companies moved approximately 252 million tonnes of goods on behalf of their customers \\parencite{ssb2026godstransport}. Behind every load, a traffic coordinator made the same kind of decision the one-vehicle operator made, only at greater scale and under tighter time pressure. Those decisions add up directly on the company's bottom line: a driver assigned past the weekly hours cap turns the next load into overtime, a vehicle and its driver waiting between two assignments incur cost without producing revenue, and the heaviest workload concentrated on the same few drivers week after week produces fatigue and turnover.",
+      "summary": null,
+      "feedback": null,
+      "suggestion": "Coordinators of this kind sit in transport companies across Norway. In 2025, Norwegian transport companies moved approximately 252 million tonnes of goods on behalf of their customers \\parencite{ssb2026godstransport}, and behind every load a coordinator made the same kind of decision the one-vehicle operator made, at greater scale and under tighter time pressure. Those decisions land directly on the bottom line: a driver assigned past the weekly hours cap turns the next load into overtime, a vehicle waiting between two assignments incurs cost without revenue, and the heaviest workload concentrated on the same few drivers produces fatigue and turnover.",
+      "status": "ready",
+      "explanation": "Per-paragraph rewrite (A-thesis voice: faster, less bullshit). Anchor terms (Efficiency/Trust/control/Adaptability) verbatim. No em dashes. 252m tonnes citation kept (only external evidence in Ch 1). Tighten consequences enumeration."
+    },
+    "dd13534ee5b04f7a": {
+      "context": "Introduction > The Problem",
+      "paragraph": "At a hundred vehicles, the puzzle the one-vehicle operator could carry in their head no longer fits there. To know whether a driver is close to the weekly hours cap, the coordinator opens the timesheet. To know whether the right vehicle is free at the right hour, they check the order tool. To know whether the Friday regular has already been promised a slot, they consult their own memory. The data needed for a good plan lives in four places at once, and no view assembles it. A further part of it lives nowhere at all: which routes are difficult and who is familiar with them, which licence allows which load, which vehicle suits which job, which customer must not be refused. These are the multi-driver counterpart of the family commitments and weekly regulars that shaped the one-vehicle case. Knowledge of this kind, acquired on the job and rarely written down, is termed \\emph{tacit knowledge}. It is what no system can read from a screen, and it is what makes the coordinator irreplaceable.",
+      "summary": null,
+      "feedback": null,
+      "suggestion": "At a hundred vehicles, the puzzle the one-vehicle operator could carry in their head no longer fits there. The data needed for a good plan lives in several places at once, and no view assembles it. A further part of it lives nowhere at all: which routes are difficult and who is familiar with them, which licence allows which load, which vehicle suits which job, which customer must not be refused. Knowledge of this kind, acquired on the job and rarely written down, is termed \\emph{tacit knowledge}; it is what no system can read from a screen and what makes the coordinator irreplaceable. The software the coordinator currently operates does not close the remaining gap: the two commercial Norwegian Transport Management Systems named by the interviewed companies, Timpex and Opter, handle order management and invoicing but neither produces an assignment plan automatically, and other companies plan from internal tools, spreadsheets, memory, or telephone calls. None of the systems in current use takes on the assignment planning itself: the decision of which driver and vehicle perform which order.",
+      "status": "ready",
+      "extra_edits": [
+        {
+          "target_text": "\n\nThe software the coordinator currently operates does not close the remaining gap. The two commercial Norwegian Transport Management Systems (TMS) named by the interviewed companies, Timpex and Opter, handle order management and invoicing, but neither produces an assignment plan automatically. They scale the operator's record-keeping to a fleet, but stop there. Other companies plan from internal tools, spreadsheets, memory, or telephone calls. None of the systems in current use takes on the assignment planning itself: the decision of which driver and vehicle perform which order. That is the gap a planning system would have to fill.",
+          "new_text": "",
+          "label": "Delete Old 8 (TMS situation) after merging into Old 7 (visibility gap + tacit)"
+        }
+      ],
+      "explanation": "Per-paragraph rewrite (A-thesis voice: faster, less bullshit). CONSOLIDATES two paragraphs into one, applying this diff also deletes the consumed paragraph. Anchor terms verbatim. No em dashes. Consolidates Old 7 (visibility gap + tacit) + Old 8 (TMS situation) into one paragraph. Applying THIS entry's extra_edit deletes the consumed paragraph."
+    },
+    "a2ae8aec2f0e29b8": {
+      "context": "Introduction > The Problem",
+      "paragraph": "The software the coordinator currently operates does not close the remaining gap. The two commercial Norwegian Transport Management Systems (TMS) named by the interviewed companies, Timpex and Opter, handle order management and invoicing, but neither produces an assignment plan automatically. They scale the operator's record-keeping to a fleet, but stop there. Other companies plan from internal tools, spreadsheets, memory, or telephone calls. None of the systems in current use takes on the assignment planning itself: the decision of which driver and vehicle perform which order. That is the gap a planning system would have to fill.",
+      "summary": null,
+      "feedback": null,
+      "suggestion": null,
+      "status": "pending",
+      "extra_edits": [],
+      "explanation": "CONSUMED by Old 7 (visibility gap + tacit) (hash dd13534e). Apply Old 7 (visibility gap + tacit)'s diff instead, it carries the merged content and an extra_edit that deletes this paragraph."
+    },
+    "e6fc41643cc97cb1": {
+      "context": "Introduction > The Problem",
+      "paragraph": "What the coordinator does mentally is, in effect, an algorithm. Rules such as ``this driver is close to overtime, assign the load to another'' or ``this vehicle is too small for that pallet count, substitute it'' are applied repeatedly, yet they are never written down, compared against alternatives, or refined between shifts. A computer can apply the same rules at greater scale, hold more constraints in view simultaneously, and search through more candidate plans than a person can in comparable time. The aim is not to replace the coordinator, but to take the part of the puzzle a computer can solve and leave the part that depends on tacit knowledge to the person who carries it.",
+      "summary": null,
+      "feedback": null,
+      "suggestion": "What the coordinator does mentally is, in effect, an algorithm. Rules such as ``this driver is close to overtime, assign the load to another'' or ``this vehicle is too small for that pallet count, substitute it'' are applied repeatedly, never written down, never compared against alternatives. A computer can apply the same rules at greater scale, hold more constraints in view, and search through more candidate plans than a person can in comparable time. The aim is not to replace the coordinator but to take the part of the puzzle a computer can solve and leave the part that depends on tacit knowledge to the person who carries it.",
+      "status": "ready",
+      "explanation": "Per-paragraph rewrite (A-thesis voice: faster, less bullshit). Anchor terms (Efficiency/Trust/control/Adaptability) verbatim. No em dashes. Tighten algorithm-vs-tacit-knowledge framing."
+    },
+    "f7668577fef5f65a": {
+      "context": "Introduction > The Solution",
+      "paragraph": "This thesis concerns precisely that division of labour. Ressursplanlegger (hereafter RP) is the artefact it builds and evaluates. RP is an algorithm-assisted planning platform. An algorithm reads a company's drivers, vehicles, and orders, and proposes a plan covering a horizon set by the coordinator. The coordinator opens the proposal in a calendar-style view and reviews each assignment, free to change or remove any of them. The plan takes effect only after the coordinator approves it.",
+      "summary": null,
+      "feedback": null,
+      "suggestion": "Ressursplanlegger (hereafter RP) is the artefact this thesis builds and evaluates: an algorithm-assisted planning platform that proposes a plan covering a horizon set by the coordinator. The coordinator reviews each assignment in a calendar-style view, free to change or remove any of them, and the plan takes effect only after their approval.",
+      "status": "ready",
+      "explanation": "Per-paragraph rewrite (A-thesis voice: faster, less bullshit). Anchor terms (Efficiency/Trust/control/Adaptability) verbatim. No em dashes. RP intro: cut 6 sentences to 2."
+    },
+    "51390e1a4bb4bead": {
+      "context": "Introduction > The Solution",
+      "paragraph": "Three concerns recurred often enough across the interviews with traffic coordinators and the dialogue with Admmit to be drawn out as guiding concepts for the rest of the project. \\textbf{Efficiency} is what RP must measurably improve; \\textbf{Trust/control} is what RP must preserve in the coordinator's hands; \\textbf{Adaptability} is what RP must support across companies. The rest of this section develops each in turn.",
+      "summary": null,
+      "feedback": null,
+      "suggestion": "Three concerns recurred across the interviews with traffic coordinators and the dialogue with Admmit, and are used as guiding concepts throughout the thesis. \\textbf{Efficiency} is what RP must measurably improve; \\textbf{Trust/control} is what RP must preserve in the coordinator's hands; \\textbf{Adaptability} is what RP must support across companies.",
+      "status": "ready",
+      "explanation": "Per-paragraph rewrite (A-thesis voice: faster, less bullshit). Anchor terms (Efficiency/Trust/control/Adaptability) verbatim. No em dashes. Anchor terms (Efficiency/Trust/control/Adaptability) verbatim. Cut 'The rest of this section develops each in turn' filler."
+    },
+    "1d3c71f495d022ac": {
+      "context": "Introduction > The Solution > Efficiency",
+      "paragraph": "The owner of the hundred-vehicle business asks a simple question at the end of every week. How much overtime did the company run? How many vehicle-hours sat idle between assignments? Was the workload spread evenly across the drivers, or did the same few people carry the weight again? The information required to answer is in the company's systems, yet no single view assembles it. Efficiency is the question of whether RP makes those quantities visible, and whether, once they are visible, the coordinator can move them in the right direction: less overtime, less idle time between assignments, and a more even distribution of work across the team.",
+      "summary": null,
+      "feedback": null,
+      "suggestion": "The owner of the hundred-vehicle business asks the same question at the end of every week. How much overtime did the company run? How many vehicle-hours sat idle between assignments? Was the workload spread evenly across drivers, or did the same few people carry the weight again? \\textbf{Efficiency} is whether RP makes those quantities visible, and whether the coordinator can move them in the right direction: less overtime, less idle time, a more even distribution of work.",
+      "status": "ready",
+      "explanation": "Per-paragraph rewrite (A-thesis voice: faster, less bullshit). Anchor terms (Efficiency/Trust/control/Adaptability) verbatim. No em dashes. ANCHOR DEFINITION: Efficiency verbatim. Three weekly questions are the definition, keep."
+    },
+    "5aa8fb0b841b84f0": {
+      "context": "Introduction > The Solution > Trust/control",
+      "paragraph": "The one-vehicle operator inspected every job before accepting it. The coordinator of a hundred-vehicle fleet cannot examine a thousand jobs a week one by one, yet a system that issued plans without their approval would not be acceptable to them either. Every plan the algorithm proposes is reviewed by the coordinator before it takes effect, because trust in the algorithm grows only where control over it is real.",
+      "summary": null,
+      "feedback": null,
+      "suggestion": "The one-vehicle operator inspected every job before accepting it. The coordinator of a hundred-vehicle fleet cannot inspect a thousand jobs a week one by one, but a system that issued plans without their approval would not be acceptable either. \\textbf{Trust/control} is the property that every algorithm-generated plan is reviewed before it takes effect: trust grows only where control is real.",
+      "status": "ready",
+      "explanation": "Per-paragraph rewrite (A-thesis voice: faster, less bullshit). Anchor terms (Efficiency/Trust/control/Adaptability) verbatim. No em dashes. ANCHOR DEFINITION: Trust/control verbatim. Closing names the property explicitly."
+    },
+    "e66c6cb48f9dce92": {
+      "context": "Introduction > The Solution > Adaptability",
+      "paragraph": "Two transport companies of comparable size may operate on entirely different rules. The first has ten drivers working from a single depot and plans one day at a time; the second has several dozen vehicles distributed across multiple branches and plans a week ahead. The first values keeping every driver busy above all else; the second values keeping the same crews together for repeat customers. Adaptability is the capacity of the system to fit both, with operational rules and priorities adjusted per company through configuration rather than through changes to the code.",
+      "summary": null,
+      "feedback": null,
+      "suggestion": "Two transport companies of comparable size may operate on entirely different rules. The first has ten drivers in a single depot and plans one day at a time; the second has several dozen vehicles across multiple branches and plans a week ahead. \\textbf{Adaptability} is the capacity of the system to fit both, with operational rules and priorities adjusted per company through configuration rather than through code changes.",
+      "status": "ready",
+      "explanation": "Per-paragraph rewrite (A-thesis voice: faster, less bullshit). Anchor terms (Efficiency/Trust/control/Adaptability) verbatim. No em dashes. ANCHOR DEFINITION: Adaptability verbatim. Two-company contrast load-bearing, keep. Tighten 'first values X, second values Y' redundancy."
+    },
+    "abc0394f905b6669": {
+      "context": "Introduction > Research Questions",
+      "paragraph": "The puzzle from \\Cref{sec:problem} supplies the questions this thesis must answer.",
+      "summary": null,
+      "feedback": null,
+      "suggestion": "The puzzle from \\Cref{sec:problem} supplies the questions this thesis must answer.",
+      "status": "ready",
+      "explanation": "Per-paragraph rewrite (A-thesis voice: faster, less bullshit). Anchor terms (Efficiency/Trust/control/Adaptability) verbatim. No em dashes. One-line transition; trivial."
+    },
+    "a62fc91bca18e916": {
+      "context": "Introduction > Research Questions",
+      "paragraph": "\\begin{quote}\nTo what extent can an algorithm-assisted planning platform automate the traffic coordinator's planning work in Admmit's customer companies in a way that improves resource utilization (reducing overtime, idle time between assignments, and uneven driver load) and is perceived as useful by the coordinator who runs it?\n\\end{quote}",
+      "summary": null,
+      "feedback": null,
+      "suggestion": null,
+      "status": "pending",
+      "explanation": "RQ wording supervisor-mandated (supervisor-log entry 8). LEAVE VERBATIM."
+    },
+    "a54d5ac4aec87597": {
+      "context": "Introduction > Research Questions",
+      "paragraph": "The main question is one of balance. The more of the planning work RP can take on, the more it can move the company's utilization numbers and the more useful it becomes to the coordinator who runs it; if it takes on too much, or takes it on in the wrong way, it begins to erode the tacit knowledge and override authority that make the coordinator irreplaceable. The question is therefore not whether to automate, but how far automation can go before it costs more than it gives.",
+      "summary": null,
+      "feedback": null,
+      "suggestion": "The main question is one of balance. More automation moves the utilization numbers further but, taken too far or in the wrong way, erodes the tacit knowledge and override authority that make the coordinator irreplaceable. The question is not whether to automate, but how far automation can go before it costs more than it gives.",
+      "status": "ready",
+      "explanation": "Per-paragraph rewrite (A-thesis voice: faster, less bullshit). Anchor terms (Efficiency/Trust/control/Adaptability) verbatim. No em dashes. 'Balance' frame good. Tighten the double-clause."
+    },
+    "94c28171dd8da62b": {
+      "context": "Introduction > Research Questions",
+      "paragraph": "\\begin{quote}\n\\textbf{SQ1}: To what extent does RP reduce overtime, idle time, and uneven driver load below the level produced by current planning practice in Admmit's customer companies?\n\\end{quote}",
+      "summary": null,
+      "feedback": null,
+      "suggestion": null,
+      "status": "pending",
+      "explanation": "SQ1 wording supervisor-aligned. LEAVE VERBATIM."
+    },
+    "71d6e35eb1f76844": {
+      "context": "Introduction > Research Questions",
+      "paragraph": "SQ1 is the Efficiency side of the balance: do the owner's end-of-week numbers come down once the coordinator works from RP rather than from the present mix of order tools, spreadsheets, and memory? It is answered in §5.1.1 against a benchmark of synthetic datasets that approximate the fleet ranges of the interviewed companies, with the comparison baseline drawn from the interview accounts of how planning is done at present.",
+      "summary": null,
+      "feedback": null,
+      "suggestion": "SQ1 is the Efficiency side of the balance: do the owner's end-of-week numbers come down once the coordinator works from RP rather than from order tools, spreadsheets, and memory? §5.1.1 answers it against a benchmark of synthetic datasets that approximate the fleet ranges of the interviewed companies, with the baseline drawn from interview accounts of how planning is done at present.",
+      "status": "ready",
+      "explanation": "Per-paragraph rewrite (A-thesis voice: faster, less bullshit). Anchor terms (Efficiency/Trust/control/Adaptability) verbatim. No em dashes. Tighten 'present mix of order tools, spreadsheets, and memory' enumeration."
+    },
+    "81601f7371e06bf0": {
+      "context": "Introduction > Research Questions",
+      "paragraph": "\\begin{quote}\n\\textbf{SQ2}: Through what kind of interface and process can the traffic coordinator review and override every algorithm-generated assignment without making the planning workflow heavier than current practice?\n\\end{quote}",
+      "summary": null,
+      "feedback": null,
+      "suggestion": null,
+      "status": "pending",
+      "explanation": "SQ2 wording supervisor-mandated (supervisor-log entry 8). LEAVE VERBATIM."
+    },
+    "8412291e08647a29": {
+      "context": "Introduction > Research Questions",
+      "paragraph": "SQ2 is the Trust/control side of the balance: how can the inspection the one-vehicle operator performed by reflex be reproduced for the coordinator of a fleet, when there are a thousand jobs a week and much of what argues for or against the algorithm's choice is knowledge the algorithm cannot read off the screen? It is answered in §5.1.2 by examining the timeline, the override controls, and the conflict view in RP.",
+      "summary": null,
+      "feedback": null,
+      "suggestion": "SQ2 is the Trust/control side: how can the one-vehicle operator's reflex inspection be reproduced for a fleet coordinator, when there are a thousand jobs a week and much of what argues for or against an assignment is knowledge the algorithm cannot read off the screen? §5.1.2 answers it by examining the timeline, the override controls, and the conflict view in RP.",
+      "status": "ready",
+      "explanation": "Per-paragraph rewrite (A-thesis voice: faster, less bullshit). Anchor terms (Efficiency/Trust/control/Adaptability) verbatim. No em dashes. 'Inspection by reflex / fleet of a thousand jobs / knowledge the algorithm cannot read off the screen' framing good. Tighten joinery."
+    },
+    "dda63fb95aefe930": {
+      "context": "Introduction > Research Questions",
+      "paragraph": "\\begin{quote}\n\\textbf{SQ3}: Through which configurable elements can RP serve companies that differ in operational rules, fleet size, and planning horizon, without changes to the code?\n\\end{quote}",
+      "summary": null,
+      "feedback": null,
+      "suggestion": null,
+      "status": "pending",
+      "explanation": "SQ3 wording supervisor-aligned. LEAVE VERBATIM."
+    },
+    "50981c6b684fa08e": {
+      "context": "Introduction > Research Questions",
+      "paragraph": "SQ3 is the Adaptability question: what has to be configurable for RP to fit the ten-driver depot and the multi-branch fleet without changes to the code? It is answered in §5.1.3 against the per-company configuration of soft-constraint weights and the planning horizon set in the dashboard.",
+      "summary": null,
+      "feedback": null,
+      "suggestion": "SQ3 is the Adaptability question: what has to be configurable for RP to fit the ten-driver depot and the multi-branch fleet without code changes? §5.1.3 answers it against the per-company configuration of soft-constraint weights and the planning horizon.",
+      "status": "ready",
+      "extra_edits": [
+        {
+          "target_text": "\\section{Scope and Delimitations}\n\\label{sec:scope}",
+          "new_text": "\\section{Contributions}\n\\label{sec:contributions}\n\nThis thesis delivers the following contributions to the problem domain:\n\n\\begin{itemize}\n  \\item \\textbf{The artefact RP}: an algorithm-assisted planning platform built on Next.js, tRPC, and PostgreSQL, with three optimisation engines (a greedy heuristic, OR-Tools CP-SAT, and Timefold) and a Gantt-style drag-and-drop human-in-the-loop timeline.\n  \\item \\textbf{An interview corpus} with traffic coordinators in Norwegian transport companies, conducted alongside an ongoing dialogue with Admmit, surfacing the visibility gap and the operator-vs-owner asymmetry that anchor the discussion.\n  \\item \\textbf{A multi-engine benchmark} comparing the three solvers on identical synthetic datasets that span the fleet ranges of the interviewed companies, under a shared time budget and a shared lex-tier scorer.\n  \\item \\textbf{A requirements traceability matrix} recording implementation and developer-verified behaviour for thirty-seven in-scope functional requirements (FK-01 through FK-37).\n  \\item \\textbf{An eight-iteration narrative} of the artefact's construction, each iteration carrying an inline origin label (Admmit-mandate, interview-validated, designer-technical, or a mixture) so a reader can trace any design decision back to its origin.\n  \\item \\textbf{A bounded discussion} that organises the primary findings under the three locked anchor concepts (\\textbf{Efficiency}, \\textbf{Trust/control}, \\textbf{Adaptability}) and names twelve hierarchical limitations (L1 through L12) that bound what the thesis can and cannot claim.\n\\end{itemize}\n\n\n\\section{Scope and Delimitations}\n\\label{sec:scope}",
+          "label": "Insert §1.4 Contributions (bulleted list) before §1.4 Scope. LaTeX auto-renumbers."
+        }
+      ],
+      "explanation": "Per-paragraph rewrite (A-thesis voice: faster, less bullshit). Anchor terms (Efficiency/Trust/control/Adaptability) verbatim. No em dashes. 'Ten-driver depot vs multi-branch fleet' callback good. NOTE: this entry also hosts an extra_edit that inserts §1.4 Contributions before \\section{Scope and Delimitations} (atomic with the rewrite)."
+    },
+    "37235e0a67e9602f": {
+      "context": "Introduction > Scope and Delimitations",
+      "paragraph": "RP fills the step between the order book and the drivers' day: the conversion of a list of orders for a given period into a concrete plan that specifies who drives what, in which vehicle, and when. The length of that period is set by the coordinator and ranges from at least a single day to a week or longer, since the companies the system has to accommodate do not all plan on the same horizon. Around that core, the system holds the information the planning step requires: which drivers are employed and what they are qualified to do, which vehicles the company has and what each can carry, and when employees are working and when they are not.",
+      "summary": null,
+      "feedback": null,
+      "suggestion": "RP turns a list of orders for a given period into a plan that specifies who drives what, in which vehicle, and when. The period is set by the coordinator and ranges from a single day to a week or longer, since the companies the system has to accommodate do not all plan on the same horizon. The plan is produced by an automated solver, which the coordinator also picks: a tight time budget returns a quicker plan suited to the morning rush, a longer budget a more thoroughly searched one suited to the previous evening's planning session. The system holds the information the planning step requires: which drivers are employed and what they are qualified to do, which vehicles the company has and what each can carry, and when employees are working.",
+      "status": "ready",
+      "extra_edits": [
+        {
+          "target_text": "\n\nThe plan itself is produced by an automated solver. The coordinator picks which solver runs and how long it is allowed to search: a tight time budget returns a quicker, less thoroughly searched plan, suited to the morning rush; a longer budget returns a more thoroughly searched one, suited to the previous evening's planning session.",
+          "new_text": "",
+          "label": "Delete Old 25 (solver + time budget) after merging into Old 24 (in-scope core)"
+        }
+      ],
+      "explanation": "Per-paragraph rewrite (A-thesis voice: faster, less bullshit). CONSOLIDATES two paragraphs into one, applying this diff also deletes the consumed paragraph. Anchor terms verbatim. No em dashes. Consolidates Old 24 (in-scope core) + Old 25 (solver + time budget) into one paragraph. Applying THIS entry's extra_edit deletes the consumed paragraph."
+    },
+    "f3cb1030a4cee52a": {
+      "context": "Introduction > Scope and Delimitations",
+      "paragraph": "The plan itself is produced by an automated solver. The coordinator picks which solver runs and how long it is allowed to search: a tight time budget returns a quicker, less thoroughly searched plan, suited to the morning rush; a longer budget returns a more thoroughly searched one, suited to the previous evening's planning session.",
+      "summary": null,
+      "feedback": null,
+      "suggestion": null,
+      "status": "pending",
+      "extra_edits": [],
+      "explanation": "CONSUMED by Old 24 (in-scope core) (hash 37235e0a). Apply Old 24 (in-scope core)'s diff instead, it carries the merged content and an extra_edit that deletes this paragraph."
+    },
+    "8de44ccb2717a853": {
+      "context": "Introduction > Scope and Delimitations",
+      "paragraph": "The priorities the solver weighs against each other are tuned per company. The cost of overtime relative to idle time, the strength with which workload should balance across drivers, and the value of keeping a job within a driver's home region are exposed in the dashboard as configurable weights. The owner who cares most about overtime sets one weighting; the owner who cares most about even workloads sets another. The same algorithm, run on the same data, returns different plans for the two companies because the two companies have asked it to optimise different things.",
+      "summary": null,
+      "feedback": null,
+      "suggestion": "The priorities the solver weighs are tuned per company through configurable weights in the dashboard: the cost of overtime relative to idle time, the strength of workload balancing, the value of keeping a job within a driver's home region. The same algorithm on the same data returns different plans for two companies, because they have asked it to optimise different things.",
+      "status": "ready",
+      "explanation": "Per-paragraph rewrite (A-thesis voice: faster, less bullshit). Anchor terms (Efficiency/Trust/control/Adaptability) verbatim. No em dashes. 'Same algorithm, same data, different plans' closing good, keep. Tighten enumeration."
+    },
+    "d7edf8a6f3567511": {
+      "context": "Introduction > Scope and Delimitations",
+      "paragraph": "Several capabilities are deliberately out of scope and warrant explicit naming, since they came up early in the project and could otherwise be assumed by default. RP is not a driver-facing application and does not push notifications to drivers; it is a planning tool, not a dispatch tool, and the message that reaches the driver's phone remains the responsibility of whatever order tool the company already operates. It does not handle billing or invoicing, which Timpex and Opter already cover, and bridging the two is a project of its own. It addresses Norwegian transport only, since the regulatory frame is national. It does not track vehicles in real time on the road; it plans the day, it does not monitor the day's execution. It does not attempt to plan the order in which a single driver should visit a list of stops, sometimes called the Vehicle Routing Problem (VRP), since the question RP answers is who does what, not in which order. Finally, it does not permit the algorithm to operate without a human in the loop; this is a fixed Admmit requirement, not a configurable setting.",
+      "summary": null,
+      "feedback": null,
+      "suggestion": "The following capabilities are deliberately out of scope, since they came up early in the project and could otherwise be assumed by default:\n\n\\begin{itemize}\n  \\item RP is not a driver-facing application and does not push notifications to drivers; the message that reaches the driver's phone remains the responsibility of the order tool the company already operates.\n  \\item It does not handle billing or invoicing, which Timpex and Opter cover, and bridging the two is a project of its own.\n  \\item It addresses Norwegian transport only, since the regulatory frame is national.\n  \\item It does not track vehicles in real time on the road; it plans the day, it does not monitor execution.\n  \\item It does not plan the order in which a single driver should visit a list of stops (the Vehicle Routing Problem); the question RP answers is who does what, not in which order.\n  \\item It does not permit the algorithm to operate without a human in the loop; this is a fixed Admmit requirement, not a configurable setting.\n\\end{itemize}",
+      "status": "ready",
+      "extra_edits": [
+        {
+          "target_text": "\\section{Approach}\n\\label{sec:approach}",
+          "new_text": "\\section{Thesis Structure}\n\\label{sec:thesis-structure}\n\nThe thesis is organised as follows:\n\n\\begin{itemize}\n  \\item \\textbf{\\Cref{chap:theory}} establishes the theoretical and disciplinary background: resource scheduling, human-in-the-loop automation (Bainbridge, Hoff and Bashir, Miller, Lee and See), Transport Management Systems, and Design Science Research.\n  \\item \\textbf{\\Cref{chap:method}} sets out the Design Science Research method as applied through Peffers' six DSRM activities, the eight-iteration construction of RP, and the evaluation framework.\n  \\item \\textbf{\\Cref{chap:findings}} reports what the interviews surfaced, what the artefact delivers against its functional requirements, and how the three optimisation engines compare on the multi-engine benchmark.\n  \\item \\textbf{\\Cref{chap:discussion}} interprets the findings under the three anchor concepts, works through adoption and sustainability, and names the twelve hierarchical limitations (L1 through L12) that bound what the thesis can claim.\n  \\item \\textbf{\\Cref{chap:conclusion}} answers each sub-question against the body of evidence and outlines future work.\n\\end{itemize}\n\n\n\\section{Approach}\n\\label{sec:approach}",
+          "label": "Insert §1.6 Thesis Structure (chapter map) before §1.5 Approach. LaTeX auto-renumbers."
+        }
+      ],
+      "explanation": "Per-paragraph rewrite (A-thesis voice: faster, less bullshit). Anchor terms (Efficiency/Trust/control/Adaptability) verbatim. No em dashes. STRUCTURAL CHANGE: convert 6-item prose enumeration to bulleted list (scannable, A-thesis pattern). NOTE: this entry also hosts an extra_edit that inserts §1.6 Thesis Structure before \\section{Approach}."
+    },
+    "20e4a1993652a94d": {
+      "context": "Introduction > Approach",
+      "paragraph": "RP was built in stages, starting from the bachelor task Admmit offered. The task came with two requirements set by Admmit on behalf of its customers: that an algorithm propose the plan, and that a human-in-the-loop workflow leave the coordinator in charge of every assignment. The shape of the planning problem itself, beyond those two requirements, was open at the start. To fill it in, the project included an outreach phase: a set of interviews with traffic coordinators in Norwegian transport companies, conducted alongside an ongoing dialogue with Admmit. From those conversations the visibility gap, the role of tacit knowledge, and the limits of the existing software described in \\Cref{sec:problem} were learned, together with what coordinators would and would not accept from an algorithm.",
+      "summary": null,
+      "feedback": null,
+      "suggestion": "RP was built in stages, starting from the bachelor task Admmit offered. The task came with two requirements set by Admmit on behalf of its customers: an algorithm that proposes the plan, and a human-in-the-loop workflow that leaves the coordinator in charge of every assignment. Beyond those two requirements, the shape of the planning problem was open at the start; the visibility gap, the role of tacit knowledge, and the limits of the existing software were learned from an outreach phase of interviews with traffic coordinators in Norwegian transport companies, conducted alongside an ongoing dialogue with Admmit. The construction and evaluation followed a Design Science Research approach: an artefact built to address a practical problem, evaluated against the problem it was built to address, refined across iterations, and reflected on in writing. With more time the project would have run a second round of interviews and a fuller iteration cycle on the trust-and-control surface, testing the balance against operating coordinators rather than against the team's own reading of the first-round transcripts. \\Cref{chap:method} describes the method and the iterations in full.",
+      "status": "ready",
+      "extra_edits": [
+        {
+          "target_text": "\n\nThe design and construction of RP followed a Design Science Research approach: an artefact built to address a practical problem, evaluated against the problem it was built to address, refined across iterations, and reflected on in writing. The balance the main question asks for, between automation and the coordinator's tacit knowledge, is itself difficult to calibrate from the outside; with more time the project would have run a second round of interviews and a fuller iteration cycle on the trust-and-control surface, testing the balance against operating coordinators rather than against the team's own reading of the first-round transcripts. \\Cref{chap:method} describes the method and the iterations in full.",
+          "new_text": "",
+          "label": "Delete Old 29 (DSR + hedge) after merging into Old 28 (bachelor task + outreach)"
+        },
+        {
+          "target_text": "\\Cref{chap:method} describes the method and the iterations in full.",
+          "new_text": "\\Cref{chap:method} describes the method and the iterations in full.\n\n\n\\section{Additional Resources}\n\\label{sec:additional-resources}\n\nThe artefact source code, the synthetic benchmark datasets, and the requirements traceability matrix referenced throughout this thesis are tracked in the project's Git repository alongside the thesis source:\n\n\\begin{itemize}\n  \\item RP lives in \\texttt{ressursplanlegger/} as a Git submodule of the thesis repository.\n  \\item The benchmark protocol described in \\Cref{sec:eval-benchmark} is implemented in \\texttt{ressursplanlegger/src/optimization/benchmark.ts}, with the three synthetic datasets stored under \\texttt{ressursplanlegger/datasets/}.\n  \\item The requirements traceability matrix referenced in \\Cref{sec:eval-traceability} is maintained alongside the codebase and reproduced in summary form in \\Cref{chap:findings}.\n\\end{itemize}",
+          "label": "Append §1.8 Additional Resources at end of chapter. Anchored on the closing 'method and the iterations in full.' sentence (preserved verbatim in the rewrite)."
+        }
+      ],
+      "explanation": "Per-paragraph rewrite (A-thesis voice: faster, less bullshit). CONSOLIDATES two paragraphs into one, applying this diff also deletes the consumed paragraph. Anchor terms verbatim. No em dashes. Consolidates Old 28 (bachelor task + outreach) + Old 29 (DSR + hedge) into one paragraph. Applying THIS entry's extra_edit deletes the consumed paragraph."
+    },
+    "603334bf70246881": {
+      "context": "Introduction > Approach",
+      "paragraph": "The design and construction of RP followed a Design Science Research approach: an artefact built to address a practical problem, evaluated against the problem it was built to address, refined across iterations, and reflected on in writing. The balance the main question asks for, between automation and the coordinator's tacit knowledge, is itself difficult to calibrate from the outside; with more time the project would have run a second round of interviews and a fuller iteration cycle on the trust-and-control surface, testing the balance against operating coordinators rather than against the team's own reading of the first-round transcripts. \\Cref{chap:method} describes the method and the iterations in full.",
+      "summary": null,
+      "feedback": null,
+      "suggestion": null,
+      "status": "pending",
+      "extra_edits": [],
+      "explanation": "CONSUMED by Old 28 (bachelor task + outreach) (hash 20e4a199). Apply Old 28 (bachelor task + outreach)'s diff instead, it carries the merged content and an extra_edit that deletes this paragraph."
     }
   },
   "result/chapters/ch3/ch3-method.tex": {

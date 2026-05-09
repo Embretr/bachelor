@@ -30,6 +30,7 @@ State file format:
         "paragraph":  "Many everyday jobs come down to scheduling...",
         "summary":    null | "One-sentence description of this paragraph.",
         "feedback":   null | "User's feedback text.",
+        "explanation": null | "Claude's rationale for the suggested rewrite (rendered above the diff in the suggestion block).",
         "suggestion": null | "Claude-drafted LaTeX rewrite of THIS paragraph."
                           | ["paragraph 1 text", "paragraph 2 text", ...],
         "extra_edits": null | [
@@ -223,6 +224,7 @@ def attach_state(blocks, file_rel: str):
             b["summary"] = entry.get("summary")
             b["feedback"] = entry.get("feedback")
             b["suggestion"] = entry.get("suggestion")
+            b["explanation"] = entry.get("explanation")
             b["extra_edits"] = entry.get("extra_edits") or []
             b["incoming_edits"] = incoming.get(b["text"], [])
             b["status"] = entry.get("status")
@@ -478,6 +480,8 @@ INDEX_HTML = r"""<!doctype html>
   .pending-note { margin-top: 0.5rem; padding: 0.4rem 0.55rem; background: #fef3c7; border: 1px solid #fde68a; color: #92400e; border-radius: 4px; font-size: 0.82rem; }
   .suggestion { margin-top: 0.6rem; padding: 0.6rem; background: #fffbe6; border: 1px solid #f1d97c; border-radius: 4px; }
   .suggestion .label { font-size: 0.72rem; color: #6b5800; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.3rem; }
+  .suggestion .explanation { font-size: 0.82rem; color: #4b3a00; background: #fff3c0; border-left: 3px solid #d4a800; padding: 0.45rem 0.6rem; margin-bottom: 0.5rem; border-radius: 3px; line-height: 1.45; white-space: pre-wrap; }
+  .suggestion .explanation::before { content: "Why: "; font-weight: 600; color: #6b5800; }
   .sug-part { margin: 0.45rem 0; padding: 0.45rem 0.55rem; background: #fffefa; border-left: 3px solid #f1d97c; border-radius: 0 3px 3px 0; }
   .sug-part .part-label { font-size: 0.68rem; color: #92400e; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.25rem; }
   .part-label { font-size: 0.7rem; color: #92400e; margin-bottom: 0.4rem; }
@@ -1246,9 +1250,13 @@ async function renderFile() {
            </div>`
         : "";
 
+      const explanationHTML = b.explanation
+        ? `<div class="explanation">${escapeHtml(b.explanation)}</div>`
+        : "";
       const suggestionHTML = hasSuggestion
         ? `<div class="suggestion">
              <div class="label">Suggested revision (drafted by Claude)${extras.length ? ` &middot; replaces ${1 + extras.length} paragraphs` : ""}</div>
+             ${explanationHTML}
              ${primarySugHTML}
              ${extrasHTML}
              <div class="hunk-summary"></div>
