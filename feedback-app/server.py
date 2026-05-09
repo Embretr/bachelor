@@ -399,6 +399,47 @@ def apply_edits(file_rel: str, source_hash: str, edits: list):
     return True, None
 
 
+def edit_paragraph(file_rel: str, old_text: str, new_text: str):
+    """Replace exactly one occurrence of old_text with new_text in file_rel.
+
+    Used by the direct-edit tool in text mode. If a state.json entry exists
+    under the old paragraph hash, it is migrated to the new hash so feedback
+    and summaries survive a content edit.
+    """
+    full_path = (REPO_ROOT / file_rel).resolve()
+    if not str(full_path).startswith(str(REPO_ROOT)):
+        return False, "Path outside repo root."
+    if not full_path.exists():
+        return False, "File not found."
+    if not old_text:
+        return False, "Missing original text."
+    if new_text is None:
+        return False, "Missing new text."
+
+    with FILE_LOCK:
+        content = full_path.read_text(encoding="utf-8")
+        count = content.count(old_text)
+        if count == 0:
+            return False, "Original paragraph not found in file (reload the page)."
+        if count > 1:
+            return False, f"Original paragraph appears {count} times - refusing to replace ambiguously."
+        new_content = content.replace(old_text, new_text, 1)
+        full_path.write_text(new_content, encoding="utf-8")
+
+        old_hash = paragraph_hash(old_text)
+        new_hash = paragraph_hash(new_text)
+        if old_hash != new_hash:
+            state = load_state()
+            fs = state.get(file_rel, {})
+            if old_hash in fs:
+                entry = fs.pop(old_hash)
+                entry["paragraph"] = new_text
+                fs[new_hash] = entry
+                state[file_rel] = fs
+                save_state(state)
+    return True, None
+
+
 # -- HTML --------------------------------------------------------------------
 
 INDEX_HTML = r"""<!doctype html>
@@ -626,6 +667,48 @@ INDEX_HTML = r"""<!doctype html>
   body.mode-text .block.heading.level-subsubsection .rendered { font-size: 0.98rem; margin-top: 0.4rem; }
   body.mode-text .block.other { display: none; }
   body.mode-text .suggestion-row { margin-top: 0.5rem; }
+
+  /* Direct-edit tool: subtle pencil button on each paragraph in text mode,
+     and the inline editor that appears when activated. */
+  .edit-para-btn {
+    display: none;
+    position: absolute;
+    top: 0.4rem;
+    right: 0.4rem;
+    padding: 0.2rem 0.55rem;
+    font-size: 0.72rem;
+    color: #6b7280;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 4px;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.15s;
+  }
+  body.mode-text .block.paragraph:not(.has-suggestion) .edit-para-btn { display: inline-block; }
+  body.mode-text .block.paragraph:hover .edit-para-btn { opacity: 1; }
+  .edit-para-btn:hover { background: #f9fafb; color: #111827; border-color: #cbd5e1; }
+  .edit-para-btn.active { display: inline-block; opacity: 1; background: #eef2ff; color: #3730a3; border-color: #c7d2fe; }
+
+  .para-editor { display: none; margin-top: 0.4rem; }
+  .para-editor.shown { display: block; }
+  .para-editor textarea {
+    width: 100%; min-height: 8rem; box-sizing: border-box;
+    padding: 0.6rem 0.8rem;
+    font-family: ui-monospace, Menlo, monospace; font-size: 0.86rem; line-height: 1.55;
+    border: 1px solid #c7d2fe; border-radius: 4px; background: #fafbff;
+    resize: vertical;
+  }
+  .para-editor .editor-row { display: flex; gap: 0.5rem; margin-top: 0.4rem; align-items: center; }
+  .para-editor .save-edit { padding: 0.3rem 0.85rem; background: #4f46e5; color: #fff; border: 1px solid #4f46e5; border-radius: 4px; cursor: pointer; font-size: 0.82rem; }
+  .para-editor .save-edit:hover:not(:disabled) { background: #4338ca; }
+  .para-editor .save-edit:disabled { opacity: 0.6; cursor: progress; }
+  .para-editor .cancel-edit { padding: 0.3rem 0.7rem; background: #fff; color: #6b7280; border: 1px solid #d1d5db; border-radius: 4px; cursor: pointer; font-size: 0.82rem; }
+  .para-editor .cancel-edit:hover { background: #f9fafb; color: #111827; }
+  .para-editor .editor-msg { font-size: 0.78rem; color: #6b7280; margin-left: 0.5rem; }
+  .para-editor .editor-msg.err { color: #b91c1c; }
+  .para-editor .editor-msg.ok { color: #065f46; }
+  .block.paragraph .text-col { position: relative; }
 
   /* Text mode + has a suggestion: hide the original paragraph card and let
      the suggestion-row's git-style diff stand in its place as flowing prose.
@@ -1285,6 +1368,15 @@ async function renderFile() {
             ${summaryHTML}
             ${incomingHTML}
             ${renderedBlock(b.text, "paragraph")}
+            <button class="edit-para-btn" type="button" title="Edit this paragraph directly and save to the .tex file">Edit</button>
+            <div class="para-editor">
+              <textarea spellcheck="false">${escapeHtml(b.text)}</textarea>
+              <div class="editor-row">
+                <button class="save-edit" type="button">Save</button>
+                <button class="cancel-edit" type="button">Cancel</button>
+                <span class="editor-msg"></span>
+              </div>
+            </div>
           </div>
           <div class="feedback-col">
             <div class="ctx">feedback</div>
@@ -1334,6 +1426,12 @@ async function renderFile() {
     $$(".speak", block).forEach(btn => {
       btn.addEventListener("click", () => speakBlock(block, btn.dataset.kind, btn));
     });
+    const editBtn = $(".edit-para-btn", block);
+    if (editBtn) editBtn.addEventListener("click", () => toggleParaEditor(block));
+    const saveEditBtn = $(".save-edit", block);
+    if (saveEditBtn) saveEditBtn.addEventListener("click", () => saveParaEdit(block));
+    const cancelEditBtn = $(".cancel-edit", block);
+    if (cancelEditBtn) cancelEditBtn.addEventListener("click", () => closeParaEditor(block));
   });
 
   wireTTS();
@@ -1513,6 +1611,66 @@ async function applySuggestion(block) {
   }
 }
 
+// ---- Direct paragraph edit (text mode) ----
+function toggleParaEditor(block) {
+  const editor = $(".para-editor", block);
+  const btn = $(".edit-para-btn", block);
+  if (!editor) return;
+  const opening = !editor.classList.contains("shown");
+  if (opening) {
+    // Reset textarea content to the current source so reopening discards any
+    // unsaved scratch from a previous session.
+    const ta = $("textarea", editor);
+    const original = $(".rendered[data-original]", block)?.dataset?.original;
+    if (ta && original !== undefined) ta.value = original;
+    editor.classList.add("shown");
+    btn.classList.add("active");
+    btn.textContent = "Editing";
+    setTimeout(() => $("textarea", editor)?.focus(), 0);
+  } else {
+    closeParaEditor(block);
+  }
+}
+
+function closeParaEditor(block) {
+  const editor = $(".para-editor", block);
+  const btn = $(".edit-para-btn", block);
+  if (!editor) return;
+  editor.classList.remove("shown");
+  btn?.classList.remove("active");
+  if (btn) btn.textContent = "Edit";
+  const slot = $(".editor-msg", editor);
+  if (slot) { slot.textContent = ""; slot.className = "editor-msg"; }
+}
+
+async function saveParaEdit(block) {
+  const editor = $(".para-editor", block);
+  const ta = $("textarea", editor);
+  const slot = $(".editor-msg", editor);
+  const saveBtn = $(".save-edit", editor);
+  const original = $(".rendered[data-original]", block).dataset.original;
+  const next = ta.value;
+  if (next === original) {
+    slot.textContent = "No changes."; slot.className = "editor-msg";
+    return;
+  }
+  saveBtn.disabled = true;
+  slot.textContent = "Saving..."; slot.className = "editor-msg";
+  try {
+    await fetchJSON("/api/edit-paragraph", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ file: filePath, old: original, new: next }),
+    });
+    slot.textContent = "Saved. Reloading..."; slot.className = "editor-msg ok";
+    preserveScrollAcrossReload();
+    setTimeout(() => location.reload(), 350);
+  } catch (err) {
+    slot.textContent = err.message || "Save failed."; slot.className = "editor-msg err";
+    saveBtn.disabled = false;
+  }
+}
+
 async function rejectSuggestion(block) {
   const hash = block.dataset.hash;
   try {
@@ -1656,6 +1814,20 @@ class Handler(http.server.BaseHTTPRequestHandler):
                 return
             reject_entry(file_rel, h)
             self._json(200, {"ok": True})
+            return
+
+        if path == "/api/edit-paragraph":
+            file_rel = data.get("file", "")
+            old_text = data.get("old", "")
+            new_text = data.get("new", "")
+            if not file_rel or old_text is None or new_text is None:
+                self._json(400, {"error": "Missing file/old/new."})
+                return
+            ok, err = edit_paragraph(file_rel, old_text, new_text)
+            if not ok:
+                self._json(409, {"error": err})
+                return
+            self._json(200, {"ok": True, "new_hash": paragraph_hash(new_text)})
             return
 
         if path == "/api/apply":

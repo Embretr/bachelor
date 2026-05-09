@@ -26,11 +26,11 @@
 ### Chapter 1 — Introduction
 
 **An A introduction:**
-- **Anchor coherence:** Names the three anchor concepts (Efficiency, Trust/control, Adaptability) verbatim in §1.2 with brief definitions; these exact names recur in Discussion and Conclusion without synonyms.
+- **Anchor coherence:** Names the three anchor concepts (Efficiency, Control, Adaptability) verbatim in §1.2 with brief definitions; these exact names recur in Discussion and Conclusion without synonyms.
 - **Story-first opening (supervisor 2026-05-06):** §1.1 opens with a running example that scales (one operator → second vehicle → fleet → traffic coordinator) before any technical term lands. The visibility gap, tacit knowledge, and the existing-software gap each arrive through that example rather than as freestanding claims. A reader without domain background can follow §1.1 from beginning to end.
 - **Three-act flow (problem → solution → approach):** §1.1 sets up the puzzle; §1.2–§1.4 introduce RP, the anchors, the RQ, and the scope as the answer; §1.5 names the framgangsmåte. No section acts on more than one of the three roles.
 - **Concrete-before-abstract on every key term:** Soft and hard constraints, optimisation, tacit knowledge, and the visibility gap each appear after the situation that motivates them, never as cold definitions.
-- **RQ + SQs in the locked utility-and-balance form:** The main question pairs measurable utilization gain with coordinator-perceived utility. Each SQ is quotable as a single-line block quote in Ch 6 and maps cleanly to one anchor (SQ1 → Efficiency, SQ2 → Trust/control, SQ3 → Adaptability).
+- **RQ + SQs in the locked utility-and-balance form:** The main question pairs measurable utilization gain with coordinator-perceived utility. Each SQ is quotable as a single-line block quote in Ch 6 and maps cleanly to one anchor (SQ1 → Efficiency, SQ2 → Control, SQ3 → Adaptability).
 - Scope delimiters have explicit justifications — "X is out of scope because Y", not just a list.
 - Approach section names the bachelor task origin, the outreach phase, and the DSR commitment with a forward pointer to Ch 3.
 
@@ -111,7 +111,7 @@
 ### Chapter 5 — Discussion
 
 **An A discussion chapter:**
-- **Anchor-organised primary findings:** §5.1 contains exactly three sub-sections, one per locked anchor (5.1.1 Efficiency, 5.1.2 Trust/control, 5.1.3 Adaptability). Anchor names are used verbatim — no synonyms ("kontroll" alone, "fleksibilitet", "skalerbarhet", "human control"). Each sub-section has a `MUST ANCHOR` marker tied to exactly one anchor.
+- **Anchor-organised primary findings:** §5.1 contains exactly three sub-sections, one per locked anchor (5.1.1 Efficiency, 5.1.2 Control, 5.1.3 Adaptability). Anchor names are used verbatim — no synonyms ("kontroll" alone, "fleksibilitet", "skalerbarhet", "human control"). Each sub-section has a `MUST ANCHOR` marker tied to exactly one anchor.
 - **Operator-vs-owner asymmetry framed inside §5.1.1:** The asymmetry is named as one observed structural pattern in how the demand for automation is articulated — Admmit and the transport-company owners articulate utilization optimization as a goal that the operating coordinators do not articulate in the same words, even though several coordinators welcomed an algorithm proposing assignments. Bainbridge's *ironies of automation* is cited here. The asymmetry is structural, not unanimous; do not write "coordinators do not want this" or any equivalent that contradicts the interview record.
 - **Three-layer HITL applied in §5.1.2:** Bainbridge frames operator authority over override; Hoff & Bashir's dimensional model of trust antecedents explains how trust forms over use; Miller motivates explanation/transparency as a design requirement.
 - **Hierarchical limitations (L1–L12), each named:** §5.4 contains three named sub-subsections — Empirical Foundation (L1, L2, L3, L4), Validation and Artefact (L5–L9), Conceptual and Methodological (L10, L11, L12). Each L# is a named paragraph or `\paragraph{}`, not a buried sentence. An L#-to-SQ mapping appears at the top of §5.4.
@@ -180,7 +180,7 @@ These apply to the thesis as a whole:
 
 Structural patterns observed in a verified A-grade NTNU CS bachelor (Reference: `evaluation/reference-thesis-analysis.md`). Reviewers MUST check these eight patterns when assessing the thesis as a whole.
 
-1. **Three locked anchors threaded from Ch 1 to Ch 6** — Efficiency, Trust/control, Adaptability are defined verbatim in Ch 1.2, used to organise Discussion §5.1, and named in each Conclusion RQ-answer paragraph. Synonyms anywhere are flagged as critical drift.
+1. **Three locked anchors threaded from Ch 1 to Ch 6** — Efficiency, Control, Adaptability are defined verbatim in Ch 1.2, used to organise Discussion §5.1, and named in each Conclusion RQ-answer paragraph. Synonyms anywhere are flagged as critical drift.
 2. **Origin story in Method §3.1** grounding design choices in Admmit's mandate and the team's stakeholder dialogue with seven coordinators.
 3. **Named iterations with descriptive titles** in Method §3.5 development section — at minimum four iterations, each with tried / why / what happened / learned / next, and an inline origin label.
 4. **Hierarchical limitations in Discussion §5.4** — three named sub-subsections (Empirical L1–L4, Validation L5–L9, Conceptual L10–L12), each L# a named paragraph, not a buried sentence.

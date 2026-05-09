@@ -11,13 +11,13 @@
 
 The thesis argument turns on three named concepts. Every chapter must reference at least one. Discussion (Ch 5) and Conclusion (Ch 6) MUST organise findings under them.
 
-**Convention:** Anchor names are locked English proper nouns used consistently across the thesis — never re-translated to Norwegian, never split, never paraphrased (e.g. "Trust/control" is the unit, not "control" alone). Synonyms ("effektivitet", "tillit/kontroll", "tilpasningsdyktighet", "fleksibilitet", "skalerbarhet", "human control", "operator oversight", "trust calibration") drift the spine and must be flagged by reviewers.
+**Convention:** Anchor names are locked English proper nouns used consistently across the thesis — never re-translated to Norwegian, never paraphrased (e.g. **Control** is the locked term; "kontroll" alone, "menneskelig overstyring", "human oversight", "operator supervision", and the retired "Trust/control" form (renamed to "Control" 2026-05-09) are forbidden). Synonyms ("effektivitet", "tilpasningsdyktighet", "fleksibilitet", "skalerbarhet", "trust calibration") drift the spine and must be flagged by reviewers.
 
 **Efficiency**
 Improved resource utilization across three concrete dimensions: reduced overtime, reduced idle time between assignments, and reduced uneven load between drivers (load balancing). Secondary: reduced time spent on the planning activity itself. Visibility into current utilization is the precondition for optimization — the system's primary value is making invisible utilization patterns legible to the coordinator and the company.
 
-**Trust/control**
-The traffic coordinator's authority to review and override any algorithm-generated assignment, applying the tacit knowledge the algorithm cannot see. Trust and control are inseparable in this thesis: trust is built through demonstrable control. Use the compound term verbatim — never split into "Tillit" or "kontroll" alone, and never substitute "menneskelig overstyring" or "human oversight". The earlier "inspect, modify, accept, or reject" gloss was retired 2026-05-06; see `context/lessons-learned.md` *Don't list the four Trust/control actions; use a plainer verb instead*.
+**Control**
+The traffic coordinator's authority to review and override any algorithm-generated assignment, applying the tacit knowledge the algorithm cannot see. Trust calibration (Hoff and Bashir, Lee and See) is the theoretical lens through which Control is read in §5.1.2: the design goal is appropriate trust in the algorithm, which is built through demonstrable, structural override authority rather than through interface polish. Use the term verbatim, capitalised — never substitute "kontroll" alone, "menneskelig overstyring", "human oversight", or "operator supervision". The earlier "inspect, modify, accept, or reject" gloss was retired 2026-05-06; see `context/lessons-learned.md` *Don't list the four Control actions; use a plainer verb instead*. The previous compound form "Trust/control" was retired 2026-05-09 and renamed to **Control**.
 
 **Adaptability**
 Capacity of the system to function meaningfully across companies with materially different operational rules, fleet composition, and assignment criteria. Distinct from "skalerbarhet" (which concerns volume). Expressed technically through configurable soft-constraint weights and per-company assignment rules.

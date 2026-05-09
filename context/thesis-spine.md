@@ -24,17 +24,17 @@ The RQ frames the work as a balance between two simultaneous demands: utilizatio
 Each sub-question is designed to be quotable verbatim as a single-line block quote in Chapter 6, answerable in one paragraph traceable to a specific Discussion anchor sub-section, and bounded by named limitations from §5.4. Updated 2026-05-06 to align with the reframed RQ; previous SQ wordings are recorded in `context/supervisor-log.md` 2026-05-06.
 
 1. **SQ1** — *To what extent does RP reduce overtime, idle time, and uneven driver load below the level produced by current planning practice in Admmit's customer companies?* → answered in Ch 5.1.1 (Efficiency) → bounded by L1, L2, L3, L4, L5, L6, L7
-2. **SQ2** — *Through what kind of interface and process can the traffic coordinator review and override every algorithm-generated assignment without making the planning workflow heavier than current practice?* → answered in Ch 5.1.2 (Trust/control) → bounded by L8, L10
+2. **SQ2** — *Through what kind of interface and process can the traffic coordinator review and override every algorithm-generated assignment without making the planning workflow heavier than current practice?* → answered in Ch 5.1.2 (Control) → bounded by L8, L10
 3. **SQ3** — *Through which configurable elements can RP serve companies that differ in operational rules, fleet size, and planning horizon, without changes to the code?* → answered in Ch 5.1.3 (Adaptability) and cross-anchor → bounded by L9, L11, L12
 
 ---
 
 ## Anchor Concepts
 
-The thesis argument turns on three named concepts. Every chapter must reference at least one. Discussion (Ch 5) and Conclusion (Ch 6) MUST organise their findings under them. Anchor names are locked English proper nouns used consistently across the thesis — never re-translated to Norwegian, never split, never paraphrased (e.g. "Trust/control" is the unit, not "control" alone). Synonyms ("effektivitet", "tillit/kontroll", "tilpasningsdyktighet", "fleksibilitet", "skalerbarhet", "human control", "operator oversight", "trust calibration") drift the spine and must be flagged by reviewers.
+The thesis argument turns on three named concepts. Every chapter must reference at least one. Discussion (Ch 5) and Conclusion (Ch 6) MUST organise their findings under them. Anchor names are locked English proper nouns used consistently across the thesis — never re-translated to Norwegian, never split, never paraphrased (e.g. "Control" is the unit, not "control" alone). Synonyms ("effektivitet", "tillit/kontroll", "tilpasningsdyktighet", "fleksibilitet", "skalerbarhet", "human control", "operator oversight", "trust calibration") drift the spine and must be flagged by reviewers.
 
 1. **Efficiency** — improved resource utilization across three concrete dimensions: reduced overtime, reduced idle time between assignments, and reduced uneven load between drivers. Visibility into current utilization is the precondition for optimization; the system's primary value is making invisible patterns legible to coordinator and owner.
-2. **Trust/control** — the coordinator's authority to review and override any algorithm-generated assignment, applying the tacit knowledge the algorithm cannot see. Trust and control are inseparable: trust is built through demonstrable control. Use the compound term verbatim. (The earlier "inspect, modify, accept, or reject" gloss was retired 2026-05-06; see `context/lessons-learned.md` *Don't list the four Trust/control actions* and the supersession note on Sub-clause C.)
+2. **Control** — the coordinator's authority to review and override any algorithm-generated assignment, applying the tacit knowledge the algorithm cannot see. Trust and control are inseparable: trust is built through demonstrable control. Use the compound term verbatim. (The earlier "inspect, modify, accept, or reject" gloss was retired 2026-05-06; see `context/lessons-learned.md` *Don't list the four Control actions* and the supersession note on Sub-clause C.)
 3. **Adaptability** — capacity to function meaningfully across companies with materially different operational rules, fleet composition, and assignment criteria. Distinct from "skalerbarhet" (which concerns volume).
 
 ---
@@ -42,7 +42,7 @@ The thesis argument turns on three named concepts. Every chapter must reference 
 ## The Argument — One Sentence Per Chapter
 
 **Chapter 1 — Introduction:**
-A running example scaling from one operator to a fleet introduces the planning puzzle, the visibility gap, and the role of tacit knowledge; Ressursplanlegger is then named as the artefact this thesis builds and evaluates to support the coordinator's work, and the three anchors (Efficiency, Trust/control, Adaptability) frame what such support has to deliver.
+A running example scaling from one operator to a fleet introduces the planning puzzle, the visibility gap, and the role of tacit knowledge; Ressursplanlegger is then named as the artefact this thesis builds and evaluates to support the coordinator's work, and the three anchors (Efficiency, Control, Adaptability) frame what such support has to deliver.
 
 **Chapter 2 — Theory:**
 Four theoretical foundations support the rest of the thesis: resource scheduling under utilization-oriented constraints, with §2.2 layering five HITL sources (Parasuraman's automation taxonomy, Bainbridge's operator-vs-owner framing, Hoff and Bashir's trust-calibration model, Miller's explanation-as-interface, and Lee and See's trust foundation); Transport Management Systems used to position RP inside the existing software category and identify the planning gap RP fills; and Design Science Research as the paradigm under which both the artefact and the knowledge claims are made.
@@ -54,7 +54,7 @@ A Design Science Research process applied through Peffers' six DSRM activities �
 Interview themes surface the resource-utilization visibility gap and the role of tacit knowledge in the coordinator's daily work, alongside operator-vs-owner asymmetry as one observed structural pattern in how the demand for automation is articulated; Ressursplanlegger embodies the locked design qualities as a Next.js + tRPC + PostgreSQL platform with a multi-engine solver layer (greedy / OR-Tools CP-SAT / Timefold) and a human-in-the-loop drag-and-drop timeline, with a DSR Artifacts mapping linking each project artefact to its category.
 
 **Chapter 5 — Discussion:**
-Organised under the three locked anchors — Efficiency (visibility gap, operator-vs-owner asymmetry, multi-engine "How-not-Of" benchmark), Trust/control (three-layer HITL applied to override authority and tacit knowledge), Adaptability (cross-company adaptability via configurable constraint weights) — the discussion names twelve hierarchical limitations (L1–L12), explicit deviations from plan, and a self-critical methodology reflection.
+Organised under the three locked anchors — Efficiency (visibility gap, operator-vs-owner asymmetry, multi-engine "How-not-Of" benchmark), Control (three-layer HITL applied to override authority and tacit knowledge), Adaptability (cross-company adaptability via configurable constraint weights) — the discussion names twelve hierarchical limitations (L1–L12), explicit deviations from plan, and a self-critical methodology reflection.
 
 **Chapter 6 — Conclusion:**
 Each sub-question is quoted verbatim and answered in a single paragraph tied to the anchor it serves, with Future Work grounded in specific named limitations and a closing claim about the balance between automation and the coordinator's perceived utility — that algorithm-assisted planning at the scale of Admmit's customer companies is feasible inside a single deployable artefact when automation is bounded by review-and-override authority and configurability per company.
@@ -72,7 +72,7 @@ Each sub-question is quoted verbatim and answered in a single paragraph tied to 
 ## Spine Status: APPROVED DRAFT
 
 Last revised: 2026-05-02. Ch 3 sentence updated from "four to six named iterations" to "eight named iterations" to match the chapter scaffold (§3.5.1–§3.5.8) and §3.1 ¶4 prose. Earlier same-day revision: updated Ch 2 sentence to five-layer HITL (Parasuraman + Bainbridge + Hoff & Bashir + Miller + Lee) to match `context/outline.md` §2.2 and the drafted `result/chapters/ch2/ch2-theory.tex`; reworded TMS-as-category clause from "delimit" to "position the gap" to match what §2.3 actually does.
-Previous revision 2026-04-30: Sharpened RQ + locked anchor concepts (Efficiency / Trust/control / Adaptability) + revised sub-questions reflecting operator-vs-owner asymmetry per `evaluation/reference-thesis-analysis.md` §12.0–§12.0.7. Bainbridge (1983) added as theoretical anchor for HITL discussion.
+Previous revision 2026-04-30: Sharpened RQ + locked anchor concepts (Efficiency / Control / Adaptability) + revised sub-questions reflecting operator-vs-owner asymmetry per `evaluation/reference-thesis-analysis.md` §12.0–§12.0.7. Bainbridge (1983) added as theoretical anchor for HITL discussion.
 Review again after Chapter 4 is drafted — if findings shift the argument, update the spine before writing Chapter 5.
 
 <!--
@@ -85,10 +85,10 @@ SQ1 (utilization-improvement question) → §5.1.1 Efficiency
                     L5 (synthetic benchmarks, not production data),
                     L6 (no real-world deployment),
                     L7 (no empirical comparison against existing TMS)
-SQ2 (review-and-override question; tacit-knowledge channel) → §5.1.2 Trust/control
+SQ2 (review-and-override question; tacit-knowledge channel) → §5.1.2 Control
       → bounded by L8 (no user testing with coordinators),
                     L10 (HITL as Admmit mandate, not validated level)
-SQ3 (per-company configurability question) → §5.1.3 Adaptability (primary) + cross-anchor (Efficiency, Trust/control)
+SQ3 (per-company configurability question) → §5.1.3 Adaptability (primary) + cross-anchor (Efficiency, Control)
       → bounded by L9 (algorithm evaluation against own benchmarks only),
                     L11 (single domain — Norwegian transport),
                     L12 (boundary cases described, not quantified)

@@ -18,7 +18,7 @@ The repo holds three things and three things only:
 | `sources/` | Source materials — primary literature notes (`raw/extracted/`), interview transcripts (`interviews/`) |
 | `context/` | The feedback corpus — what we have decided the thesis should be |
 
-`context/` is closed at five files (plus the live feedback layer at `feedback-app/state.json`):
+The core `context/` files loaded at session start (plus the live feedback layer at `feedback-app/state.json`):
 
 - `context/thesis-spine.md` — argument backbone, one sentence per chapter
 - `context/glossary.md` — locked terms, including anchor concept definitions
@@ -26,22 +26,13 @@ The repo holds three things and three things only:
 - `context/supervisor-log.md` — chronological NTNU supervisor directives, verbatim
 - `context/rubric.md` — A-grade criteria the thesis is judged against
 
-These together are the only context loaded at session start. **Anything not in this list is not context** — it is either in the result, in a source, or it does not belong in this repo.
+Additional files may be added to `context/` when they earn their place (e.g. benchmark theses for comparison, external references that inform writing decisions). Add deliberately, not reflexively: new files should carry information that does not fit one of the existing five.
 
 ---
 
-## Before Every Session — Required Ritual
+## Loading Context
 
-1. Read `STATUS.md` — current revision phase
-2. Read `context/lessons-learned.md` — the operative voice
-3. Read `context/supervisor-log.md` — recent supervisor directives
-4. Read `context/thesis-spine.md` — argument backbone
-5. Read `context/glossary.md` — locked terms (anchor concepts)
-6. Read `context/rubric.md` — what an A looks like for the section under work
-7. Load the relevant `result/chapters/chN/chN-*.tex` for the section being touched
-8. Load relevant source notes from `sources/raw/extracted/<bibkey>.md` for any cite involved
-
-Skip nothing. The thesis is co-authored across machines — every session reloads the full corpus so no participant operates from stale context.
+Load what the task needs. For most revision work, `context/lessons-learned.md` and `context/glossary.md` plus the affected `.tex` file are enough. Pull in `supervisor-log.md`, `thesis-spine.md`, `rubric.md`, source notes, or the A-thesis benchmark when the task actually calls for them. If the work touches the spine or anchors, read the relevant context file first.
 
 ---
 
@@ -102,32 +93,33 @@ A section that fails any of the four is not A-grade no matter how strong its sou
 Three anchor concepts spine the thesis argument. They are **English proper nouns used consistently across the thesis** — never re-translated to Norwegian, never split, never paraphrased.
 
 - **Efficiency** — improved resource utilization (overtime, idle time, load balance)
-- **Trust/control** — coordinator's ability to inspect, modify, accept, or reject any algorithm-generated assignment
+- **Control** — coordinator's authority to review and override any algorithm-generated assignment, applying the tacit knowledge the algorithm cannot see
 - **Adaptability** — capacity to function meaningfully across companies with different operational rules
 
 Where the spine demands them:
 
 - **Ch 1 §1.2** defines all three verbatim
-- **Ch 5 §5.1** organises Primary Findings under them (5.1.1 Efficiency, 5.1.2 Trust/control, 5.1.3 Adaptability)
+- **Ch 5 §5.1** organises Primary Findings under them (5.1.1 Efficiency, 5.1.2 Control, 5.1.3 Adaptability)
 - **Ch 6 §6.2** connects each SQ-answer paragraph to the anchor it serves
 - Other chapters reference at least one anchor where structurally relevant
 
-**Drift from the locked names is a critical issue.** Synonyms — "effektivitet", "tillit/kontroll", "tilpasningsdyktighet", "fleksibilitet", "skalerbarhet", "control" alone, "human control", "operator oversight", "trust calibration" — must be flagged on read and refused on write. Locked terms verbatim: **Efficiency**, **Trust/control**, **Adaptability**.
+**Don't drift the anchor names silently.** When writing or rewriting, use the current locked terms verbatim: **Efficiency**, **Control**, **Adaptability**. If the user wants to rename or restructure them, they say so explicitly (as with the 2026-05-09 Trust/control → Control rename). Synonyms that are NOT the anchor — "effektivitet", "kontroll" alone, "tilpasningsdyktighet", "fleksibilitet", "skalerbarhet", "tillit/kontroll", "human oversight", "trust calibration" — should be flagged when read; replace on write unless the user has indicated otherwise.
 
-The phrase "accountable to the traffic coordinator" in the research question is always operationalised by the four concrete actions defined under Trust/control: **inspect, modify, accept, or reject**. Vague control language ("human oversight", "operator supervision") is forbidden. Where the four are referenced, name them inline; do not write "the four actions defined under Trust/control".
+The phrase "accountable to the traffic coordinator" in the research question is operationalised by the coordinator's authority to review and override every algorithm-generated assignment. Use plainer single verbs ("review", "review and override", "approve or change") rather than reciting the four actions inline (see lessons-learned: *Don't list the four Control actions; use a plainer verb instead*).
 
 **Theoretical anchor for HITL**: Bainbridge (1983) *Ironies of Automation* (`bainbridge1983ironies`), layered with Hoff & Bashir 2015 (trust calibration) and Miller 2019 (explanation as interface).
 
 ---
 
-## Writing Rules
+## Writing Defaults (override when iteration calls for it)
 
-- Write in **formal, academic English**.
-- Use **passive or impersonal constructions** — avoid "we believe" / "we think"; prefer "it can be argued" / "the results suggest" / "the interviews indicate".
-- Use `\parencite{key}` for (Author, Year) citations; `\textcite{key}` for Author (Year) in-text.
-- Add all new sources to `result/references.bib` — never invent a source.
-- Use the exact terminology defined in `context/glossary.md`.
-- **Never use em dashes** (`---`, `—`) anywhere in thesis output. Replace with commas, parentheses, colons, semicolons, or full stops. En dashes (`--` for ranges) remain allowed.
+These are the defaults the thesis was drafted under. Iterate freely; if a rewrite needs to break one of these for a good reason, do.
+
+- Formal academic English.
+- Impersonal constructions ("the results suggest", "the interviews indicate") rather than first-person "we believe / we think". Was a strong preference; no longer absolute.
+- `\parencite{key}` for (Author, Year); `\textcite{key}` for Author (Year) in-text.
+- Glossary terminology where the term is locked (anchor concepts, key defined terms).
+- Em dashes (`---`, `—`) are off by default per earlier user preference. Use commas, parentheses, colons, semicolons, or full stops. If the user wants em dashes back, they will say so.
 
 ## LaTeX Conventions
 
@@ -145,23 +137,18 @@ make watch  # auto-recompile on save
 make clean  # remove build artefacts
 ```
 
-After every `.tex` edit, run `make` and report compile status before ending the turn.
+Run `make` when the edit could plausibly break compilation (new commands, label changes, structural moves, large rewrites). For small prose tweaks, batch and compile at the end of the session.
 
 ---
 
-## What Claude Must Never Do
+## Hard Rules (factual safety only)
 
-- Invent references or data — use only sources in `result/references.bib` and `sources/raw/extracted/`.
-- Use "we believe", "we think", "we found" — use impersonal academic constructions.
-- Write outside the scope of the section under work — not the next section, not the chapter introduction.
-- Change the research question — use it verbatim from the .tex.
-- Make changes that do not improve the thesis grade.
-- **Replace, split, or paraphrase anchor names** — locked terms are **Efficiency**, **Trust/control**, **Adaptability**. Never write the old Norwegian forms, never split the slash compound, never paraphrase ("efficiency gains", "operator oversight", "fleksibilitet", "skalerbarhet").
-- Use em dashes (`---`, `—`) — banned everywhere in thesis output.
-- **Reference Trimtex or Opptur** as Norwegian transport management systems — they are factual errors (frequent transcription confusions for Timpex and Opter respectively). Only **Timpex** and **Opter** are real Norwegian TMS named in the interview pool; other interviewed companies use internal/custom tools described generically. Neither Timpex nor Opter generates assignment plans automatically — both are order/invoicing tools.
-- **Reference the writing pipeline in thesis prose** — phrasings like "the four actions defined under Trust/control" or "this section is structured around X" belong in lessons-learned, not in the thesis.
-- **Add new files to `context/`** — context is closed at the five files listed above. New rules go into `lessons-learned.md`; new directives go into `supervisor-log.md`; new terms go into `glossary.md`. Splitting into more files re-creates the bloat that was removed.
-- **Recreate deleted scaffolding** — outline files, fit/gap docs, requirement traceability matrices, sprint logs, decision logs, per-section review files. The draft has absorbed what these said; the feedback corpus carries forward what is operative.
+A short list. Everything else is iteration territory.
+
+- **Do not invent references or data.** Cite only what is in `result/references.bib` or extracted in `sources/raw/extracted/`. Real findings only.
+- **Do not write Trimtex or Opptur** as Norwegian transport management systems. They are transcription errors for Timpex and Opter respectively. Only Timpex and Opter are real Norwegian TMS named in the interview pool, and neither produces assignment plans automatically (both are order/invoicing tools).
+- **Anchor concept names are user-locked.** Current locked terms verbatim: **Efficiency**, **Control**, **Adaptability** (renamed from "Trust/control" 2026-05-09). The user can rename or restructure these, but Claude does not silently drift them. If a rewrite would change an anchor's name, raise it explicitly.
+- **Supervisor-log entries are historical record.** Append new directives chronologically; do not retcon old entries to match present terminology.
 
 ---
 
@@ -174,12 +161,14 @@ bachelor/
 ├── Makefile                     ← run `make` to compile PDF
 ├── main.tex                     ← root LaTeX file
 │
-├── context/                     ← feedback corpus — five files, closed
+├── context/                     ← feedback corpus (open, add as needed)
 │   ├── thesis-spine.md          ← argument backbone (one sentence per chapter)
 │   ├── glossary.md              ← locked terms (incl. anchor concept defs)
 │   ├── lessons-learned.md       ← generalised rules distilled from feedback
 │   ├── supervisor-log.md        ← NTNU supervisor directives (chronological)
-│   └── rubric.md                ← A-grade criteria
+│   ├── rubric.md                ← A-grade criteria
+│   ├── a-thesis-amundsen-remoy-2025.md  ← benchmark A-thesis: GenAI in programming education (Alsam pool)
+│   └── a-thesis-trana-jorgensen-2025.md ← benchmark A-thesis: ChatSSB (Alsam pool, DSR + 8 iterations + SusAF)
 │
 ├── sources/                     ← source materials
 │   ├── raw/                     ← primary materials and stub notes
