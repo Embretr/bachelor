@@ -168,7 +168,8 @@ bachelor/
 │   ├── supervisor-log.md        ← NTNU supervisor directives (chronological)
 │   ├── rubric.md                ← A-grade criteria
 │   ├── a-thesis-amundsen-remoy-2025.md  ← benchmark A-thesis: GenAI in programming education (Alsam pool)
-│   └── a-thesis-trana-jorgensen-2025.md ← benchmark A-thesis: ChatSSB (Alsam pool, DSR + 8 iterations + SusAF)
+│   ├── a-thesis-trana-jorgensen-2025.md ← benchmark A-thesis: ChatSSB (Alsam pool, DSR + 8 iterations + SusAF)
+│   └── a-thesis-brand-et-al-2024.md     ← benchmark A-thesis: 5G underperformance prediction (Skundberg, SimulaMet, Hevner DSR, mid-project pivot)
 │
 ├── sources/                     ← source materials
 │   ├── raw/                     ← primary materials and stub notes
