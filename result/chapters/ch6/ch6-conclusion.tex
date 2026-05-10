@@ -1,4 +1,4 @@
-\chapter{Conclusion}
+\chapter{Conclusion and Future Work}
 \label{chap:conclusion}
 
 
@@ -45,7 +45,27 @@ The contribution of the thesis sits at three levels. The artefact (RP) is a depl
 \section{Future Work}
 \label{sec:future-work}
 
-Future work is grounded in specific named limitations from §5.4. Generic items ("further research could investigate...") are not on this list.
+Future work is grounded in specific named limitations from §5.5. Generic items ("further research could investigate...") are not on this list. \Cref{tab:future-work} ranks the seven items by priority, names what each is grounded in, and identifies the audience best placed to act on it; the paragraphs that follow expand each entry.
+
+\begin{table}[h]
+\centering
+\caption{Future work in priority order. Each item is grounded in one or more limitations from \Cref{sec:limitations} or in interview material from \Cref{chap:findings}; the audience column names who is best placed to act on it.}
+\label{tab:future-work}
+\small
+\begin{tabular}{p{0.04\textwidth}p{0.32\textwidth}p{0.30\textwidth}p{0.22\textwidth}}
+\toprule
+\textbf{\#} & \textbf{Item} & \textbf{Grounding} & \textbf{Audience} \\
+\midrule
+1 & Driver-facing page                       & Recurring interview request (FK-38); interaction with L8                                  & Admmit / next thesis \\
+2 & Billing and invoicing integration        & Adoption barrier (\Cref{sec:adoption}); FK-39                                              & Admmit (TMS partnership) \\
+3 & Production pilot with one of the seven   & Closes L5, L6, and (partially) L7; addresses central methodology weak spot               & Admmit + interviewed company \\
+4 & Real-time replanning for sick-leave      & Norlog Tana and Ottem interview pain points                                               & Admmit \\
+5 & Algorithm scaling improvements           & L9; OR-Tools timeout on the large instance                                                & Algorithm research \\
+6 & Broader Adaptability (hard constraints)  & L4; partial-mechanism gap from \Cref{sec:adaptability}                                     & Admmit \\
+7 & Cross-domain replication                 & L11                                                                                       & Future research \\
+\bottomrule
+\end{tabular}
+\end{table}
 
 A driver-facing page within the web application is the highest-priority extension. The interviews surfaced it as a recurring request across companies, and its absence interacts with L8: a coordinator-driven flow that has not been user-tested with coordinators is doubly bounded when the driver-facing endpoint is also missing. Implementing the driver page and conducting coordinator user testing on the override flow at the same time would close part of L8 directly.
 
@@ -62,3 +82,13 @@ Broader Adaptability addresses the partial realisation named in §3.5.8 and L4. 
 Cross-domain replication addresses L11. The visibility gap, the operator-vs-owner asymmetry, the multi-engine architecture, and the configurability mechanism are all anchored in Norwegian transport in this thesis. Whether they transfer to nurse rostering, airline crew scheduling, or other Nordic transport markets is a question for future replication. The structural argument (multi-resource assignment plus tacit knowledge plus stakeholder asymmetry) is general enough to suggest transferability, but transferability is not entailed by the structural argument and would have to be tested.
 
 The closing claim of this thesis is not about RP alone. Algorithm-assisted planning under stakeholder asymmetry in Norwegian transport is feasible, and the conditions under which it is feasible are structural rather than incidental: the operator must keep authority over every algorithm-generated assignment, the system must explain itself in the operator's vocabulary rather than in solver internals, and the configuration that distinguishes one company from another must live as configuration rather than as code. RP demonstrates these conditions inside a single bachelor-thesis artefact. Whether the same conditions hold in adjacent domains, and whether they hold under operational time pressure with real coordinators on real days, is the empirical work this thesis hands to the next one.
+
+
+\vspace{2em}
+\noindent\textit{Thank you for reading our bachelor thesis.}
+
+\vspace{1em}
+\noindent Trondheim, May 2026
+
+\vspace{0.5em}
+\noindent Embret Olav Rasmussen Roås \hspace{2em} Mikael Stray Frøyshov

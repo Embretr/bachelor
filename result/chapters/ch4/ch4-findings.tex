@@ -1,4 +1,4 @@
-\chapter{Findings}
+\chapter{Results}
 \label{chap:findings}
 
 This chapter reports what the seven interviews surfaced and what was built, without interpretation. \Cref{sec:interview-findings} reports the themes the thematic analysis named. \Cref{sec:requirements} lists the functional and non-functional requirements derived from those themes. \Cref{sec:fitgap} compares what existing systems cover with what is missing. \Cref{sec:system-description} describes Ressursplanlegger as it actually is: architecture, features, the user interface, and the technology stack. \Cref{sec:algorithm} reports the optimisation algorithm and the benchmark results that test it. \Cref{sec:dsr-artifacts} maps each project artefact to its DSR category. \Cref{sec:process-documentation} documents the project process. Interpretation, anchor binding, and limitation analysis belong to Chapter 5.
@@ -19,6 +19,28 @@ Attitudes toward automation are split rather than aligned. Norlog Lakselv, Norlo
 
 When asked what they consider when matching a driver to an assignment, the interviewed coordinators name the same set of criteria, in the following frequency-ranked order: availability and position (who is free and nearest), experience (especially on demanding routes), driving and rest-time status (legally required), competence and licence (matching the certificate to the assignment), route familiarity (especially in northern Norway), equipment match (the right vehicle for the job), and overtime status (taken into account particularly toward annual limits). The list is consistent across companies of different size and current system, but the relative weight each company places on each criterion differs. Some companies prioritise workload balance, others prioritise vehicle--driver continuity or route familiarity. The variation across companies motivates configurable soft-constraint weights in the artefact.
 
+\Cref{tab:themes} summarises the themes the analysis named, the frequency at which each surfaced across the seven calls, and the direction each theme pointed.
+
+\begin{table}[h]
+\centering
+\caption{Themes named in the interview analysis. Frequency reports how widely each theme surfaced across the seven calls; direction reports whether the theme was unanimous or split.}
+\label{tab:themes}
+\small
+\begin{tabular}{p{0.30\textwidth}p{0.28\textwidth}p{0.34\textwidth}}
+\toprule
+\textbf{Theme} & \textbf{Frequency} & \textbf{Direction} \\
+\midrule
+Resource-utilization visibility gap & Surfaces across all 7 companies                  & Universal: overtime reactive, idle time invisible, load balance from memory \\
+Operator-vs-owner asymmetry          & Demand articulated by owners and Admmit, not by coordinators & Mirrors Bainbridge's ironies of automation \\
+Slow legacy software                 & Most frequently named pain point (Timpex specifically) & Critical: Norlog Mo i Rana ranks speed as ``100 prosent'' the most important property \\
+Tacit-knowledge dependency           & All 7 coordinators                               & Universal: licence/competence, route familiarity, customer specifics not formally captured \\
+Lack of capacity overview            & All 7 companies                                  & Universal: no single view of driver availability $+$ vehicle status $+$ assignment load \\
+Sick-leave handling                  & All 7 (severity varies)                          & Mixed: trivial (Norlog Lakselv ``two or three keystrokes'') to dominant (Norlog Tana ``every single day'') \\
+Attitudes to automation              & 3 positive, 3 sceptical, 1 partial               & Split, but consensus on ``suggest, don't decide'' \\
+\bottomrule
+\end{tabular}
+\end{table}
+
 
 \section{Requirements}
 \label{sec:requirements}
@@ -37,11 +59,83 @@ The fourteen gap items concentrate on the planning step itself. None of the exis
 
 Vendor-specific factual context fills out the picture. Timpex is described as extremely slow under concurrent use and is used for order management, invoicing, and driver notification across the three Norlog branches. Opter is used by Harlem Solutions for order management and invoicing, with a driver-facing order app; it is described primarily as a billing tool with no planning support. Custom systems at Ottem and Nordic Crane are tailored to each company's operations and do well at what they were built for, but offer no standardisation, no optimisation, and are difficult to maintain. Bergen Bulk Transport plans by phone and from memory, with no software in the planning loop. The core gap, in one sentence, is that all existing systems address what happens after the assignment is made (order registration, invoicing, delivery tracking) and none addresses the assignment decision itself: who drives what, with which vehicle, and why. RP occupies that gap. It is a planning and decision-support tool, not an order-management or invoicing tool, and would deploy alongside Timpex or Opter rather than replace them.
 
+\newcommand{\cmark}{\ensuremath{\checkmark}}
+\newcommand{\xmark}{\ensuremath{\times}}
+\newcommand{\pmark}{\ensuremath{\circ}}
+
+\Cref{tab:fitgap} reports the fit/gap analysis as a coverage matrix. Cells use the convention: \cmark{} = covered, \pmark{} = partial, \xmark{} = absent, n.a.\ = not applicable.
+
+\begin{table}[h]
+\centering
+\caption{Fit/gap analysis across the systems named in the consultation pool and RP. Order management and invoicing are well covered by Timpex and Opter; the planning step is the universal gap.}
+\label{tab:fitgap}
+\small
+\begin{tabular}{p{0.36\textwidth}ccccc}
+\toprule
+\textbf{Capability} & \textbf{Timpex} & \textbf{Opter} & \textbf{Internal} & \textbf{Manual} & \textbf{RP} \\
+\midrule
+\multicolumn{6}{l}{\textit{Fit (covered by existing systems)}}\\
+\midrule
+Order and assignment registration                  & \cmark & \cmark & \pmark & \xmark & \xmark \\
+Invoicing and billing                              & \cmark & \cmark & \pmark & \xmark & \xmark \\
+Driver notification                                 & \cmark & \cmark & \pmark & \xmark & \xmark \\
+Basic driver and vehicle data storage              & \cmark & \cmark & \pmark & \xmark & \cmark \\
+Assignment status tracking for invoicing           & \cmark & \cmark & \pmark & \xmark & \cmark \\
+\midrule
+\multicolumn{6}{l}{\textit{Gap (planning step the existing systems do not address)}}\\
+\midrule
+Unified daily planning view                        & \xmark & \xmark & \xmark & \xmark & \cmark \\
+Automatic plan generation                          & \xmark & \xmark & \xmark & \xmark & \cmark \\
+Conflict detection                                 & \xmark & \xmark & \xmark & \xmark & \cmark \\
+Driver-availability overview (schedule + time-off) & \xmark & \xmark & \xmark & \xmark & \cmark \\
+Competency and certification tracking with expiry  & \xmark & \xmark & \pmark & \xmark & \cmark \\
+Capacity overview (``is the day covered?'')        & \xmark & \xmark & \xmark & \xmark & \cmark \\
+Manual override of algorithmic suggestion          & n.a.   & n.a.   & n.a.   & n.a.   & \cmark \\
+Recurring assignments as first-class               & \xmark & \xmark & \xmark & \xmark & \cmark \\
+Sick-leave linkage to coverage                     & \xmark & \xmark & \xmark & \xmark & \cmark \\
+Driving and rest-time monitoring with planning     & \xmark & \xmark & \xmark & \xmark & \pmark \\
+Vehicle maintenance tracking                       & \xmark & \xmark & \pmark & \xmark & \cmark \\
+Utilisation metrics (drivers, vehicles)            & \xmark & \xmark & \xmark & \xmark & \cmark \\
+Multi-tenant data isolation                        & \xmark & \xmark & \xmark & \xmark & \cmark \\
+System performance under concurrent users          & \xmark & \pmark & \pmark & n.a.   & \cmark \\
+\bottomrule
+\end{tabular}
+\end{table}
+
 
 \section{System Description}
 \label{sec:system-description}
 
-RP is a full-stack monorepo built on Next.js 15 with the App Router, with React 19 client components and React Server Components, TypeScript end-to-end, and tRPC 11 as the typed remote-procedure-call layer between the browser and the Next.js server. There is no separate backend service for standard operations: the Next.js API routes serve as both the HTTP server and the business-logic layer. The browser communicates with the server via tRPC over HTTPS, with TanStack Query handling client-side server-state caching. The server uses Better Auth for session management (sessions persisted to PostgreSQL with expiry) and Prisma 7 as the ORM against PostgreSQL. Three optimisation engines run as subprocesses invoked by the Node.js server: a greedy solver (Python, custom code with no dependencies), an OR-Tools CP-SAT solver (Python, Google's open-source constraint-programming engine), and Timefold (Java, an open-source metaheuristic constraint-solver platform). Each engine receives a problem description on standard input and returns a solution on standard output. Multi-tenant data isolation is enforced at two layers: every entity in the database carries a \texttt{companyId} foreign key, and every tRPC procedure resolves the authenticated user's company from the session before querying.
+RP is a full-stack monorepo built on Next.js 15 with the App Router, with React 19 client components and React Server Components, TypeScript end-to-end, and tRPC 11 as the typed remote-procedure-call layer between the browser and the Next.js server. \Cref{fig:architecture} shows the deployed architecture. There is no separate backend service for standard operations: the Next.js API routes serve as both the HTTP server and the business-logic layer. The browser communicates with the server via tRPC over HTTPS, with TanStack Query handling client-side server-state caching. The server uses Better Auth for session management (sessions persisted to PostgreSQL with expiry) and Prisma 7 as the ORM against PostgreSQL. Three optimisation engines run as subprocesses invoked by the Node.js server: a greedy solver (Python, custom code with no dependencies), an OR-Tools CP-SAT solver (Python, Google's open-source constraint-programming engine), and Timefold (Java, an open-source metaheuristic constraint-solver platform). Each engine receives a problem description on standard input and returns a solution on standard output. Multi-tenant data isolation is enforced at two layers: every entity in the database carries a \texttt{companyId} foreign key, and every tRPC procedure resolves the authenticated user's company from the session before querying.
+
+\begin{figure}[h]
+  \centering
+  \begin{tikzpicture}[
+    node distance=0.65cm,
+    box/.style={rectangle, draw, rounded corners, align=center, minimum height=0.85cm, font=\small, fill=blue!4},
+    wide/.style={box, minimum width=11cm},
+    solver/.style={box, minimum width=3.4cm, fill=orange!7},
+    db/.style={box, minimum width=4cm, fill=green!6},
+    arrow/.style={-Stealth, thick}
+  ]
+    \node[wide] (browser) {Browser \,---\, React 19 client components \,+\, TanStack Query};
+    \node[wide, below=of browser] (server) {Next.js 15 server (App Router, tRPC 11, Better Auth, Prisma 7)};
+    \node[db, below=1.2cm of server, xshift=-3.5cm] (db) {PostgreSQL\\\footnotesize multi-tenant via \texttt{companyId} on every row};
+    \node[box, below=1.2cm of server, xshift=3cm, minimum width=4.5cm, fill=orange!7] (registry) {Solver registry\\\footnotesize subprocess invocations};
+    \node[solver, below=of registry, xshift=-3.6cm] (greedy) {Greedy heuristic\\\footnotesize TypeScript runtime};
+    \node[solver, below=of registry] (ortools) {OR-Tools CP-SAT\\\footnotesize Python subprocess};
+    \node[solver, below=of registry, xshift=3.6cm] (timefold) {Timefold metaheuristic\\\footnotesize JVM subprocess};
+
+    \draw[arrow] (browser) -- node[right, font=\footnotesize] {tRPC over HTTPS} (server);
+    \draw[arrow] (server) -- (db);
+    \draw[arrow] (server) -- (registry);
+    \draw[arrow] (registry) -- (greedy);
+    \draw[arrow] (registry) -- (ortools);
+    \draw[arrow] (registry) -- (timefold);
+  \end{tikzpicture}
+  \caption{System architecture of RP. The Next.js server is the single business-logic layer, with multi-tenant isolation enforced at the data layer via \texttt{companyId} on every row. Three optimisation engines run as subprocesses, each receiving a problem on stdin and returning a solution on stdout.}
+  \label{fig:architecture}
+\end{figure}
 
 The deployed feature inventory matches the in-scope list. The planning timeline at \texttt{/ressursplanlegger} shows all assignments, drivers, and vehicles for a selected day in a Gantt-style view, with vertical stacking of overlapping assignments and resource-utilisation indicators rendered inline. The coordinator can manually assign a driver and a vehicle to an assignment, override any algorithm-generated assignment by drag-and-drop, set priority levels, and approve the daily plan. Recurring assignments (daily, weekly, biweekly, monthly) are first-class entities. The assignment status workflow runs from planned through approved, in-progress, completed, and cancelled. Driver and vehicle management cover competencies and certifications with expiry tracking, weekly work schedules, time-off, vehicle types and capacity, vehicle maintenance dates, status flags, and trailers. Multi-tenancy is delivered through company-scoped workspaces with email-and-password authentication via Better Auth, role-based invitations (owner, admin, member), and session-based access control. The dashboard at \texttt{/oversikt} aggregates utilisation metrics and key operational indicators. The deviation viewer at \texttt{/avvik} lists each active conflict by type, affected assignment, and affected resource.
 
@@ -59,13 +153,80 @@ The problem the algorithm solves is an assignment problem with two paired resour
 
 Three solver approaches are integrated in a pluggable solver registry. The greedy heuristic walks the priority-sorted assignment list once and gives each assignment the first feasible (employee, vehicle) combination found. It is fast, milliseconds per instance, and produces a feasible plan, but it commits early to locally good choices that can block later high-priority assignments. The OR-Tools CP-SAT solver formalises the problem as constraint-programming variables and constraints, searches the feasible space using propagation and backtracking, and returns near-optimal plans within a configurable wall-clock budget (sixty seconds in the benchmark configuration). It dominates on small and medium instances but cannot complete the large instance within sixty seconds. Timefold is a metaheuristic engine running tabu search, simulated annealing, and late-acceptance hill climbing under Timefold's \texttt{HardMediumSoftScore} model, with per-slot \texttt{feasibleEmployees} and \texttt{feasibleVehicles} value-range providers, soft weights wired through a \texttt{SoftWeights} problem fact, sum-of-squares workload balance, and dedicated unassigned-slot constraints in the medium tier so that coverage is rewarded separately from feasibility. Each engine reads the same shared constraint configuration, so comparisons measure search behaviour, not constraint definitions. A portfolio engine ("auto") runs all three in parallel and selects the lexicographically best candidate across the four scoring tiers (hard, legal, business-critical, preference), re-scoring every child candidate with the canonical scorer before lex comparison.
 
-Six hard constraints must be satisfied for a plan to be feasible: HC-01 employee competencies match the assignment requirement; HC-02 employee is on duty (within the weekly schedule, not on time-off, not already assigned); HC-03 vehicle is in active status; HC-04 vehicle type matches the assignment requirement; HC-05 no employee is double-booked; HC-06 no vehicle is double-booked. Five soft constraints encode preferences with configurable weights: SC-01 prefer assigning an employee to their designated vehicle; SC-02 balance workload evenly across employees; SC-03 minimise transitions between consecutive assignments for an employee; SC-04 schedule high-priority assignments first; SC-05 respect stated employee preferences. Norwegian working-time regulation enters as a separate \emph{legal} tier alongside the hard tier: an eleven-hour daily rest minimum, a forty-eight-hour weekly working-hour bound averaged over a reference period, and a six-consecutive-day work limit, all as defaults from \texttt{DEFAULT\_CONSTRAINTS} that the benchmark runner backfills for legacy datasets.
+Six hard constraints must be satisfied for a plan to be feasible (\Cref{tab:hard-constraints}); five soft constraints encode preferences with per-company configurable weights (\Cref{tab:soft-constraints}).
+
+\begin{table}[h]
+\centering
+\caption{Hard constraints (HC-01 through HC-06). A plan that violates any of these is not a feasible plan.}
+\label{tab:hard-constraints}
+\small
+\begin{tabular}{p{0.10\textwidth}p{0.80\textwidth}}
+\toprule
+\textbf{ID} & \textbf{Constraint} \\
+\midrule
+HC-01 & Employee competencies match the assignment requirement \\
+HC-02 & Employee is on duty: within the weekly schedule, not on time-off, not already assigned \\
+HC-03 & Vehicle is in active status \\
+HC-04 & Vehicle type matches the assignment requirement \\
+HC-05 & No employee is double-booked across overlapping assignments \\
+HC-06 & No vehicle is double-booked across overlapping assignments \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[h]
+\centering
+\caption{Soft constraints (SC-01 through SC-05). Each carries a per-company weight that flows into the CP-SAT objective function and the Timefold scoring function, so the same engines produce different plans for different companies without code changes.}
+\label{tab:soft-constraints}
+\small
+\begin{tabular}{p{0.10\textwidth}p{0.65\textwidth}p{0.16\textwidth}}
+\toprule
+\textbf{ID} & \textbf{Constraint} & \textbf{Per-company weight} \\
+\midrule
+SC-01 & Prefer assigning an employee to their designated vehicle               & Configurable \\
+SC-02 & Balance workload evenly across employees (sum-of-squares term)         & Configurable \\
+SC-03 & Minimise transitions between consecutive assignments for an employee   & Configurable \\
+SC-04 & Schedule high-priority assignments first                               & Configurable \\
+SC-05 & Respect stated employee preferences                                    & Configurable \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Norwegian working-time regulation enters as a separate \emph{legal} tier alongside the hard tier: an eleven-hour daily rest minimum, a forty-eight-hour weekly working-hour bound averaged over a reference period, and a six-consecutive-day work limit, all as defaults from \texttt{DEFAULT\_CONSTRAINTS} that the benchmark runner backfills for legacy datasets.
 
 The objective function combines coverage and soft-constraint compliance under the lex-tier model. The portfolio compares solutions lexicographically: hard, then legal, then business-critical, then preference. The flattened weighted total reported alongside the lex breakdown is kept for human readability but does not drive engine selection. Coverage (the count of assignments actually placed) is rewarded in the medium tier so that an engine that places more assignments at the cost of more soft-constraint violations is not automatically penalised. Workload balance enters the soft tier as a sum-of-squares term across employees, so that a single overloaded driver costs more than several drivers each lightly above average. Per-company configurability of the soft-constraint weights means that the same engines produce different plans for different companies without code changes.
 
 Three known limitations of the algorithm are forwarded to the limitations chapter. The OR-Tools CP-SAT engine does not complete the large instance (five hundred assignments) within the sixty-second time budget; the heuristic-versus-exact crossover point under the current formulation is reported below as a real result and forwarded as part of L9. Pathological soft-constraint weight combinations (weights summing to zero, one weight dominating the others) produce unstable rankings or single-criterion plans; the user-experience challenge of explaining what each weight actually means to a coordinator who does not work in optimisation vocabulary is acknowledged and forwarded to L9. The lex contract's strict ordering by hard violations can mask cases where a metaheuristic is better on the legal, business-critical, and preference tiers but loses on the hard tier; this is reported below as a finding about the scoring contract rather than as a flaw in any single engine.
 
-The benchmark runs the four engines (greedy, OR-Tools, Timefold, auto) against three synthetic datasets: small (twenty assignments, five employees, three vehicles), medium (one hundred assignments, twenty employees, ten vehicles), and large (five hundred assignments, fifty employees, twenty-five vehicles). The reference run on 2026-05-02 produces the following results. On small, all three engines schedule twenty-five per cent of assignments, the greedy and auto totals come in at -15{,}151.20, and OR-Tools and Timefold tie at -15{,}951.20. On medium, the scheduled-assignment percentage rises from forty-three per cent (greedy and auto) to fifty-one per cent (OR-Tools) and fifty per cent (Timefold), with totals of -48{,}493.20 (greedy and auto), -58{,}029.00 (OR-Tools), and -57{,}471.95 (Timefold). On large, OR-Tools times out at sixty seconds without producing a result; greedy and auto schedule 35.6 per cent in nineteen milliseconds at -328{,}975.01; Timefold schedules 39.4 per cent in 45.3 seconds at -306{,}857.47. Auto picks greedy on every dataset because greedy has the smallest hard-tier penalty, even though Timefold beats greedy on the legal, business-critical, and preference tiers on the large instance. The headline engineering result is the Timefold engine moving from being the worst-performing engine pre-rework (an average canonical penalty around -446{,}765 across datasets in the v0 \texttt{HardSoftScore} configuration) to being competitive with the heuristic baseline post-rework (around -126{,}760 average), a reduction of approximately seventy-two per cent traceable to the constraint-provider rework on 2026-04-23. OR-Tools is the strongest individual engine on the instances it can finish (small and medium) but cannot complete the five-hundred-assignment large instance within the sixty-second budget, and that is the operational scaling boundary the thesis reports. Wall-clock figures are single-sample and should be read as order-of-magnitude rather than as production performance numbers; the boundaries are forwarded as L5 and L9 in §5.4.
+The benchmark runs the four engines (greedy, OR-Tools, Timefold, auto) against three synthetic datasets: small (twenty assignments, five employees, three vehicles), medium (one hundred assignments, twenty employees, ten vehicles), and large (five hundred assignments, fifty employees, twenty-five vehicles). The reference run on 2026-05-02 produces the results in \Cref{tab:benchmark-results}.
+
+\begin{table}[h]
+\centering
+\caption{Multi-engine benchmark, reference run dated 2026-05-02. All engines run with a sixty-second time budget, the same constraint configuration, and the same problem JSON. Each (engine, dataset) pairing is executed once; figures are single-sample. Wall-clock figures for small and medium were not recorded individually, but all engines completed within the time budget on those datasets. Auto picks greedy on every dataset because greedy has the smallest hard-tier penalty.}
+\label{tab:benchmark-results}
+\small
+\begin{tabular}{llrrr}
+\toprule
+\textbf{Dataset} & \textbf{Engine} & \textbf{Scheduled} & \textbf{Total score} & \textbf{Wall-clock} \\
+\midrule
+Small               & Greedy   & 25\,\%   & $-15{,}151.20$  & --- \\
+(5 emp., 3 veh.,    & OR-Tools & 25\,\%   & $-15{,}951.20$  & --- \\
+ 20 ass.)           & Timefold & 25\,\%   & $-15{,}951.20$  & --- \\
+\midrule
+Medium              & Greedy   & 43\,\%   & $-48{,}493.20$  & --- \\
+(20 emp., 10 veh.,  & OR-Tools & 51\,\%   & $-58{,}029.00$  & --- \\
+ 100 ass.)          & Timefold & 50\,\%   & $-57{,}471.95$  & --- \\
+\midrule
+Large               & Greedy   & 35.6\,\% & $-328{,}975.01$ & 19\,ms \\
+(50 emp., 25 veh.,  & OR-Tools & ---      & timeout         & 60.0\,s \\
+ 500 ass.)          & Timefold & 39.4\,\% & $-306{,}857.47$ & 45.3\,s \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Two observations on the table do not show up in the numbers themselves and are worth naming explicitly. First, auto picks greedy on every dataset because greedy has the smallest hard-tier penalty under the lex contract, even though Timefold beats greedy on the legal, business-critical, and preference tiers on the large instance. Second, the Timefold engine moved from being the worst-performing engine pre-rework (an average canonical penalty around $-446{,}765$ across datasets in the v0 \texttt{HardSoftScore} configuration) to being competitive with the heuristic baseline post-rework (around $-126{,}760$ on average), a reduction of approximately seventy-two per cent traceable to the constraint-provider rework on 2026-04-23. Wall-clock figures are single-sample and should be read as order-of-magnitude rather than as production performance numbers; the boundaries are forwarded as L5 and L9 in §5.4.
+
+These results indicate that engine choice in this configuration is bounded by an instance-size threshold rather than by an optimality gap: OR-Tools dominates on small and medium instances but cannot complete the large instance within the sixty-second budget, the greedy heuristic carries the auto portfolio at the lex-tier hard score, and the Timefold rework moves the metaheuristic into the same competitive band as the heuristic baseline at the cost of running an order of magnitude longer.
 
 
 \section{DSR Artifacts Mapping}

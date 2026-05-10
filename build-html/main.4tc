@@ -1,0 +1,135 @@
+\expandafter\ifx\csname doTocEntry\endcsname\relax \expandafter\endinput\fi
+\doTocEntry\toclikechapter{}{\csname a:TocLink\endcsname{1}{x1-1000}{QQ2-1-1}{Abstract}}{3}\relax 
+\doTocEntry\toclikechapter{}{\csname a:TocLink\endcsname{1}{x1-2000}{QQ2-1-2}{Sammendrag}}{5}\relax 
+\doTocEntry\toclikechapter{}{\csname a:TocLink\endcsname{1}{x1-3000}{QQ2-1-3}{Preface}}{7}\relax 
+\doTocEntry\toclikechapter{}{\csname a:TocLink\endcsname{1}{x1-4000}{QQ2-1-4}{Assignment Details}}{9}\relax 
+\doTocEntry\toclikechapter{}{\csname a:TocLink\endcsname{1}{x1-5000}{QQ2-1-5}{Contents}}{11}\relax 
+\doTocEntry\toclikechapter{}{\csname a:TocLink\endcsname{1}{x1-6000}{QQ2-1-6}{Figures}}{15}\relax 
+\doTocEntry\toclikechapter{}{\csname a:TocLink\endcsname{1}{x1-7000}{QQ2-1-7}{Tables}}{17}\relax 
+\doTocEntry\tocchapter{1}{\csname a:TocLink\endcsname{1}{x1-80001}{QQ2-1-8}{Introduction and Relevance}}{1}\relax 
+\doTocEntry\tocsection{1.1}{\csname a:TocLink\endcsname{1}{x1-90001.1}{QQ2-1-9}{The Problem}}{1}\relax 
+\doTocEntry\tocsection{1.2}{\csname a:TocLink\endcsname{1}{x1-100001.2}{QQ2-1-10}{The Solution}}{2}\relax 
+\doTocEntry\tocsubsection{1.2.1}{\csname a:TocLink\endcsname{1}{x1-110001.2.1}{QQ2-1-11}{Efficiency}}{3}\relax 
+\doTocEntry\tocsubsection{1.2.2}{\csname a:TocLink\endcsname{1}{x1-120001.2.2}{QQ2-1-12}{Control}}{3}\relax 
+\doTocEntry\tocsubsection{1.2.3}{\csname a:TocLink\endcsname{1}{x1-130001.2.3}{QQ2-1-13}{Adaptability}}{3}\relax 
+\doTocEntry\tocsection{1.3}{\csname a:TocLink\endcsname{1}{x1-140001.3}{QQ2-1-14}{Research Questions}}{3}\relax 
+\doTocEntry\toclot{1.1}{\csname a:TocLink\endcsname{1}{x1-14001r1}{}{\ignorespaces Research-question structure. Each sub-question is bound to one of the three locked anchor concepts and answered in a specific section, with the limitations register \mbox  {(L1--L12)} naming what bounds each answer.}}{table}\relax 
+\doTocEntry\tocsection{1.4}{\csname a:TocLink\endcsname{1}{x1-150001.4}{QQ2-1-16}{Scope and Delimitations}}{8}\relax 
+\doTocEntry\tocsection{1.5}{\csname a:TocLink\endcsname{1}{x1-160001.5}{QQ2-1-17}{Thesis Structure}}{9}\relax 
+\doTocEntry\tocsection{1.6}{\csname a:TocLink\endcsname{1}{x1-170001.6}{QQ2-1-18}{Approach}}{10}\relax 
+\doTocEntry\tocsection{1.7}{\csname a:TocLink\endcsname{1}{x1-180001.7}{QQ2-1-19}{Additional Resources}}{10}\relax 
+\doTocEntry\tocchapter{2}{\csname a:TocLink\endcsname{1}{x1-190002}{QQ2-1-20}{Theory}}{1}\relax 
+\doTocEntry\tocsection{2.1}{\csname a:TocLink\endcsname{1}{x1-200002.1}{QQ2-1-21}{Resource Scheduling}}{1}\relax 
+\doTocEntry\toclot{2.1}{\csname a:TocLink\endcsname{1}{x1-20009r1}{}{\ignorespaces The four solver families positioned along speed, plan quality, and modelling effort, with the situation each best fits. RP integrates the first three (greedy, CP, metaheuristic); mathematical programming is excluded for the reason in the right-most column.}}{table}\relax 
+\doTocEntry\tocsection{2.2}{\csname a:TocLink\endcsname{1}{x1-210002.2}{QQ2-1-23}{Human-in-the-Loop Automation}}{6}\relax 
+\doTocEntry\toclot{2.2}{\csname a:TocLink\endcsname{1}{x1-21006r2}{}{\ignorespaces The five bodies of HITL theory used in this thesis, what each contributes, and where each is applied. Together they translate into concrete design constraints on the artefact set out in the paragraph below.}}{table}\relax 
+\doTocEntry\tocsection{2.3}{\csname a:TocLink\endcsname{1}{x1-220002.3}{QQ2-1-25}{Transport Management Systems}}{10}\relax 
+\doTocEntry\tocsection{2.4}{\csname a:TocLink\endcsname{1}{x1-230002.4}{QQ2-1-26}{Design Science Research}}{11}\relax 
+\doTocEntry\tocsection{2.5}{\csname a:TocLink\endcsname{1}{x1-240002.5}{QQ2-1-27}{Adoption, Sustainability, and Ethics}}{12}\relax 
+\doTocEntry\tocsubsection{2.5.1}{\csname a:TocLink\endcsname{1}{x1-250002.5.1}{QQ2-1-28}{Adoption}}{12}\relax 
+\doTocEntry\tocsubsection{2.5.2}{\csname a:TocLink\endcsname{1}{x1-260002.5.2}{QQ2-1-29}{Sustainability}}{13}\relax 
+\doTocEntry\tocsubsection{2.5.3}{\csname a:TocLink\endcsname{1}{x1-270002.5.3}{QQ2-1-30}{Algorithmic Ethics}}{13}\relax 
+\doTocEntry\tocchapter{3}{\csname a:TocLink\endcsname{1}{x1-280003}{QQ2-1-31}{Methodology}}{1}\relax 
+\doTocEntry\toclof{3.1}{\csname a:TocLink\endcsname{1}{x1-28001r1}{}{\ignorespaces The methodology of this thesis as a linear sequence. Each step in the figure corresponds to one section of this chapter.}}{figure}\relax 
+\doTocEntry\tocsection{3.1}{\csname a:TocLink\endcsname{1}{x1-290003.1}{QQ2-1-33}{Defining the Task}}{4}\relax 
+\doTocEntry\tocsection{3.2}{\csname a:TocLink\endcsname{1}{x1-300003.2}{QQ2-1-34}{Method Theory: DSR and DSRM Applied}}{5}\relax 
+\doTocEntry\tocsection{3.3}{\csname a:TocLink\endcsname{1}{x1-310003.3}{QQ2-1-35}{Data Collection}}{6}\relax 
+\doTocEntry\toclot{3.1}{\csname a:TocLink\endcsname{1}{x1-31001r1}{}{\ignorespaces The seven companies in the consultation pool. Each call lasted approximately fifteen minutes and was conducted with a traffic coordinator or transport manager. Region and fleet figures are approximate; entries marked with `---' were not specified by the interviewee. Companies are named consistently with \Cref  {sec:interview-findings}.}}{table}\relax 
+\doTocEntry\tocsection{3.4}{\csname a:TocLink\endcsname{1}{x1-320003.4}{QQ2-1-37}{Data Analysis}}{10}\relax 
+\doTocEntry\tocsection{3.5}{\csname a:TocLink\endcsname{1}{x1-330003.5}{QQ2-1-38}{Choice of Technologies}}{11}\relax 
+\doTocEntry\tocparagraph{}{\csname a:TocLink\endcsname{1}{x1-34000}{QQ2-1-39}{TypeScript and Next.js (web application).}}{11}\relax 
+\doTocEntry\tocparagraph{}{\csname a:TocLink\endcsname{1}{x1-35000}{QQ2-1-40}{Postgres (data substrate).}}{11}\relax 
+\doTocEntry\tocparagraph{}{\csname a:TocLink\endcsname{1}{x1-36000}{QQ2-1-41}{Greedy heuristic (TypeScript).}}{12}\relax 
+\doTocEntry\tocparagraph{}{\csname a:TocLink\endcsname{1}{x1-37000}{QQ2-1-42}{OR-Tools CP-SAT (Python).}}{12}\relax 
+\doTocEntry\tocparagraph{}{\csname a:TocLink\endcsname{1}{x1-38000}{QQ2-1-43}{Timefold (JVM metaheuristics).}}{12}\relax 
+\doTocEntry\tocparagraph{}{\csname a:TocLink\endcsname{1}{x1-39000}{QQ2-1-44}{Multi-tenant data isolation.}}{12}\relax 
+\doTocEntry\tocsection{3.6}{\csname a:TocLink\endcsname{1}{x1-400003.6}{QQ2-1-45}{Iterative Development Process}}{13}\relax 
+\doTocEntry\toclot{3.2}{\csname a:TocLink\endcsname{1}{x1-40001r2}{}{\ignorespaces The eight iterations of RP's construction. Timeframes are approximate (boundaries reconstructed retrospectively); milestone dates correspond to specific capability artefacts in the project repository as recorded in \Cref  {sec:sprint-summary}.}}{table}\relax 
+\doTocEntry\tocsubsection{3.6.1}{\csname a:TocLink\endcsname{1}{x1-410003.6.1}{QQ2-1-47}{Schema and Timeline Scaffolding}}{16}\relax 
+\doTocEntry\tocsubsection{3.6.2}{\csname a:TocLink\endcsname{1}{x1-420003.6.2}{QQ2-1-48}{Single-engine Baseline (greedy)}}{16}\relax 
+\doTocEntry\tocsubsection{3.6.3}{\csname a:TocLink\endcsname{1}{x1-430003.6.3}{QQ2-1-49}{Constraint Generalisation (CP-SAT)}}{17}\relax 
+\doTocEntry\tocsubsection{3.6.4}{\csname a:TocLink\endcsname{1}{x1-440003.6.4}{QQ2-1-50}{Multi-engine Selection and Benchmarking}}{17}\relax 
+\doTocEntry\tocsubsection{3.6.5}{\csname a:TocLink\endcsname{1}{x1-450003.6.5}{QQ2-1-51}{HITL Interface}}{18}\relax 
+\doTocEntry\tocsubsection{3.6.6}{\csname a:TocLink\endcsname{1}{x1-460003.6.6}{QQ2-1-52}{Real-time Deviation Detection}}{18}\relax 
+\doTocEntry\tocsubsection{3.6.7}{\csname a:TocLink\endcsname{1}{x1-470003.6.7}{QQ2-1-53}{User-controlled Plan-time vs Plan-quality Tradeoff}}{19}\relax 
+\doTocEntry\tocsubsection{3.6.8}{\csname a:TocLink\endcsname{1}{x1-480003.6.8}{QQ2-1-54}{Configurable Soft-constraint Weights}}{20}\relax 
+\doTocEntry\tocsection{3.7}{\csname a:TocLink\endcsname{1}{x1-490003.7}{QQ2-1-55}{Evaluation Framework}}{20}\relax 
+\doTocEntry\tocsubsection{3.7.1}{\csname a:TocLink\endcsname{1}{x1-500003.7.1}{QQ2-1-56}{Multi-engine Benchmark Protocol}}{21}\relax 
+\doTocEntry\tocsubsection{3.7.2}{\csname a:TocLink\endcsname{1}{x1-510003.7.2}{QQ2-1-57}{What the Framework Does Not Test}}{22}\relax 
+\doTocEntry\tocsubsection{3.7.3}{\csname a:TocLink\endcsname{1}{x1-520003.7.3}{QQ2-1-58}{Anchor Coverage}}{22}\relax 
+\doTocEntry\tocsubsection{3.7.4}{\csname a:TocLink\endcsname{1}{x1-530003.7.4}{QQ2-1-59}{Requirements Traceability Matrix}}{22}\relax 
+\doTocEntry\tocsection{3.8}{\csname a:TocLink\endcsname{1}{x1-540003.8}{QQ2-1-60}{Validity and Reliability}}{23}\relax 
+\doTocEntry\tocchapter{4}{\csname a:TocLink\endcsname{1}{x1-550004}{QQ2-1-61}{Results}}{1}\relax 
+\doTocEntry\tocsection{4.1}{\csname a:TocLink\endcsname{1}{x1-560004.1}{QQ2-1-62}{Interview Findings}}{1}\relax 
+\doTocEntry\toclot{4.1}{\csname a:TocLink\endcsname{1}{x1-56001r1}{}{\ignorespaces Themes named in the interview analysis. Frequency reports how widely each theme surfaced across the seven calls; direction reports whether the theme was unanimous or split.}}{table}\relax 
+\doTocEntry\tocsection{4.2}{\csname a:TocLink\endcsname{1}{x1-570004.2}{QQ2-1-64}{Requirements}}{6}\relax 
+\doTocEntry\tocsection{4.3}{\csname a:TocLink\endcsname{1}{x1-580004.3}{QQ2-1-65}{Fit/Gap Analysis}}{7}\relax 
+\doTocEntry\toclot{4.2}{\csname a:TocLink\endcsname{1}{x1-58001r2}{}{\ignorespaces Fit/gap analysis across the systems named in the consultation pool and RP. Order management and invoicing are well covered by Timpex and Opter; the planning step is the universal gap.}}{table}\relax 
+\doTocEntry\tocsection{4.4}{\csname a:TocLink\endcsname{1}{x1-590004.4}{QQ2-1-67}{System Description}}{11}\relax 
+\doTocEntry\toclof{4.1}{\csname a:TocLink\endcsname{1}{x1-59001r1}{}{\ignorespaces System architecture of RP. The Next.js server is the single business-logic layer, with multi-tenant isolation enforced at the data layer via \texttt  {companyId} on every row. Three optimisation engines run as subprocesses, each receiving a problem on stdin and returning a solution on stdout.}}{figure}\relax 
+\doTocEntry\tocsection{4.5}{\csname a:TocLink\endcsname{1}{x1-600004.5}{QQ2-1-69}{Optimisation Algorithm}}{15}\relax 
+\doTocEntry\toclot{4.3}{\csname a:TocLink\endcsname{1}{x1-60001r3}{}{\ignorespaces Hard constraints (HC-01 through HC-06). A plan that violates any of these is not a feasible plan.}}{table}\relax 
+\doTocEntry\toclot{4.4}{\csname a:TocLink\endcsname{1}{x1-60002r4}{}{\ignorespaces Soft constraints (SC-01 through SC-05). Each carries a per-company weight that flows into the CP-SAT objective function and the Timefold scoring function, so the same engines produce different plans for different companies without code changes.}}{table}\relax 
+\doTocEntry\toclot{4.5}{\csname a:TocLink\endcsname{1}{x1-60003r5}{}{\ignorespaces Multi-engine benchmark, reference run dated 2026-05-02. All engines run with a sixty-second time budget, the same constraint configuration, and the same problem JSON. Each (engine, dataset) pairing is executed once; figures are single-sample. Wall-clock figures for small and medium were not recorded individually, but all engines completed within the time budget on those datasets. Auto picks greedy on every dataset because greedy has the smallest hard-tier penalty.}}{table}\relax 
+\doTocEntry\tocsection{4.6}{\csname a:TocLink\endcsname{1}{x1-610004.6}{QQ2-1-73}{DSR Artifacts Mapping}}{25}\relax 
+\doTocEntry\toclot{4.6}{\csname a:TocLink\endcsname{1}{x1-61001r6}{}{\ignorespaces Project artefacts mapped to DSR categories.}}{table}\relax 
+\doTocEntry\tocsection{4.7}{\csname a:TocLink\endcsname{1}{x1-620004.7}{QQ2-1-75}{Process Documentation}}{28}\relax 
+\doTocEntry\tocsubsection{4.7.1}{\csname a:TocLink\endcsname{1}{x1-630004.7.1}{QQ2-1-76}{Sprint Summary}}{28}\relax 
+\doTocEntry\tocsubsection{4.7.2}{\csname a:TocLink\endcsname{1}{x1-640004.7.2}{QQ2-1-77}{Key Decisions}}{28}\relax 
+\doTocEntry\tocsubsection{4.7.3}{\csname a:TocLink\endcsname{1}{x1-650004.7.3}{QQ2-1-78}{Time Tracking}}{29}\relax 
+\doTocEntry\tocchapter{5}{\csname a:TocLink\endcsname{1}{x1-660005}{QQ2-1-79}{Discussion}}{1}\relax 
+\doTocEntry\tocsection{5.1}{\csname a:TocLink\endcsname{1}{x1-670005.1}{QQ2-1-80}{Primary Findings under the Anchors}}{1}\relax 
+\doTocEntry\tocsubsection{5.1.1}{\csname a:TocLink\endcsname{1}{x1-680005.1.1}{QQ2-1-81}{Efficiency}}{1}\relax 
+\doTocEntry\tocsubsection{5.1.2}{\csname a:TocLink\endcsname{1}{x1-690005.1.2}{QQ2-1-82}{Control}}{3}\relax 
+\doTocEntry\tocsubsection{5.1.3}{\csname a:TocLink\endcsname{1}{x1-700005.1.3}{QQ2-1-83}{Adaptability}}{4}\relax 
+\doTocEntry\tocsection{5.2}{\csname a:TocLink\endcsname{1}{x1-710005.2}{QQ2-1-84}{Adoption and Deployment Implications}}{6}\relax 
+\doTocEntry\tocsection{5.3}{\csname a:TocLink\endcsname{1}{x1-720005.3}{QQ2-1-85}{Sustainability and Ethical Considerations}}{7}\relax 
+\doTocEntry\toclot{5.1}{\csname a:TocLink\endcsname{1}{x1-72003r1}{}{\ignorespaces Sustainability Awareness Framework (SusAF) analysis of RP across five dimensions and three orders of effect (immediate, enabling, structural). Empty cells mark places this thesis does not have empirical or analytical grounding to fill, not places where no effect exists.}}{table}\relax 
+\doTocEntry\tocsection{5.4}{\csname a:TocLink\endcsname{1}{x1-730005.4}{QQ2-1-87}{Ethical Reflections for the Profession - Societal Benefits and Impact}}{11}\relax 
+\doTocEntry\tocsection{5.5}{\csname a:TocLink\endcsname{1}{x1-740005.5}{QQ2-1-88}{Limitations}}{12}\relax 
+\doTocEntry\toclot{5.2}{\csname a:TocLink\endcsname{1}{x1-74001r2}{}{\ignorespaces Hierarchical limitations register. Scope categories group the limitations into empirical foundation, validation and artefact, and conceptual or methodological bounds; the SQ column records which sub-question each limitation principally bounds.}}{table}\relax 
+\doTocEntry\tocsubsection{5.5.1}{\csname a:TocLink\endcsname{1}{x1-750005.5.1}{QQ2-1-90}{Empirical Foundation}}{15}\relax 
+\doTocEntry\tocparagraph{}{\csname a:TocLink\endcsname{1}{x1-76000}{QQ2-1-91}{L1 — Sample size (7 interviews).}}{15}\relax 
+\doTocEntry\tocparagraph{}{\csname a:TocLink\endcsname{1}{x1-77000}{QQ2-1-92}{L2 — Self-selection bias in interview sample (Admmit customers only).}}{15}\relax 
+\doTocEntry\tocparagraph{}{\csname a:TocLink\endcsname{1}{x1-78000}{QQ2-1-93}{L3 — Researcher–developer overlap and informal study procedures.}}{15}\relax 
+\doTocEntry\tocparagraph{}{\csname a:TocLink\endcsname{1}{x1-79000}{QQ2-1-94}{L4 — Interview-guide coverage gap.}}{16}\relax 
+\doTocEntry\tocsubsection{5.5.2}{\csname a:TocLink\endcsname{1}{x1-800005.5.2}{QQ2-1-95}{Validation and Artefact}}{16}\relax 
+\doTocEntry\tocparagraph{}{\csname a:TocLink\endcsname{1}{x1-81000}{QQ2-1-96}{L5 — Synthetic benchmarks, not production data.}}{16}\relax 
+\doTocEntry\tocparagraph{}{\csname a:TocLink\endcsname{1}{x1-82000}{QQ2-1-97}{L6 — No real-world deployment.}}{17}\relax 
+\doTocEntry\tocparagraph{}{\csname a:TocLink\endcsname{1}{x1-83000}{QQ2-1-98}{L7 — No empirical comparison against existing TMS.}}{17}\relax 
+\doTocEntry\tocparagraph{}{\csname a:TocLink\endcsname{1}{x1-84000}{QQ2-1-99}{L8 — No user testing with coordinators.}}{17}\relax 
+\doTocEntry\tocparagraph{}{\csname a:TocLink\endcsname{1}{x1-85000}{QQ2-1-100}{L9 — Algorithm evaluation against own benchmarks only.}}{18}\relax 
+\doTocEntry\tocsubsection{5.5.3}{\csname a:TocLink\endcsname{1}{x1-860005.5.3}{QQ2-1-101}{Conceptual and Methodological}}{18}\relax 
+\doTocEntry\tocparagraph{}{\csname a:TocLink\endcsname{1}{x1-87000}{QQ2-1-102}{L10 — HITL as mandate, not validated level.}}{18}\relax 
+\doTocEntry\tocparagraph{}{\csname a:TocLink\endcsname{1}{x1-88000}{QQ2-1-103}{L11 — Single-domain (Norwegian transport).}}{19}\relax 
+\doTocEntry\tocparagraph{}{\csname a:TocLink\endcsname{1}{x1-89000}{QQ2-1-104}{L12 — Boundary cases described, not quantified.}}{19}\relax 
+\doTocEntry\tocsection{5.6}{\csname a:TocLink\endcsname{1}{x1-900005.6}{QQ2-1-105}{Deviations from Plan}}{19}\relax 
+\doTocEntry\tocsection{5.7}{\csname a:TocLink\endcsname{1}{x1-910005.7}{QQ2-1-106}{Methodology Reflection}}{20}\relax 
+\doTocEntry\tocsubsection{5.7.1}{\csname a:TocLink\endcsname{1}{x1-920005.7.1}{QQ2-1-107}{Reproducibility}}{20}\relax 
+\doTocEntry\tocsubsection{5.7.2}{\csname a:TocLink\endcsname{1}{x1-930005.7.2}{QQ2-1-108}{Validity}}{21}\relax 
+\doTocEntry\tocsubsection{5.7.3}{\csname a:TocLink\endcsname{1}{x1-940005.7.3}{QQ2-1-109}{Setbacks}}{21}\relax 
+\doTocEntry\tocsection{5.8}{\csname a:TocLink\endcsname{1}{x1-950005.8}{QQ2-1-110}{Recommendations for Admmit and the Norwegian Transport Software Market}}{22}\relax 
+\doTocEntry\tocparagraph{}{\csname a:TocLink\endcsname{1}{x1-96000}{QQ2-1-111}{Open the configuration surface beyond soft-constraint weights.}}{22}\relax 
+\doTocEntry\tocparagraph{}{\csname a:TocLink\endcsname{1}{x1-97000}{QQ2-1-112}{Invest in the existing-TMS integration path rather than in a competing billing module.}}{23}\relax 
+\doTocEntry\tocparagraph{}{\csname a:TocLink\endcsname{1}{x1-98000}{QQ2-1-113}{Front-load the operator first-week experience.}}{23}\relax 
+\doTocEntry\tocparagraph{}{\csname a:TocLink\endcsname{1}{x1-99000}{QQ2-1-114}{Adopt or push for a shared synthetic-dataset format for Norwegian transport.}}{23}\relax 
+\doTocEntry\tocsection{5.9}{\csname a:TocLink\endcsname{1}{x1-1000005.9}{QQ2-1-115}{Considering Production Deployment}}{24}\relax 
+\doTocEntry\tocsubsection{5.9.1}{\csname a:TocLink\endcsname{1}{x1-1010005.9.1}{QQ2-1-116}{From Synthetic to Operational Data (L5)}}{24}\relax 
+\doTocEntry\tocsubsection{5.9.2}{\csname a:TocLink\endcsname{1}{x1-1020005.9.2}{QQ2-1-117}{From Validation Against Self to Comparison Against Alternatives (L7)}}{24}\relax 
+\doTocEntry\tocsubsection{5.9.3}{\csname a:TocLink\endcsname{1}{x1-1030005.9.3}{QQ2-1-118}{From Override-Flow Specification to Coordinator User Testing (L8)}}{25}\relax 
+\doTocEntry\tocsubsection{5.9.4}{\csname a:TocLink\endcsname{1}{x1-1040005.9.4}{QQ2-1-119}{The First Pilot}}{25}\relax 
+\doTocEntry\tocchapter{6}{\csname a:TocLink\endcsname{1}{x1-1050006}{QQ2-1-120}{Conclusion and Future Work}}{1}\relax 
+\doTocEntry\tocsection{6.1}{\csname a:TocLink\endcsname{1}{x1-1060006.1}{QQ2-1-121}{Summary}}{1}\relax 
+\doTocEntry\tocsection{6.2}{\csname a:TocLink\endcsname{1}{x1-1070006.2}{QQ2-1-122}{Answers to Research Questions}}{2}\relax 
+\doTocEntry\tocsection{6.3}{\csname a:TocLink\endcsname{1}{x1-1080006.3}{QQ2-1-123}{Future Work}}{4}\relax 
+\doTocEntry\toclot{6.1}{\csname a:TocLink\endcsname{1}{x1-108001r1}{}{\ignorespaces Future work in priority order. Each item is grounded in one or more limitations from \Cref  {sec:limitations} or in interview material from \Cref  {chap:findings}; the audience column names who is best placed to act on it.}}{table}\relax 
+\doTocEntry\toclikechapter{}{\csname a:TocLink\endcsname{1}{x1-109000}{QQ2-1-125}{Bibliography}}{9}\relax 
+\doTocEntry\tocappendix{A}{\csname a:TocLink\endcsname{1}{x1-110000A}{QQ2-1-126}{Additional Material}}{1}\relax 
+\doTocEntry\tocsection{A.1}{\csname a:TocLink\endcsname{1}{x1-111000A.1}{QQ2-1-127}{Functional Requirements Register (FK-01 -- FK-42)}}{1}\relax 
+\doTocEntry\tocsection{A.2}{\csname a:TocLink\endcsname{1}{x1-112000A.2}{QQ2-1-128}{Non-Functional Requirements Register (IFK-01 -- IFK-16)}}{1}\relax 
+\doTocEntry\tocsection{A.3}{\csname a:TocLink\endcsname{1}{x1-113000A.3}{QQ2-1-129}{System Architecture}}{1}\relax 
+\doTocEntry\tocsection{A.4}{\csname a:TocLink\endcsname{1}{x1-114000A.4}{QQ2-1-130}{Application Screenshots}}{2}\relax 
+\doTocEntry\tocsection{A.5}{\csname a:TocLink\endcsname{1}{x1-115000A.5}{QQ2-1-131}{Multi-Engine Benchmark Results}}{2}\relax 
+\doTocEntry\tocsection{A.6}{\csname a:TocLink\endcsname{1}{x1-116000A.6}{QQ2-1-132}{Interview Guide}}{2}\relax 
+\doTocEntry\tocsection{A.7}{\csname a:TocLink\endcsname{1}{x1-117000A.7}{QQ2-1-133}{Iteration Timeline}}{2}\relax 
+\doTocEntry\tocsection{A.8}{\csname a:TocLink\endcsname{1}{x1-118000A.8}{QQ2-1-134}{Project Process Artefacts}}{3}\relax 

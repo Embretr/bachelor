@@ -1,0 +1,38 @@
+% cover-back.tex
+% Back cover, generated locally as a substitute for page 2 of the NTNU
+% Grafisk senter PDF. Decorative composition: a filled blue rectangle in
+% the upper area, a circle outline overlapping it, a thin line dropping
+% from below the circle and turning right, and the NTNU text-mark at the
+% foot.
+
+\clearpage
+\thispagestyle{empty}
+\null
+
+\begin{tikzpicture}[remember picture, overlay]
+
+  \definecolor{ntnucoverblue}{RGB}{156,182,220}
+  \definecolor{ntnucoverbluelight}{RGB}{210,222,238}
+
+  % --- Filled blue rectangle (upper-middle) ---
+  \fill[ntnucoverblue]
+    ([xshift=80mm, yshift=-70mm]current page.north west)
+    rectangle
+    ([xshift=190mm, yshift=-140mm]current page.north west);
+
+  % --- Circle outline overlapping the rectangle ---
+  \draw[ntnucoverbluelight, line width=0.6pt]
+    ([xshift=110mm, yshift=-130mm]current page.north west) circle (35mm);
+
+  % --- Line dropping from the circle, turning right at the bottom ---
+  \draw[ntnucoverbluelight, line width=0.6pt]
+    ([xshift=110mm, yshift=-165mm]current page.north west) --
+    ([xshift=110mm, yshift=-220mm]current page.north west) --
+    ([xshift=200mm, yshift=-220mm]current page.north west);
+
+  % --- NTNU brand mark (official logo, slightly left of centre) ---
+  \node[anchor=south west, inner sep=0pt]
+    at ([xshift=70mm, yshift=20mm]current page.south west)
+    {\includegraphics[width=55mm]{figures/ntnu-logo}};
+
+\end{tikzpicture}

@@ -58,7 +58,27 @@ The six activities did not run in Peffers' nominal order. Peffers note four poss
 
 The empirical input for the Problem-Identification step came from a single instrument: brief semi-structured interviews with traffic coordinators and transport managers across seven Norwegian transport companies. The form was chosen for its balance of openness and structure. Openness let themes the team had not anticipated surface, and structure let the same five guide topics be compared across calls. A fully structured questionnaire would have closed off the openness; a fully open conversation would have lost the comparability.
 
-The seven coordinators were selected purposively from Admmit's customer roster. The project required coordinators in the planning role at companies where algorithm-assisted planning is plausibly relevant, and Admmit's customer base supplied that population directly. The companies span small operators with around eight to twenty drivers up to a multi-department fleet of around forty-five vehicles, range geographically from Bergen and Mo i Rana to Lakselv and Tana, and cover the systems used in the field: Timpex, Opter, internal or custom tools, and fully manual planning. The self-selection that follows from recruiting through Admmit's customer roster is a known limitation, named as L2 in \Cref{sec:limitations}.
+The seven coordinators were selected purposively from Admmit's customer roster. The project required coordinators in the planning role at companies where algorithm-assisted planning is plausibly relevant, and Admmit's customer base supplied that population directly. The companies span small operators with around eight to twenty drivers up to a multi-department fleet of around forty-five vehicles, range geographically from Bergen and Mo i Rana to Lakselv and Tana, and cover the systems used in the field: Timpex, Opter, internal or custom tools, and fully manual planning. \Cref{tab:companies} summarises the consultation pool. The self-selection that follows from recruiting through Admmit's customer roster is a known limitation, named as L2 in \Cref{sec:limitations}.
+
+\begin{table}[h]
+\centering
+\caption{The seven companies in the consultation pool. Each call lasted approximately fifteen minutes and was conducted with a traffic coordinator or transport manager. Region and fleet figures are approximate; entries marked with `---' were not specified by the interviewee. Companies are named consistently with \Cref{sec:interview-findings}.}
+\label{tab:companies}
+\small
+\begin{tabular}{p{0.20\textwidth}p{0.16\textwidth}p{0.18\textwidth}p{0.18\textwidth}p{0.16\textwidth}}
+\toprule
+\textbf{Company} & \textbf{Region} & \textbf{Approx.\ fleet} & \textbf{Current planning system} & \textbf{Stance on automation} \\
+\midrule
+Bergen Bulk Transport & Bergen     & 8--20 drivers           & Manual (phone, memory)               & Sceptical \\
+Harlem Solutions      & ---        & ---                     & Opter                                 & Sceptical \\
+Norlog Mo i Rana      & Mo i Rana  & ---                     & Timpex                                & Positive \\
+Norlog Lakselv        & Lakselv    & ---                     & Timpex                                & Positive \\
+Norlog Tana           & Tana       & ---                     & Timpex (with scanning competence)     & Positive \\
+Ottem                 & ---        & $\sim$45 vehicles, 3 departments & Internal order system        & Sceptical \\
+Nordic Crane          & ---        & Crane and transport divisions    & Custom (own system)          & Partial \\
+\bottomrule
+\end{tabular}
+\end{table}
 
 Five guide topics anchored every conversation: current tools and workflow, assignment criteria, sick-leave handling, attitudes to automation, and adoption criteria. Each topic opened with a broad question, with prompts only where the coordinator's first answer left an obvious gap. That kept the calls comparable on topic coverage while preserving the open-question structure the form requires. No separate scripted questionnaire was used beyond this guide.
 
@@ -104,7 +124,28 @@ The artefact is implemented as a multi-tenant web application with a shared back
 \section{Iterative Development Process}
 \label{sec:iterations}
 
-RP was built across eight named iterations, paced as formal sprints with iteration boundaries aligned to sprint planning, day-to-day execution coordinated between the two students, and direction confirmed jointly with Admmit at sprint checkpoints. The first iteration laid the data substrate. The next three progressed from a single greedy heuristic to a multi-engine solver layer. The next three built the human-in-the-loop interface that lets the coordinator review and override every algorithm-generated assignment. The eighth iteration exposed per-company configurability of the soft-constraint weights. Each iteration is reported below as it ran: what was tried, what happened, and what motivated the next step. Iteration boundaries are reconstructed retrospectively from project artefacts and decision points; precise dates and ordering are approximate.
+RP was built across eight named iterations, paced as formal sprints with iteration boundaries aligned to sprint planning, day-to-day execution coordinated between the two students, and direction confirmed jointly with Admmit at sprint checkpoints. The first iteration laid the data substrate. The next three progressed from a single greedy heuristic to a multi-engine solver layer. The next three built the human-in-the-loop interface that lets the coordinator review and override every algorithm-generated assignment. The eighth iteration exposed per-company configurability of the soft-constraint weights. Each iteration is reported below as it ran: what was tried, what happened, and what motivated the next step. Iteration boundaries are reconstructed retrospectively from project artefacts and decision points; precise dates and ordering are approximate. \Cref{tab:iterations} summarises the eight iterations against the dated capability milestones recorded in \Cref{sec:sprint-summary}.
+
+\begin{table}[h]
+\centering
+\caption{The eight iterations of RP's construction. Timeframes are approximate (boundaries reconstructed retrospectively); milestone dates correspond to specific capability artefacts in the project repository as recorded in \Cref{sec:sprint-summary}.}
+\label{tab:iterations}
+\small
+\begin{tabular}{p{0.04\textwidth}p{0.27\textwidth}p{0.20\textwidth}p{0.32\textwidth}}
+\toprule
+\textbf{\#} & \textbf{Iteration} & \textbf{Approximate timeframe} & \textbf{Capability and milestones} \\
+\midrule
+1 & Schema and timeline scaffolding (\Cref{sec:iter-schema})            & Mid-February 2026     & Data model, multi-tenant boundary on \texttt{companyId}, read-only Gantt timeline \\
+2 & Single-engine baseline (greedy) (\Cref{sec:iter-greedy})            & Mid-February 2026     & Engine framework (2026-02-16), greedy baseline (2026-02-17) \\
+3 & Constraint generalisation (CP-SAT) (\Cref{sec:iter-cpsat})          & Late February 2026    & OR-Tools CP-SAT solver (2026-02-19) \\
+4 & Multi-engine selection and benchmarking (\Cref{sec:iter-multiengine}) & Late February 2026  & Timefold engine (2026-02-24), shared constraint configuration (2026-02-26), benchmark harness with three datasets \\
+5 & HITL interface (\Cref{sec:iter-hitl})                                & March 2026            & Drag-and-drop override timeline, post-hoc constraint check \\
+6 & Real-time deviation detection (\Cref{sec:iter-deviations})           & Early April 2026      & Multi-category deviation taxonomy, work-hour bounds and overlap checks (2026-04-09) \\
+7 & Plan-time vs plan-quality tradeoff (\Cref{sec:iter-tradeoff})        & Mid-April 2026        & Time-quality control, portfolio engine (2026-04-14), lex-tier scoring with Arbeidsmiljøloven (2026-04-14) \\
+8 & Configurable soft-constraint weights (\Cref{sec:iter-weights})       & Late April / early May 2026 & Per-company weight configuration UI, Timefold engine-correctness rework (2026-04-23), benchmark-runner measurability fix (2026-05-02) \\
+\bottomrule
+\end{tabular}
+\end{table}
 
 \subsection{Schema and Timeline Scaffolding}
 \label{sec:iter-schema}

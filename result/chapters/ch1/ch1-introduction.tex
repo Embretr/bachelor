@@ -1,4 +1,4 @@
-\chapter{Introduction}
+\chapter{Introduction and Relevance}
 \label{chap:introduction}
 
 \section{The Problem}
@@ -69,6 +69,23 @@ SQ2 is the Control side: how can the one-vehicle operator's reflex inspection be
 
 SQ3 is the Adaptability question: what has to be configurable for RP to fit the ten-driver depot and the multi-branch fleet without code changes? §5.1.3 answers it against the per-company configuration of soft-constraint weights and the planning horizon.
 
+\begin{table}[h]
+\centering
+\caption{Research-question structure. Each sub-question is bound to one of the three locked anchor concepts and answered in a specific section, with the limitations register \mbox{(L1--L12)} naming what bounds each answer.}
+\label{tab:rq-structure}
+\small
+\begin{tabular}{p{0.08\textwidth}p{0.30\textwidth}p{0.16\textwidth}p{0.16\textwidth}p{0.20\textwidth}}
+\toprule
+\textbf{ID} & \textbf{Question} & \textbf{Anchor} & \textbf{Answered in} & \textbf{Bounded by} \\
+\midrule
+RQ  & Balance between automation gains and coordinator-perceived utility & All three & \Cref{sec:answers} & All L1--L12 \\
+SQ1 & Reduction in overtime, idle time, and uneven driver load & Efficiency      & \Cref{sec:efficiency},   \Cref{sec:answers} & L1, L2, L3, L4 \\
+SQ2 & Interface and process for review-and-override authority      & Control         & \Cref{sec:trust-control},\Cref{sec:answers} & L8, L10 \\
+SQ3 & Configurable elements that fit different companies          & Adaptability    & \Cref{sec:adaptability},\Cref{sec:answers} & L5, L6, L7, L9, L11, L12 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
 
 \section{Scope and Delimitations}
 \label{sec:scope}
@@ -107,3 +124,16 @@ The thesis is organised as follows:
 \label{sec:approach}
 
 RP was built in stages, starting from the bachelor task Admmit offered. The task came with two requirements set by Admmit on behalf of its customers: an algorithm that proposes the plan, and a human-in-the-loop workflow that leaves the coordinator in charge of every assignment. Beyond those two requirements, the shape of the planning problem was open at the start; the visibility gap, the role of tacit knowledge, and the limits of the existing software were learned from an outreach phase of interviews with traffic coordinators in Norwegian transport companies, conducted alongside an ongoing dialogue with Admmit. The construction and evaluation followed a Design Science Research approach: an artefact built to address a practical problem, evaluated against the problem it was built to address, refined across iterations, and reflected on in writing. With more time the project would have run a second round of interviews and a fuller iteration cycle on the control surface, testing the balance against operating coordinators rather than against the team's own reading of the first-round transcripts. \Cref{chap:method} describes the method and the iterations in full.
+
+
+\section{Additional Resources}
+\label{sec:additional-resources}
+
+The artefact and the supporting material referenced from the chapters that follow are available as listed below.
+
+\begin{itemize}
+  \item \textbf{RP source code.} The full Next.js + tRPC + PostgreSQL platform, the three optimisation engines (greedy heuristic, OR-Tools CP-SAT, Timefold), and the multi-engine benchmark harness are held in a private GitHub repository accessible to the supervisor and to Admmit on request.
+  \item \textbf{Multi-engine benchmark suite.} The three synthetic datasets (small, medium, large), the engine-version snapshots used for reproducibility, and the 2026-05-02 reference run results reported in \Cref{sec:algorithm} live alongside the source code in the project repository.
+  \item \textbf{Requirements registers and traceability matrix.} The full FK-01 through FK-42 functional register, the IFK-01 through IFK-16 non-functional register, and the implementation-and-developer-verified traceability matrix referenced from \Cref{sec:eval-traceability} are reproduced in \Cref{chap:appendix}.
+  \item \textbf{Interview audio and transcripts.} The seven recorded calls and the corrected transcripts are stored locally on the project authors' devices, accessible only to the authors and the supervisor under the consultation framing set out in \Cref{sec:data-collection}, and will be deleted after submission and grading.
+\end{itemize}

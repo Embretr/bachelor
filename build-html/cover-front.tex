@@ -1,0 +1,101 @@
+% cover-front.tex
+% Front cover, generated locally as a substitute for the NTNU Grafisk senter
+% PDF. Positions and proportions follow the official cover layout.
+
+\begin{titlepage}
+\thispagestyle{empty}
+\null
+
+\begin{tikzpicture}[remember picture, overlay]
+
+  \definecolor{ntnucoverblue}{RGB}{156,182,220}
+  \definecolor{ntnulogoblue}{RGB}{0,80,158}
+
+  % --- Top-left blue rectangle, flush to the left page edge ---
+  \fill[ntnucoverblue]
+    ([xshift=0mm, yshift=-28mm]current page.north west)
+    rectangle
+    ([xshift=30mm, yshift=-95mm]current page.north west);
+  \node[rotate=90, font=\bfseries\large, color=white]
+    at ([xshift=15mm, yshift=-61.5mm]current page.north west)
+    {Bacheloroppgave};
+
+  % --- Vertical NTNU / faculty / institute text below the rectangle ---
+  \node[
+      rotate=90,
+      anchor=south west,
+      align=left,
+      font=\scriptsize,
+      inner sep=0pt
+    ]
+    at ([xshift=22mm, yshift=-165mm]current page.north west)
+    {%
+      \textbf{NTNU}\\[0.35em]
+      Norges teknisk-naturvitenskapelige universitet\\
+      Fakultet for informasjonsteknologi og elektroteknikk\\
+      Institutt for datateknologi og informatikk%
+    };
+
+  % --- Horizontal accent line (arrow) below the vertical text ---
+  \draw[ntnucoverblue, line width=0.5pt, -{Stealth[length=3mm]}]
+    ([xshift=0mm, yshift=-200mm]current page.north west) --
+    ([xshift=70mm, yshift=-200mm]current page.north west);
+
+  % --- Authors ---
+  \node[
+      anchor=north west,
+      font=\large,
+      align=left,
+      inner sep=0pt
+    ]
+    at ([xshift=60mm, yshift=-42mm]current page.north west)
+    {%
+      Embret Olav Rasmussen Roås\\
+      Mikael Stray%
+    };
+
+  % --- Title ---
+  \node[
+      anchor=north west,
+      font=\bfseries\Huge,
+      align=left,
+      inner sep=0pt,
+      text width=140mm
+    ]
+    at ([xshift=60mm, yshift=-58mm]current page.north west)
+    {Ressursplanlegger};
+
+  % --- Subtitle (compact line right under the title) ---
+  \node[
+      anchor=north west,
+      font=\bfseries\normalsize,
+      align=left,
+      inner sep=0pt,
+      text width=140mm
+    ]
+    at ([xshift=60mm, yshift=-74mm]current page.north west)
+    {Algorithm-Assisted Resource Planning for Transport Companies};
+
+  % --- Info block: thesis type, supervisor, date ---
+  \node[
+      anchor=north west,
+      font=\normalsize,
+      align=left,
+      inner sep=0pt,
+      text width=140mm
+    ]
+    at ([xshift=60mm, yshift=-87mm]current page.north west)
+    {%
+      Bachelor's Thesis in Computer Engineering\\
+      Supervisor: Ali Alsam\\
+      May 2026%
+    };
+
+  % --- Bottom NTNU brand mark (official logo) ---
+  \node[anchor=south, inner sep=0pt]
+    at ([yshift=20mm]current page.south)
+    {\includegraphics[width=70mm]{figures/ntnu-logo}};
+
+\end{tikzpicture}
+
+\end{titlepage}

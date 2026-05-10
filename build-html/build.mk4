@@ -1,0 +1,15 @@
+-- Build sequence for the HTML compile of the thesis.
+-- Runs htlatex, then biber + makeglossaries, then two more htlatex passes
+-- so cross-refs, citations, and the acronym list all settle.
+Make:htlatex {}
+Make:htlatex {}
+Make:match("html$", "domfilter")
+
+Make:add("biber", "biber ${input}")
+Make:add("makeglossaries", "makeglossaries ${input}")
+
+Make:htlatex {}
+Make:biber {}
+Make:makeglossaries {}
+Make:htlatex {}
+Make:htlatex {}

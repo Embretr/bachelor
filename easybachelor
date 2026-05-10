@@ -1,0 +1,121 @@
+#!/usr/bin/env python3
+"""
+EasyBachelor - one-command launcher for the thesis revision workspace.
+
+Usage (from repo root):
+  ./easybachelor              # default port 8765
+  ./easybachelor --port 9000
+  ./easybachelor --no-browser
+
+Starts the editor server, opens the browser, and prints a copy-paste-ready
+/loop prompt for Claude Code so chat.json is polled and answered hands-off
+in a separate Claude Code session running concurrently.
+"""
+
+import argparse
+import os
+import subprocess
+import sys
+import time
+import webbrowser
+from pathlib import Path
+
+REPO_ROOT = Path(__file__).resolve().parent
+SERVER_SCRIPT = REPO_ROOT / "feedback-app" / "server.py"
+
+# ANSI colours - skip them if stdout isn't a TTY.
+def _supports_colour() -> bool:
+    return sys.stdout.isatty() and os.environ.get("TERM", "") != "dumb"
+
+if _supports_colour():
+    CYAN = "\033[96m"
+    YELLOW = "\033[93m"
+    GREEN = "\033[92m"
+    MAGENTA = "\033[95m"
+    DIM = "\033[2m"
+    BOLD = "\033[1m"
+    RESET = "\033[0m"
+else:
+    CYAN = YELLOW = GREEN = MAGENTA = DIM = BOLD = RESET = ""
+
+BANNER = r"""
+ ███████  █████  ███████ ██    ██     ██████   █████   ██████ ██   ██ ███████ ██       ██████  ██████
+ ██      ██   ██ ██       ██  ██      ██   ██ ██   ██ ██      ██   ██ ██      ██      ██    ██ ██   ██
+ █████   ███████ ███████   ████       ██████  ███████ ██      ███████ █████   ██      ██    ██ ██████
+ ██      ██   ██      ██    ██        ██   ██ ██   ██ ██      ██   ██ ██      ██      ██    ██ ██   ██
+ ███████ ██   ██ ███████    ██        ██████  ██   ██  ██████ ██   ██ ███████ ███████  ██████  ██   ██
+"""
+
+
+def get_auto_prompt() -> str:
+    """Single source of truth lives in feedback-app/server.py."""
+    try:
+        sys.path.insert(0, str(REPO_ROOT / "feedback-app"))
+        import server  # type: ignore
+        return server.AUTO_LOOP_PROMPT
+    except Exception:
+        return (
+            "Watch feedback-app/chat.json. Whenever you see user messages "
+            "without an assistant message after them, process them and "
+            "append an assistant reply summarising what you changed."
+        )
+
+
+def main():
+    parser = argparse.ArgumentParser(prog="easybachelor")
+    parser.add_argument("--port", type=int, default=8765)
+    parser.add_argument("--no-browser", action="store_true",
+                        help="don't auto-open the browser")
+    args = parser.parse_args()
+
+    if not SERVER_SCRIPT.exists():
+        sys.stderr.write(f"{YELLOW}Server script not found: {SERVER_SCRIPT}{RESET}\n")
+        sys.exit(1)
+
+    print(CYAN + BOLD + BANNER + RESET)
+    print(DIM + "  thesis revision workspace - localhost editor + chat" + RESET)
+    print()
+
+    url = f"http://localhost:{args.port}"
+
+    print(f"{GREEN}Starting server...{RESET}  {url}")
+    proc = subprocess.Popen(
+        [sys.executable, str(SERVER_SCRIPT), "--port", str(args.port)],
+        cwd=str(REPO_ROOT),
+    )
+
+    time.sleep(0.7)
+    if not args.no_browser:
+        webbrowser.open(url)
+
+    print()
+    print(BOLD + "Next - open Claude Code in a second terminal:" + RESET)
+    print(f"  {DIM}cd {REPO_ROOT}{RESET}")
+    print(f"  {DIM}claude{RESET}")
+    print()
+    print(BOLD + "Then paste this into Claude Code so chat.json answers itself:" + RESET)
+    cmd = "/loop " + get_auto_prompt()
+    print()
+    # Indent each line of the wrapped prompt for readability.
+    for line in cmd.split("\n"):
+        print(f"  {YELLOW}{line}{RESET}")
+    print()
+    print(DIM + "  (Claude self-paces; checks /api/chat/unanswered, replies when there's something to do.)" + RESET)
+    print(DIM + "  (Or click 'Copy auto prompt' in the chat header to copy it from the browser.)" + RESET)
+    print()
+    print(MAGENTA + "Server running. Ctrl+C to stop." + RESET)
+    print()
+
+    try:
+        proc.wait()
+    except KeyboardInterrupt:
+        print(f"\n{DIM}stopping...{RESET}")
+        proc.terminate()
+        try:
+            proc.wait(timeout=3)
+        except subprocess.TimeoutExpired:
+            proc.kill()
+
+
+if __name__ == "__main__":
+    main()
