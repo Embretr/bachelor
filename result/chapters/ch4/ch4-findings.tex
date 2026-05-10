@@ -1,6 +1,18 @@
 \chapter{Results}
 \label{chap:findings}
 
+% TODO-AUTO-ROUTER (lagt til 2026-05-10): Kapitlet trenger en ny seksjon som
+% rapporterer production-log-data fra auto-routeren (§3.4.5 i ch3). Loggen
+% akkumulerer per kjøring metrikker som lar oss måle:
+%   - Kvalitet: snittskår over tid per kategori (rask/medium/grundig)
+%   - Konsistens: standardavvik på skår innenfor en celle før/etter cold start
+%   - Kostnad: total løsningstid per kategori (rask faktisk er rask, grundig
+%     blir billigere etter warmup når race-en avsluttes)
+%   - Sammenligning mot statisk regel: hvor ofte slo læringen den naive regelen?
+% Dette er distinkt fra synthetic-benchmark-resultatene som hører hjemme et
+% annet sted i kapitlet. Den nye seksjonen kan kalles "Auto-router log analysis"
+% eller liknende.
+
 This chapter reports what the seven interviews surfaced and what was built, without interpretation. \Cref{sec:interview-findings} reports the themes the thematic analysis named. \Cref{sec:requirements} lists the functional and non-functional requirements derived from those themes. \Cref{sec:fitgap} compares what existing systems cover with what is missing. \Cref{sec:system-description} describes Ressursplanlegger as it actually is: architecture, features, the user interface, and the technology stack. \Cref{sec:algorithm} reports the optimisation algorithm and the benchmark results that test it. \Cref{sec:dsr-artifacts} maps each project artefact to its DSR category. \Cref{sec:process-documentation} documents the project process. Interpretation, anchor binding, and limitation analysis belong to Chapter 5.
 
 
