@@ -30,11 +30,13 @@ This chapter walks through how the artefact was built and the research that info
 \section{Defining the Task}
 \label{sec:defining-task}
 
-The work behind this thesis began with a bachelor task posted by Admmit, a Norwegian software firm whose existing products serve transport companies. The task description asked for a working prototype of a planning platform that could help Norwegian traffic coordinators assign drivers and vehicles to the day's transport assignments. Two students accepted the task and committed to delivering both the artefact, named RP, and the thesis that documents it.
+Admmit, a Norwegian software firm serving the transport sector, offered a bachelor task through NTNU: build a working prototype of a planning platform that helps Norwegian traffic coordinators assign drivers and vehicles to transport assignments. Two students accepted, naming the artefact RP.
 
-Three requirements were fixed before any code was written. The platform had to operate as Human-in-the-Loop (HITL): the algorithm would propose a plan, and the coordinator would have full authority to review, modify, and approve every assignment in it. The platform had to be multi-tenant, meaning a single deployed instance could serve several customer companies with their data and configuration kept apart. And every plan had to respect the working-hours and rest-period rules of the Norwegian Working Environment Act (\textit{Arbeidsmiljøloven}) as hard constraints, since no plan that violates them can legally be carried out.
+Admmit fixed three requirements before any code was written. The platform operates as Human-in-the-Loop (HITL): the algorithm proposes a plan, and the coordinator has the final say on every assignment. The platform is multi-tenant: one installation serves multiple customer companies with each company's data kept apart. And every plan respects working-hours and rest-period rules from the Norwegian Working Environment Act (\textit{Arbeidsmiljøloven}) as hard constraints.
 
-The task description fixed the topic but not the empirical foundation. Two questions needed answers before a planning interface could be designed responsibly: how do Norwegian traffic coordinators actually plan a day's assignments, and what software, if any, do they use today? Neither could be answered from the desk. The team turned to Admmit's customer roster and reached out to traffic coordinators and transport managers directly. Brief semi-structured calls followed across the next month, with the team adjusting questions between calls so that gaps in earlier conversations could be probed in later ones. The interviews and the artefact-building ran in parallel from that point onwards: themes that surfaced in one call drove a question into the next call and a design decision into the next iteration.
+The brief fixed the topic but left the empirical foundation open. Two questions needed answers first: how do Norwegian traffic coordinators actually plan, and which software, if any, do they use today? Neither could be answered from by us. Drawing on Admmit's customer roster, the team ran semi-structured phone calls with traffic coordinators and transport managers over the following month. From then on, the interviews and the artefact-building influenced each other throughout the project.
+
+% Sjekket: temasetninger står alene i hver paragraf, 3 krav er den eneste lista (sentral), ingen em-dash, ingen overkonkret påstand, HITL og multi-tenant glosset inline, hver setning bærer info, fakta verifisert (Admmit, NTNU, RP-navn, 3 krav fra brukeren).
 
 
 \section{Method Theory: Design Science Research}
@@ -124,7 +126,7 @@ The interviews produced ten transcripts. The team used \textcite{braun2006themat
 
 Braun and Clarke developed thematic analysis in psychology and gender studies. The procedure carries across to operational practice in transport because it works on what people say in their own words, regardless of subject matter. Each transcript was treated as a data item, the ten transcripts together as the data set, and the five guide topics as the entry points the coding ran across.
 
-The six phases were worked through in order. Familiarisation came from listening to each recording while reading the transcript. Initial coding tagged segments where coordinators talked about specific aspects of their work: tools used, criteria applied, problems handled, expectations of automation. Theme search grouped codes that pointed in the same direction; theme review tested whether the candidate themes held up across companies of different size and tool-maturity. Theme definition fixed the wording of each theme. Report production happens through this thesis, primarily in \Cref{sec:interview-findings} where the themes are presented and in \Cref{sec:requirements} where they translate into functional requirements.
+The six phases were worked through in order. Familiarisation came from listening to each recording while reading the transcript. Initial coding tagged segments where coordinators talked about specific aspects of their work: tools used, criteria applied, problems handled, expectations of automation. Theme search grouped codes that pointed in the same direction; theme review tested whether the candidate themes held up across companies of different size and tool-maturity. Theme definition fixed the wording of each theme. Report production happens through this thesis, primarily in \Cref{sec:interview-findings} where the themes are presented.
 
 \textcite{braun2006thematic} require analysts to be explicit about their positioning on three dimensions \parencite[pp.~81--82]{braun2006thematic}. The analysis here was inductive: the team did not bring a codebook into the first interview, and the patterns described in \Cref{sec:interview-findings} were named only after the coding had identified them. It was semantic: codes worked at what coordinators actually said about tools, criteria, sick-leave handling, attitudes, and adoption, rather than at deeper layers of meaning. And it was realist: coordinator accounts were treated as reports of working practice rather than as discursive constructions, and were used as input to the design decisions in \Cref{sec:building-artefact}. Following \textcite[Table~2]{braun2006thematic}, the themes are described as having been named through the coding process, not as having emerged unaided.
 
@@ -226,6 +228,10 @@ One related need surfaced in the interviews but did not make it into this versio
 \subsection{From minutes to intervals}
 \label{sec:plan-time-intervals}
 
+% TODO: Etter kodefiksen bør denne seksjonen oppdateres til faktisk
+% koordinator-språk: rask, middels og grundig. Forklar at koordinator velger
+% tid/kvalitet, mens systemet velger engine via historikkbasert auto-router.
+
 Different planning situations call for different plans. A morning rush after several sick-call-ins needs a plan now; next week's planning can take longer to compute and should be more accurate. The first interface gave the coordinator a slider in seconds, asking them to pick how long the solver should run before returning a plan.
 
 The slider did not work, and the reason was not the design of the slider. A coordinator does not know what twenty seconds buys them in plan quality, or whether twenty seconds is fast or slow for a planning solver in the first place. The number was the wrong unit, and the question (which solver, for how long?) was the wrong question to put in front of a planner.
@@ -238,6 +244,10 @@ This is a small case of the same pattern that runs through HITL: the coordinator
 
 \subsection{Configurable weights for different operational realities}
 \label{sec:configurable-weights}
+
+% TODO: Etter kodefiksen bør denne seksjonen styrkes: soft-constraint weights
+% skal beskrives som persistent per-company settings som brukes som default i
+% solve-flowen, ikke bare som en delvis realisert konfigurasjonsmekanisme.
 
 The interviewed companies do not all want the same kind of plan. Some operate fixed routes that they want to assign to the same drivers each time, prizing continuity over balance. Others rotate workload deliberately to keep no single driver too loaded. Some weight customer priority over driver preference; others reverse it. Adaptability requires that the same algorithm, running on the same data, can produce these materially different plans without code changes.
 
@@ -268,9 +278,17 @@ Configurable weights are a partial realisation of Adaptability. The five prefere
 %   etter warmup)
 % - Sammenligning mot statisk regel: hvor ofte slo læringen den naive regelen?
 % Begge evalueringskilder må beskrives som distinkte instrumenter i §3.5.
+% TODO: Når solveAuto er wired inn i normal solve-flow, gjør denne TODO-blokken
+% om til vanlig metodeprosa. Beskriv cold start, warm path, size bucket,
+% category og companyId som evaluerbar mekanisme.
 
 \section{Evaluation Framework}
 \label{sec:evaluation-framework}
+
+% TODO: Etter kodefiksen bør Evaluation Framework utvides fra to til tre
+% instrumenter: multi-engine benchmark, requirements traceability og
+% auto-router run history. Avgrens auto-router-loggen som teknisk validering av
+% enginevalg, ikke som bevis på produksjonsgevinst.
 
 The framework that tests RP's claims is asymmetric on purpose. Some claims are tested directly through the multi-engine benchmark; others are accepted as inputs the framework does not itself test, following the position carried through \Cref{sec:solver-layer}. Two such accepted-as-input claims anchor the artefact. The first is that the visibility gap is real, which the seven coordinator interviews surfaced (\Cref{sec:interview-recruitment}). The second is that human-in-the-loop operation is the right operator stance, which Admmit fixed in the project's first week (\Cref{sec:defining-task}). The framework tests something else: through the multi-engine architecture and the benchmark protocol described below, it asks how solver approaches compare under realistic constraint combinations; it does not ask whether the problem is worth solving. The validate-versus-evaluate distinction that bounds these claims is set out under DSR theory in \Cref{sec:dsr} and is not repeated here. The benchmark is a validation instrument in Wieringa's sense (see \Cref{sec:dsr}), applied at the level of solver behaviour.
 
@@ -303,6 +321,10 @@ The requirements traceability matrix is the coverage check rather than a quality
 % at historikken ikke er biased og at engine-versjoner ikke har endret seg
 % (modelldrift). Dette er distinkt fra Malterud's tre kriterier for kvalitativ
 % validitet og bør nevnes som en separat reliabilitets-tråd.
+% TODO: Skriv dette som vanlig validity/reliability-tekst etter kodefiksen.
+% Poeng: auto-routerens reliabilitet avhenger av nok historikk per
+% company/category/size bucket, fravær av skjev historikk og stabile
+% engine-versjoner.
 
 \section{Validity and Reliability}
 \label{sec:validity}
