@@ -4,15 +4,15 @@
 \section{The Problem}
 \label{sec:problem}
 
-Consider a small transport business: one owner-operator, one vehicle. When a customer calls with goods to be moved, the operator checks the calendar, accepts the job if time is available, and refuses it if not. Simplicity disappears as soon as two requests collide. If two customers want their goods moved at the same hour, only one can be served, and accepting the higher-paying job seems natural. But suppose a third call later in the day fits alongside the cheaper job that was refused: the operator who accepted both short jobs earns more than the one who took the single bigger one, and keeps both customers. Decisions can no longer be made one call at a time.
+Consider a small transport business: one owner who is also the driver, and one vehicle. When a customer calls with goods to be moved, the operator checks the calendar, accepts the job if time is available, and refuses it if not. Simplicity disappears as soon as two requests collide. If two customers want their goods moved at the same hour, only one can be served, and accepting the higher-paying job seems natural. But suppose a third call later in the day fits alongside the cheaper job that was refused: the operator who accepted both short jobs earns more than the one who took the single bigger one, and keeps both customers. The operator now has an optimization problem, and one that translates directly to revenue.
 
-Other considerations press on the puzzle, and they fall into two kinds. \emph{Soft constraints}, also called priorities, are preferences the operator follows where possible: avoid out-of-town runs that conflict with family commitments, retain a Friday regular, favour familiar areas. Any of them can give way when a better job arrives. \emph{Hard constraints} do not give way: the legal limit on consecutive driving hours, the capacity of the vehicle, the customer's delivery window. Arranging a working day so that revenue is high, hard constraints are respected, and soft constraints are honoured is an optimisation problem with multiple competing objectives.
+Prioritizing revenue is one thing, but you may have other constraints affecting your choice as well. \emph{Soft constraints}, also called priorities or preferences, are preferences the operator follows where possible: retain a Friday regular, or favor familiar areas. Any of them can overridden when a better job arrives. \emph{Hard constraints} do not give way: the legal limit on consecutive driving hours, the capacity of the vehicle, the customer's delivery window. Arranging a working day so that revenue is high, hard constraints are respected, and soft constraints are honored is a constrained optimization problem.
 
-The problem changes shape when the business grows. A second vehicle and a second driver double the calendar: each incoming call demands not a yes or no but an assignment, with the rule that two assignments cannot go to the same driver at the same time. New constraints enter, like one driver who holds the licence for transporting dangerous chemicals and is the only one who can take the load of paint thinner that arrives every Wednesday. At the scale of one hundred drivers, fifty vehicles, and a thousand orders a week, the puzzle no longer fits on a single desk. Companies in this range, tens to hundreds of drivers and dozens of vehicles, are the ones this thesis is concerned with; they correspond to the customer base of Admmit, the Norwegian software firm that offered the thesis as a bachelor task. The owner of such a company has long since stepped out of the cab, and a new role sits between the customers ringing in and the drivers behind the wheel: a traffic coordinator, whose entire day is the puzzle.
+This task, already complex at the single-vehicle level, scales with the size of the company. Imagine that the small transport business from the first paragraph invests in another truck. A second driver is hired to operate it. Each incoming job now requires a choice: which driver, and does that driver have constraints that rule them out? Could another job configuration open up space in the calendar for even more jobs? At the scale of a typical Norwegian transport company, with hundreds of vehicles and employees and enough jobs to fill their capacity, the puzzle has outgrown the person who used to solve it in their head. The role that handles this planning is the traffic coordinator: deciding which jobs the company accepts, and which driver and vehicle complete each one.
 
-Coordinators of this kind sit in transport companies across Norway. In 2025, Norwegian transport companies moved approximately 252 million tonnes of goods on behalf of their customers \parencite{ssb2026godstransport}, and behind every load a coordinator made the same kind of decision the one-vehicle operator made, at greater scale and under tighter time pressure. Those decisions land directly on the bottom line: a driver assigned past the weekly hours cap turns the next load into overtime, a vehicle waiting between two assignments incurs cost without revenue, and the heaviest workload concentrated on the same few drivers produces fatigue and turnover.
+The traffic coordinator only needs information about employees, vehicles, and jobs to produce a valid plan. A good plan also reflects priorities the company has learned over time, the soft constraints introduced earlier. This knowledge, called tacit knowledge, is what makes a plan fit the company rather than just satisfy the rules. It is rarely written down, and none of the systems used by Norwegian transport companies today capture it.
 
-At a hundred vehicles, the puzzle the one-vehicle operator could carry in their head no longer fits there. The data needed for a good plan lives in several places at once, and no view assembles it. A further part of it lives nowhere at all: which routes are difficult and who is familiar with them, which licence allows which load, which vehicle suits which job, which customer must not be refused. Knowledge of this kind, acquired on the job and rarely written down, is termed \emph{tacit knowledge}; it is what no system can read from a screen and what makes the coordinator irreplaceable. The software the coordinator currently operates does not close the remaining gap: the two commercial Norwegian Transport Management Systems named by the interviewed companies, Timpex and Opter, handle order management and invoicing but neither produces an assignment plan automatically, and other companies plan from internal tools, spreadsheets, memory, or telephone calls. None of the systems in current use takes on the assignment planning itself: the decision of which driver and vehicle perform which order.
+Admmit, the Norwegian software firm that offered the thesis as a bachelor task, builds software for administrating transport companies. Their customer base is primarily Norwegian transport companies with one to several hundred vehicles, and varying amounts of employees and jobs related to them. Their current software helps HR and personnel administration, time and payroll, absence tracking, orders, documents, and more. What they do not cover however is the planning step explained above, currently executed by the traffic coordinators.
 
 What the coordinator does mentally is, in effect, an algorithm. Rules such as ``this driver is close to overtime, assign the load to another'' or ``this vehicle is too small for that pallet count, substitute it'' are applied repeatedly, never written down, never compared against alternatives. A computer can apply the same rules at greater scale, hold more constraints in view, and search through more candidate plans than a person can in comparable time. The aim is not to replace the coordinator but to take the part of the puzzle a computer can solve and leave the part that depends on tacit knowledge to the person who carries it.
 
@@ -20,24 +20,27 @@ What the coordinator does mentally is, in effect, an algorithm. Rules such as ``
 \section{The Solution}
 \label{sec:solution}
 
-Ressursplanlegger (hereafter RP) is the artefact this thesis builds and evaluates: an algorithm-assisted planning platform that proposes a plan covering a horizon set by the coordinator. The coordinator reviews each assignment in a calendar-style view, free to change or remove any of them, and the plan takes effect only after their approval.
+Ressursplanlegger (hereafter RP) is the solution to the problem described above, an algorithm-assisted planning platform that proposes a plan covering a horizon set by the coordinator. The coordinator reviews each assignment in a calendar-style view, and the plan takes effect only after their approval.
 
-Three concerns recurred across the interviews with traffic coordinators and the dialogue with Admmit, and are used as guiding concepts throughout the thesis. \textbf{Efficiency} is what RP must measurably improve; \textbf{Control} is what RP must preserve in the coordinator's hands; \textbf{Adaptability} is what RP must support across companies.
+After communicating with several different traffic coordinators, we found it useful to try to define a set of primary concepts to focus on throughout the thesis and the building of RP, as these seemed to be the primary focus points for the users. \textbf{Efficiency} is what RP must measurably improve; \textbf{Control} is what RP must preserve in the coordinator's hands; \textbf{Adaptability} is what RP must support across companies.
 
 \subsection{Efficiency}
 \label{sec:anchor-efficiency}
 
-The owner of the hundred-vehicle business asks the same question at the end of every week. How much overtime did the company run? How many vehicle-hours sat idle between assignments? Was the workload spread evenly across drivers, or did the same few people carry the weight again? \textbf{Efficiency} is whether RP makes those quantities visible, and whether the coordinator can move them in the right direction: less overtime, less idle time, a more even distribution of work.
+Efficiency is whether RP makes overtime, idle time between assignments, and uneven workload across drivers visible, and whether the coordinator can move them in the right direction.
+
 
 \subsection{Control}
 \label{sec:anchor-trust-control}
 
-The one-vehicle operator inspected every job before accepting it. The coordinator of a hundred-vehicle fleet cannot inspect a thousand jobs a week one by one, but a system that issued plans without their approval would not be acceptable either. \textbf{Control} is the property that every algorithm-generated plan is reviewed before it takes effect: trust grows only where control is real.
+Control is the property that every algorithm-generated plan is reviewed by the coordinator before it takes effect, because trust grows only where override authority is real.
+
 
 \subsection{Adaptability}
 \label{sec:anchor-adaptability}
 
-Two transport companies of comparable size may operate on entirely different rules. The first has ten drivers in a single depot and plans one day at a time; the second has several dozen vehicles across multiple branches and plans a week ahead. \textbf{Adaptability} is the capacity of the system to fit both, with operational rules and priorities adjusted per company through configuration rather than through code changes.
+Adaptability is the capacity of the system to fit companies that differ in size, rules, and planning horizon through configuration rather than code changes.
+
 
 
 \section{Research Questions}
@@ -46,53 +49,35 @@ Two transport companies of comparable size may operate on entirely different rul
 The puzzle from \Cref{sec:problem} supplies the questions this thesis must answer.
 
 \begin{quote}
-To what extent can an algorithm-assisted planning platform automate the traffic coordinator's planning work in Admmit's customer companies in a way that improves resource utilisation (reducing overtime, idle time between assignments, and uneven driver load) and is perceived as useful by the coordinator who runs it?
+  To what extent can an algorithm-assisted planning platform automate the traffic coordinator's planning work in Admmit's customer companies in a way that improves resource utilization, and is perceived as useful by the coordinator who runs it?
 \end{quote}
 
-The main question is one of balance. More automation moves the utilisation numbers further but, taken too far or in the wrong way, erodes the tacit knowledge and override authority that make the coordinator irreplaceable. The question is not whether to automate, but how far automation can go before it costs more than it gives.
+The main question is one of balance. More automation improves the numbers but, taken too far, erodes the tacit knowledge that makes the coordinator irreplaceable. The question is how far to automate before the cost outweighs the gain.
 
 \begin{quote}
-\textbf{SQ1}: To what extent does RP reduce overtime, idle time, and uneven driver load below the level produced by current planning practice in Admmit's customer companies?
+  \textbf{SQ1}: To what extent does RP reduce overtime, idle time, and uneven driver load below the level produced by current planning practice in Admmit's customer companies?
 \end{quote}
 
-SQ1 is the Efficiency side of the balance: do the owner's end-of-week numbers come down once the coordinator works from RP rather than from order tools, spreadsheets, and memory? \Cref{sec:efficiency} answers it against a benchmark of synthetic datasets that approximate the fleet ranges of the interviewed companies, with the baseline drawn from interview accounts of how planning is done at present.
+SQ1 is the Efficiency side of the balance: do the owner's end-of-week numbers come down once the coordinator works from RP rather than from order tools, spreadsheets, and memory?
 
 \begin{quote}
-\textbf{SQ2}: Through what kind of interface and process can the traffic coordinator review and override every algorithm-generated assignment without making the planning workflow heavier than current practice?
+  \textbf{SQ2}: Through what kind of interface and process can the traffic coordinator review and override every algorithm-generated assignment without making the planning workflow heavier than current practice?
 \end{quote}
 
-SQ2 is the Control side: how can the one-vehicle operator's reflex inspection be reproduced for a fleet coordinator, when there are a thousand jobs a week and much of what argues for or against an assignment is knowledge the algorithm cannot read off the screen? \Cref{sec:trust-control} answers it by examining the timeline, the override controls, and the conflict view in RP.
+SQ2 is the Control side: how can the one-vehicle operator's reflex inspection be reproduced for a fleet coordinator, when there are a thousand jobs a week and much of what argues for or against an assignment is knowledge the algorithm cannot read off the screen?.
 
 \begin{quote}
-\textbf{SQ3}: Through which configurable elements can RP serve companies that differ in operational rules, fleet size, and planning horizon, without changes to the code?
+  \textbf{SQ3}: Through which configurable elements can RP serve companies that differ in operational rules, fleet size, and planning horizon, without changes to the code?
 \end{quote}
 
-SQ3 is the Adaptability question: what has to be configurable for RP to fit the ten-driver depot and the multi-branch fleet without code changes? \Cref{sec:adaptability} answers it against company-scoped data, per-company soft-constraint weights, and category-based engine choice.
+SQ3 is the Adaptability question: what has to be configurable for RP to fit the ten-driver depot and the multi-branch fleet without code changes?
 
-\begin{table}[h]
-\centering
-\caption{Research-question structure. Each sub-question is bound to one of the three locked anchor concepts and answered in a specific section, with the limitations register \mbox{(L1--L12)} naming what bounds each answer.}
-\label{tab:rq-structure}
-\small
-\begin{tabular}{p{0.08\textwidth}p{0.30\textwidth}p{0.16\textwidth}p{0.16\textwidth}p{0.20\textwidth}}
-\toprule
-\textbf{ID} & \textbf{Question} & \textbf{Anchor} & \textbf{Answered in} & \textbf{Bounded by} \\
-\midrule
-RQ  & Balance between automation gains and coordinator-perceived utility & All three & \Cref{sec:answers} & All L1--L12 \\
-SQ1 & Reduction in overtime, idle time, and uneven driver load & Efficiency      & \Cref{sec:efficiency},   \Cref{sec:answers} & L1, L2, L3, L4 \\
-SQ2 & Interface and process for review-and-override authority      & Control         & \Cref{sec:trust-control},\Cref{sec:answers} & L8, L10 \\
-SQ3 & Configurable elements that fit different companies          & Adaptability    & \Cref{sec:adaptability},\Cref{sec:answers} & L5, L6, L7, L9, L11, L12 \\
-\bottomrule
-\end{tabular}
-\end{table}
 
 
 \section{Scope and Delimitations}
 \label{sec:scope}
 
-RP turns a list of orders for a given period into a plan that specifies who drives what, in which vehicle, and when. The period is set by the coordinator and ranges from a single day to a week or longer, since the companies the system has to accommodate do not all plan on the same horizon. Before a plan is generated, the coordinator chooses a time-and-quality category: quick, medium, or thorough. The system then chooses the solver engine behind that category based on company, problem size, and run history. The system holds the information the planning step requires: which drivers are employed and what they are qualified to do, which vehicles the company has and what each can carry, and when employees are working.
-
-The priorities the solver layer weighs are tuned per company through configurable weights in the dashboard: the cost of overtime relative to idle time, the strength of workload balancing, the value of keeping a job within a driver's home region. The same planning data can therefore return different plans for two companies, because they have asked the system to optimise different things.
+RP turns a list of orders for a given period into a plan that specifies who drives what, in which vehicle, and when. The period is set by the coordinator. The plan is produced by an automated solver, which the coordinator also picks: a tight time budget returns a quicker plan suited to the morning rush, a longer budget a more thoroughly searched one suited to the previous evening's planning session. The system holds the information the planning step requires. The priorities the solver weighs are tuned per company through configurable weights in the dashboard.
 
 The following capabilities are deliberately out of scope, since they came up early in the project and could otherwise be assumed by default:
 
@@ -113,26 +98,17 @@ The thesis is organised as follows:
 
 \begin{itemize}
   \item \textbf{\Cref{chap:theory}} establishes the theoretical and disciplinary background: resource scheduling, human-in-the-loop automation (Bainbridge, Hoff and Bashir, Miller, Lee and See), Transport Management Systems, and Design Science Research.
-  \item \textbf{\Cref{chap:method}} sets out the Design Science Research method as applied through Peffers' six DSRM activities, the six-iteration construction of RP, and the evaluation framework.
+  \item \textbf{\Cref{chap:method}} sets out the Design Science Research method as applied through Peffers' six DSRM activities, the eight-iteration construction of RP, and the evaluation framework.
   \item \textbf{\Cref{chap:findings}} reports what the interviews surfaced, what the artefact delivers against its functional requirements, and how the three optimisation engines compare on the multi-engine benchmark.
   \item \textbf{\Cref{chap:discussion}} interprets the findings under the three anchor concepts, works through adoption and sustainability, and names the twelve hierarchical limitations (L1 through L12) that bound what the thesis can claim.
   \item \textbf{\Cref{chap:conclusion}} answers each sub-question against the body of evidence and outlines future work.
 \end{itemize}
 
 
-\section{Approach}
-\label{sec:approach}
-
-RP was built in stages, starting from the bachelor task Admmit offered. The task came with two requirements set by Admmit on behalf of its customers: an algorithm that proposes the plan, and a human-in-the-loop workflow that leaves the coordinator in charge of every assignment. Beyond those two requirements, the shape of the planning problem was open at the start; the visibility gap, the role of tacit knowledge, and the limits of the existing software were learned from an outreach phase of interviews with traffic coordinators in Norwegian transport companies, conducted alongside an ongoing dialogue with Admmit. The construction and evaluation followed a Design Science Research approach: an artefact built to address a practical problem, evaluated against the problem it was built to address, refined across iterations, and reflected on in writing. With more time the project would have run a second round of interviews and a fuller iteration cycle on the control surface, testing the balance against operating coordinators rather than against the team's own reading of the first-round transcripts. \Cref{chap:method} describes the method and the iterations in full.
-
-
 \section{Additional Resources}
 \label{sec:additional-resources}
 
-The supporting material referenced from the chapters that follow is listed below.
 
 \begin{itemize}
-  \item \textbf{Multi-engine benchmark material.} The three synthetic dataset sizes (small, medium, large), the reproducibility notes, and the seed-42 benchmark results reported in \Cref{sec:algorithm} are documented in the benchmark appendix material.
-  \item \textbf{Requirements registers and traceability matrix.} The full FK-01 through FK-42 functional register, the IFK-01 through IFK-16 non-functional register, and the implementation-and-developer-verified traceability matrix referenced from \Cref{sec:eval-traceability} are reproduced in \Cref{chap:appendix}.
-  \item \textbf{Interview audio and transcripts.} The seven recorded calls and the corrected transcripts are stored locally on the project authors' devices, accessible only to the authors and the supervisor under the consultation framing set out in \Cref{sec:data-collection}, and will be deleted after submission and grading.
+  \item \textbf{RP source code.} GitHub repository accessible to the supervisor and to Admmit on request.
 \end{itemize}
