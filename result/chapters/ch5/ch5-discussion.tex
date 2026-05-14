@@ -16,13 +16,15 @@ The interviews surfaced an asymmetry that shapes the contribution. Utilisation o
 
 This matters because transport planning is usually changed under time pressure. A system that only reports utilisation after the day is planned arrives too late to shape the plan. RP's contribution is to make utilisation and feasibility part of the decision while there is still time to act.
 
-The benchmark adds a narrower technical claim. It shows that the solver layer can generate alternative plans under shared constraints, and that the choice of solver matters. OR-Tools CP-SAT schedules more assignments than greedy on the small and medium synthetic instances, but does not finish the large instance within the current 120-second cap. Greedy gives a weaker plan on the reported instances, but remains useful because it returns a plan quickly at larger scale. RP can therefore support human judgement, but its solver layer still has a scaling boundary.
+The benchmark adds a narrower technical claim. It shows that the solver layer can generate alternative plans under shared constraints, and that the choice of solver matters by instance size. CP-SAT is strongest where it completes, proving optimality on the small and medium synthetic instances. Greedy remains useful because it returns a feasible baseline almost immediately. Timefold justifies the third engine in the portfolio: it does not beat CP-SAT on the smaller instances, but it completes the large instance where CP-SAT times out and improves coverage over greedy. The scaling boundary is therefore not a boundary of the solver layer as a whole, but of exact CP-SAT search under the current cap.
 
 
 \section{Where Automation Stops}
 \label{sec:trust-control}
 
-Automation stops where the plan needs judgement the data cannot carry. RP can check whether a driver is available, competent, and within working-time limits. It cannot know which route is harder in winter, which driver handles a difficult customer well, or when the day calls for an exception to the usual plan. That residue is not a gap to close with more data; it is what approval-mode automation exists to preserve.
+Automation stops where the plan needs judgement the data cannot carry. RP can check whether a driver is available and competent, and it can surface working-time and rest-period issues for review. It cannot know which route is harder in winter, which driver handles a difficult customer well, or when the day calls for an exception to the usual plan. That residue is not a gap to close with more data; it is what approval-mode automation exists to preserve.
+
+The benchmark reinforces that boundary. A solver output can be operationally feasible under the hard rules and still carry legal-tier issues that need review. That does not make the coordinator a passive approver; it makes review part of the control structure. RP can surface those issues, but the final plan still depends on a human checking whether the proposed allocation is acceptable before it is used.
 
 That boundary explains why approval cannot be treated as a formality. A transport plan is not finished when the solver returns a feasible allocation. It is finished when the coordinator has judged whether the allocation fits the day. RP's Control design follows from that: the system proposes, but the coordinator must be able to change the result before it becomes the plan.
 
