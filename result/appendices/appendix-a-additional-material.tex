@@ -7,13 +7,101 @@ This appendix gathers supporting material referenced from the main chapters: the
 \section{Functional Requirements Register (FK-01 -- FK-42)}
 \label{app:requirements-functional}
 
-\textit{[Placeholder. The full functional requirements register, with each FK-ID, MoSCoW priority, source theme or interview, and implementation status, is to be inserted here as a table. Summary references in the main thesis: \Cref{sec:eval-traceability}.]}
+The register lists the forty-two functional requirements derived in \Cref{sec:themes-to-requirements} from the visibility, assignment-criteria, and automation-attitudes themes, layered with Admmit's HITL and multi-tenant mandates. Each row records the MoSCoW priority, the originating theme or mandate, and the implementation status from the requirements traceability matrix (\Cref{sec:eval-traceability}). Thirty-seven of the forty-two are in scope; thirty-six are implemented and developer-verified, FK-30 is partial, and FK-38 through FK-42 are documented as future work.
+
+\begin{footnotesize}
+\begin{longtable}{@{}p{0.05\textwidth}p{0.42\textwidth}p{0.07\textwidth}p{0.23\textwidth}p{0.13\textwidth}@{}}
+\toprule
+\textbf{ID} & \textbf{Requirement} & \textbf{MoSCoW} & \textbf{Source} & \textbf{Status} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{ID} & \textbf{Requirement} & \textbf{MoSCoW} & \textbf{Source} & \textbf{Status} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+FK-01 & Every record carries a \texttt{companyId}; queries are scoped server-side so cross-tenant access is impossible by construction. & Must & Admmit mandate (multi-tenant) & Implemented \\
+FK-02 & Authenticated coordinator role required for all planning and editing operations. & Must & Admmit mandate & Implemented \\
+FK-03 & Coordinator can approve, change, or reject any algorithm-generated assignment. & Must & Admmit mandate (HITL); automation-attitudes theme (all 7) & Implemented \\
+FK-04 & No assignment is committed without a coordinator action; the solver always returns a proposal. & Must & Admmit mandate (HITL) & Implemented \\
+FK-05 & Employee records with base availability and contact details. & Must & Assignment-criteria theme & Implemented \\
+FK-06 & Employee competences including driver licence class, ADR endorsements, scanning competence, and winter-driving experience. & Must & Assignment-criteria theme (Norlog Tana scanning; ADR; northern routes) & Implemented \\
+FK-07 & Vehicle records with type, capacity, and active/inactive status. & Must & Assignment-criteria theme & Implemented \\
+FK-08 & Trailers tracked separately from vehicles and movable across assignments. & Should & Iteration 2 (data modelling) & Implemented \\
+FK-09 & Assignment records with time window, location, vehicle-type requirement, and competence requirement. & Must & Assignment-criteria theme & Implemented \\
+FK-10 & Team-based assignments that bind two or more resources together (crane operator plus transport driver, fixed teams). & Should & Iteration 2 (Nordic Crane) & Implemented \\
+FK-11 & Recurring route templates instantiated per occurrence with different staffing each time. & Should & Iteration 2 (Norlog Lakselv) & Implemented \\
+FK-12 & Planning timeline (Gantt) across the chosen horizon showing assignments, employees, and vehicles. & Must & Visibility theme (all 7) & Implemented \\
+FK-13 & Timeline filtering and date-range selection. & Could & Visibility theme & Implemented \\
+FK-14 & Resource overview combining driver availability, vehicle status, and assignment load (\texttt{/oversikt}). & Must & Visibility theme (capacity-overview gap, all 7) & Implemented \\
+FK-15 & Drag-and-drop reassignment of an assignment to another employee or vehicle. & Must & Automation-attitudes theme; iteration 4 & Implemented \\
+FK-16 & Coordinator changes are saved even when they introduce a conflict; the system never blocks a manual edit. & Must & Automation-attitudes theme (flag-not-block); iteration 4 & Implemented \\
+FK-17 & Continuous conflict check that runs as the coordinator edits and as the solver returns. & Must & Visibility theme; iteration 4 & Implemented \\
+FK-18 & Flag missing driver on an assignment. & Must & Visibility theme & Implemented \\
+FK-19 & Flag missing vehicle on an assignment. & Must & Visibility theme & Implemented \\
+FK-20 & Flag employee double-booking across overlapping assignments. & Must & Assignment-criteria theme; HC-05 & Implemented \\
+FK-21 & Flag vehicle double-booking across overlapping assignments. & Must & Assignment-criteria theme; HC-06 & Implemented \\
+FK-22 & Flag overtime accumulation toward weekly and annual limits. & Should & Assignment-criteria theme (overtime status) & Implemented \\
+FK-23 & Flag night-work where it triggers legal-tier review. & Should & Arbeidsmiljøloven; assignment-criteria theme & Implemented \\
+FK-24 & Flag competence mismatch between employee and assignment requirement. & Must & Assignment-criteria theme; HC-01 & Implemented \\
+FK-25 & Flag assignment on a declared unavailable day. & Must & Visibility theme; HC-02 & Implemented \\
+FK-26 & Deviation viewer (\texttt{/avvik}) listing every current flag with severity and source. & Should & Visibility theme; iteration 4 & Implemented \\
+FK-27 & Plan generation triggered from the timeline; the returned plan opens in the same view with its score and any unresolved conflicts. & Must & Iteration 5 & Implemented \\
+FK-28 & Three planning categories (\texttt{rask}, \texttt{middels}, \texttt{grundig}), each with a time cap and a pool of allowed engines. & Must & Iteration 5 & Implemented \\
+FK-29 & Auto-router that selects an engine within a category from logged run history of company, problem size, and category. & Must & Iteration 5 & Implemented \\
+FK-30 & Driving and rest-time status tracked against Arbeidsmiljøloven for each employee. & Should & Assignment-criteria theme (legally required) & Partial \\
+FK-31 & Cold-start behaviour for a new company-size-category combination runs all allowed engines and returns the best result. & Should & Iteration 5 & Implemented \\
+FK-32 & Six hard constraints (HC-01--HC-06) enforced by every engine; a plan that violates any of them is not feasible. & Must & Assignment-criteria theme; \Cref{tab:hard-constraints} & Implemented \\
+FK-33 & Five soft constraints (SC-01--SC-05) scored with per-company weights. & Must & Assignment-criteria theme; iteration 6 & Implemented \\
+FK-34 & Four-tier scoring (hard, legal, business-critical, preference) applied by a canonical TypeScript scorer to every returned plan. & Must & Iteration 3; \Cref{tab:scoring-tiers} & Implemented \\
+FK-35 & Per-company weight configuration UI for the five soft constraints. & Must & Iteration 6 (Adaptability) & Implemented \\
+FK-36 & Three integrated solver engines (greedy heuristic, OR-Tools CP-SAT, Timefold) accessed through one shared problem format. & Must & Iterations 1 and 3 & Implemented \\
+FK-37 & Post-run summary showing the chosen engine, score, scheduled-assignment percentage, hard-tier and legal-tier counts, and wall-clock time. & Should & Iteration 5 & Implemented \\
+FK-38 & Sick-leave replanning flow that proposes coverage when a driver is marked sick. & Won't & Sick-leave theme (all 7; Norlog Tana, Ottem); iteration 4 follow-up & Future work \\
+FK-39 & Per-company configuration of hard constraints, not only soft weights. & Won't & Iteration 6 follow-up & Future work \\
+FK-40 & Integration with Timpex and Opter for assignment data exchange. & Won't & Fit items from \Cref{sec:themes-to-requirements} & Future work \\
+FK-41 & Pre-distribution of plans 18--24 hours before assignments run, for coordinator review. & Won't & Nordic Crane (interview) & Future work \\
+FK-42 & Smarter auto-router with exploration and time-decay weighting on the engine history. & Won't & \Cref{sec:validity} (engine-choice reliability) & Future work \\
+\end{longtable}
+\end{footnotesize}
 
 
 \section{Non-Functional Requirements Register (IFK-01 -- IFK-16)}
 \label{app:requirements-nonfunctional}
 
-\textit{[Placeholder. The full non-functional requirements register, with each IFK-ID, target value, and verification approach, is to be inserted here as a table.]}
+The non-functional register records the sixteen quality requirements the artefact had to meet alongside its functional behaviour. The categories follow standard practice: security and data isolation, performance and time budgets, reliability and reproducibility, maintainability, usability, and deployability. Each row gives the target the requirement sets and the approach used to verify it during development.
+
+\begin{footnotesize}
+\begin{longtable}{@{}p{0.06\textwidth}p{0.47\textwidth}p{0.37\textwidth}@{}}
+\toprule
+\textbf{ID} & \textbf{Requirement and target} & \textbf{Verification approach} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{ID} & \textbf{Requirement and target} & \textbf{Verification approach} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+IFK-01 & Multi-tenant isolation. Every record carries a \texttt{companyId} and every query is scoped server-side, so cross-tenant access is impossible by construction. & Query-level scoping inspected in every tRPC procedure. \\
+IFK-02 & Authenticated coordinator role required for all planning and editing operations. & Session and role check at the API layer, exercised during development. \\
+IFK-03 & No personal data outside GDPR-non-sensitive categories is collected or stored. & Schema review against the GDPR sensitive-data list; consistent with the ethics note in \Cref{sec:ethics}. \\
+IFK-04 & Each solver engine runs in its own subprocess with its own language runtime, so a new engine can be added without changing the others. & Inspection of the solver-runner abstraction and the three concrete runners. \\
+IFK-05 & The three engines share one input and one output format; the registry layer translates between engine-specific representations. & Canonical scorer accepts outputs from all three engines without per-engine code paths. \\
+IFK-06 & The canonical TypeScript scorer re-evaluates every returned plan; engine self-reports are not trusted as final. & Benchmark protocol re-scores each returned plan (\Cref{sec:eval-benchmark}). \\
+IFK-07 & The synthetic benchmark generator is deterministic at seed 42 so successive runs produce identical instances. & Hashed generator output compared across runs. \\
+IFK-08 & Engine versions are pinned in the dependency manifest (OR-Tools CP-SAT, Timefold JAR, greedy script revision). & Dependency manifest review; documented in the benchmark appendix. \\
+IFK-09 & Per-engine wall-clock cap enforced at the category boundary (120 seconds per engine in the benchmark protocol). & Wall-clock log recorded for every benchmark run. \\
+IFK-10 & Timefold stops after 35 seconds without improvement so a stalled run does not consume the full cap. & Timefold solver configuration; benchmark wall-clock log. \\
+IFK-11 & Every plan generation logs company, problem size, category, engine, score, scheduled percentage, and wall-clock time. & Run-history table inspected during auto-router development (\Cref{sec:eval-auto-router}). \\
+IFK-12 & Coordinator interface uses coordinator vocabulary (\texttt{rask}, \texttt{middels}, \texttt{grundig}) rather than engine names. & Interface walkthrough; corresponds to iteration 5. \\
+IFK-13 & Browser-only client; the coordinator needs no local installation. & Access from a fresh machine with only a browser. \\
+IFK-14 & One deployment serves multiple companies without per-tenant infrastructure. & Two synthetic tenants run against the same instance during development. \\
+IFK-15 & An engine that times out, errors, or returns an infeasible plan is annotated rather than crashing the request; the next-best plan returns instead. & Fault-injection exercises and the benchmark timeout on the large dataset for CP-SAT (\Cref{sec:algorithm-benchmark}). \\
+IFK-16 & The four scoring tiers are defined once in the canonical scorer; no engine duplicates the tier logic. & Source review of the scorer and the three engine adapters. \\
+\end{longtable}
+\end{footnotesize}
 
 
 \section{System Architecture}
