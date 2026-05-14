@@ -1,0 +1,133 @@
+\chapter{Theory}
+\label{chap:theory}
+
+% TODO-AUTO-ROUTER (lagt til 2026-05-10, VURDER): Hvis ch5 skal koble
+% auto-routeren (§3.4.5) til portfolio-litteratur og multi-armed bandit
+% (Gomes & Selman 2001, SATzilla, Sutton & Barto kap. 2), må fundamentet
+% etableres her i ch2. Vurder en kort underseksjon under \Cref{sec:scheduling}
+% om algorithm portfolios og solver selection. Dette er nice-to-have, ikke
+% obligatorisk — avhenger av om vi vil løfte designet til den akademiske
+% rammen, eller bare beskrive det som et pragmatisk valg i ch3.
+
+This chapter develops the four theoretical foundations the rest of the thesis stands on: the scheduling problem the algorithm solves (§2.1), the human-in-the-loop pattern under which the coordinator runs the system (§2.2), the existing software category RP sits inside (§2.3), and the research paradigm that frames the work (§2.4). §2.1 grounds Efficiency, §2.2 grounds Control, and §2.3 grounds Adaptability from §1.2.
+
+
+\section{Resource Scheduling}
+\label{sec:scheduling}
+
+
+The coordinator's puzzle from \Cref{sec:problem} is a scheduling problem. \textcite{pinedo2016scheduling} defines scheduling as allocating resources to tasks over time, subject to given constraints, with the goal of optimising one or more objectives. In scheduling vocabulary, the coordinator's puzzle is an assignment problem in which each task must be matched with two resources, a driver and a vehicle, that stay paired for the assignment. Pairing makes the problem harder than the single-resource case that dominates \parencite{pinedo2016scheduling}, because a candidate plan now has to satisfy compatibility for two resource types at the same moment.
+
+Producing a plan that legally fits every assignment is one bar; producing one that uses the company's drivers and vehicles well is a different one, and harder. \textcite{ernst2004staff} review the personnel-scheduling literature across application domains and identify overtime hours, idle time, and workload balance as the utilization dimensions on which plans are judged. None of these can improve before the coordinator can see them, so visibility is the precondition any planning system at the assignment step has to deliver before any of these dimensions can move.
+
+The hard and soft constraints introduced in \Cref{sec:problem} are formalised in scheduling theory as follows. Hard constraints bound feasibility: a plan that violates one is not a valid plan. Each violated soft constraint adds a penalty to the score the solver tries to minimise \parencite{ernst2004staff, rossi2006constraint}, so the solver searches for a plan that respects every hard constraint and incurs the smallest total soft-constraint penalty. Each penalty has a weight, and different companies can give the same constraint different weights depending on what matters to them. The thesis groups this configurability under \textbf{Adaptability}.
+
+The problem is NP-hard: no algorithm is known to solve every instance in polynomial time, and one is widely believed not to exist \parencite{rossi2006constraint, pinedo2016scheduling}. Exhaustive search stops being practical even on daily fleets the size the interviewed companies operate. Practical solvers therefore return a good plan within a fixed time budget rather than a guaranteed-best one.
+
+The personnel-scheduling literature names four solver families. Constructive heuristics, called dispatching rules in \textcite{pinedo2016scheduling}, build a plan one assignment at a time according to a priority rule --- like a teacher picking the first room that fits each lesson. They are fast but can lock onto a locally good plan. Constraint programming writes down what each variable could hold and rules out options through propagation and backtracking, the way a sudoku solver works \parencite{rossi2006constraint}; it returns near-optimal plans within a configurable time budget at the cost of higher modelling effort upfront. Metaheuristics improve a candidate plan by repeatedly modifying it and keeping the better candidate. \textcite{glover1986future} introduces the term and presents tabu search; \textcite{burke2017late} present late-acceptance hill climbing as an alternative. Mathematical programming dominates by volume but is rarely used on its own for messy real-world instances because their constraints resist clean mathematical formulation \parencite[pp.~17--18]{ernst2004staff}.
+
+
+
+
+
+\Cref{tab:solver-families} summarises how the four families compare on speed, plan quality, and modelling effort.
+
+\begin{table}[h]
+    \centering
+    \caption{The four solver families positioned along speed, plan quality, and modelling effort, with the situation each best fits. RP integrates the first three (greedy, CP, metaheuristic); mathematical programming is excluded for the reason in the right-most column.}
+    \label{tab:solver-families}
+    \small
+    \begin{tabular}{p{0.20\textwidth}p{0.16\textwidth}p{0.18\textwidth}p{0.14\textwidth}p{0.22\textwidth}}
+        \toprule
+        \textbf{Family} & \textbf{Speed} & \textbf{Quality} & \textbf{Modelling effort} & \textbf{When it fits} \\
+        \midrule
+        Constructive heuristic (greedy)         & Milliseconds          & Locally good; can lock in early                & Low         & Need an immediate baseline plan; small instances \\
+        Constraint programming (CP-SAT)         & Configurable budget   & Near-optimal within budget                     & Medium      & Mid-size instances with mixed hard/soft constraints \\
+        Metaheuristic (tabu, SA, late-acceptance) & Continues with time & Improves over time; scale-independent in LAHC & Low--medium & Large instances where CP saturates within the budget \\
+        Mathematical programming                & Slow on messy cases   & Optimal if the model fits                      & Very high   & Clean structured problems; rare for messy real-world rostering \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+
+\section{Human-in-the-Loop Automation}
+\label{sec:hitl}
+
+A nurse confirms a medication dose the hospital system flags. A pilot accepts an autopilot suggestion before the autopilot acts. In each case an automated process generates a recommendation, and a human exercises authority over whether it takes effect. The human factors literature calls this configuration human-in-the-loop. A traffic coordinator who reviews and approves every plan the algorithm produces is operating in exactly the same pattern.
+
+\textcite{parasuraman2000automation} formalise this division of authority on a ten-level scale of automation for decision and action selection. The scale runs from level 1 (fully manual) to level 10 (fully autonomous), with intermediate steps that progressively transfer authority from human to machine. Level 4 is ``the computer suggests one alternative'', level 5 is ``executes that suggestion if the human approves'', and level 6 is ``executes automatically unless the human vetoes within a time window''. The level a system sits at is a design choice with real consequences. At level 5, the operator's approval is required for the system to act. At level 6, the operator has to step in to stop something the system would otherwise do on its own.
+
+\textcite{bainbridge1983ironies} names the structural reason this matters: the people who specify automation are not the people who must operate it. HITL is the design move that satisfies both --- the algorithm produces the plan, the operator retains review-and-override authority over each result.
+
+Authority is one thing. Whether the coordinator trusts what the algorithm produces is another, and a coordinator who has the authority to override the algorithm may still leave it unused if they do not trust what it produces. \textcite{hoff2015trust} review 127 studies of human-automation trust from 101 articles, and group their findings into a three-layer model of dispositional, situational, and learned trust \parencite[p.~413]{hoff2015trust}. A coordinator who instinctively distrusts software (dispositional), who has been burned by a past system (learned), and who is rushed at 7am on Monday (situational) brings three different trusts to the same screen. Hoff and Bashir also report that early errors damage trust more than later errors do \parencite[p.~426]{hoff2015trust}, which has a concrete consequence for deployment: an operator's first week with such a system weighs more in trust formation than the months that follow. The aim is calibrated trust, where the coordinator neither rubber-stamps the algorithm nor refuses to use it.
+
+For the coordinator to trust the algorithm in a way that matches how good it actually is, they need to understand what it is doing. \textcite{miller2019explanation} surveys explanation in the social sciences and notes three things most automated systems get wrong. First, explanations are contrastive: when people ask why something happened, they usually mean why it happened rather than the alternative they had in mind. Second, explanations are selective: people want one or two key reasons, not the full causal chain. Third, explanations are social: explaining is a kind of communication, so a good explanation fits what the listener already knows \parencite[p.~3]{miller2019explanation}. Translated to a planning algorithm, the coordinator's question is rarely ``why was this assignment generated?'' --- it is ``why was this driver assigned, rather than the one I would have picked?''. Reasons must be expressed in the operator's working vocabulary, not in raw constraint weights, and belong next to the controls used to override.
+
+\textcite{lee2004trust} define trust as the user's belief that the system will help them reach their goals in a situation where they cannot fully predict what it will do \parencite[p.~54]{lee2004trust}. Their key argument is that the design goal is the right amount of trust, not the maximum amount. A coordinator who accepts every plan without checking it (Lee and See call this \textit{misuse}) is over-trusting; a coordinator who plans entirely by hand even when the solver works well (\textit{disuse}) is under-trusting. To help a user calibrate, Lee and See recommend that the system reveal its past performance, show how it works, and explain its purpose in terms that connect to the user's goals \parencite[p.~74]{lee2004trust}. The risk Lee and See point to is concrete: if coordinators do not understand or trust the algorithm, they will not use it, and the visibility gap from \Cref{sec:scheduling} stays open regardless of how good the solver is. \Cref{chap:discussion} returns to this adoption question.
+
+\Cref{tab:hitl-theory} summarises what each of the five bodies (Bainbridge, Parasuraman, Lee and See, Hoff and Bashir, Miller) contributes to the design of an HITL system, and where in this thesis each contribution is referenced.
+
+\begin{table}[h]
+    \centering
+    \caption{The five bodies of HITL theory used in this thesis, what each contributes, and where each is applied. Together they translate into concrete design constraints on the artefact set out in the paragraph below.}
+    \label{tab:hitl-theory}
+    \small
+    \begin{tabular}{p{0.16\textwidth}p{0.06\textwidth}p{0.40\textwidth}p{0.30\textwidth}}
+        \toprule
+        \textbf{Source} & \textbf{Year} & \textbf{Contribution} & \textbf{Where applied} \\
+        \midrule
+        Bainbridge        & 1983 & Owner-vs-operator articulation asymmetry; ironies of automation        & \Cref{sec:problem}, \Cref{sec:efficiency}, \Cref{sec:trust-control} \\
+        Parasuraman et al.& 2000 & Ten-level scale of automation for decision and action selection        & \Cref{sec:trust-control}; RP sits at level 5 \\
+        Lee \& See        & 2004 & Appropriate trust as the design goal; misuse and disuse as failure modes & \Cref{sec:hitl}, \Cref{sec:trust-control} \\
+        Hoff \& Bashir    & 2015 & Three-layer trust model (dispositional, situational, learned); early errors weigh more & \Cref{sec:hitl}, \Cref{sec:trust-control}, \Cref{sec:recommendations} (first-week recommendation) \\
+        Miller            & 2019 & Explanation as contrastive, selective, social                          & \Cref{sec:hitl}, \Cref{sec:trust-control}; deviation viewer + post-solve summary \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+The four bodies translate into concrete design constraints on RP's HITL interface. The planning timeline shows the algorithm's suggested plan in the same Gantt view used for manual work, keeping the suggestion open to inspection. A post-solve summary reports the solution score and constraint violations, exposing performance in the sense Lee and See describe. A deviation view lists each active conflict by type, assignment, and resource, locating the contested decision for override. Override is intentionally low-friction: dragging an assignment block reassigns it, and conflicting changes save with a warning rather than a block --- a blocking validator would tell the coordinator that the system holds final authority, which \textbf{Control} forbids. Soft-constraint weights are exposed per company, and the choice of solver engine and time budget is exposed at plan generation.
+
+
+\section{Transport Management Systems}
+\label{sec:tms}
+
+The two systems named in \Cref{sec:problem}, Timpex and Opter, are commercial implementations of a wider category called a Transport Management System (TMS). \textcite{griffis2007tms} defines a TMS as information technology used to plan, optimise, and execute transportation operations before, during, and after the physical movement of goods \parencite[p.~19]{griffis2007tms}; \textcite{heinbach2022datadriven} echo this definition.
+
+What a TMS offers varies widely by vendor, and not all transport companies use one. \textcite{griffis2007tms} found that half the firms in the 2007 sample managed transport entirely manually, the other half through partial or legacy IT \parencite[p.~26]{griffis2007tms}.
+
+Even where a TMS is in place, one part of the operation is missing from the category as a whole: the upstream planning step that decides which driver and vehicle perform which assignment. \textcite{griffis2007tms} observe that most TMS offerings centre on the individual shipment as the unit of analysis and lack the ability to optimise multi-load shipments, leaving load consolidation as a manual activity \parencite[p.~27]{griffis2007tms}. \textcite{heinbach2022datadriven} reach the same conclusion: TMS products focus on shipment-level business activities, while other digital platforms add capabilities outside that focus \parencite[p.~808]{heinbach2022datadriven}. What existing systems cover, in short, is order management, freight billing, and shipment-level execution; what is missing is the upstream planning step between an order existing and a specific driver and vehicle being assigned to perform it.
+
+How one piece of software can serve many companies whose rules differ has its own literature. \textcite{mietzner2009variability} describe a pattern in which all customers run the same system, but each adjusts a set of settings to fit their own rules. The software ships once; what differs between companies is the per-company configuration, not the code. The pattern is the standard way one product serves customers whose operational rules differ.
+
+
+\section{Design Science Research}
+\label{sec:dsr}
+
+An engineer who builds a new tool to fix a specific problem on a shop floor, and studies how the tool behaves once it is in use, is doing Design Science Research (DSR). The paradigm treats the artefact and the knowledge produced about it as one combined contribution. \textcite{wieringa2014dsm} puts it concisely: design science is building artefacts to improve their setting, and studying them as you go \parencite[p.~3]{wieringa2014dsm}.
+
+\textcite{hevner2007threecycle} structures the same work as three linked cycles. The relevance cycle imports requirements and acceptance criteria from the application environment, the rigor cycle draws on existing scientific knowledge and contributes new knowledge back to it, and the design cycle iterates internally between constructing and evaluating the artefact \parencite[pp.~88--90]{hevner2007threecycle}. \textcite{peffers2007dsrm} structure the same paradigm as a procedural model. Their Design Science Research Methodology (DSRM) specifies six activities: problem identification and motivation; objectives for a solution; design and development; demonstration; evaluation; and communication \parencite[p.~46]{peffers2007dsrm}. The two framings are complementary: the cycles describe what must be present, the activities describe what is done. \Cref{chap:method} applies the DSRM activities step by step to this project.
+
+\textcite{orlikowski1991studying} groups IS research into positivist, interpretive, and critical stances \parencite[p.~5]{orlikowski1991studying}. DSR sits between the first two: it admits external criteria (so positivist measurement applies to the artefact) while also producing the artefact itself as design knowledge (which interpretive observation alone cannot do).
+
+Within DSR, what 'examined' means depends on which standard is applied. \textcite{wieringa2014dsm} distinguishes validation, which predicts whether a deployed system would do what stakeholders want, from evaluation, which observes a deployed system in actual use \parencite[pp.~31, 34]{wieringa2014dsm}. In validation, the researcher experiments with a model of how stakeholders would use the artefact; in evaluation, those stakeholders use the artefact independently of the researcher. \textcite{hevner2007threecycle} treats lab testing before field testing as standard practice \parencite[p.~91]{hevner2007threecycle}, so the choice between validation and evaluation is set by which stage of the relevance cycle a study has reached, not by which yields stronger evidence in the abstract.
+
+
+\section{Adoption, Sustainability, and Ethics}
+\label{sec:adjacent}
+
+Three further bodies of theory shape how the artefact is read in \Cref{chap:discussion}: the literature on technology adoption, on software sustainability, and on the ethics of algorithmic decision-making.
+
+\subsection{Adoption}
+\label{sec:utaut}
+
+A traffic coordinator considering whether to use a new planning system is weighing four things: will it make my work better, will it be easy to use, do my colleagues use it, and is help there when something goes wrong. Information systems research formalises this judgement. \textcite{venkatesh2003utaut} consolidate eight earlier acceptance models into the Unified Theory of Acceptance and Use of Technology (UTAUT). The four constructs of the model match the four questions: performance expectancy, effort expectancy, social influence, and facilitating conditions. Two coordinators with the same system in front of them can reach opposite adoption decisions because the four answer differently for each.
+
+\subsection{Sustainability}
+\label{sec:susaf}
+
+A change to a planning system has effects beyond the planning task itself: how operators feel about their work, how customers receive their goods, how vehicles use fuel. The Sustainability Awareness Framework (SusAF), introduced by \textcite{becker2015karlskrona} and developed by \textcite{duboc2020requirements}, gives a way to think about these effects. SusAF organises sustainability across five dimensions (technical, economic, social, individual, environmental) and three orders of effect: immediate (what the system does directly), enabling (what becomes possible through ongoing use), and structural (long-term shifts at the level of an industry or society). The framework's value is forcing the analysis across all five dimensions, not only the one a designer naturally attends to. The United Nations 2030 Agenda \parencite{un2015agenda2030} provides a related mapping target: seventeen Sustainable Development Goals against which the effects of an artefact can be located.
+
+\subsection{Algorithmic Ethics}
+\label{sec:algo-ethics}
+
+An algorithm that assigns drivers to jobs across a fleet makes choices with consequences for the drivers it routes. Three lines of literature ask what that means ethically. \textcite{mittelstadt2016algorithms} survey ethical concerns raised by algorithmic decision-making; the two most relevant here are decisions whose grounds the operator cannot inspect, and decisions that systematically disadvantage some over others. \textcite{martin2019accountability} asks who is answerable when an algorithm-generated decision goes wrong, and argues that responsibility cannot rest with the algorithm itself; it must rest with a person or organisation, and the more inscrutable the algorithm, the more responsibility falls on its designer. \textcite{lee2018understanding} documents how algorithmic management affects working life: when an algorithm tracks, schedules, and evaluates workers, it can tighten worker discretion in ways that erode the qualitative experience of work, even when the system produces measurable improvements. The three together name the questions any algorithm-assisted planning system has to engage with.

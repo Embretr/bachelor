@@ -1,0 +1,134 @@
+\chapter{Discussion}
+\label{chap:discussion}
+
+This chapter discusses what algorithm-assisted planning in RP can support and where its claims must stop. The interviews and the benchmark together support a prototype-level answer: an algorithm can take over search and visibility work, but the coordinator's final judgement stays with the coordinator. The chapter works through that division, the company variation RP has to handle, and the claims the project can defend without operational data.
+
+
+\section{What RP Demonstrates}
+\label{sec:primary-findings}
+\label{sec:efficiency}
+
+RP shows that traffic planning can be partly automated without making the algorithm responsible for the final plan. The system searches possible driver-vehicle assignments, checks formal constraints, and returns a plan the coordinator can inspect. The coordinator still decides whether that plan is usable.
+
+The value of that division is practical. Current planning makes overtime, idle gaps, workload spread, and conflicts hard to see before the plan is already made. RP brings those issues into the planning moment. The coordinator does not only receive an assignment list, but a proposal with visible reasons to accept, change, or reject it.
+
+This matters because transport planning is usually changed under time pressure. A system that only reports utilisation after the day is planned arrives too late to shape the plan. RP's contribution is to make utilisation and feasibility part of the decision while there is still time to act.
+
+The benchmark adds a narrower technical claim. The engines complement each other rather than rank linearly: no single engine dominates across instance sizes (\Cref{tab:benchmark-results}), which is why RP keeps three in the portfolio and lets the auto-router choose between them.
+
+
+\section{Where Automation Stops}
+\label{sec:trust-control}
+
+The interviews showed a split between who asks for automation and who has to use it. Owners and Admmit want better utilisation visibility; coordinators want speed and the authority to override. \textcite{bainbridge1983ironies} described the same configuration: the people who specify automation are not the people who must live with it. Two design choices in RP follow from that split. Utilisation visibility was built into the same planning view the coordinator already uses, not into a separate management dashboard. Override authority stayed with each individual assignment, rather than being delegated to a default-accept-unless-rejected pattern.
+
+Automation stops where the plan needs judgement the data cannot carry. RP can check whether a driver is available and competent, and it can surface working-time and rest-period issues for review. It cannot know which route is harder in winter, which driver handles a difficult customer well, or when the day calls for an exception. The benchmark shows the same gap from a different angle: a plan can be operationally feasible under the hard rules and still carry working-time issues that need a person to weigh. That residue is why every assignment in RP must pass through coordinator approval before it becomes a plan.
+
+RP sits at level 5 on \textcite{parasuraman2000automation}'s automation scale: the system proposes, the human approves. Level 6, where the system acts unless the coordinator stops it within a time window, would assume that the cases needing coordinator judgement are rare exceptions. The interviews described them as ordinary parts of the day's work, which is why RP settles on level 5.
+
+Authority alone is not enough. The coordinator must have time to use it, and the system has to be readable enough to support that. RP's deviation viewer and post-solve summary show why the plan looks the way it does in the coordinator's own vocabulary, not in solver internals, and they are designed for the first-week window where early errors weigh most heavily \parencite{hoff2015trust, miller2019explanation}. Whether coordinators will actually use the override authority under daily pressure, and whether their trust lands at the right level rather than at over-trust or disuse \parencite{lee2004trust}, is a question this thesis cannot answer from synthetic data.
+
+
+\section{Making RP Fit Different Companies}
+\label{sec:adaptability}
+
+RP becomes useful across companies when local differences can be expressed as settings, not code changes. The interviews show variation in scale, planning horizon, competence needs, route familiarity, and what each company treats as a good plan. A single fixed objective would hide those differences.
+
+The soft-constraint weights are the clearest user-controlled mechanism. They let a company emphasise continuity, workload balance, priority, transitions, or driver preferences when the solver scores candidate plans. The same assignment data can therefore produce different plans because the company has different planning priorities, not because the system has been rewritten.
+
+Where less configurable systems require editing the model or its parameters outside the coordinator workflow, the company changes RP from the dashboard. \textcite{mietzner2009variability} call this pattern multi-tenant variability: a deployment that carries a fixed set of configuration points distinguishing customers without forking the codebase. RP's configuration sits at the weights and the company-scoped data; the engines and the HITL interface are shared.
+
+The solve categories handle the rest. A coordinator should not need to pick a solver engine or a number of seconds: a rushed morning needs a quick proposal, while next-week planning can spend longer searching. Choosing between \texttt{rask}, \texttt{middels}, and \texttt{grundig} fits that decision, and the auto-router picks the engine behind the category from earlier runs in the same company and size bucket. The mechanics for choosing among engines when history is thin, and locking in when it is not, are documented in \Cref{sec:algorithm-implementation}.
+
+This is the strongest Adaptability claim RP can make. It can support different companies through company-scoped data, configurable planning preferences, and category-based solving. It is not yet evidence that every transport rule can be configured. Hard constraints, local agreements, status workflows, and exception taxonomies would need a second empirical pass before RP could claim that level of fit. Adaptability here is also distinct from scalability: the thesis does not claim RP scales to thousands of drivers, only that it can serve materially different operational rulebooks within its current scope through configuration and routing choices rather than code changes.
+
+
+\section{Methodology Reflection}
+\label{sec:methodology-reflection}
+
+Design Science Research's main strength on this project was that it forced an artefact to be built early. Building forced choices the interviews alone would have left implicit, for instance whether planning priorities should live inside the algorithm or be exposed as company configuration. Without an artefact, those questions would have stayed open.
+
+Two specific decisions did not survive the build. The first was a coordinator-facing slider that asked for solver runtime in seconds, dropped once it became clear that a coordinator has no way to translate ``twenty seconds'' into expected plan quality (\Cref{sec:iterations}); the slider was replaced with the \texttt{rask}/\texttt{middels}/\texttt{grundig} categories. The second was the plan for a second round of interviews once the prototype was usable enough to demonstrate. With the timeline that was available, the closing weeks went to the benchmark and the chapter drafts instead. A second round would have tested the design against operating coordinators, rather than against the team's reading of the first-round transcripts.
+
+Against those gaps, what the method delivered is traceability. The same line runs from coordinator accounts, through requirements, into the implemented workflow and benchmark, which makes the design choices inspectable rather than asserted. The level of evidence the method can produce on its own is still bounded: DSR validation shows that an artefact is coherent and technically plausible before deployment, but it cannot show how the artefact behaves in daily operation. The next step is therefore field evaluation, not another synthetic benchmark.
+
+
+\section{Claim Boundaries}
+\label{sec:limitations}
+
+The limitations matter because each one blocks a stronger claim. \Cref{tab:limitations-register} names twelve specific bounds grouped by scope: empirical foundation, validation, and conceptual.
+
+\begin{table}[h]
+\centering
+\caption{Limitations register grouped by scope. SQ marks the sub-question each limitation principally bounds.}
+\label{tab:limitations-register}
+\small
+\begin{tabular}{p{0.05\textwidth}p{0.17\textwidth}p{0.58\textwidth}p{0.07\textwidth}}
+\toprule
+\textbf{ID} & \textbf{Scope} & \textbf{Statement} & \textbf{SQ} \\
+\midrule
+L1  & Empirical    & Ten brief interviews across seven companies; thematic coverage, not statistical generalisation & SQ1 \\
+L2  & Empirical    & Recruitment from Admmit's customer network only                                          & SQ1 \\
+L3  & Empirical    & Researcher--developer overlap; consultation framing, not formal study                    & SQ1 \\
+L4  & Empirical    & Interview guide did not exhaustively probe rule differences across companies            & SQ3 \\
+\midrule
+L5  & Validation   & Synthetic benchmarks rather than production data                                         & SQ1 \\
+L6  & Validation   & No real-world deployment                                                                 & RQ \\
+L7  & Validation   & No empirical comparison against Timpex, Opter, or internal tools in use                  & SQ1 \\
+L8  & Validation   & No user testing of the override flow with coordinators                                   & SQ2 \\
+L9  & Validation   & Solver evaluation and auto-router history against the project's own data only            & SQ1, SQ3 \\
+\midrule
+L10 & Conceptual   & HITL was an Admmit mandate, not an empirically validated automation level                & SQ2 \\
+L11 & Conceptual   & Single domain: Norwegian transport                                                       & SQ3 \\
+L12 & Conceptual   & Boundary cases described qualitatively, not quantified                                   & SQ3 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The three most consequential are L5, L6, and L8. L5 and L6 together explain a single missing piece. RP can claim technical feasibility and plan-time decision support, but not measured reductions in overtime, idle time, or workload imbalance: the benchmark uses synthetic data, and no company has run RP in production. L8 bounds the Control claim specifically. Coordinators have not used the override workflow under real work pressure, so the design preserves authority on paper, but real coordinator acceptance is still a field-evaluation question. Closing all three would take the same step, a controlled pilot, which \Cref{sec:adoption} returns to.
+
+
+\section{Sustainability and Professional Responsibility}
+\label{sec:sustainability}
+\label{sec:profession-ethics}
+
+The Sustainability Awareness Framework helps make sense of the effects RP could have beyond technical performance \parencite{becker2015karlskrona,duboc2020requirements}. RP changes what a company can measure, what a coordinator must justify, and how driver workload becomes visible. That visibility carries different risks at different levels.
+
+For individual drivers, the same idle-time view that helps coordinators balance work could also be used to pressure single drivers. The approval step helps limit that risk, but it cannot decide how management uses the visibility RP creates. For the wider team, plan-time visibility of workload spread can help prevent the same drivers from carrying too much work, which is a fairness gain current manual planning practice cannot offer.
+
+At the company level, the same visibility can push planning toward filling every gap, even when slack is what keeps a transport day resilient against delays and absences. RP cannot decide where that line goes; the organisation does. Technically, configurable weights, solve categories, and auto-router history add long-term cost: each company's choices and routing evidence must be documented and maintained as part of how coordinators plan, not buried in code.
+
+\Cref{tab:susaf} summarises the effects across the SusAF five dimensions and three orders of effect (immediate, enabling, structural). Cells marked "---" are dimensions where this thesis does not have empirical or analytical grounding to make a claim, not dimensions where no effect exists.
+
+\begin{table}[h]
+\centering
+\caption{SusAF analysis of RP across five dimensions and three orders of effect.}
+\label{tab:susaf}
+\small
+\begin{tabular}{p{0.13\textwidth}p{0.27\textwidth}p{0.27\textwidth}p{0.23\textwidth}}
+\toprule
+\textbf{Dimension} & \textbf{Immediate} & \textbf{Enabling} & \textbf{Structural} \\
+\midrule
+Technical      & Multi-tenant data model and pluggable solver registry support longevity            & New solvers and new companies can be added without touching the application code & --- \\
+Economic       & Visible utilisation supports internal cost control and pricing decisions            & Per-company configurability supports a multi-tenant deployment model             & Distributes development cost across customers \\
+Social         & Coordinator approval keeps judgement in the loop rather than replacing it           & Workload-balance optimisation can also tighten the baseline drivers are expected to meet & --- \\
+Individual     & Tacit-knowledge formalisation can be experienced as a deskilling threat             & ---                                                                              & --- \\
+Environmental  & Better utilisation reduces idle vehicle-hours                                       & --- (magnitude not measured; routing remains out of scope)                       & --- \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Algorithm-assisted assignment carries an accountability question. When the coordinator approves a plan the algorithm produced, the answerable party is the coordinator, not the algorithm or the company that built it \parencite{martin2019accountability}. RP's override workflow records what the algorithm proposed and what the coordinator changed, so the trail of decisions is inspectable after the fact. The audit trail does not produce accountability on its own; it makes the coordinator's authority over each assignment visible.
+
+Privacy is part of the same responsibility. Planning requires employee data such as availability, competence, working hours, vehicle assignment, and absence. That data should stay company-scoped and limited to the planning task. More detailed monitoring would need a stronger justification than this artefact provides.
+
+
+\section{Deployment Path}
+\label{sec:adoption}
+\label{sec:recommendations}
+
+RP should be deployed as a planning layer between incoming assignments and execution, not as a replacement for the order and invoicing systems companies already operate. Across the seven interviewed companies, billing and invoicing integration was the most frequently named missing feature, and Timpex and Opter already cover that category. A deployment that connects RP to those existing systems, so coordinators do not re-enter orders, vehicles, and employees by hand, is what makes the planning layer usable in real work. Without that bridge, the same data would have to be entered twice and reconciled by hand, which is not the workflow RP is designed to support.
+
+Beyond integration, an early deployment needs a person available to adjust company settings and to interpret what the system shows as the coordinator's questions surface during the first weeks of use. That support role is a deployment question RP cannot solve on its own.
+
+Until a pilot has run with real planning data, the deployable claim should stay narrow: algorithm-assisted planning with coordinator approval, configurable preferences, category-based engine choice, and visible conflicts. The Efficiency claims that L5 and L6 currently rule out wait for the pilot; \Cref{sec:future-work} describes what it should measure.

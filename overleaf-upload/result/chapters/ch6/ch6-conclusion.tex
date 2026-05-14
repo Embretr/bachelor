@@ -1,0 +1,93 @@
+\chapter{Conclusion and Future Work}
+\label{chap:conclusion}
+
+\section{Summary}
+\label{sec:summary}
+
+Norwegian transport companies operate without systematic visibility into resource utilisation. Across the seven interviewed companies, overtime is handled reactively, idle time between assignments is invisible in current tools, and load balancing across drivers depends on coordinator memory. The demand to address that gap is articulated by owners and by Admmit, not by the coordinators who must run any algorithm-assisted system day to day, and the same configuration mirrors Bainbridge's \emph{Ironies of Automation}.
+
+This thesis used Design Science Research as its paradigm, applying the Peffers DSRM activities through six named iterations. The empirical foundation was built from semi-structured interviews with seven traffic coordinators and transport managers across Norway, analysed through Braun and Clarke's six-phase thematic analysis. The artefact, RP, is a Next.js + tRPC + PostgreSQL platform with a multi-engine solver layer (greedy heuristic, OR-Tools CP-SAT, Timefold metaheuristic), a category-based auto-router, and a drag-and-drop human-in-the-loop timeline. The evaluation framework benchmarks solver behaviour against three synthetic datasets and complements the benchmark with auto-router run history and a requirements traceability matrix.
+
+The interviews surfaced the resource-utilisation visibility gap as the primary finding and the operator-vs-owner asymmetry as the configuration that makes the gap a finding worth surfacing. Forty-two functional requirements were prioritised under MoSCoW, of which thirty-seven are in scope and thirty-six are implemented and developer-verified. The fit/gap analysis produced five fit items where Timpex, Opter, and the internal or manual tools the seven companies use already meet a need, and fourteen gap items where they do not. The seed-42 benchmark shows that CP-SAT proves optimality on the small and medium datasets, while Timefold completes the large dataset where CP-SAT times out and improves coverage over greedy. Twelve hierarchical limitations (L1 through L12) bound what the thesis can claim, the most consequential being the absence of production deployment (L6) and of user testing with coordinators (L8). The thesis's central qualification is that RP supports but does not replace coordinator judgement, and that its argument applies under the stakeholder asymmetry that runs across the seven interviewed companies, not in low-variation fleets where utilisation patterns are uniform across drivers.
+
+
+\section{Answers to Research Questions}
+\label{sec:answers}
+
+\begin{quote}
+To what extent can an algorithm-assisted planning platform automate the traffic coordinator's planning work in Admmit's customer companies in a way that improves resource utilisation (reducing overtime, idle time between assignments, and uneven driver load) and is perceived as useful by the coordinator who runs it?
+\end{quote}
+
+The balance the question asks for is feasible inside a single deployable artefact. Automation that delivers utilisation gains in Admmit's customer companies works when the system makes utilisation visible before any algorithm reorders it (\textbf{Efficiency}), when the coordinator's review-and-override authority is structural rather than optional and the channel through which tacit knowledge enters the plan (\textbf{Control}), and when planning preferences and engine choice can adapt per company without code changes (\textbf{Adaptability}). RP demonstrates this configuration through a planning timeline that exposes utilisation patterns current systems leave invisible, a HITL interface with deviation view, score panel, category choice, and drag-and-drop override, per-company soft-constraint weights, and an auto-router that chooses engines from historical runs. The evidence base is bounded by the absence of production deployment (L6), the absence of user testing with coordinators (L8), and the use of synthetic rather than production benchmark data (L5); the artefact is validated in Wieringa's sense (predicting how it would behave once deployed), not evaluated in deployment.
+
+\begin{quote}
+\textbf{SQ1} — To what extent does RP reduce overtime, idle time, and uneven driver load below the level produced by current planning practice in Admmit's customer companies?
+\end{quote}
+
+RP does not prove reductions in overtime, idle time, or uneven driver load in production, because no company has used it operationally. What it does show is narrower: on deterministic synthetic instances that approximate the fleet ranges of the interviewed companies, the solver layer can place assignments under shared constraints and reveal the trade-off between plan quality, runtime, and scale. As reported in \Cref{tab:benchmark-results}, CP-SAT proves optimality on the small and medium datasets, while Timefold completes the large dataset where CP-SAT times out and improves coverage over greedy. The empirical foundation is bounded by L1, L2, L3, and L4; the benchmark comparison is bounded by L5, L6, and L7. The answer to SQ1 is therefore that RP validates algorithm-assisted planning as technically plausible under synthetic constraints, while measured utilisation improvement remains a pilot question.
+
+\begin{quote}
+\textbf{SQ2} — Through what kind of interface and process can the traffic coordinator review and override every algorithm-generated assignment without making the planning workflow heavier than current practice?
+\end{quote}
+
+The coordinator can review and override every assignment, and apply the tacit knowledge the algorithm cannot see, when override is structural rather than optional, when explanation is part of the interface rather than added afterwards, when trust calibration is a design target rather than an accident of deployment, and when the system stops at Parasuraman level 5 (the coordinator must approve, not merely fail to object) rather than at level 6. RP delivers these conditions through the planning timeline, the deviation viewer, the post-solve summary panel, the \texttt{rask}/\texttt{middels}/\texttt{grundig} category control, and drag-and-drop override that saves with a warning rather than blocks, as discussed under \textbf{Control} in \Cref{sec:trust-control}. The answer is bounded by L8 (no user testing with coordinators) and L10 (HITL as Admmit mandate, not validated level), so the design argument is design plus theory rather than design plus theory plus operational evidence.
+
+\begin{quote}
+\textbf{SQ3} — Through which configurable elements can RP serve companies that differ in operational rules, fleet size, and planning horizon, without changes to the code?
+\end{quote}
+
+RP serves companies with materially different operational rulebooks through three implemented layers: company-scoped data, per-company soft-constraint weights, and category-based engine choice. The coordinator sets the planning horizon and chooses \texttt{rask}, \texttt{middels}, or \texttt{grundig}. The auto-router then uses company, size bucket, category, and history to choose the engine. This separates user-controlled Adaptability (what kind of plan the company prefers) from system-controlled Adaptability (which engine fits that kind of request). The claim is still bounded by L9, L11, and L12: hard constraints, local agreements, status workflows, and exception taxonomies are not fully configurable in this version.
+
+The contribution of the thesis sits at three levels. The artefact (RP) is a deployable algorithm-assisted planning platform that fills the planning gap existing Transport Management Systems leave open. The empirical foundation is a structured account of the visibility gap and the operator-vs-owner asymmetry in seven Norwegian transport companies, together with a forty-two-requirement register and a fit/gap analysis grounded in those interviews. The design knowledge is the validation framing for synthetic solver benchmarks, the HITL interface treatment of Control, and the combination of per-company weights and category-based auto-routing for Adaptability inside a multi-tenant deployment.
+
+
+\section{Future Work}
+\label{sec:future-work}
+
+Future work is grounded in the named limitations in \Cref{sec:limitations}. Generic items ("further research could investigate...") are not on this list. \Cref{tab:future-work} ranks the items by priority, names what each is grounded in, and identifies the audience best placed to act on it; the paragraphs that follow expand each entry.
+
+\begin{table}[h]
+\centering
+\caption{Future work in priority order. Each item is grounded in one or more limitations from \Cref{sec:limitations} or in interview material from \Cref{chap:findings}; the audience column names who is best placed to act on it.}
+\label{tab:future-work}
+\small
+\begin{tabular}{p{0.04\textwidth}p{0.32\textwidth}p{0.30\textwidth}p{0.22\textwidth}}
+\toprule
+\textbf{\#} & \textbf{Item} & \textbf{Grounding} & \textbf{Audience} \\
+\midrule
+1 & Billing and invoicing integration        & Adoption barrier (\Cref{sec:adoption}); FK-39                                              & Admmit (TMS partnership) \\
+2 & Production pilot with one of the seven   & Closes L5, L6, and (partially) L7; addresses central methodology weak spot               & Admmit + interviewed company \\
+3 & Real-time replanning for sick-leave      & Norlog Tana and Ottem interview pain points                                               & Admmit \\
+4 & Algorithm scaling improvements           & L9; CP-SAT large timeout; incomplete Timefold coverage                                    & Algorithm research \\
+5 & Auto-router exploration and robustness   & L9; warm path uses simple historical average                                              & Algorithm research \\
+6 & Broader Adaptability (hard constraints)  & L4; partial-mechanism gap from \Cref{sec:adaptability}                                     & Admmit \\
+7 & Cross-domain replication                 & L11                                                                                       & Future research \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Billing and invoicing integration was the most frequently named missing feature across the seven interviews. It addresses the adoption barrier identified in \Cref{sec:adoption}: a transport company that adopts RP keeps its existing TMS for invoicing, and an integration that lets the two systems exchange data through a documented interface would lower the adoption threshold meaningfully. The integration sits in the order-management category that Timpex and Opter already cover, so the integration project is bridging rather than replacing.
+
+A production pilot with one of the seven interviewed companies is the single most valuable methodological move available to a follow-on project. It addresses L5 (synthetic benchmarks rather than production data) and L6 (no real-world deployment) at the same time, lets the artefact's Efficiency claims be tested against operational utilisation data rather than against synthetic instances, and would generate the empirical comparison that L7 currently bounds. The pilot should record what the solver proposes, what the coordinator changes, which solve category is used, which engine the auto-router selects, whether the run was cold or warm, and how many conflicts remain after review, so that the artefact's behaviour under real use can be compared against the benchmark.
+
+Real-time replanning for sick-leave events is a feature several interviewees flagged. Norlog Tana described sick-leave as the dominant operational problem of the day, and Ottem reported a structurally similar problem from order cancellations. A re-solve flow that takes a partial plan plus a disruption (a driver going sick, an order being cancelled) and returns an updated plan, with the coordinator's previous decisions preserved where possible, would address part of L9 (algorithm evaluation against own benchmarks only) by introducing a real-event-driven evaluation regime.
+
+Algorithm scaling improvements address the operational scaling boundary documented in \Cref{sec:algorithm-benchmark} and forwarded as part of L9. Timefold already covers part of that boundary by completing the five-hundred-assignment instance where CP-SAT times out, but its coverage is still incomplete and it does not prove optimality. Future work should therefore proceed in two directions: tuning Timefold for higher large-instance coverage, and testing whether a Timefold or greedy incumbent can warm-start CP-SAT strongly enough to improve large-instance search within the 120-second cap.
+
+Auto-router exploration and robustness address the limits of the current warm path. The router currently selects the engine with the best average total score once a cell has at least three successful runs. That is simple and useful, but it can lock in too early, react badly to outliers, or keep choosing an engine that is no longer available. A later version should add lightweight exploration, such as epsilon-greedy or UCB, use a more robust score summary than a plain average, and filter warm choices by engines that are runnable in the current deployment.
+
+Broader Adaptability addresses the partial realisation named in \Cref{sec:adaptability} and L4. Hard-constraint configurability, status-workflow definitions per company, and richer exception categories are still limited in the current artefact. A subsequent iteration that opens these layers to per-tenant configuration, with an interview-guide pass that probes the rule differences L4 names, would deliver a fuller realisation of Adaptability.
+
+Cross-domain replication addresses L11. The visibility gap, the operator-vs-owner asymmetry, the multi-engine architecture, and the configurability mechanism are all anchored in Norwegian transport in this thesis. Whether they transfer to nurse rostering, airline crew scheduling, or other Nordic transport markets is a question for future replication. The structural argument (multi-resource assignment plus tacit knowledge plus stakeholder asymmetry) is general enough to suggest transferability, but transferability is not entailed by the structural argument and would have to be tested.
+
+The closing claim of this thesis is not about RP alone. Algorithm-assisted planning under stakeholder asymmetry in Norwegian transport is feasible, and the conditions under which it is feasible are structural rather than incidental: the operator must keep authority over every algorithm-generated assignment, the system must explain itself in the operator's vocabulary rather than in solver internals, and the configuration that distinguishes one company from another must live as configuration rather than as code. RP demonstrates these conditions inside a single bachelor-thesis artefact. Whether the same conditions hold in adjacent domains, and whether they hold under operational time pressure with real coordinators on real days, is the empirical work this thesis hands to the next one.
+
+
+\vspace{2em}
+\noindent\textit{Thank you for reading our bachelor thesis.}
+
+\vspace{1em}
+\noindent Trondheim, May 2026
+
+\vspace{0.5em}
+\noindent Embret Olav Rasmussen Roås \hspace{2em} Mikael Stray Frøyshov

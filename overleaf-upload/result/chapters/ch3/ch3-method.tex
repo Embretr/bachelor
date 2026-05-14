@@ -1,0 +1,269 @@
+\chapter{Methodology}
+\label{chap:method}
+
+This chapter walks through how the artefact was built and the research that informed it. \Cref{sec:defining-task} describes how the bachelor task was defined and the empirical foundation that surrounded it. \Cref{sec:dsr-dsrm} sets out the research paradigm and Peffers' DSRM applied to the project. \Cref{sec:interviews-thematic-analysis} covers how the interview material was collected, analysed, and translated into requirements. \Cref{sec:building-artefact} reports the build of the artefact across six learning iterations. \Cref{sec:evaluation-framework} describes the validation framework, and \Cref{sec:validity} bounds what the surrounding research can claim. \Cref{fig:research-design} shows the chapter's flow.
+
+\begin{figure}[h]
+  \centering
+  \begin{tikzpicture}[
+    node distance=0.55cm,
+    box/.style={rectangle, draw, rounded corners, align=center, minimum width=10cm, minimum height=0.85cm, fill=blue!4, font=\small},
+    arrow/.style={-Stealth, thick}
+  ]
+    \node[box] (a) {Defining the task: Admmit brief and outreach to coordinators};
+    \node[box, below=of a] (b) {Method theory: Design Science Research and Peffers' DSRM};
+    \node[box, below=of b] (c) {Interviews and thematic analysis: from raw transcripts to requirements};
+    \node[box, below=of c] (d) {Building the artefact: six iterations of construction and learning};
+    \node[box, below=of d] (e) {Validation framework: benchmark, run history, and traceability matrix};
+    \node[box, below=of e] (f) {Validity and reliability: Malterud's three standards};
+    \draw[arrow] (a) -- (b);
+    \draw[arrow] (b) -- (c);
+    \draw[arrow] (c) -- (d);
+    \draw[arrow] (d) -- (e);
+    \draw[arrow] (e) -- (f);
+  \end{tikzpicture}
+  \caption{The methodology of this thesis as a linear sequence. Each step in the figure corresponds to one section of this chapter.}
+  \label{fig:research-design}
+\end{figure}
+
+
+\section{Defining the Task}
+\label{sec:defining-task}
+
+Admmit, a Norwegian software firm serving the transport sector, offered a bachelor task through NTNU: build a working prototype of a planning platform that helps Norwegian traffic coordinators assign drivers and vehicles to transport assignments. Two students accepted, naming the artefact RP.
+
+Admmit fixed three requirements before any code was written. The platform operates as Human-in-the-Loop (HITL): the algorithm proposes a plan, and the coordinator has the final say on every assignment. The platform is multi-tenant: one installation serves multiple customer companies with each company's data kept apart. Working-hours and rest-period rules under the Norwegian Working Environment Act (\textit{Arbeidsmiljøloven}) had to be respected. How the solver handles working-time issues is covered in \Cref{sec:engineering-results}.
+
+The brief fixed the topic but left the empirical foundation open. Two questions needed answers first: how do Norwegian traffic coordinators actually plan, and which software, if any, do they use today? Neither could be answered from the task brief alone. Drawing on Admmit's customer roster, the team ran semi-structured phone calls with traffic coordinators and transport managers over the following month. From then on, the interviews and the artefact-building influenced each other throughout the project.
+
+\section{Method Theory: Design Science Research}
+\label{sec:dsr-dsrm}
+
+\subsection{Research Methodology}
+\label{sec:research-methodology}
+
+The bachelor task asks for two things at once: a working software product that Admmit's customers could use, and a research-based account of why the product was built the way it was. The first cannot be delivered by an interview study; the second cannot be delivered by a code project alone. Design Science Research (DSR) is the research paradigm that makes both possible. DSR works by building an artefact and treating the act of building it as a way of generating knowledge about the design choices that went into it \parencite{hevner2007threecycle}. The artefact and the knowledge are not two separate deliverables; they are produced together, and each informs the other.
+
+Two other paradigms were considered and set aside. A positivist study and an interpretivist study could each answer part of the research question, but neither alone would deliver both a working artefact and a research-based account of the design knowledge embedded in it. DSR was therefore the appropriate paradigm for this project.
+
+\subsection{Application Objectives}
+\label{sec:application-objectives}
+
+The three anchors from \Cref{sec:solution} set the build objectives. Efficiency translated to overtime, idle gaps, and uneven workload being visible before plan approval. Control translated to every generated assignment being inspectable and overridable. Adaptability translated to one deployed system covering companies with different fleet structures, competence rules, and planning horizons through configuration rather than code.
+
+\subsection{Applying DSRM}
+\label{sec:dsrm-applied}
+
+The methodology used to structure this work is \textcite{peffers2007dsrm}'s Design Science Research Methodology (DSRM), which organises DSR around six activities \parencite[p.~46]{peffers2007dsrm}.
+
+\textbf{Problem identification.} The problem RP addresses appeared from two directions at once. From the supplier side, Admmit described a planning gap in the Norwegian transport sector: coordinators do not have software that gives them a structured view of a day's assignments and the constraints those assignments need to satisfy. From the user side, the interviews surfaced how that gap is felt at the desk. Overtime piles up reactively because no tool tracks it across the week. Idle time vanishes into the gaps between assignments. Workload depends on the coordinator's memory rather than on a system that records who has carried what.
+
+\textbf{Objectives.} Stated under the three anchor concepts in \Cref{sec:application-objectives}. The two requirements Admmit fixed before the first interview (HITL operation, multi-tenant deployment) and the legal requirement of Arbeidsmiljøloven compliance are the concrete forms those objectives take in the artefact.
+
+\textbf{Design and development.} The artefact was built through six learning iterations, each described in \Cref{sec:building-artefact}: technology choice, data modelling, solver-layer expansion, human-in-the-loop deviation handling, plan-time category control, and per-company configurability of soft-constraint weights.
+
+\textbf{Demonstration.} A multi-engine benchmark on three deterministic synthetic datasets that span the fleet sizes observed in the interviewed companies. The benchmark protocol is set out in \Cref{sec:evaluation-framework}.
+
+\textbf{Evaluation.} Peffers' ``Evaluation'' activity is realised here as pre-deployment validation in Wieringa's sense. The three instruments are described in \Cref{sec:evaluation-framework}: a multi-engine benchmark for solver behaviour on fixed synthetic data, the auto-router run history for whether category-based engine choice has enough evidence to drop the parallel race, and a requirements traceability matrix for implementation coverage.
+
+\textbf{Communication.} The work reaches two audiences. The academic audience receives the bachelor presentation at NTNU and this thesis. The industry audience, Admmit, was kept in the loop through ad hoc meetings at project milestones, demonstrations of working parts of the platform, and a closing presentation. Recommendations for what would have to be in place before production deployment are folded into the discussion (\Cref{chap:discussion}) and future-work sections (\Cref{chap:conclusion}) of this thesis rather than delivered as a separate document.
+
+DSRM does not require the activities to run in sequence. Peffers identify four legitimate entry points into the cycle \parencite[p.~56]{peffers2007dsrm}, and the project entered through the one that starts from objectives. Admmit's task description fixed three of them (HITL operation, multi-tenant deployment, Arbeidsmiljøloven compliance) before any interview had been conducted or any code written. From there the work moved both backwards into problem identification (the interviews) and forwards into design and development (the artefact), with the two strands feeding each other for the rest of the project.
+
+Development followed a two-week sprint pattern. Each sprint opened with planning, ran on daily stand-ups between the two students, and closed with a retrospective. The six iterations described in \Cref{sec:building-artefact} mark learning phases rather than a one-to-one mapping to sprint count.
+
+
+\section{Interviews and Thematic Analysis}
+\label{sec:interviews-thematic-analysis}
+
+\subsection{Recruitment and Procedure}
+\label{sec:interview-recruitment}
+\label{sec:data-collection}
+
+The companies were drawn from Admmit's customer roster. Ten interviews were carried out across seven companies. The team contacted candidates by phone and asked whether the coordinator or transport manager had time for a brief conversation about how they plan a day's assignments.
+
+Some companies contributed more than one interview. Where the same TMS was used across several departments or by several traffic coordinators inside the same company, the team interviewed each one separately rather than relying on a single voice. That gave the analysis more than one perspective on the same system: different desks, different routines, different views of where the tool helps and where it does not.
+
+The sample spans a small operator with eight to twenty drivers up to a multi-department fleet of around forty-five vehicles, and covers a mix of planning tools: Timpex, Opter, an internal system, and one operator who plans every day from a phone and memory alone. The companies are spread across Norway from Bergen on the west coast to Tana in the north. \Cref{tab:companies} summarises the consultation pool.
+
+\begin{table}[h]
+\centering
+\caption{The seven companies in the consultation pool. Region and fleet figures are approximate; entries marked with `---' were not specified by the interviewee. Companies are referred to by name where they are quoted in the thesis; otherwise they are referenced generically by size, sector, and system maturity.}
+\label{tab:companies}
+\small
+\begin{tabular}{p{0.24\textwidth}p{0.18\textwidth}p{0.24\textwidth}p{0.22\textwidth}}
+\toprule
+\textbf{Company} & \textbf{Region} & \textbf{Approx.\ fleet} & \textbf{Current planning system} \\
+\midrule
+Bergen Bulk Transport & Bergen     & 8--20 drivers                    & Manual (phone, memory)            \\
+Harlem Solutions      & ---        & ---                              & Opter                             \\
+Norlog Mo i Rana      & Mo i Rana  & ---                              & Timpex                            \\
+Norlog Lakselv        & Lakselv    & ---                              & Timpex                            \\
+Norlog Tana           & Tana       & ---                              & Timpex (with scanning competence) \\
+Ottem                 & ---        & $\sim$45 vehicles, 3 departments & Internal order system             \\
+Nordic Crane          & ---        & Crane and transport divisions    & Custom (own system)               \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Each conversation was guided by five topics: current tools and planning workflow, criteria the coordinator uses when assigning a driver, how sick-leave is handled, attitudes to automation, and what would have to be true before the company would adopt a new tool. The questions inside each topic were not fixed. As the team learned what a coordinator could speak to in a brief call, the prompts were sharpened between interviews. A topic that produced a vague answer in one call was probed more concretely in the next; a question that turned out to be redundant was dropped.
+
+The interviews were spread across about a month so that what came out of one conversation could feed into the next. Recordings were transcribed automatically, with manual correction where a segment was used in the analysis.
+
+Each call ran for about twenty to thirty minutes and was conducted in Norwegian. Every interviewee held responsibility for traffic coordination, sometimes alongside other duties such as transport manager or operations lead. Consent was obtained verbally at the start of each call, before the recording began; participants were told the purpose of the call, that the conversation would be recorded, and how the recording would be used. The seven Norwegian-language quotes that appear in \Cref{sec:interview-themes} were translated into English by the authors.
+
+\subsection{Thematic Analysis}
+\label{sec:thematic-analysis}
+
+The interviews produced ten transcripts. The team used \textcite{braun2006thematic}'s framework for thematic analysis, which provides a six-phase guide for moving from raw transcripts to themes that survive across the data set.
+
+Braun and Clarke developed thematic analysis in psychology and gender studies. The procedure carries across to operational practice in transport because it works on what people say in their own words, regardless of subject matter. Each transcript was treated as a data item, the ten transcripts together as the data set, and the five guide topics as the entry points the coding ran across.
+
+The six phases were worked through in order. Familiarisation came from listening to each recording while reading the transcript. Initial coding tagged segments where coordinators talked about specific aspects of their work: tools used, criteria applied, problems handled, expectations of automation. Theme search grouped codes that pointed in the same direction; theme review tested whether the candidate themes held up across companies of different size and tool-maturity. Theme definition fixed the wording of each theme. Report production happens through this thesis, primarily in \Cref{sec:interview-findings} where the themes are presented.
+
+Both authors took part in the coding. Familiarisation, initial coding, theme search, and theme review were carried out jointly through discussion rather than through independent parallel coding followed by reconciliation. No disagreements over theme assignment arose during this work. The trail from a coordinator's account to a functional requirement is preserved as a chain of GitHub issues: each interview produced one or more issues that carried the relevant points and the coding that grew out of them, and the functional requirements that followed reference those issues.
+
+\textcite{braun2006thematic} require analysts to be explicit about their positioning on three dimensions \parencite[pp.~81--82]{braun2006thematic}.
+
+The analysis was inductive: no codebook was brought into the first interview, and the patterns reported in \Cref{sec:interview-findings} were named only after coding had identified them.
+
+It was semantic: codes worked at what coordinators said about tools, criteria, sick-leave handling, attitudes, and adoption, not at deeper layers of meaning.
+
+It was realist: coordinator accounts were treated as reports of working practice and used as input to the design decisions in \Cref{sec:building-artefact}.
+
+Following \textcite[Table~2]{braun2006thematic}, the themes are described as having been named through the coding process, not as having emerged unaided.
+
+\subsection{From Themes to Requirements}
+\label{sec:themes-to-requirements}
+
+Themes are not requirements. The themes that came out of the analysis describe what coordinators do, what they struggle with, and what they expect from a tool. To drive the build, the themes had to be translated into a list of concrete things the platform should or should not do.
+
+Each theme was rewritten as one or more functional requirements. The visibility theme described how coordinators cannot see overtime building up, idle time between assignments, or workload spread; it produced requirements for a timeline view and a conflict-detection module. The assignment-criteria theme catalogued what drives a driver-vehicle match in practice: licences and competences, vehicle suitability, work-time limits, route experience, and several softer preferences. It produced hard-constraint requirements (the assignments the algorithm must not return) and soft-constraint requirements (the trade-offs the algorithm should weigh). The automation-attitudes theme, that coordinators want a tool that suggests rather than decides, produced the override flow and the per-company weight-configuration requirements.
+
+The full register holds forty-two functional requirements (FK-01 through FK-42), each prioritised under MoSCoW. MoSCoW classifies a requirement as Must (the artefact is incomplete without it), Should (important but not blocking), Could (desirable if time permits), or Won't (out of scope for this version). Themes that surfaced repeatedly across companies were prioritised higher than themes mentioned by a single coordinator. Requirements that followed directly from Admmit's HITL or multi-tenant mandates were Must by definition.
+
+The register was then run through a fit/gap analysis against the systems coordinators currently use: Timpex, Opter, internal systems, and manual planning. Fit/gap is a side-by-side comparison of what existing systems already cover and what they do not. Five items came out as fit, where existing tools already meet the need, and fourteen as gap, where they do not. The gap list set the build agenda for \Cref{sec:building-artefact}; the fit list noted where the platform should integrate with existing tools rather than compete.
+
+\subsection{Ethics}
+\label{sec:ethics}
+
+None of the conversations touched on health, ethnicity, religion, political views, or any of the other categories that GDPR treats as sensitive personal data. No identifiable personal information about the participants is reported in this thesis. The study was therefore not registered with Sikt, the Norwegian agency for research-data registration.
+
+Coordinators and transport managers chose to take the call, and were told the conversation would be recorded before it began. Companies are named where they are quoted or summarised in the thesis; individual employees are not identified. Timpex and Opter, the two commercial vendors that came up in the conversations, are named as systems, not as the users we spoke to.
+
+Recordings and transcripts are stored locally and will be deleted once the thesis has been graded.
+
+
+\section{Building the Artefact}
+\label{sec:building-artefact}
+\label{sec:iterations}
+
+The artefact was built across six iterations, each with its own learning that drove the next step. \Cref{tab:iterations} summarises them; the subsections below tell each in turn.
+
+\begin{table}[h]
+\centering
+\caption{The six iterations through which RP took shape. Each row names one learning that motivated the next step.}
+\label{tab:iterations}
+\small
+\begin{tabular}{p{0.04\textwidth}p{0.32\textwidth}p{0.55\textwidth}}
+\toprule
+\textbf{\#} & \textbf{Iteration} & \textbf{Capability and learning} \\
+\midrule
+1 & Choice of technologies (\Cref{sec:choice-of-technologies}) & Web stack, three solver engines, subprocess-based runtime separation \\
+2 & Modelling what the coordinator knows (\Cref{sec:data-modelling}) & Differentiated competences, team assignments, recurring routes, trailers \\
+3 & One solver is not enough (\Cref{sec:solver-layer}) & Greedy first; CP-SAT for medium instances; Timefold for thorough budgets \\
+4 & A blank timeline is not Control (\Cref{sec:hitl-deviations}) & Drag-and-drop override; continuous flagging of issues the coordinator should review \\
+5 & From minutes to intervals (\Cref{sec:plan-time-intervals}) & Three coordinator-vocabulary intervals; engine choice made by the system \\
+6 & Configurable weights for different operational realities (\Cref{sec:configurable-weights}) & Five soft-constraint preferences, configurable per company \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Choice of Technologies}
+\label{sec:choice-of-technologies}
+\label{sec:tech-choice}
+
+The first iteration set the technical foundation. Two decisions mattered: where the planning data would live, and how the solver engines would fit alongside the web application. The team chose a web stack that could deploy without standing servers per tenant, and ran each solver as its own process rather than inside the web application. The driving reason was that the three planned solver libraries had different language and runtime requirements; running them in-process would have forced one runtime onto all three, and locked future engine choices to that decision. The resulting stack and process boundaries are described in \Cref{sec:system-description}.
+
+\subsection{Modelling what the coordinator knows}
+\label{sec:data-modelling}
+
+The second iteration extended the data model with classes of structure the early interviews surfaced. A driving licence on its own is not enough to characterise a driver; coordinators described scanning competence for food transport (Norlog Tana), ADR endorsements for dangerous goods, and winter-driving experience for northern routes. Some assignments need more than one resource, such as a crane operator alongside a transport driver at Nordic Crane, or fixed teams that always work together. Some routes at Norlog Lakselv recur but with different staffing each time, so the model treats the route as a rule the coordinator instantiates rather than as copies in the calendar. Trailers move with assignments separately from vehicles. Each addition came from a coordinator describing something the original model could not represent. The data model is therefore a record of which parts of tacit knowledge had to be made queryable, not a passive translation of the problem.
+
+\subsection{One solver is not enough}
+\label{sec:solver-layer}
+
+The third iteration was a decision about how many solver strategies the artefact should host. The first implementation used a greedy heuristic because it was fast and good enough for a baseline. But greedy can lock onto early choices that a more systematic search would have improved on, so OR-Tools CP-SAT was added. CP-SAT in turn could not finish the largest instances within a reasonable budget, so Timefold was added as a metaheuristic that keeps improving as long as time remains. Once three engines had to be compared under shared constraints, reproducibility forced the architecture from iteration 1 to carry pinned versions and identical inputs.
+
+\subsection{A blank timeline is not Control}
+\label{sec:hitl-deviations}
+
+The fourth iteration was the recognition that override authority is not the same as informed override. The first interface gave the coordinator a Gantt timeline and the right to change any assignment, but no help in seeing whether a change was safe. A continuous check was added that flags issues for the coordinator to review: missing driver or vehicle, double-booking, overtime, night-work, competence mismatch, or assignment on a declared unavailable day. The structural choice was to flag, not to block. Interviews had been clear that coordinators want a tool that suggests, not one that decides; a blocking system would have moved authority back to the algorithm. Sick-leave replanning surfaced as a related need, especially from Norlog Tana, but its own flow is documented as future work.
+
+\subsection{From minutes to intervals}
+\label{sec:plan-time-intervals}
+
+The fifth iteration replaced a system-vocabulary control with a coordinator-vocabulary one. The first interface asked the coordinator to set the solver's runtime in seconds, which assumed the coordinator knew what twenty seconds bought them in plan quality. They did not, and they should not have to. The control was replaced with three named categories --- \texttt{rask}, \texttt{middels}, and \texttt{grundig} --- each carrying a time cap and a set of allowed engines. The engine choice within a category is not fixed: for each request the system looks up how the allowed engines have performed before for the same company, problem size, and category. With fewer than three previous successful runs it runs all allowed engines in parallel and returns the best result. With enough history it runs only the engine with the best historical score.
+
+\subsection{Configurable weights for different operational realities}
+\label{sec:configurable-weights}
+
+The sixth iteration came from a finding that the interviewed companies do not all want the same kind of plan. Some prize continuity, others rotation; some weight customer priority, others driver preference. A single fixed objective inside the solver would have favoured one operating style over another. The mechanism added was a small set of weights stored per company and used by the solver when scoring candidate plans. The same engine produces a different plan for each company without code changes. The configurability is partial: the soft-constraint preferences are tunable, but the hard constraints --- competence match, availability, vehicle suitability, no overlap --- are not. Per-company configuration of harder layers is carried forward to \Cref{sec:future-work}.
+
+\section{Validation Framework}
+\label{sec:evaluation-framework}
+
+RP is validated before deployment through three instruments: a multi-engine benchmark on fixed synthetic instances, the auto-router run history, and a requirements traceability matrix. The three cover the anchors unevenly. Efficiency is tested most directly through the benchmark. Adaptability is checked through implementation coverage and run history. Control is only partially validated, since the review-and-override flow is implemented but not user-tested with coordinators.
+
+Three claims sit outside what this framework can support: there is no production deployment, no empirical comparison against Timpex, Opter, or internal tools, and no user testing of the override flow. All three are carried forward to \Cref{sec:limitations}. The boundary follows the validation-versus-evaluation distinction introduced in \Cref{sec:dsr}.
+
+\subsection{Multi-engine benchmark protocol}
+\label{sec:eval-benchmark}
+
+Three synthetic datasets feed the benchmark. The small dataset has five employees, three vehicles, and twenty assignments. The medium dataset has twenty employees, ten vehicles, and one hundred assignments. The large dataset has fifty employees, twenty-five vehicles, and five hundred assignments. Each dataset spans a five-day planning horizon from 16 to 20 February 2026.
+
+The sizes were chosen to span the fleet ranges named in \Cref{sec:interview-recruitment}. The small dataset is below the smallest interviewed fleet and works as a tight sanity check. The medium dataset sits near the small-operator end of the sample. The large dataset exceeds the largest observed fleet and is intended to expose where exact search begins to bind.
+
+Synthetic data was used because no company had operated RP in production, and because the consultation framing did not collect operational planning data from the interviewed companies. Benchmark numbers therefore cannot be projected directly onto real Norwegian transport operations without further validation; this gap is carried forward to \Cref{sec:limitations}.
+
+The run protocol is held constant across engines so that the comparison is on solver behaviour, not on benchmark configuration.
+
+The datasets are generated deterministically with seed 42. The generator limits assignment requirements to what the available employees and vehicles can satisfy.
+
+Each engine receives the same input and the same constraints. Every (engine, dataset) pairing runs once, alone, under a 120-second cap on the same machine. Each pairing was run once given the project's time budget; the benchmark therefore reports point performance rather than averaged performance over repeats, and run-to-run variance is not characterised. Timefold additionally stops if it has gone 35 seconds without improving the solution.
+
+After each run, the shared TypeScript scoring function re-evaluates the returned solution with dates interpreted in UTC. Logged metrics: scheduled-assignment count and percentage, hard-tier violations, legal-tier violations, optimality where the engine proves it, wall-clock solve time, and success or timeout.
+
+\subsection{Auto-router run history}
+\label{sec:eval-auto-router}
+
+The auto-router run history is what makes the engine-choice logic from \Cref{sec:plan-time-intervals} a validation instrument. Each completed run logs company, problem size, category, engine, score, scheduled percentage, and solve time. The log is what tells the system when enough history exists to drop the parallel race for a given company-size-category combination, and which engine to favour when it does. Runs aborted because another engine had already proven optimality are excluded, since an engine that did not finish should not be marked down for it.
+
+\subsection{Requirements traceability matrix}
+\label{sec:eval-traceability}
+
+The requirements traceability matrix is a coverage check, not a quality test.
+
+For each functional requirement (FK-01 through FK-42), the matrix records two things: whether it is implemented in the codebase, and whether its behaviour was verified during development. ``Verified during development'' is narrower than passing an automated test suite, and it is the honest description of what was done.
+
+Thirty-six of the thirty-seven in-scope requirements are implemented and developer-verified. One is partial (FK-30, driving and rest-time status). The five out-of-scope requirements (FK-38 through FK-42) are documented as future work.
+
+The matrix shows implementation coverage; it complements rather than replaces automated test coverage.
+
+
+\section{Validity and Reliability}
+\label{sec:validity}
+
+Three standards from \textcite{malterud2001lancet}'s framework for qualitative inquiry bound what the surrounding research can claim \parencite[p.~483]{malterud2001lancet}. Relevance asks whether the research question is worth answering. Validity asks whether the study investigates what it claims. Reflexivity asks whether the researcher's effect on the process is acknowledged and managed.
+
+Relevance and validity bound the interview component first. The seven coordinators were a purposive sample matched to the research question, which asks about coordinator experience of the visibility gap rather than its prevalence in Norwegian transport. \textcite[p.~485]{malterud2001lancet} treats purposive sampling as the appropriate strategy for qualitative inquiry. Validity within that sample rests on triangulation across the seven calls: the visibility gap and the operator-vs-owner asymmetry surfaced across companies of different size and system maturity rather than from any single coordinator. The findings transfer in Malterud's bounded sense of applicability within a specified setting rather than to the population at large \parencite[p.~486]{malterud2001lancet}. The bounds on sample size and self-selection are carried forward to \Cref{sec:limitations}.
+
+Validity for the system component is narrower. Three instruments carry it, all set out in \Cref{sec:evaluation-framework}: the requirements traceability matrix that records implementation and developer-verified behaviour for each functional requirement, the multi-engine benchmark that compares engines on identical synthetic instances, and the auto-router run history that records the evidence used for category-based engine choice. Together they validate the artefact in Wieringa's sense (predicting how it would behave once deployed) rather than evaluating it in deployment (see \Cref{sec:dsr}). The gaps that bound this validation --- no production deployment, no user testing of the override flow --- are carried forward to \Cref{sec:limitations}.
+
+The history-based engine choice is only as reliable as the history it has. Three successful runs is a low bar, and a combination with biased or outdated history can still favour the wrong engine. More careful selection methods, such as exploration and time-decay weighting, are left to future work.
+
+Reflexivity addresses the researcher configuration directly. The research team and the development team are the same two people, and the interviews were conducted as industry consultation under Admmit's bachelor task brief rather than as a formal research study. \textcite[p.~484]{malterud2001lancet} treats preconceptions as separate from bias unless the researcher fails to disclose them.
+
+Two preconceptions matter here. The team expected that a visibility gap might exist, and Admmit had already fixed HITL as a project requirement. Both are disclosed in \Cref{sec:defining-task,sec:dsr-dsrm} so that the reader can judge their effect on the method.
+
+An Admmit-employed designer contributed early UI sketches at the start of the project, but had no role in the interviews, the analysis, or the engineering of the artefact. The researcher--developer overlap and the informal study procedure are carried forward to \Cref{sec:limitations}. What the methodology produced is the subject of the next chapter.

@@ -1,0 +1,52 @@
+\chapter{Additional Material}
+\label{chap:appendix}
+
+This appendix gathers supporting material referenced from the main chapters: the full functional and non-functional requirements registers, the system architecture diagram, application screenshots, the multi-engine benchmark results in tabular form, the interview guide used in the seven semi-structured calls, and the iteration timeline of the six named iterations.
+
+
+\section{Functional Requirements Register (FK-01 -- FK-42)}
+\label{app:requirements-functional}
+
+\textit{[Placeholder. The full functional requirements register, with each FK-ID, MoSCoW priority, source theme or interview, and implementation status, is to be inserted here as a table. Summary references in the main thesis: \Cref{sec:eval-traceability}.]}
+
+
+\section{Non-Functional Requirements Register (IFK-01 -- IFK-16)}
+\label{app:requirements-nonfunctional}
+
+\textit{[Placeholder. The full non-functional requirements register, with each IFK-ID, target value, and verification approach, is to be inserted here as a table.]}
+
+
+\section{System Architecture}
+\label{app:architecture}
+
+\textit{[Placeholder. Architecture diagram showing the browser client, the Next.js + tRPC server, the PostgreSQL database, and the three solver subprocesses (greedy heuristic in Python, OR-Tools CP-SAT in Python, Timefold in JVM), with the shared constraint configuration and the multi-tenant \texttt{companyId} boundary. Summary references in the main thesis: \Cref{sec:tech-choice}, \Cref{sec:system-description}.]}
+
+
+\section{Application Screenshots}
+\label{app:screenshots}
+
+\textit{[Placeholder. Screenshots of RP as deployed, showing the planning timeline at \texttt{/ressursplanlegger}, the deviation viewer at \texttt{/avvik}, the dashboard at \texttt{/oversikt}, the drag-and-drop override flow, the \texttt{rask}/\texttt{middels}/\texttt{grundig} time-quality control, the chosen-engine summary, and the per-company soft-constraint weight configuration. Summary references in the main thesis: \Cref{sec:system-description}, \Cref{sec:trust-control}.]}
+
+
+\section{Multi-Engine Benchmark Results}
+\label{app:benchmark}
+
+\textit{[Placeholder. Full benchmark results table for the seed-42 deterministic datasets, showing scheduled-assignment count and percentage, hard-tier violations, legal-tier violations, optimality where proved, timeout status, and wall-clock solve time for greedy, OR-Tools CP-SAT, and Timefold. The appendix should also record the five-day horizon, 120-second per-engine cap, Timefold's 35-second no-improvement limit, the JVM/JDK setup for Timefold, and the canonical scorer used to re-evaluate all returned solutions. Summary references in the main thesis: \Cref{sec:eval-benchmark}, \Cref{sec:algorithm}, \Cref{sec:efficiency}.]}
+
+
+\section{Interview Guide}
+\label{app:interview-guide}
+
+\textit{[Placeholder. The five guide topics used to anchor the seven semi-structured calls (current tools and workflow, assignment criteria, sick-leave handling, attitudes to automation, adoption criteria), with the broad opening question for each topic and the prompts used where coordinator answers left an obvious gap. Summary references in the main thesis: \Cref{sec:data-collection}.]}
+
+
+\section{Iteration Timeline}
+\label{app:iterations}
+
+\textit{[Placeholder. Gantt or table of the six named iterations from \Cref{sec:iterations}: Choice of Technologies, Modelling what the coordinator knows, One solver is not enough, A blank timeline is not Control, From minutes to intervals, Configurable weights for different operational realities. To be paired with the seven two-week sprint boundaries from the dev-log and the dated capability milestones from the project notes. Summary references in the main thesis: \Cref{sec:iterations}, \Cref{sec:sprint-summary}.]}
+
+
+\section{Project Process Artefacts}
+\label{app:process}
+
+\textit{[Placeholder. Supporting process documentation as agreed with the supervisor and Admmit: project milestones for the six iterations, time-accounting summary by author and task category, decision log highlights, and any meeting notes the authors choose to include.]}

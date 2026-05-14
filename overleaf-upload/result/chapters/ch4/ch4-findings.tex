@@ -1,0 +1,245 @@
+\chapter{Results}
+\label{chap:findings}
+
+This chapter reports what the seven interviews surfaced, what was built, and how the solver layer behaved on synthetic instances. \Cref{sec:interview-findings} names the interview themes. \Cref{sec:the-artefact} describes the artefact. \Cref{sec:evaluation-results} reports the benchmark and the implementation coverage. \Cref{sec:project-timeline} closes with the project timeline.
+
+
+\section{Interview Findings}
+\label{sec:interview-findings}
+\label{sec:interview-themes}
+
+All seven interviewed companies make the driver-vehicle assignment manually. Their tools differ, from phone and memory to Timpex, Opter, and internal systems, but none generates the match. The planning decision remains with the coordinator.
+
+The most surprising theme was how little coordinators can see about resource utilisation while they plan. Overtime is handled when it surfaces, not tracked toward limits. Idle time between assignments is not visible in any of the tools the seven companies use. Load across drivers is balanced from the coordinator's memory of who has done what this week, not from a structured view.
+
+Owners and Admmit asked for better utilisation visibility; coordinators asked for speed and override authority. The interviews therefore show a split between the people asking for optimisation and the people who must work with the suggested plans each day.
+
+Two pain points were named across the seven calls: dependence on tacit knowledge, and the absence of a single capacity overview. Every coordinator carried operational knowledge no current system captures, and treated this as the reason a fully automated plan would be unsafe. No interviewed company has a single view that combines driver availability, vehicle status, and assignment load; coordinators reconstruct that picture each morning from several sources and from memory.
+
+Sick-leave handling varies materially across the seven companies. Some coordinators describe it as a small task: Norlog Lakselv handles a sick-day in ``to-tre tastetrykk'' (two or three keystrokes), and Nordic Crane reports finishing a replanning event in about twenty-seven seconds. Others describe sick-leave as the dominant problem of their day. Norlog Tana put it directly: ``jeg sitter jo egentlig med den problemløsningen hver eneste dag'' (I sit with that problem-solving every single day). The difference depends on how many drivers are available, how flexible the routes are, and whether the routes need special competence such as scanning at Norlog Tana. Ottem describes a structurally similar problem from the order side: cancellations come in unpredictably and force the same kind of reshuffling.
+
+Attitudes toward algorithm-assisted planning were split, not aligned. Norlog Lakselv, Norlog Mo i Rana, and Norlog Tana welcomed the idea. Harlem Solutions, Ottem, and Bergen Bulk Transport were sceptical, mainly because transport is unpredictable and they wanted to keep human judgement in the loop. Nordic Crane was partly positive, asking specifically for automatic distribution eighteen to twenty-four hours before an assignment runs, rather than full real-time automation. Even the sceptical interviewees accepted the idea of an algorithmic suggestion. Ottem framed the shared expectation most directly: ``det må være noen som sitter og tenker bak meg da'' (``there must be someone sitting and thinking behind me''). Across the seven calls, the agreement was that the system should propose a plan the coordinator can correct, not replace the coordinator.
+
+When asked what they consider in matching a driver to an assignment, coordinators name the same criteria, in a consistent frequency order: availability and current position, experience (especially on demanding routes), driving and rest-time status (legally required), competency and licence, route familiarity (especially in northern Norway), equipment match, and overtime status toward annual limits. The criteria were stable across companies, but their weighting was not. Some prioritised workload balance, others vehicle-driver continuity or route familiarity.
+
+\Cref{tab:themes} lists the themes and where each surfaced across the seven calls.
+
+\begin{table}[h]
+\centering
+\caption{The six themes named in the interview analysis and where each surfaced across the seven calls.}
+\label{tab:themes}
+\small
+\begin{tabular}{p{0.45\textwidth}p{0.45\textwidth}}
+\toprule
+\textbf{Theme} & \textbf{Where it surfaced} \\
+\midrule
+Resource-utilisation visibility gap & All 7 companies \\
+Operator-vs-owner asymmetry        & Owners and Admmit, not coordinators \\
+Tacit-knowledge dependency         & All 7 coordinators \\
+Lack of capacity overview          & All 7 companies \\
+Sick-leave handling                & All 7, severity varies \\
+Attitudes to automation            & 3 positive, 3 sceptical, 1 partial \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{The Artefact}
+\label{sec:the-artefact}
+\label{sec:engineering-results}
+
+\subsection{System Overview}
+\label{sec:system-description}
+\label{sec:requirements}
+
+RP is the implemented artefact built around the planning step identified in \Cref{sec:interview-themes}. It is a web application where the coordinator works with company-scoped planning data and asks solver engines for proposed plans. At result level, RP consists of one web application, one PostgreSQL database, and three solver engines. Each company's data is separated by \texttt{companyId}, so one deployment can serve several companies without mixing their assignments, employees, vehicles, planning preferences, or optimisation history. \Cref{fig:architecture} shows this structure.
+
+\begin{figure}[h]
+  \centering
+  \resizebox{\textwidth}{!}{%
+  \begin{tikzpicture}[
+    node distance=0.65cm,
+    box/.style={rectangle, draw, rounded corners, align=center, minimum height=0.85cm, font=\small, fill=blue!4},
+    wide/.style={box, minimum width=11cm},
+    solver/.style={box, minimum width=3.4cm, fill=orange!7},
+    db/.style={box, minimum width=4cm, fill=green!6},
+    arrow/.style={-Stealth, thick}
+  ]
+    \node[wide] (browser) {Browser client};
+    \node[wide, below=of browser] (server) {Web application\\\footnotesize coordinator screens and business logic};
+    \node[db, below=1.2cm of server, xshift=-3.5cm] (db) {PostgreSQL\\\footnotesize multi-tenant via \texttt{companyId} on every row};
+    \node[box, below=1.2cm of server, xshift=3cm, minimum width=4.5cm, fill=orange!7] (registry) {Solver registry\\\footnotesize shared problem format};
+    \node[solver, below=of registry, xshift=-3.6cm] (greedy) {Greedy heuristic\\\footnotesize Python subprocess};
+    \node[solver, below=of registry] (ortools) {OR-Tools CP-SAT\\\footnotesize Python subprocess};
+    \node[solver, below=of registry, xshift=3.6cm] (timefold) {Timefold metaheuristic\\\footnotesize JVM subprocess};
+
+    \draw[arrow] (browser) -- (server);
+    \draw[arrow] (server) -- (db);
+    \draw[arrow] (server) -- (registry);
+    \draw[arrow] (registry) -- (greedy);
+    \draw[arrow] (registry) -- (ortools);
+    \draw[arrow] (registry) -- (timefold);
+  \end{tikzpicture}%
+  }
+  \caption{System architecture of RP. One web application serves the coordinator interface and business logic, PostgreSQL stores company-scoped data, and three solver engines return candidate plans through a shared problem format.}
+  \label{fig:architecture}
+\end{figure}
+
+RP was specified against 58 requirements: 42 functional and 16 non-functional, prioritised under MoSCoW. The registers are reproduced in \Cref{app:requirements-functional,app:requirements-nonfunctional}; the implementation status of each is reported in \Cref{sec:implementation-coverage}.
+
+\subsection{Coordinator Workflow}
+\label{sec:coordinator-workflow}
+
+The coordinator's main screen is the planning timeline. It shows assignments across the selected planning period, with employees and vehicles available as planning resources. From that view, the coordinator can read the day, adjust assignments, and approve the plan.
+
+When the coordinator drags an assignment to another driver or vehicle, RP saves the change and continues even if the move creates a conflict. The conflict is shown as a warning on the timeline and in the deviation viewer. The system records the problem without blocking the coordinator's decision.
+
+Plan generation starts from the timeline. After the coordinator picks a category and runs the solver, the proposed plan returns to the same view with its score and any unresolved conflicts. The coordinator can approve the proposal, change it, or run the solver again. The category choice and the engine behind it are described in \Cref{sec:algorithm-implementation}.
+
+\subsection{Algorithm and Constraints}
+\label{sec:algorithm-implementation}
+
+The algorithm takes a planning period with assignments, employees, and vehicles, and returns a plan that pairs each assignment with one employee and one vehicle. Some pairings are allowed and others are not; the solver searches for the allowed combination that produces the best plan.
+
+The coordinator chooses a category (\texttt{rask}, \texttt{middels}, or \texttt{grundig}), not an engine. Each category sets a time cap and a pool of engines. For a new company-size-category combination, RP runs the available engines and returns the best result. Once enough history exists, it runs the engine that has performed best in that combination. The three engines differ in search strategy: greedy builds one plan quickly, CP-SAT searches systematically within the time cap, and Timefold keeps improving a candidate plan until time runs out. \Cref{sec:algorithm-benchmark} reports how the three behaved on the seed-42 datasets.
+
+\Cref{tab:scoring-tiers} sets out the four tiers RP uses to score a plan, strictest first. A plan that fails a stricter tier cannot beat a plan that respects it on softer goals.
+
+\begin{table}[h]
+\centering
+\caption{Scoring tiers, from strictest to softest.}
+\label{tab:scoring-tiers}
+\small
+\begin{tabularx}{\textwidth}{@{}
+  p{0.18\textwidth}
+  X
+  p{0.27\textwidth}
+@{}}
+\toprule
+\textbf{Tier} & \textbf{What it bounds} & \textbf{Effect on a plan} \\
+\midrule
+Hard              & Operational feasibility: competence, availability, vehicle type, no overlap & Plan invalid if any violated \\
+Legal             & Working-hours and rest-period rules under Arbeidsmiljøloven                  & Surfaced for coordinator review \\
+Business-critical & Assignment coverage and high-priority assignments                            & Lower score; plan still valid \\
+Preference        & Continuity, balance, transitions, driver wishes                              & Lowest weight \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+The hard tier is listed in detail in \Cref{tab:hard-constraints}. A plan that violates any of these is not a valid plan.
+
+\begin{table}[h]
+\centering
+\caption{Hard constraints. A plan that violates any of these is not feasible.}
+\label{tab:hard-constraints}
+\small
+\begin{tabularx}{\textwidth}{@{}
+  p{0.14\textwidth}
+  X
+@{}}
+\toprule
+\textbf{ID} & \textbf{Constraint} \\
+\midrule
+HC-01 & Employee competencies match the assignment requirement \\
+HC-02 & Employee is available for the assignment time \\
+HC-03 & Vehicle is available and active \\
+HC-04 & Vehicle type matches the assignment requirement \\
+HC-05 & No employee is double-booked across overlapping assignments \\
+HC-06 & No vehicle is double-booked across overlapping assignments \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Among the plans that respect the hard tier, RP prefers some over others. The soft constraints in \Cref{tab:soft-constraints} drive that preference. Each carries a per-company weight, so the same engine produces a different plan for a company that values continuity than for one that values workload balance.
+
+\begin{table}[h]
+\centering
+\caption{Soft constraints. Each carries a per-company weight.}
+\label{tab:soft-constraints}
+\small
+\begin{tabularx}{\textwidth}{@{}
+  p{0.14\textwidth}
+  X
+  p{0.18\textwidth}
+@{}}
+\toprule
+\textbf{ID} & \textbf{Constraint} & \textbf{Weight} \\
+\midrule
+SC-01 & Prefer assigning an employee to their designated vehicle & Configurable \\
+SC-02 & Balance workload across employees & Configurable \\
+SC-03 & Minimise travel or transition cost between consecutive assignments & Configurable \\
+SC-04 & Prioritise high-priority assignments & Configurable \\
+SC-05 & Respect stated employee preferences & Configurable \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Evaluation Results}
+\label{sec:evaluation-results}
+
+\subsection{Multi-engine Benchmark}
+\label{sec:algorithm}
+\label{sec:algorithm-benchmark}
+
+The benchmark compares the three solver engines on the same synthetic planning instances under the protocol described in \Cref{sec:eval-benchmark}. Each assignment needs a feasible driver-vehicle pair; assignments with no feasible pair remain unassigned with a recorded reason.
+
+The seed-42 benchmark shows that no single engine dominates all instance sizes. Greedy is the fastest baseline and returns a feasible solution on all three datasets, but schedules fewer assignments than the stronger search engines where those complete. OR-Tools CP-SAT schedules the most assignments on the small and medium datasets and proves optimality in its own model, but times out on the large dataset under the 120-second cap. Timefold underperforms on the small dataset, where CP-SAT reaches the proven optimum almost immediately, but improves over greedy on the medium and large datasets and is the only non-greedy engine to complete the large instance within the cap.
+
+\begin{table}[h]
+\centering
+\caption{Multi-engine benchmark, seed-42 datasets, 120-second per-engine cap. OR-Tools CP-SAT proves optimality on small and medium but times out on large; Timefold is the only engine that completes the large instance with a coverage improvement over greedy.}
+\label{tab:benchmark-results}
+\small
+\begin{tabular}{llll}
+\toprule
+\textbf{Dataset} & \textbf{Greedy} & \textbf{OR-Tools CP-SAT} & \textbf{Timefold} \\
+\midrule
+Small  (20 assignments)  & 10/20 (50.0\,\%)   & 11/20 (55.0\,\%, optimal)   & 9/20 (45.0\,\%) \\
+\midrule
+Medium (100 assignments) & 47/100 (47.0\,\%)  & 67/100 (67.0\,\%, optimal)  & 60/100 (60.0\,\%) \\
+\midrule
+Large  (500 assignments) & 189/500 (37.8\,\%) & timeout ($>$120\,s)         & 222/500 (44.4\,\%) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+All successful runs have zero hard-tier violations, which makes the coverage figures comparable across engines. The canonical scorer still reports legal-tier violations in every successful solution, concerning working-time and rest-period rules. They grow with dataset size because tight resource pools force longer employee schedules. RP surfaces those issues for coordinator review rather than treating them as hard infeasibility.
+
+\subsection{Implementation Coverage}
+\label{sec:implementation-coverage}
+
+Of the forty-two functional requirements, thirty-seven were in scope. Thirty-six are implemented and developer-verified; one (FK-30, driving and rest-time status) is partial. The remaining five (FK-38--FK-42) are documented as future work. The full register and per-requirement status are in \Cref{app:requirements-functional}.
+
+The fit/gap analysis against Timpex, Opter, internal systems, and manual planning produced five fit items where existing tools already meet the need, and fourteen gap items where they do not. The fourteen gap items set the build agenda for the iterations in \Cref{sec:iterations}; the five fit items mark where RP should integrate with existing tools rather than compete.
+
+\section{Project Timeline}
+\label{sec:project-timeline}
+\label{sec:administrative-results}
+\label{sec:sprint-summary}
+
+The project ran from 12 January to 9 April 2026 as seven sprints, with thesis writing continuing toward submission in May. \Cref{tab:sprint-timeline} records the main work in each. The six learning iterations in \Cref{sec:iterations} describe the same period from a learning perspective.
+
+\begin{table}[h]
+\centering
+\caption{Sprint timeline for the RP project.}
+\label{tab:sprint-timeline}
+\small
+\begin{tabularx}{\textwidth}{@{}
+  p{0.16\textwidth}
+  p{0.22\textwidth}
+  X
+@{}}
+\toprule
+\textbf{Sprint} & \textbf{Period} & \textbf{Main work} \\
+\midrule
+Sprint 0 & 12--16 Jan & Kickoff, scope, stack choice, project setup \\
+Sprint 1 & 19--30 Jan & Scaffold, schema, authentication, database integration \\
+Sprint 2 & 2--13 Feb & Deviation handling, sick-leave flow, interface polish \\
+Sprint 3 & 16--27 Feb & Greedy, OR-Tools CP-SAT, and Timefold engines \\
+Sprint 4 & 2--13 Mar & Seven interviews, fit/gap work, user-research features \\
+Sprint 5 & 16--27 Mar & Integration, end-to-end tests, thesis chapter drafting \\
+Sprint 6 & 30 Mar--9 Apr & Benchmarks, hardening, documentation \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+These results provide the empirical, technical, and administrative basis for the discussion of Efficiency, Control, and Adaptability in Chapter 5.

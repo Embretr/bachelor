@@ -1,0 +1,51 @@
+\documentclass[10pt, british]{ntnuthesis}
+
+% Project additions on top of the NTNU thesis class.
+\usepackage{amssymb}
+\usepackage{tabularx}
+\usepackage{microtype}
+% Project metadata.
+\title{Ressursplanlegger: Algorithm-Assisted Resource Planning for Transport Companies}
+\author{Embret Olav Rasmussen Roås \and Mikael Stray Frøyshov}
+
+\input{glossary.tex}
+
+\begin{document}
+
+% Front cover, generated locally (cover-front.tex). The corresponding
+% back cover lives in cover-back.tex and is included after the appendix.
+\input{cover-front}
+
+\input{result/frontmatter/0A-abstract}
+\input{result/frontmatter/0B-sammendrag}
+\input{result/frontmatter/0C-preface}
+\input{result/frontmatter/0D-assignment-details}
+
+\tableofcontents
+\listoffigures
+\listoftables
+
+\renewcommand{\glsnamefont}[1]{\textbf{#1}}
+\printglossary[type=\acronymtype, nonumberlist, style=super, nogroupskip, title={Acronyms}]
+
+\input{result/chapters/ch1/ch1-introduction}
+\input{result/chapters/ch2/ch2-theory}
+\input{result/chapters/ch3/ch3-method}
+\input{result/chapters/ch4/ch4-findings}
+\input{result/chapters/ch5/ch5-discussion}
+\input{result/chapters/ch6/ch6-conclusion}
+
+\printbibliography
+
+\cleardoublepage
+
+\setcounter{page}{1}
+\pagenumbering{roman}
+\addtocontents{toc}{\protect\setChapterprefix{Appendix }}
+\appendix
+\renewcommand{\chaptername}{Appendix}
+\input{result/appendices/appendix-a-additional-material}
+
+\input{cover-back}
+
+\end{document}

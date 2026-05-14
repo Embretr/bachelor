@@ -1,0 +1,114 @@
+\chapter{Introduction and Relevance}
+\label{chap:introduction}
+
+\section{The Problem}
+\label{sec:problem}
+
+Consider a small transport business: one owner who is also the driver, and one vehicle. When a customer calls with goods to be moved, the operator checks the calendar, accepts the job if time is available, and refuses it if not. Simplicity disappears as soon as two requests collide. If two customers want their goods moved at the same hour, only one can be served, and accepting the higher-paying job seems natural. But suppose a third call later in the day fits alongside the cheaper job that was refused: the operator who accepted both short jobs earns more than the one who took the single bigger one, and keeps both customers. The operator now has an optimization problem, and one that translates directly to revenue.
+
+Prioritizing revenue is one thing, but you may have other constraints affecting your choice as well. \emph{Soft constraints}, also called priorities or preferences, are preferences the operator follows where possible: retain a Friday regular, or favor familiar areas. Any of them can overridden when a better job arrives. \emph{Hard constraints} do not give way: the legal limit on consecutive driving hours, the capacity of the vehicle, the customer's delivery window. Arranging a working day so that revenue is high, hard constraints are respected, and soft constraints are honored is a constrained optimization problem.
+
+This task, already complex at the single-vehicle level, scales with the size of the company. Imagine that the small transport business from the first paragraph invests in another truck. A second driver is hired to operate it. Each incoming job now requires a choice: which driver, and does that driver have constraints that rule them out? Could another job configuration open up space in the calendar for even more jobs? At the scale of a typical Norwegian transport company, with hundreds of vehicles and employees and enough jobs to fill their capacity, the puzzle has outgrown the person who used to solve it in their head. The role that handles this planning is the traffic coordinator: deciding which jobs the company accepts, and which driver and vehicle complete each one.
+
+The traffic coordinator only needs information about employees, vehicles, and jobs to produce a valid plan. A good plan also reflects priorities the company has learned over time, the soft constraints introduced earlier. This knowledge, called tacit knowledge, is what makes a plan fit the company rather than just satisfy the rules. It is rarely written down, and none of the systems used by Norwegian transport companies today capture it.
+
+Admmit, the Norwegian software firm that offered the thesis as a bachelor task, builds software for administrating transport companies. Their customer base is primarily Norwegian transport companies with one to several hundred vehicles, and varying amounts of employees and jobs related to them. Their current software helps HR and personnel administration, time and payroll, absence tracking, orders, documents, and more. What they do not cover however is the planning step explained above, currently executed by the traffic coordinators.
+
+What the coordinator does mentally is, in effect, an algorithm. Rules such as ``this driver is close to overtime, assign the load to another'' or ``this vehicle is too small for that pallet count, substitute it'' are applied repeatedly, never written down, never compared against alternatives. A computer can apply the same rules at greater scale, hold more constraints in view, and search through more candidate plans than a person can in comparable time. The aim is not to replace the coordinator but to take the part of the puzzle a computer can solve and leave the part that depends on tacit knowledge to the person who carries it.
+
+
+\section{The Solution}
+\label{sec:solution}
+
+Ressursplanlegger (hereafter RP) is the solution to the problem described above, an algorithm-assisted planning platform that proposes a plan covering a horizon set by the coordinator. The coordinator reviews each assignment in a calendar-style view, and the plan takes effect only after their approval.
+
+After communicating with several different traffic coordinators, we found it useful to try to define a set of primary concepts to focus on throughout the thesis and the building of RP, as these seemed to be the primary focus points for the users. \textbf{Efficiency} is what RP must measurably improve; \textbf{Control} is what RP must preserve in the coordinator's hands; \textbf{Adaptability} is what RP must support across companies.
+
+\subsection{Efficiency}
+\label{sec:anchor-efficiency}
+
+Efficiency is whether RP makes overtime, idle time between assignments, and uneven workload across drivers visible, and whether the coordinator can move them in the right direction.
+
+
+\subsection{Control}
+\label{sec:anchor-trust-control}
+
+Control is the property that every algorithm-generated plan is reviewed by the coordinator before it takes effect, because trust grows only where override authority is real.
+
+
+\subsection{Adaptability}
+\label{sec:anchor-adaptability}
+
+Adaptability is the capacity of the system to fit companies that differ in size, rules, and planning horizon through configuration rather than code changes.
+
+
+
+\section{Research Questions}
+\label{sec:research-questions}
+
+The puzzle from \Cref{sec:problem} supplies the questions this thesis must answer.
+
+\begin{quote}
+  To what extent can an algorithm-assisted planning platform automate the traffic coordinator's planning work in Admmit's customer companies in a way that improves resource utilization, and is perceived as useful by the coordinator who runs it?
+\end{quote}
+
+The main question is one of balance. More automation improves the numbers but, taken too far, erodes the tacit knowledge that makes the coordinator irreplaceable. The question is how far to automate before the cost outweighs the gain.
+
+\begin{quote}
+  \textbf{SQ1}: To what extent does RP reduce overtime, idle time, and uneven driver load below the level produced by current planning practice in Admmit's customer companies?
+\end{quote}
+
+SQ1 is the Efficiency side of the balance: do the owner's end-of-week numbers come down once the coordinator works from RP rather than from order tools, spreadsheets, and memory?
+
+\begin{quote}
+  \textbf{SQ2}: Through what kind of interface and process can the traffic coordinator review and override every algorithm-generated assignment without making the planning workflow heavier than current practice?
+\end{quote}
+
+SQ2 is the Control side: how can the one-vehicle operator's reflex inspection be reproduced for a fleet coordinator, when there are a thousand jobs a week and much of what argues for or against an assignment is knowledge the algorithm cannot read off the screen?.
+
+\begin{quote}
+  \textbf{SQ3}: Through which configurable elements can RP serve companies that differ in operational rules, fleet size, and planning horizon, without changes to the code?
+\end{quote}
+
+SQ3 is the Adaptability question: what has to be configurable for RP to fit the ten-driver depot and the multi-branch fleet without code changes?
+
+
+
+\section{Scope and Delimitations}
+\label{sec:scope}
+
+RP turns a list of orders for a given period into a plan that specifies who drives what, in which vehicle, and when. The period is set by the coordinator. The plan is produced by an automated solver, which the coordinator also picks: a tight time budget returns a quicker plan suited to the morning rush, a longer budget a more thoroughly searched one suited to the previous evening's planning session. The system holds the information the planning step requires. The priorities the solver weighs are tuned per company through configurable weights in the dashboard.
+
+The following capabilities are deliberately out of scope, since they came up early in the project and could otherwise be assumed by default:
+
+\begin{itemize}
+  \item RP is not a driver-facing application and does not push notifications to drivers; the message that reaches the driver's phone remains the responsibility of the order tool the company already operates.
+  \item It does not handle billing or invoicing, which Timpex and Opter cover, and bridging the two is a project of its own.
+  \item It addresses Norwegian transport only, since the regulatory frame is national.
+  \item It does not track vehicles in real time on the road; it plans the day, it does not monitor execution.
+  \item It does not plan the order in which a single driver should visit a list of stops (the Vehicle Routing Problem); the question RP answers is who does what, not in which order.
+  \item It does not permit the algorithm to operate without a human in the loop; this is a fixed Admmit requirement, not a configurable setting.
+\end{itemize}
+
+
+\section{Thesis Structure}
+\label{sec:thesis-structure}
+
+The thesis is organised as follows:
+
+\begin{itemize}
+  \item \textbf{\Cref{chap:theory}} establishes the theoretical and disciplinary background: resource scheduling, human-in-the-loop automation (Bainbridge, Hoff and Bashir, Miller, Lee and See), Transport Management Systems, and Design Science Research.
+  \item \textbf{\Cref{chap:method}} sets out the Design Science Research method as applied through Peffers' six DSRM activities, the eight-iteration construction of RP, and the evaluation framework.
+  \item \textbf{\Cref{chap:findings}} reports what the interviews surfaced, what the artefact delivers against its functional requirements, and how the three optimisation engines compare on the multi-engine benchmark.
+  \item \textbf{\Cref{chap:discussion}} interprets the findings under the three anchor concepts, works through adoption and sustainability, and names the twelve hierarchical limitations (L1 through L12) that bound what the thesis can claim.
+  \item \textbf{\Cref{chap:conclusion}} answers each sub-question against the body of evidence and outlines future work.
+\end{itemize}
+
+
+\section{Additional Resources}
+\label{sec:additional-resources}
+
+
+\begin{itemize}
+  \item \textbf{RP source code.} GitHub repository accessible to the supervisor and to Admmit on request.
+\end{itemize}
