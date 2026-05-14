@@ -1,7 +1,7 @@
 \chapter{Methodology}
 \label{chap:method}
 
-This chapter walks through how the artefact was built and the research that informed it. \Cref{sec:defining-task} describes how the bachelor task was defined and the empirical foundation that surrounded it. \Cref{sec:dsr-dsrm} sets out the research paradigm and Peffers' DSRM applied to the project. \Cref{sec:interviews-thematic-analysis} covers how the interview material was collected, analysed, and translated into requirements. \Cref{sec:building-artefact} reports the build of the artefact across six learning iterations. \Cref{sec:evaluation-framework} describes how the artefact is evaluated, and \Cref{sec:validity} bounds what the surrounding research can claim. \Cref{fig:research-design} shows the chapter's flow.
+This chapter walks through how the artefact was built and the research that informed it. \Cref{sec:defining-task} describes how the bachelor task was defined and the empirical foundation that surrounded it. \Cref{sec:dsr-dsrm} sets out the research paradigm and Peffers' DSRM applied to the project. \Cref{sec:interviews-thematic-analysis} covers how the interview material was collected, analysed, and translated into requirements. \Cref{sec:building-artefact} reports the build of the artefact across six learning iterations. \Cref{sec:evaluation-framework} describes the validation framework, and \Cref{sec:validity} bounds what the surrounding research can claim. \Cref{fig:research-design} shows the chapter's flow.
 
 \begin{figure}[h]
   \centering
@@ -14,7 +14,7 @@ This chapter walks through how the artefact was built and the research that info
     \node[box, below=of a] (b) {Method theory: Design Science Research and Peffers' DSRM};
     \node[box, below=of b] (c) {Interviews and thematic analysis: from raw transcripts to requirements};
     \node[box, below=of c] (d) {Building the artefact: six iterations of construction and learning};
-    \node[box, below=of d] (e) {Evaluation framework: benchmark, run history, and traceability matrix};
+    \node[box, below=of d] (e) {Validation framework: benchmark, run history, and traceability matrix};
     \node[box, below=of e] (f) {Validity and reliability: Malterud's three standards};
     \draw[arrow] (a) -- (b);
     \draw[arrow] (b) -- (c);
@@ -32,7 +32,7 @@ This chapter walks through how the artefact was built and the research that info
 
 Admmit, a Norwegian software firm serving the transport sector, offered a bachelor task through NTNU: build a working prototype of a planning platform that helps Norwegian traffic coordinators assign drivers and vehicles to transport assignments. Two students accepted, naming the artefact RP.
 
-Admmit fixed three requirements before any code was written. The platform operates as Human-in-the-Loop (HITL): the algorithm proposes a plan, and the coordinator has the final say on every assignment. The platform is multi-tenant: one installation serves multiple customer companies with each company's data kept apart. A third requirement concerned working-hours and rest-period compliance under the Norwegian Working Environment Act (\textit{Arbeidsmiljøloven}). In the implemented solver contract, operational feasibility is enforced as the hard tier, while working-time and rest-period issues are scored and reported in a separate legal tier for coordinator review.
+Admmit fixed three requirements before any code was written. The platform operates as Human-in-the-Loop (HITL): the algorithm proposes a plan, and the coordinator has the final say on every assignment. The platform is multi-tenant: one installation serves multiple customer companies with each company's data kept apart. Working-hours and rest-period rules under the Norwegian Working Environment Act (\textit{Arbeidsmiljøloven}) had to be respected. How the solver handles working-time issues is covered in \Cref{sec:engineering-results}.
 
 The brief fixed the topic but left the empirical foundation open. Two questions needed answers first: how do Norwegian traffic coordinators actually plan, and which software, if any, do they use today? Neither could be answered from the task brief alone. Drawing on Admmit's customer roster, the team ran semi-structured phone calls with traffic coordinators and transport managers over the following month. From then on, the interviews and the artefact-building influenced each other throughout the project.
 
@@ -49,7 +49,7 @@ Two other paradigms were considered and set aside. A positivist study and an int
 \subsection{Application Objectives}
 \label{sec:application-objectives}
 
-The three anchor concepts from \Cref{sec:solution} became build objectives. \textbf{Efficiency} required the solver and timeline to make overtime, idle gaps, and uneven workload visible before the plan was approved. \textbf{Control} required every generated assignment to remain inspectable and overridable by the coordinator. \textbf{Adaptability} required one deployed system to support companies with different fleet structures, competence rules, planning horizons, and planning preferences through configuration rather than code changes.
+The three anchors from \Cref{sec:solution} set the build objectives. Efficiency translated to overtime, idle gaps, and uneven workload being visible before plan approval. Control translated to every generated assignment being inspectable and overridable. Adaptability translated to one deployed system covering companies with different fleet structures, competence rules, and planning horizons through configuration rather than code.
 
 \subsection{Applying DSRM}
 \label{sec:dsrm-applied}
@@ -64,7 +64,7 @@ The methodology used to structure this work is \textcite{peffers2007dsrm}'s Desi
 
 \textbf{Demonstration.} A multi-engine benchmark on three deterministic synthetic datasets that span the fleet sizes observed in the interviewed companies. The benchmark protocol is set out in \Cref{sec:evaluation-framework}.
 
-\textbf{Evaluation.} RP is evaluated through the multi-engine benchmark, the auto-router run history, and a requirements-traceability matrix that records implementation status for each functional requirement. The benchmark validates solver behaviour on fixed synthetic data. The run history validates whether the category-based engine choice has enough evidence to move from a cold race to a warm single-engine choice. The traceability matrix records implementation coverage. All three are described in \Cref{sec:evaluation-framework}.
+\textbf{Evaluation.} Peffers' ``Evaluation'' activity is realised here as pre-deployment validation in Wieringa's sense. The three instruments are described in \Cref{sec:evaluation-framework}: a multi-engine benchmark for solver behaviour on fixed synthetic data, the auto-router run history for whether category-based engine choice has enough evidence to drop the parallel race, and a requirements traceability matrix for implementation coverage.
 
 \textbf{Communication.} The work reaches two audiences. The academic audience receives the bachelor presentation at NTNU and this thesis. The industry audience, Admmit, was kept in the loop through ad hoc meetings at project milestones, demonstrations of working parts of the platform, and a closing presentation. Recommendations for what would have to be in place before production deployment are folded into the discussion (\Cref{chap:discussion}) and future-work sections (\Cref{chap:conclusion}) of this thesis rather than delivered as a separate document.
 
@@ -91,17 +91,17 @@ The sample spans a small operator with eight to twenty drivers up to a multi-dep
 \caption{The seven companies in the consultation pool. Region and fleet figures are approximate; entries marked with `---' were not specified by the interviewee. Companies are referred to by name where they are quoted in the thesis; otherwise they are referenced generically by size, sector, and system maturity.}
 \label{tab:companies}
 \small
-\begin{tabular}{p{0.20\textwidth}p{0.16\textwidth}p{0.18\textwidth}p{0.18\textwidth}p{0.16\textwidth}}
+\begin{tabular}{p{0.24\textwidth}p{0.18\textwidth}p{0.24\textwidth}p{0.22\textwidth}}
 \toprule
-\textbf{Company} & \textbf{Region} & \textbf{Approx.\ fleet} & \textbf{Current planning system} & \textbf{Stance on automation} \\
+\textbf{Company} & \textbf{Region} & \textbf{Approx.\ fleet} & \textbf{Current planning system} \\
 \midrule
-Bergen Bulk Transport & Bergen     & 8--20 drivers           & Manual (phone, memory)               & Sceptical \\
-Harlem Solutions      & ---        & ---                     & Opter                                 & Sceptical \\
-Norlog Mo i Rana      & Mo i Rana  & ---                     & Timpex                                & Positive \\
-Norlog Lakselv        & Lakselv    & ---                     & Timpex                                & Positive \\
-Norlog Tana           & Tana       & ---                     & Timpex (with scanning competence)     & Positive \\
-Ottem                 & ---        & $\sim$45 vehicles, 3 departments & Internal order system        & Sceptical \\
-Nordic Crane          & ---        & Crane and transport divisions    & Custom (own system)          & Partial \\
+Bergen Bulk Transport & Bergen     & 8--20 drivers                    & Manual (phone, memory)            \\
+Harlem Solutions      & ---        & ---                              & Opter                             \\
+Norlog Mo i Rana      & Mo i Rana  & ---                              & Timpex                            \\
+Norlog Lakselv        & Lakselv    & ---                              & Timpex                            \\
+Norlog Tana           & Tana       & ---                              & Timpex (with scanning competence) \\
+Ottem                 & ---        & $\sim$45 vehicles, 3 departments & Internal order system             \\
+Nordic Crane          & ---        & Crane and transport divisions    & Custom (own system)               \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -109,6 +109,8 @@ Nordic Crane          & ---        & Crane and transport divisions    & Custom (
 Each conversation was guided by five topics: current tools and planning workflow, criteria the coordinator uses when assigning a driver, how sick-leave is handled, attitudes to automation, and what would have to be true before the company would adopt a new tool. The questions inside each topic were not fixed. As the team learned what a coordinator could speak to in a brief call, the prompts were sharpened between interviews. A topic that produced a vague answer in one call was probed more concretely in the next; a question that turned out to be redundant was dropped.
 
 The interviews were spread across about a month so that what came out of one conversation could feed into the next. Recordings were transcribed automatically, with manual correction where a segment was used in the analysis.
+
+Each call ran for about twenty to thirty minutes and was conducted in Norwegian. Every interviewee held responsibility for traffic coordination, sometimes alongside other duties such as transport manager or operations lead. Consent was obtained verbally at the start of each call, before the recording began; participants were told the purpose of the call, that the conversation would be recorded, and how the recording would be used. The seven Norwegian-language quotes that appear in \Cref{sec:interview-themes} were translated into English by the authors.
 
 \subsection{Thematic Analysis}
 \label{sec:thematic-analysis}
@@ -119,7 +121,17 @@ Braun and Clarke developed thematic analysis in psychology and gender studies. T
 
 The six phases were worked through in order. Familiarisation came from listening to each recording while reading the transcript. Initial coding tagged segments where coordinators talked about specific aspects of their work: tools used, criteria applied, problems handled, expectations of automation. Theme search grouped codes that pointed in the same direction; theme review tested whether the candidate themes held up across companies of different size and tool-maturity. Theme definition fixed the wording of each theme. Report production happens through this thesis, primarily in \Cref{sec:interview-findings} where the themes are presented.
 
-\textcite{braun2006thematic} require analysts to be explicit about their positioning on three dimensions \parencite[pp.~81--82]{braun2006thematic}. The analysis here was inductive: the team did not bring a codebook into the first interview, and the patterns described in \Cref{sec:interview-findings} were named only after the coding had identified them. It was semantic: codes worked at what coordinators actually said about tools, criteria, sick-leave handling, attitudes, and adoption, rather than at deeper layers of meaning. And it was realist: coordinator accounts were treated as reports of working practice rather than as discursive constructions, and were used as input to the design decisions in \Cref{sec:building-artefact}. Following \textcite[Table~2]{braun2006thematic}, the themes are described as having been named through the coding process, not as having emerged unaided.
+Both authors took part in the coding. Familiarisation, initial coding, theme search, and theme review were carried out jointly through discussion rather than through independent parallel coding followed by reconciliation. No disagreements over theme assignment arose during this work. The trail from a coordinator's account to a functional requirement is preserved as a chain of GitHub issues: each interview produced one or more issues that carried the relevant points and the coding that grew out of them, and the functional requirements that followed reference those issues.
+
+\textcite{braun2006thematic} require analysts to be explicit about their positioning on three dimensions \parencite[pp.~81--82]{braun2006thematic}.
+
+The analysis was inductive: no codebook was brought into the first interview, and the patterns reported in \Cref{sec:interview-findings} were named only after coding had identified them.
+
+It was semantic: codes worked at what coordinators said about tools, criteria, sick-leave handling, attitudes, and adoption, not at deeper layers of meaning.
+
+It was realist: coordinator accounts were treated as reports of working practice and used as input to the design decisions in \Cref{sec:building-artefact}.
+
+Following \textcite[Table~2]{braun2006thematic}, the themes are described as having been named through the coding process, not as having emerged unaided.
 
 \subsection{From Themes to Requirements}
 \label{sec:themes-to-requirements}
@@ -171,87 +183,39 @@ The artefact was built across six iterations, each with its own learning that dr
 \label{sec:choice-of-technologies}
 \label{sec:tech-choice}
 
-The web application is built in TypeScript on Next.js, with React on the client side and Next.js API routes handling the server side in the same project. Next.js was chosen for its serverless deployment model, which removes the operational burden of running a long-lived server for each tenant. PostgreSQL holds the operational data, accessed through the Prisma ORM, with multi-tenant isolation enforced at the data layer rather than the application layer: every query is scoped by company, so cross-tenant leakage cannot creep in through a new query path added later. Both the timeline UI and the data substrate run inside this single application; the algorithms do not.
-
-The three solver engines run as separate processes, each in the runtime that suits its library. The greedy heuristic and the OR-Tools CP-SAT engine are written in Python; the Timefold metaheuristic engine runs on the Java Virtual Machine. The Next.js backend invokes each engine as a subprocess, sending the problem instance as JSON on standard input and reading the solution as JSON on standard output. The application code carries no solver-library dependencies, and each engine can be upgraded or swapped without touching the rest of the system.
+The first iteration set the technical foundation. Two decisions mattered: where the planning data would live, and how the solver engines would fit alongside the web application. The team chose a web stack that could deploy without standing servers per tenant, and ran each solver as its own process rather than inside the web application. The driving reason was that the three planned solver libraries had different language and runtime requirements; running them in-process would have forced one runtime onto all three, and locked future engine choices to that decision. The resulting stack and process boundaries are described in \Cref{sec:system-description}.
 
 \subsection{Modelling what the coordinator knows}
 \label{sec:data-modelling}
 
-Early interviews surfaced a class of knowledge that traffic coordinators carry in their heads. Four kinds of structure had to be added to the data model so that the coordinator's reality could be represented at all.
-
-A driving licence on its own is not enough information about a driver. Coordinators talked about more specific qualifications: a scanning certificate for transporting food (Norlog Tana), an ADR endorsement for dangerous goods, winter-driving experience for routes in the north. The same kind of differentiation runs the other way: different vehicles in the fleet require different qualifications to operate. The model has to carry both directions at once, and the solver checks at assignment time that a driver is qualified for the vehicle they are matched with.
-
-Some assignments are not one driver in one vehicle. Nordic Crane described jobs that need a crane operator and a transport driver alongside each other; other companies described fixed teams that always work together, and ad-hoc teams assembled for one assignment at a time. The model has to allow an assignment to draw on more than one resource, and to express both the fixed and the ad-hoc form.
-
-Norlog Lakselv runs many of the same routes repeatedly. The route itself is what recurs; the day and the staffing depend on which department or location handles it. Modelling each repetition as a separate assignment in the calendar would have produced duplication and a drift problem when the route changed. The model treats the route as a rule the coordinator instantiates, not as copies the coordinator maintains.
-
-Some transport jobs are not fully described by the vehicle alone. A driver may need to bring a specific trailer for the cargo, and the same vehicle may pull different trailers on different days. The model has to carry the trailer as a resource of its own, paired with vehicles and assignments separately.
-
-The data model is not a passive translation of the problem; it is a choice about how much of the coordinator's tacit knowledge to make queryable. That choice grew with the conversations.
+The second iteration extended the data model with classes of structure the early interviews surfaced. A driving licence on its own is not enough to characterise a driver; coordinators described scanning competence for food transport (Norlog Tana), ADR endorsements for dangerous goods, and winter-driving experience for northern routes. Some assignments need more than one resource, such as a crane operator alongside a transport driver at Nordic Crane, or fixed teams that always work together. Some routes at Norlog Lakselv recur but with different staffing each time, so the model treats the route as a rule the coordinator instantiates rather than as copies in the calendar. Trailers move with assignments separately from vehicles. Each addition came from a coordinator describing something the original model could not represent. The data model is therefore a record of which parts of tacit knowledge had to be made queryable, not a passive translation of the problem.
 
 \subsection{One solver is not enough}
 \label{sec:solver-layer}
 
-The scheduling theory in \Cref{sec:scheduling} left a practical design question: whether RP should rely on one solver strategy or compare several. The first implementation used a greedy heuristic because it was fast, simple, and good enough to return an immediate baseline plan. That first version also exposed the risk of committing too early to local choices, so OR-Tools CP-SAT was added to search assignment trade-offs more systematically within a fixed time budget.
-
-Timefold was added as the third engine because large planning instances need a solver that can keep improving a candidate plan as long as time remains. With greedy, CP-SAT, and Timefold, RP could compare one fast heuristic, one constraint-programming solver, and one metaheuristic solver behind the same problem format. The benchmark in \Cref{sec:evaluation-framework} was then designed to compare solver behaviour on identical inputs and constraints.
-
-Running three engines from one application introduced a reproducibility problem. A benchmark that compares engines needs each one pinned to a specific version, with the input and constraints shared verbatim, before the comparison can be trusted. The subprocess architecture in \Cref{sec:choice-of-technologies} grew partly out of this requirement. The same multi-engine architecture serves the auto-router in \Cref{sec:plan-time-intervals}, where the engine choice is made dynamically rather than being fixed by the coordinator.
+The third iteration was a decision about how many solver strategies the artefact should host. The first implementation used a greedy heuristic because it was fast and good enough for a baseline. But greedy can lock onto early choices that a more systematic search would have improved on, so OR-Tools CP-SAT was added. CP-SAT in turn could not finish the largest instances within a reasonable budget, so Timefold was added as a metaheuristic that keeps improving as long as time remains. Once three engines had to be compared under shared constraints, reproducibility forced the architecture from iteration 1 to carry pinned versions and identical inputs.
 
 \subsection{A blank timeline is not Control}
 \label{sec:hitl-deviations}
 
-The first interface gave the coordinator a Gantt-style timeline and the right to drag any assignment to a different driver, change start and end times, or remove it. Every algorithm-generated assignment passed through their hands before the plan went out.
-
-This worked, but it left the coordinator with full authority and almost no information. A driver assignment is not just a position on a timeline; it can violate competence requirements, push the driver into overtime, or collide with someone's vacation. The coordinator had Control on paper but had to remember everything the algorithm was supposed to help with.
-
-The answer was a continuous check that flagged each issue the coordinator should review: assignments missing a driver or vehicle, drivers or vehicles double-booked, drivers worked past their weekly hour limit, given night-work, placed without the right competences, or assigned on dates they have already declared unavailable. Each issue appeared inline next to the assignment on the timeline, and in a dedicated view by type and severity. The coordinator could acknowledge an issue without resolving it, or resolve it by adjusting the plan.
-
-The structural choice was to flag, not to block. Interviews had been clear that coordinators want a tool that suggests rather than decides, and a blocking system would move authority back to the algorithm. The coordinator judges whether an issue matters: a flagged night-work assignment may be fine when the driver has agreed to it; a flagged competence mismatch almost never is. The system's job is to make the situation visible; the coordinator's is to judge it.
-
-One related need surfaced in the interviews but did not make it into this version. Several coordinators, Norlog Tana especially, described the daily reality of replanning around sick leave: a driver calls in, an assignment must move, and others may have to shift to make room. Replanning is structurally different from initial planning and would have needed its own flow. In the current artefact it is handled through the same drag-and-drop, with the gap acknowledged as future work.
+The fourth iteration was the recognition that override authority is not the same as informed override. The first interface gave the coordinator a Gantt timeline and the right to change any assignment, but no help in seeing whether a change was safe. A continuous check was added that flags issues for the coordinator to review: missing driver or vehicle, double-booking, overtime, night-work, competence mismatch, or assignment on a declared unavailable day. The structural choice was to flag, not to block. Interviews had been clear that coordinators want a tool that suggests, not one that decides; a blocking system would have moved authority back to the algorithm. Sick-leave replanning surfaced as a related need, especially from Norlog Tana, but its own flow is documented as future work.
 
 \subsection{From minutes to intervals}
 \label{sec:plan-time-intervals}
 
-Different planning situations call for different plans. A morning rush after several sick-call-ins needs a plan now; next week's planning can take longer to compute and should be more accurate. The first interface gave the coordinator a slider in seconds, asking them to pick how long the solver should run before returning a plan.
-
-The slider did not work, and the reason was not the design of the slider. A coordinator does not know what twenty seconds buys them in plan quality, or whether twenty seconds is fast or slow for a planning solver in the first place. The number was the wrong unit, and the question (which solver, for how long?) was the wrong question to put in front of a planner.
-
-The current interface offers three categories: \texttt{rask}, \texttt{middels}, and \texttt{grundig}. Each category carries both a time cap and an engine pool. \texttt{rask} runs only the greedy heuristic under a five-second cap. \texttt{middels} may use greedy or OR-Tools CP-SAT under a thirty-second cap. \texttt{grundig} may use greedy, OR-Tools CP-SAT, or Timefold under a 120-second cap.
-
-The choice between engines is not static. The auto-router groups requests by company, problem-size bucket, and category. If that cell has fewer than three successful runs for the candidate engines, the system treats it as a cold start: it races the whole pool for that category, logs the completed results, and returns the best completed solution. If the cell has enough history, the system treats it as warm: it selects the engine with the best historical average score in that cell and runs only that engine.
-
-This is a small case of the same pattern that runs through HITL: the coordinator's controls have to use the coordinator's vocabulary. Plan time in seconds and a choice of solver engine were both system-vocabulary controls; three labelled intervals are coordinator-vocabulary controls. The trade-off the coordinator makes is now in their language, and the algorithm choice that follows from it stays inside the system.
+The fifth iteration replaced a system-vocabulary control with a coordinator-vocabulary one. The first interface asked the coordinator to set the solver's runtime in seconds, which assumed the coordinator knew what twenty seconds bought them in plan quality. They did not, and they should not have to. The control was replaced with three named categories --- \texttt{rask}, \texttt{middels}, and \texttt{grundig} --- each carrying a time cap and a set of allowed engines. The engine choice within a category is not fixed: for each request the system looks up how the allowed engines have performed before for the same company, problem size, and category. With fewer than three previous successful runs it runs all allowed engines in parallel and returns the best result. With enough history it runs only the engine with the best historical score.
 
 \subsection{Configurable weights for different operational realities}
 \label{sec:configurable-weights}
 
-The interviewed companies do not all want the same kind of plan. Some operate fixed routes that they want to assign to the same drivers each time, prizing continuity over balance. Others rotate workload deliberately to keep no single driver too loaded. Some weight customer priority over driver preference; others reverse it. Adaptability requires that the same solver layer, running on the same data, can produce these materially different plans without code changes.
+The sixth iteration came from a finding that the interviewed companies do not all want the same kind of plan. Some prize continuity, others rotation; some weight customer priority, others driver preference. A single fixed objective inside the solver would have favoured one operating style over another. The mechanism added was a small set of weights stored per company and used by the solver when scoring candidate plans. The same engine produces a different plan for each company without code changes. The configurability is partial: the soft-constraint preferences are tunable, but the hard constraints --- competence match, availability, vehicle suitability, no overlap --- are not. Per-company configuration of harder layers is carried forward to \Cref{sec:future-work}.
 
-The mechanism is a small set of weights stored per company and used as the default in the solve flow. Five preferences carry weights that the solver balances against each other when scoring candidate plans:
-
-\begin{itemize}
-  \item Preferring that a driver stays on the vehicle they are normally assigned to.
-  \item Spreading the workload evenly across drivers.
-  \item Minimising transitions, where a driver moves between vehicles or routes inside a single day.
-  \item Respecting priority on high-priority assignments first.
-  \item Honouring individual driver preferences for routes or shifts.
-\end{itemize}
-
-A company that values continuity sets the assigned-vehicle weight high; a company that values rotation sets the workload-balance weight high. The same engine produces a different plan for each, without code changes.
-
-The configuration UI therefore translates solver weights into planning preferences a company can actually set: continuity, workload balance, transitions, priority, and driver preferences. This makes the weight mechanism part of Adaptability rather than a solver-internal parameter list.
-
-Configurable weights are a partial realisation of Adaptability. The five preferences above can be tuned per company, but the hard constraints (competence match, availability, vehicle suitability, no overlap) are not configurable: they are facts about whether a plan is legally and operationally possible at all. Per-company configuration of harder layers, such as which kinds of constraints a company treats as hard versus soft, or how rest-period definitions vary across union agreements, is named as a gap in \Cref{sec:limitations} and forwarded to future work in \Cref{sec:future-work}.
-
-\section{Evaluation Framework}
+\section{Validation Framework}
 \label{sec:evaluation-framework}
 
-RP is evaluated through three instruments. The multi-engine benchmark compares solver behaviour on fixed synthetic planning instances. The auto-router run history checks whether category-based engine choice has enough logged evidence to move from a cold race to a warm single-engine choice. The requirements traceability matrix records whether each functional requirement is implemented and developer-verified.
+RP is validated before deployment through three instruments: a multi-engine benchmark on fixed synthetic instances, the auto-router run history, and a requirements traceability matrix. The three cover the anchors unevenly. Efficiency is tested most directly through the benchmark. Adaptability is checked through implementation coverage and run history. Control is only partially validated, since the review-and-override flow is implemented but not user-tested with coordinators.
 
-These instruments do not test every claim in the thesis. The interviews establish the visibility gap, and Admmit fixed human-in-the-loop operation as a project requirement. The evaluation framework tests the artefact built from those inputs; it does not test whether the problem is worth solving or whether coordinators would adopt RP in production. That boundary follows the validation-versus-evaluation distinction introduced in \Cref{sec:dsr}.
+Three claims sit outside what this framework can support: there is no production deployment, no empirical comparison against Timpex, Opter, or internal tools, and no user testing of the override flow. All three are carried forward to \Cref{sec:limitations}. The boundary follows the validation-versus-evaluation distinction introduced in \Cref{sec:dsr}.
 
 \subsection{Multi-engine benchmark protocol}
 \label{sec:eval-benchmark}
@@ -260,29 +224,31 @@ Three synthetic datasets feed the benchmark. The small dataset has five employee
 
 The sizes were chosen to span the fleet ranges named in \Cref{sec:interview-recruitment}. The small dataset is below the smallest interviewed fleet and works as a tight sanity check. The medium dataset sits near the small-operator end of the sample. The large dataset exceeds the largest observed fleet and is intended to expose where exact search begins to bind.
 
-Synthetic data was used because no company had operated RP in production, and because the consultation framing did not collect operational planning data from the interviewed companies. The consequence is that benchmark numbers cannot be projected directly onto real Norwegian transport operations without further validation; this is named as L5 in \Cref{sec:limitations}.
+Synthetic data was used because no company had operated RP in production, and because the consultation framing did not collect operational planning data from the interviewed companies. Benchmark numbers therefore cannot be projected directly onto real Norwegian transport operations without further validation; this gap is carried forward to \Cref{sec:limitations}.
 
-The run protocol is held constant across engines so that the comparison is on solver behaviour rather than on benchmark configuration. The datasets are generated deterministically with seed 42, and the generator clamps assignment requirements against the available employee and vehicle pools. Each engine receives the same problem JSON and the same shared constraint configuration, and each (engine, dataset) pairing is run once, solo and sequentially, under a 120-second cap on the same machine. Timefold additionally stops a run if it spends 35 seconds without improving the solution. After each successful run, the canonical TypeScript scorer re-evaluates the returned solution with dates interpreted in UTC. The logged metrics are scheduled-assignment count and percentage, hard-tier violations, legal-tier violations, optimality where the engine can prove it, wall-clock solve time, and success or timeout.
+The run protocol is held constant across engines so that the comparison is on solver behaviour, not on benchmark configuration.
+
+The datasets are generated deterministically with seed 42. The generator limits assignment requirements to what the available employees and vehicles can satisfy.
+
+Each engine receives the same input and the same constraints. Every (engine, dataset) pairing runs once, alone, under a 120-second cap on the same machine. Each pairing was run once given the project's time budget; the benchmark therefore reports point performance rather than averaged performance over repeats, and run-to-run variance is not characterised. Timefold additionally stops if it has gone 35 seconds without improving the solution.
+
+After each run, the shared TypeScript scoring function re-evaluates the returned solution with dates interpreted in UTC. Logged metrics: scheduled-assignment count and percentage, hard-tier violations, legal-tier violations, optimality where the engine proves it, wall-clock solve time, and success or timeout.
 
 \subsection{Auto-router run history}
 \label{sec:eval-auto-router}
 
-The auto-router run history is a technical validation instrument for engine choice, not evidence of production efficiency. Each routed solve records the company, size bucket, category, engine, success flag, score, scheduled percentage, solve time, and problem size. That log lets the system decide whether a future request in the same cell is still cold, meaning that the category's engine pool should be raced, or warm, meaning that one historically best engine can be selected. Aborted runs are not counted against an engine in this history, because an engine stopped by a sibling's proven-optimal result did not receive a fair attempt.
-
-\subsection{What the framework does not test}
-\label{sec:eval-bounds}
-
-Three further claims sit outside what the framework can support, and each forwards to a specific limitation in \Cref{sec:limitations}. The artefact is not deployed in production, so claims about Efficiency gains under operational time pressure cannot be made from these results: that gap is L6. There is no empirical comparison against Timpex, Opter, or the internal and custom tools the seven interviewed companies use, so claims that RP is better than alternatives in the same market segment are not supported here: that gap is L7. The review-and-override flow that delivers \textbf{Control} has not been user-tested with traffic coordinators, so claims about its comprehensibility or its behaviour under coordinator workload cannot be made: that gap is L8.
-
-\subsection{Anchor coverage}
-\label{sec:eval-anchor-coverage}
-
-The three instruments cover the anchors unevenly. \textbf{Efficiency} is tested most directly through benchmark behaviour. \textbf{Adaptability} is checked through implementation coverage and auto-router history. \textbf{Control} is only partially validated, because the review-and-override flow is implemented but not user-tested with coordinators.
+The auto-router run history is what makes the engine-choice logic from \Cref{sec:plan-time-intervals} a validation instrument. Each completed run logs company, problem size, category, engine, score, scheduled percentage, and solve time. The log is what tells the system when enough history exists to drop the parallel race for a given company-size-category combination, and which engine to favour when it does. Runs aborted because another engine had already proven optimality are excluded, since an engine that did not finish should not be marked down for it.
 
 \subsection{Requirements traceability matrix}
 \label{sec:eval-traceability}
 
-The requirements traceability matrix is the coverage check rather than a quality validation. For each functional requirement in the FK-01 to FK-42 range, the matrix records two things: whether it is implemented in the deployed codebase, and whether its behaviour was verified during development. ``Verified during development'' is a narrower claim than passing an automated test suite, and it is the honest one to make: thirty-six of the thirty-seven in-scope functional requirements are implemented and developer-verified, one is partial (FK-30, driving and rest-time status), and the five out-of-scope requirements (FK-38 through FK-42) are documented as future work. The absence of a formal automated test suite is itself a non-functional gap, named as L9 in \Cref{sec:limitations}. The traceability matrix's role is to make coverage visible, not to substitute for the testing that L9 acknowledges is missing.
+The requirements traceability matrix is a coverage check, not a quality test.
+
+For each functional requirement (FK-01 through FK-42), the matrix records two things: whether it is implemented in the codebase, and whether its behaviour was verified during development. ``Verified during development'' is narrower than passing an automated test suite, and it is the honest description of what was done.
+
+Thirty-six of the thirty-seven in-scope requirements are implemented and developer-verified. One is partial (FK-30, driving and rest-time status). The five out-of-scope requirements (FK-38 through FK-42) are documented as future work.
+
+The matrix shows implementation coverage; it complements rather than replaces automated test coverage.
 
 
 \section{Validity and Reliability}
@@ -290,14 +256,14 @@ The requirements traceability matrix is the coverage check rather than a quality
 
 Three standards from \textcite{malterud2001lancet}'s framework for qualitative inquiry bound what the surrounding research can claim \parencite[p.~483]{malterud2001lancet}. Relevance asks whether the research question is worth answering. Validity asks whether the study investigates what it claims. Reflexivity asks whether the researcher's effect on the process is acknowledged and managed.
 
-Relevance and validity bound the interview component first. The seven coordinators were a purposive sample matched to the research question, which asks about coordinator experience of the visibility gap rather than its prevalence in Norwegian transport. \textcite[p.~485]{malterud2001lancet} treats purposive sampling as the appropriate strategy for qualitative inquiry. Validity within that sample rests on triangulation across the seven calls: the visibility gap and the operator-vs-owner asymmetry surfaced across companies of different size and system maturity rather than from any single coordinator. The findings transfer in Malterud's bounded sense of applicability within a specified setting rather than to the population at large \parencite[p.~486]{malterud2001lancet}, and the bounds are named as L1 (sample size, brief duration) and L2 (self-selection from Admmit's customer roster) in \Cref{sec:limitations}.
+Relevance and validity bound the interview component first. The seven coordinators were a purposive sample matched to the research question, which asks about coordinator experience of the visibility gap rather than its prevalence in Norwegian transport. \textcite[p.~485]{malterud2001lancet} treats purposive sampling as the appropriate strategy for qualitative inquiry. Validity within that sample rests on triangulation across the seven calls: the visibility gap and the operator-vs-owner asymmetry surfaced across companies of different size and system maturity rather than from any single coordinator. The findings transfer in Malterud's bounded sense of applicability within a specified setting rather than to the population at large \parencite[p.~486]{malterud2001lancet}. The bounds on sample size and self-selection are carried forward to \Cref{sec:limitations}.
 
-Validity for the system component is narrower. Three instruments carry it, all set out in \Cref{sec:evaluation-framework}: the requirements traceability matrix that records implementation and developer-verified behaviour for each functional requirement, the multi-engine benchmark that compares engines on identical synthetic instances, and the auto-router run history that records the evidence used for category-based engine choice. Together they validate the artefact in Wieringa's sense (predicting how it would behave once deployed) rather than evaluating it in deployment (see \Cref{sec:dsr}). The gaps that bound this validation (no production deployment, no user testing of the override flow, no automated test suite) are forwarded as L6, L8, and L9 in \Cref{sec:limitations}.
+Validity for the system component is narrower. Three instruments carry it, all set out in \Cref{sec:evaluation-framework}: the requirements traceability matrix that records implementation and developer-verified behaviour for each functional requirement, the multi-engine benchmark that compares engines on identical synthetic instances, and the auto-router run history that records the evidence used for category-based engine choice. Together they validate the artefact in Wieringa's sense (predicting how it would behave once deployed) rather than evaluating it in deployment (see \Cref{sec:dsr}). The gaps that bound this validation --- no production deployment, no user testing of the override flow --- are carried forward to \Cref{sec:limitations}.
 
-The auto-router adds a separate reliability condition. Its warm-path decision is only as reliable as the history in the relevant company, size-bucket, and category cell. A sparse cell stays in cold start; a biased cell can favour the wrong engine; and engine upgrades can make old history less representative. The current implementation keeps the rule simple: at least three successful runs are required before history replaces the cold race. More advanced exploration or time-decay weighting is left to future work.
+The history-based engine choice is only as reliable as the history it has. Three successful runs is a low bar, and a combination with biased or outdated history can still favour the wrong engine. More careful selection methods, such as exploration and time-decay weighting, are left to future work.
 
 Reflexivity addresses the researcher configuration directly. The research team and the development team are the same two people, and the interviews were conducted as industry consultation under Admmit's bachelor task brief rather than as a formal research study. \textcite[p.~484]{malterud2001lancet} treats preconceptions as separate from bias unless the researcher fails to disclose them.
 
 Two preconceptions matter here. The team expected that a visibility gap might exist, and Admmit had already fixed HITL as a project requirement. Both are disclosed in \Cref{sec:defining-task,sec:dsr-dsrm} so that the reader can judge their effect on the method.
 
-An Admmit-employed designer contributed early UI sketches at the start of the project, but had no role in the interviews, the analysis, or the engineering of the artefact. The researcher--developer overlap and the informal study procedure are forwarded as L3 in \Cref{sec:limitations}. What the methodology produced is the subject of the next chapter.
+An Admmit-employed designer contributed early UI sketches at the start of the project, but had no role in the interviews, the analysis, or the engineering of the artefact. The researcher--developer overlap and the informal study procedure are carried forward to \Cref{sec:limitations}. What the methodology produced is the subject of the next chapter.

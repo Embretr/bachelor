@@ -1,17 +1,14 @@
 \chapter{Results}
 \label{chap:findings}
 
-This chapter reports how far an algorithm could take over the day's planning work, and where the coordinator's Control sets the limit. The interviews in \Cref{sec:interview-themes} say where coordinators welcome automation and where they will not give it up. The benchmark in \Cref{sec:algorithm-benchmark} reports how the available solvers perform on synthetic instances. The system description in \Cref{sec:engineering-results} shows what was built to operate within those bounds, and \Cref{sec:administrative-results} closes the chapter with the sprint record. RP was not user-tested with coordinators during the project period; implications for validation are taken up in Chapter 5.
+This chapter reports what the seven interviews surfaced, what was built, and how the solver layer behaved on synthetic instances. \Cref{sec:interview-findings} names the interview themes. \Cref{sec:the-artefact} describes the artefact. \Cref{sec:evaluation-results} reports the benchmark and the implementation coverage. \Cref{sec:project-timeline} closes with the project timeline.
 
 
-\section{Scientific Results}
-\label{sec:scientific-results}
-
-\subsection{Interview Themes}
+\section{Interview Findings}
 \label{sec:interview-findings}
 \label{sec:interview-themes}
 
-All seven interviewed companies plan the day's assignments manually. Their tools differ, from phone and memory to Timpex, Opter, and internal systems, but none of them generates the driver-vehicle match. The planning decision remains with the coordinator.
+All seven interviewed companies make the driver-vehicle assignment manually. Their tools differ, from phone and memory to Timpex, Opter, and internal systems, but none generates the match. The planning decision remains with the coordinator.
 
 The most surprising theme was how little coordinators can see about resource utilisation while they plan. Overtime is handled when it surfaces, not tracked toward limits. Idle time between assignments is not visible in any of the tools the seven companies use. Load across drivers is balanced from the coordinator's memory of who has done what this week, not from a structured view.
 
@@ -25,60 +22,29 @@ Attitudes toward algorithm-assisted planning were split, not aligned. Norlog Lak
 
 When asked what they consider in matching a driver to an assignment, coordinators name the same criteria, in a consistent frequency order: availability and current position, experience (especially on demanding routes), driving and rest-time status (legally required), competency and licence, route familiarity (especially in northern Norway), equipment match, and overtime status toward annual limits. The criteria were stable across companies, but their weighting was not. Some prioritised workload balance, others vehicle-driver continuity or route familiarity.
 
-\Cref{tab:themes} summarises the themes the analysis named, the frequency at which each surfaced across the seven calls, and the direction each theme pointed.
+\Cref{tab:themes} lists the themes and where each surfaced across the seven calls.
 
 \begin{table}[h]
 \centering
-\caption{Themes named in the interview analysis. Frequency reports how widely each theme surfaced across the seven calls; direction reports whether the theme was unanimous or split.}
+\caption{The six themes named in the interview analysis and where each surfaced across the seven calls.}
 \label{tab:themes}
 \small
-\begin{tabular}{p{0.30\textwidth}p{0.28\textwidth}p{0.34\textwidth}}
+\begin{tabular}{p{0.45\textwidth}p{0.45\textwidth}}
 \toprule
-\textbf{Theme} & \textbf{Frequency} & \textbf{Direction} \\
+\textbf{Theme} & \textbf{Where it surfaced} \\
 \midrule
-Resource-utilisation visibility gap & All 7 companies & Universal: overtime reactive, idle time invisible, load balance from memory \\
-Operator-vs-owner asymmetry & Articulated by owners and Admmit, not by coordinators & Mirrors Bainbridge's ironies of automation \\
-Tacit-knowledge dependency & All 7 coordinators & Universal: knowledge no current system captures, treated as the reason full automation is unsafe \\
-Lack of capacity overview & All 7 companies & Universal: no single view combining driver availability, vehicle status, assignment load \\
-Sick-leave handling & All 7 (severity varies) & Mixed: small task (Norlog Lakselv ``to-tre tastetrykk'') to dominant (Norlog Tana ``hver eneste dag'') \\
-Attitudes to automation & 3 positive, 3 sceptical, 1 partial & Split, but consensus on ``suggest, don't decide'' \\
+Resource-utilisation visibility gap & All 7 companies \\
+Operator-vs-owner asymmetry        & Owners and Admmit, not coordinators \\
+Tacit-knowledge dependency         & All 7 coordinators \\
+Lack of capacity overview          & All 7 companies \\
+Sick-leave handling                & All 7, severity varies \\
+Attitudes to automation            & 3 positive, 3 sceptical, 1 partial \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-\subsection{Algorithm Benchmark}
-\label{sec:algorithm}
-\label{sec:algorithm-benchmark}
-
-The benchmark shows how the solver engines behave on the same synthetic planning instances under the protocol described in \Cref{sec:eval-benchmark}. The result is a controlled comparison of solver behaviour across small, medium, and large resource-constrained datasets.
-
-Each benchmark assignment needs both a driver and a vehicle. The pair must satisfy the operational hard constraints for availability, competence, vehicle suitability, and overlapping time windows. Assignments for which no feasible pair exists remain unassigned with a recorded reason.
-
-The seed-42 benchmark shows that no single engine dominates all instance sizes. Greedy is the fastest baseline and returns a feasible solution on all three datasets, but schedules fewer assignments than the stronger search engines where those complete. OR-Tools CP-SAT schedules the most assignments on the small and medium datasets and proves optimality in its own model, but times out on the large dataset under the 120-second cap. Timefold underperforms on the small dataset, where CP-SAT reaches the proven optimum almost immediately, but improves over greedy on the medium and large datasets and is the only non-greedy engine to complete the large instance within the cap.
-
-\begin{table}[h]
-\centering
-\caption{Multi-engine benchmark, seed-42 datasets, 120-second per-engine cap. OR-Tools CP-SAT proves optimality on small and medium but times out on large; Timefold is the only engine that completes the large instance with a coverage improvement over greedy.}
-\label{tab:benchmark-results}
-\small
-\begin{tabular}{llll}
-\toprule
-\textbf{Dataset} & \textbf{Greedy} & \textbf{OR-Tools CP-SAT} & \textbf{Timefold} \\
-\midrule
-Small  (20 assignments)  & 10/20 (50.0\,\%)   & 11/20 (55.0\,\%, optimal)   & 9/20 (45.0\,\%) \\
-\midrule
-Medium (100 assignments) & 47/100 (47.0\,\%)  & 67/100 (67.0\,\%, optimal)  & 60/100 (60.0\,\%) \\
-\midrule
-Large  (500 assignments) & 189/500 (37.8\,\%) & timeout ($>$120\,s)         & 222/500 (44.4\,\%) \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-All successful runs have zero hard-tier violations, which makes the coverage figures comparable across engines. The canonical scorer still reports legal-tier violations in every successful solution. These violations concern working-time and rest-period rules, such as minimum rest, weekly hours, and consecutive working days. They grow with dataset size because tight resource pools force longer employee schedules. In RP, those issues are surfaced for coordinator review rather than treated as hard infeasibility by the benchmark engines.
-
-The normal solve flow uses these differences without asking the coordinator to choose an engine. The coordinator chooses \texttt{rask}, \texttt{middels}, or \texttt{grundig}. RP then decides which engine to run from the allowed pool for that category, using earlier runs when enough history exists and trying the available engines when it does not. The older explicit \texttt{engineId} mode remains available for benchmark and advanced use, but it is not the ordinary coordinator flow.
-
-\section{Engineering Results}
+\section{The Artefact}
+\label{sec:the-artefact}
 \label{sec:engineering-results}
 
 \subsection{System Overview}
@@ -118,9 +84,7 @@ RP is the implemented artefact built around the planning step identified in \Cre
   \label{fig:architecture}
 \end{figure}
 
-The web application holds the coordinator screens and server logic. The database stores company-scoped planning data and settings. The solver engines run outside the web application and return candidate plans to the same planning interface.
-
-RP was specified against 58 requirements: 42 functional requirements and 16 non-functional requirements, prioritised under MoSCoW. The full registers are placed in \Cref{app:requirements-functional,app:requirements-nonfunctional}, and the traceability check is described in \Cref{sec:eval-traceability}. The workflow and algorithm results below show what those requirements became in the implemented artefact.
+RP was specified against 58 requirements: 42 functional and 16 non-functional, prioritised under MoSCoW. The registers are reproduced in \Cref{app:requirements-functional,app:requirements-nonfunctional}; the implementation status of each is reported in \Cref{sec:implementation-coverage}.
 
 \subsection{Coordinator Workflow}
 \label{sec:coordinator-workflow}
@@ -129,18 +93,39 @@ The coordinator's main screen is the planning timeline. It shows assignments acr
 
 When the coordinator drags an assignment to another driver or vehicle, RP saves the change and continues even if the move creates a conflict. The conflict is shown as a warning on the timeline and in the deviation viewer. The system records the problem without blocking the coordinator's decision.
 
-Plan generation starts from a time-quality category: \texttt{rask}, \texttt{middels}, or \texttt{grundig}. After the run, RP shows the proposed plan with its score, violations, chosen engine, and whether the engine choice came from previous run history or from trying the available engines. The coordinator can approve the proposal, change it, or run the solver again.
+Plan generation starts from the timeline. After the coordinator picks a category and runs the solver, the proposed plan returns to the same view with its score and any unresolved conflicts. The coordinator can approve the proposal, change it, or run the solver again. The category choice and the engine behind it are described in \Cref{sec:algorithm-implementation}.
 
-\subsection{The Algorithm}
+\subsection{Algorithm and Constraints}
 \label{sec:algorithm-implementation}
 
-The algorithm turns the coordinator's planning problem into a set of driver-vehicle choices. The input is a planning period with assignments, employees, and vehicles. The output is a set of assignments with the employees and vehicles allocated to each one. Each possible allocation is either allowed or not allowed, and the solver searches for the set of allowed allocations that gives the best plan.
+The algorithm takes a planning period with assignments, employees, and vehicles, and returns a plan that pairs each assignment with one employee and one vehicle. Some pairings are allowed and others are not; the solver searches for the allowed combination that produces the best plan.
 
-All three solver engines receive the same planning problem and return the same kind of solution. The difference is search strategy: greedy builds one plan quickly, CP-SAT searches systematically within a time limit, and Timefold improves a candidate plan over time. The benchmark result in \Cref{sec:algorithm-benchmark} reports how those differences behaved on the seed-42 datasets.
+The coordinator chooses a category (\texttt{rask}, \texttt{middels}, or \texttt{grundig}), not an engine. Each category sets a time cap and a pool of engines. For a new company-size-category combination, RP runs the available engines and returns the best result. Once enough history exists, it runs the engine that has performed best in that combination. The three engines differ in search strategy: greedy builds one plan quickly, CP-SAT searches systematically within the time cap, and Timefold keeps improving a candidate plan until time runs out. \Cref{sec:algorithm-benchmark} reports how the three behaved on the seed-42 datasets.
 
-Normal plan generation asks the coordinator to choose a category, not an engine. The category defines an engine pool and a time cap, and the auto-router decides which engine to run from that pool. When there is not enough history, it tries the available engines. When there is enough history, it runs the engine that has performed best for that company, size bucket, and category. An explicit \texttt{engineId = "auto"} mode remains available as an engine-portfolio fallback, but it is not the normal coordinator flow.
+\Cref{tab:scoring-tiers} sets out the four tiers RP uses to score a plan, strictest first. A plan that fails a stricter tier cannot beat a plan that respects it on softer goals.
 
-A driver without the required competence cannot be assigned just because the plan looks good elsewhere. RP therefore treats competence, availability, vehicle status, vehicle type, and double-booking as hard constraints.
+\begin{table}[h]
+\centering
+\caption{Scoring tiers, from strictest to softest.}
+\label{tab:scoring-tiers}
+\small
+\begin{tabularx}{\textwidth}{@{}
+  p{0.18\textwidth}
+  X
+  p{0.27\textwidth}
+@{}}
+\toprule
+\textbf{Tier} & \textbf{What it bounds} & \textbf{Effect on a plan} \\
+\midrule
+Hard              & Operational feasibility: competence, availability, vehicle type, no overlap & Plan invalid if any violated \\
+Legal             & Working-hours and rest-period rules under Arbeidsmiljøloven                  & Surfaced for coordinator review \\
+Business-critical & Assignment coverage and high-priority assignments                            & Lower score; plan still valid \\
+Preference        & Continuity, balance, transitions, driver wishes                              & Lowest weight \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+The hard tier is listed in detail in \Cref{tab:hard-constraints}. A plan that violates any of these is not a valid plan.
 
 \begin{table}[h]
 \centering
@@ -164,7 +149,7 @@ HC-06 & No vehicle is double-booked across overlapping assignments \\
 \end{tabularx}
 \end{table}
 
-After feasibility is secured, RP can still prefer one valid plan over another. The soft constraints express those preferences, with per-company weights for continuity, balance, priority, transitions, and employee preferences.
+Among the plans that respect the hard tier, RP prefers some over others. The soft constraints in \Cref{tab:soft-constraints} drive that preference. Each carries a per-company weight, so the same engine produces a different plan for a company that values continuity than for one that values workload balance.
 
 \begin{table}[h]
 \centering
@@ -188,17 +173,50 @@ SC-05 & Respect stated employee preferences & Configurable \\
 \end{tabularx}
 \end{table}
 
-A plan that breaks a strict rule should not beat a valid plan because it performs better on softer goals. RP therefore scores plans in tiers: hard violations first, legal working-time rules next, then business-critical quality, and finally preference quality. Coverage is rewarded inside the business-critical tier, after the stricter rules have been handled.
+\section{Evaluation Results}
+\label{sec:evaluation-results}
 
-\section{Administrative Results}
+\subsection{Multi-engine Benchmark}
+\label{sec:algorithm}
+\label{sec:algorithm-benchmark}
+
+The benchmark compares the three solver engines on the same synthetic planning instances under the protocol described in \Cref{sec:eval-benchmark}. Each assignment needs a feasible driver-vehicle pair; assignments with no feasible pair remain unassigned with a recorded reason.
+
+The seed-42 benchmark shows that no single engine dominates all instance sizes. Greedy is the fastest baseline and returns a feasible solution on all three datasets, but schedules fewer assignments than the stronger search engines where those complete. OR-Tools CP-SAT schedules the most assignments on the small and medium datasets and proves optimality in its own model, but times out on the large dataset under the 120-second cap. Timefold underperforms on the small dataset, where CP-SAT reaches the proven optimum almost immediately, but improves over greedy on the medium and large datasets and is the only non-greedy engine to complete the large instance within the cap.
+
+\begin{table}[h]
+\centering
+\caption{Multi-engine benchmark, seed-42 datasets, 120-second per-engine cap. OR-Tools CP-SAT proves optimality on small and medium but times out on large; Timefold is the only engine that completes the large instance with a coverage improvement over greedy.}
+\label{tab:benchmark-results}
+\small
+\begin{tabular}{llll}
+\toprule
+\textbf{Dataset} & \textbf{Greedy} & \textbf{OR-Tools CP-SAT} & \textbf{Timefold} \\
+\midrule
+Small  (20 assignments)  & 10/20 (50.0\,\%)   & 11/20 (55.0\,\%, optimal)   & 9/20 (45.0\,\%) \\
+\midrule
+Medium (100 assignments) & 47/100 (47.0\,\%)  & 67/100 (67.0\,\%, optimal)  & 60/100 (60.0\,\%) \\
+\midrule
+Large  (500 assignments) & 189/500 (37.8\,\%) & timeout ($>$120\,s)         & 222/500 (44.4\,\%) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+All successful runs have zero hard-tier violations, which makes the coverage figures comparable across engines. The canonical scorer still reports legal-tier violations in every successful solution, concerning working-time and rest-period rules. They grow with dataset size because tight resource pools force longer employee schedules. RP surfaces those issues for coordinator review rather than treating them as hard infeasibility.
+
+\subsection{Implementation Coverage}
+\label{sec:implementation-coverage}
+
+Of the forty-two functional requirements, thirty-seven were in scope. Thirty-six are implemented and developer-verified; one (FK-30, driving and rest-time status) is partial. The remaining five (FK-38--FK-42) are documented as future work. The full register and per-requirement status are in \Cref{app:requirements-functional}.
+
+The fit/gap analysis against Timpex, Opter, internal systems, and manual planning produced five fit items where existing tools already meet the need, and fourteen gap items where they do not. The fourteen gap items set the build agenda for the iterations in \Cref{sec:iterations}; the five fit items mark where RP should integrate with existing tools rather than compete.
+
+\section{Project Timeline}
+\label{sec:project-timeline}
 \label{sec:administrative-results}
-
-\subsection{Project Timeline}
 \label{sec:sprint-summary}
 
-The project ran from 12 January to 9 April 2026 as seven calendar sprints, with thesis writing continuing toward submission in May. The sprint log records project administration and delivery rhythm; the six learning iterations in \Cref{sec:iterations} record what the artefact learned technically and empirically. The two should therefore be read as different views of the same work: sprints describe time, iterations describe learning.
-
-\Cref{tab:sprint-timeline} summarises the sprint record. The project started with scope, stack choice, and project setup, then moved through schema, authentication, deviation handling, solver engines, interviews, integration, benchmarking, and documentation.
+The project ran from 12 January to 9 April 2026 as seven sprints, with thesis writing continuing toward submission in May. \Cref{tab:sprint-timeline} records the main work in each. The six learning iterations in \Cref{sec:iterations} describe the same period from a learning perspective.
 
 \begin{table}[h]
 \centering

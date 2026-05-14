@@ -184,7 +184,7 @@ Use this to find the rules that touch the section you are writing or reviewing. 
 ## Chapter purity
 
 ### Theory chapters (Ch 2) must be source-anchored, not interview-grounded
-- **Rule:** Do not write "the interviews indicate..." or any equivalent in Ch 2 prose. Frame utilization, trust, adoption, etc. from the literature in Ch 2; reserve interview-validated versions for Ch 4 (Findings) and Ch 5.1.x (Discussion under the relevant anchor).
+- **Rule:** Do not write "the interviews indicate..." or any equivalent in Ch 2 prose. Frame utilisation, trust, adoption, etc. from the literature in Ch 2; reserve interview-validated versions for Ch 4 (Findings) and Ch 5.1.x (Discussion under the relevant anchor).
 - **Why:** Ch 2's role is theoretical scaffolding. Importing primary data into Ch 2 collapses the structure the thesis needs in Ch 4 and Ch 5; the same claim then has nothing fresh to say where the spine demands it.
 - **When to apply:** Any Ch 2 section. The `MUST EVIDENCE: interview-derived ...` markers belong in Ch 4 outline, never in Ch 2 outline.
 - **Source:** §2.1 round 1 quality review (2026-05-01); re-confirmed by supervisor 2026-05-02 (logged in `context/supervisor-log.md`).
@@ -332,8 +332,8 @@ Use this to find the rules that touch the section you are writing or reviewing. 
 - **Source:** User directive 2026-05-04 (replaces §3.5 round 1 budget rule and §3.7 round 1 density-cap rule, both 2026-05-03).
 
 ### Don't coin a new compound term — describe the situation in plain prose, then optionally name it
-- **Rule:** Do not introduce a thesis-specific compound (e.g. "resource-utilization visibility gap", "tacit-knowledge dependency", "demand asymmetry", "owner-vs-operator split") as if it were a known concept the reader already recognises. The first time the situation appears, describe it plainly so the reader sees what is meant; if a label is genuinely useful for back-references later, name it once after the description, not before. The label is then a shorthand for an idea the reader already understands, not a coined compound the reader has to decode.
-  - BEFORE: "We call this pattern the resource-utilization visibility gap. It is the starting point of this thesis."
+- **Rule:** Do not introduce a thesis-specific compound (e.g. "resource-utilisation visibility gap", "tacit-knowledge dependency", "demand asymmetry", "owner-vs-operator split") as if it were a known concept the reader already recognises. The first time the situation appears, describe it plainly so the reader sees what is meant; if a label is genuinely useful for back-references later, name it once after the description, not before. The label is then a shorthand for an idea the reader already understands, not a coined compound the reader has to decode.
+  - BEFORE: "We call this pattern the resource-utilisation visibility gap. It is the starting point of this thesis."
   - AFTER: "The data needed to track overtime, idle time, and load balance is in the company's systems, but it is hard to pull together into a single working overview... The thesis takes this as its starting point: the data is there, but in its current form it is hard for any one person to read at a glance."
 - **Why:** Supervisor 2026-05-04 on §1.1 ¶1: "what is resource utlilization visibility gap. Dont invent new concepts, instead explain what this is." Coined compounds compress an explanation the reader does not yet have; supervisors and external sensors read them as smuggled jargon. Plain description first, term second (or never), is the supervisor's preferred shape.
 - **When to apply:** Every chapter, every section. Particularly Ch 1 background (the visibility gap, demand asymmetry), Ch 2 theory openings (where coined compounds tempt most), and Ch 5.1.x anchor sub-sections.
