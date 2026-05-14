@@ -1,5 +1,62 @@
 # Ressursplanlegger — Bachelor Thesis · Claude Instructions
 
+## Writing voice — gjelder på alle nivåer: setning, avsnitt, seksjon, kapittel, hele oppgaven
+
+1. **Minst antall ord for mest info, uten at det føles unaturlig kort.** Hvis noe kan kuttes uten å miste informasjon eller bli klippet stakkato, kutt. Gjelder ord i en setning, setninger i et avsnitt, avsnitt i en seksjon.
+2. **Definert én gang er nok.** Ingen gjentakelse innen et avsnitt, på tvers av avsnitt, mellom seksjoner, eller mellom kapitler. Bruk kryssreferanser når et faktum allerede er etablert et annet sted.
+3. **Enkelt og presist, lett akademisk.** Ingen komplisering for sin egen skyld. Hverdagsord der det funker; faglige termer kun der de bærer last. Alt skal gi mening og være forklart på en måte en leser med begrenset bakgrunn forstår på første gjennomlesning. Ingen "rare" engelske formuleringer som bare høres faglige ut.
+4. **Bygg forståelse, ikke forvirring.** Ikke kast nye lister-av-N på leseren (tre konsepter, fem emner, sju iterasjoner) uten å vise hvordan de forholder seg til det leseren allerede har i hodet. Kun spine-lister står som lister; alt annet er prosa.
+5. **Ikke påstå mer enn du vet.** Hvis virkeligheten er løsere enn formuleringen, velg den løsere formuleringen. Overkonkret prosa låser tolkningen feil vei og er ofte vanskelig å belegge.
+
+Disse fem er kontrakten. Brudd er en feil, ikke et stilvalg.
+
+### Eksempler og anti-patterns
+
+**Anti-pattern: løse metaforer som ikke betyr noe konkret.**
+- Dårlig: "the two threads informed each other"
+- Dårlig: "the design space opened up"
+- Bra: "the two influenced each other throughout the project"
+
+**Anti-pattern: jargon uten forklaring (forutsetter at leseren kan rammeverket).**
+- Dårlig: "the project entered the DSRM cycle through objectives rather than problem identification"
+- Bra: "a standard DSRM project starts from a problem, then sets objectives for a solution, then builds. Our project began with the objectives"
+
+**Anti-pattern: implementation- eller optimization-vokabular i koordinator-prosa.**
+- Dårlig: "cold-start race over engine pool, fine-grained cells, warm mode"
+- Bra: "for a new group, all three solvers run in parallel and the best result returns to the coordinator"
+
+**Anti-pattern: overkonkret påstand der virkeligheten er løsere.**
+- Dårlig: "each interview shaped the next design step; each design step shaped the next interview"
+- Bra: "the two influenced each other throughout the project"
+
+**Anti-pattern: punktliste der prosa fungerer like godt.**
+- Dårlig: punktliste over fem vekter (kontinuitet, balanse, skift, prioritet, preferanser)
+- Bra: "the solver balances driver-vehicle continuity, workload spread, transition minimisation, priority handling, and individual driver preferences when scoring candidate plans"
+
+**Anti-pattern: stakkato. Korte setninger på rekke uten flyt.**
+- Dårlig: "The thesis uses DSR. The paradigm fits. The artefact and the writing are built together."
+- Bra: "The thesis uses Design Science Research. It suits projects where the artefact and the writing about it are built together rather than in sequence."
+
+**Anti-pattern: defensiv "does not"-prosa.** Ikke fortell leseren hva seksjonen IKKE gjør for å forhånds-avgrense påstander leseren ikke har stilt. Si bare hva den gjør; avgrensninger faller naturlig ut av beskrivelsen. Negative avgrensninger reiser spørsmål bare for å svare dem negativt — konfusjon forkledd som presisjon.
+- Dårlig: "The benchmark does not measure utilisation outcomes in production, and it does not retest the visibility gap."
+- Bra: la setningen falle. "Synthetic instances" og "identical constraints" gjør avgrensningen implisitt; leseren forstår selv at det ikke er produksjonsmåling, og at §4.1.1 allerede har etablert visibility gap.
+
+**Temasetninger.** Hver paragraf åpner med en setning som anker leseren i hva paragrafen handler om, uten å være meta. Ikke "This section sets out X" eller "Three things are described here". Heller en konkret setning som etablerer poenget paragrafen utvikler.
+- Dårlig: "This section describes the research paradigm."
+- Bra: "Design Science Research suits a project that has to produce a working system and an account of why it was built that way."
+
+## Spør om informasjon — vi skriver sammen
+
+Skriving er samarbeid. Spør brukeren når en setning trenger et faktum som ikke er etablert (et tall, et navn, en hendelse, en intensjon, et valg mellom to leselige tolkninger). Bedre å stille spørsmål enn å gjette eller å skrive svakt for å unngå spørsmålet. Mange små, presise spørsmål er bedre enn ett stort etterpå.
+
+## Audit-linje per underseksjon
+
+Etter hver underseksjon (eller seksjon hvis den ikke har underseksjoner), legg én kort audit-linje som sier hva du sjekket mot. Audit-linjen skal dekke ALLE reglene over: writing voice (1-5), alle anti-patterns, temasetninger, og at hver konkret påstand er verifisert (fra kilde eller bekreftet av brukeren, ikke fylt inn fordi det høres rett ut). Hvis audit-sjekken fanger en ubelagt påstand, fjern eller spør brukeren før du sender. Format: én linje, kursiv. Eksempel: *Sjekket: temasetning, ingen ny liste-av-N, ingen em-dash, ingen metafor, ingen ubelagt påstand, ingen gjentakelse fra ch1.*
+
+Før du begynner på en ny seksjon: re-les "Writing voice" og "Eksempler og anti-patterns" i denne filen.
+
+**Aldri dra med plausible setninger.** Hvis du under drafting skriver noe konkret om prosjektet (timing, motivasjon, hva teamet trodde, hva som overrasket, hvilken vei ting utviklet seg), still spørsmålet "vet jeg dette?" før du sender. Hvis du fyller inn fordi det høres rett ut: bytt til spørsmål til brukeren. Plausibel er ikke sant.
+
 ## The Mandate
 
 This thesis must receive an A. Every word Claude produces is evaluated against that standard before it is written. If a change does not move the thesis closer to an A, it is not made.

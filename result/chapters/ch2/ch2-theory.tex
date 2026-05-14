@@ -1,14 +1,6 @@
 \chapter{Theory}
 \label{chap:theory}
 
-% TODO-AUTO-ROUTER (lagt til 2026-05-10, VURDER): Hvis ch5 skal koble
-% auto-routeren (§3.4.5) til portfolio-litteratur og multi-armed bandit
-% (Gomes & Selman 2001, SATzilla, Sutton & Barto kap. 2), må fundamentet
-% etableres her i ch2. Vurder en kort underseksjon under \Cref{sec:scheduling}
-% om algorithm portfolios og solver selection. Dette er nice-to-have, ikke
-% obligatorisk — avhenger av om vi vil løfte designet til den akademiske
-% rammen, eller bare beskrive det som et pragmatisk valg i ch3.
-
 This chapter develops four theoretical foundations the rest of the thesis stands on. \Cref{sec:scheduling} sets out the scheduling problem the algorithm solves and names the utilization dimensions grouped under \textbf{Efficiency}. \Cref{sec:hitl} sets out the human-in-the-loop pattern under which the coordinator runs the system, and names \textbf{Control} as a structural requirement of that pattern. \Cref{sec:tms} places RP inside the existing software category and identifies the planning gap RP fills. \Cref{sec:dsr} sets out the research paradigm that frames both the artefact and the knowledge claims made about it. Of the four, \Cref{sec:hitl} carries the most theoretical weight: the control argument the rest of the thesis turns on is built there.
 
 \section{Resource Scheduling}
@@ -83,7 +75,7 @@ Miller            & 2019 & Explanation as contrastive, selective, social        
 \end{tabular}
 \end{table}
 
-The four bodies above (Parasuraman's automation taxonomy, Hoff and Bashir's trust antecedents, Miller's explanation as interface, and Lee and See's definition of appropriate trust) translate into concrete design constraints on RP's HITL interface. The planning timeline shows the algorithm's suggested plan in the same Gantt view the coordinator uses for manual work, so the suggestion is open to inspection rather than presented as a finished output. After a solver run, a summary panel reports the solution score and counts of hard and soft violations, exposing process and performance in the sense Lee and See describe. A separate deviation view lists each active conflict by type, affected assignment, and affected resource, so a coordinator who disagrees with the algorithm can locate the contested assignment and decide whether to override. Override is intentionally low-friction: dragging an assignment block to a different employee row reassigns it, and conflicting changes save with a warning rather than a block. A blocking validator would tell the coordinator that the system, not the coordinator, holds final authority, which is the configuration Bainbridge warns against and the one \textbf{Control} forbids. Soft-constraint weights are exposed per company so that a coordinator's notion of a good plan can be adjusted without code changes, and the choice of solver engine and time budget is exposed at the point of plan generation so the system's capability limits are visible before the plan is read. \Cref{sec:hitl-deviations,sec:plan-time-intervals} document how each layer was built into the artefact.
+The four bodies above (Parasuraman's automation taxonomy, Hoff and Bashir's trust antecedents, Miller's explanation as interface, and Lee and See's definition of appropriate trust) translate into concrete design constraints on RP's HITL interface. The planning timeline shows the algorithm's suggested plan in the same Gantt view the coordinator uses for manual work, so the suggestion is open to inspection rather than presented as a finished output. After a solver run, a summary panel reports the solution score and counts of hard and soft violations, exposing process and performance in the sense Lee and See describe. A separate deviation view lists each active conflict by type, affected assignment, and affected resource, so a coordinator who disagrees with the algorithm can locate the contested assignment and decide whether to override. Override is intentionally low-friction: dragging an assignment block to a different employee row reassigns it, and conflicting changes save with a warning rather than a block. A blocking validator would tell the coordinator that the system, not the coordinator, holds final authority, which is the configuration Bainbridge warns against and the one \textbf{Control} forbids. Soft-constraint weights are exposed per company so that a coordinator's notion of a good plan can be adjusted without code changes, and the plan-generation category is exposed so the system's speed-quality limits are visible before the plan is read. \Cref{sec:hitl-deviations,sec:plan-time-intervals} document how each layer was built into the artefact.
 
 
 \section{Transport Management Systems}

@@ -26,10 +26,10 @@ The full draft exists at `result/`. All chapters compile (`make` produces `main.
   - **A.1 Functional Requirements Register** — full FK-01 through FK-42 table (ID, description, MoSCoW, source theme/interview, implementation status). User to supply from project tracker.
   - **A.2 Non-Functional Requirements Register** — full IFK-01 through IFK-16 table (ID, target, verification). User to supply.
   - **A.3 System Architecture Diagram** — TikZ diagram of browser + Next.js + tRPC + Postgres + three solver subprocesses. Claude can generate from existing thesis content on request.
-  - **A.4 Application Screenshots** — planning timeline, deviation viewer, dashboard, drag-and-drop override, time-quality toggle, soft-constraint weight UI. User to capture from running RP.
-  - **A.5 Multi-Engine Benchmark Results** — table of the 2026-05-02 reference run. Numbers already in `ch4-findings.tex:68`. Claude can reformat into a table on request.
+  - **A.4 Application Screenshots** — planning timeline, deviation viewer, dashboard, drag-and-drop override, `rask`/`middels`/`grundig` control, chosen-engine summary, soft-constraint weight UI. User to capture from running RP.
+  - **A.5 Multi-Engine Benchmark Results** — table of the seed-42 benchmark run. Current summary numbers are in `result/chapters/ch4/ch4-findings.tex`.
   - **A.6 Interview Guide** — five guide topics with opening questions and prompts as actually used. User to supply.
-  - **A.7 Iteration Timeline** — Gantt or table of the eight named iterations with real sprint boundaries and capability milestones. User to supply real dates (artefact-side `dev-log.md` is fabricated and must not be used).
+  - **A.7 Iteration Timeline** — Gantt or table of the six named iterations with real sprint boundaries and capability milestones. User to supply real dates (artefact-side `dev-log.md` is fabricated and must not be used).
   - **A.8 Project Process Artefacts** — GitHub milestones, time accounting, decision log, meeting notes. User to supply.
 - **Process pending per-paragraph feedback** in `feedback-app/state.json` for chapters other than Ch 1 (Ch 1 was cleared on 2026-05-07).
 - **Bulk-feedback feature.** `feedback-app/server.py` now exposes `/api/feedback-bulk`, the home page renders the yellow bulk-feedback panel above the first paragraph, and `submitBulkFeedback` wires the button. Use this for chapter-wide passes such as "compare each paragraph against its summary, remove unnecessary sentences, and rewrite to be concrete to its main message."

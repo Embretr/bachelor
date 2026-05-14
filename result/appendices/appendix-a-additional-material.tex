@@ -1,37 +1,37 @@
 \chapter{Additional Material}
 \label{chap:appendix}
 
-This appendix gathers supporting material referenced from the main chapters: the full functional and non-functional requirements registers, the system architecture diagram, application screenshots, the multi-engine benchmark results in tabular form, the interview guide used in the seven semi-structured calls, and the iteration timeline of the eight named iterations.
+This appendix gathers supporting material referenced from the main chapters: the full functional and non-functional requirements registers, the system architecture diagram, application screenshots, the multi-engine benchmark results in tabular form, the interview guide used in the seven semi-structured calls, and the iteration timeline of the six named iterations.
 
 
 \section{Functional Requirements Register (FK-01 -- FK-42)}
 \label{app:requirements-functional}
 
-\textit{[Placeholder. The full functional requirements register, with each FK-ID, MoSCoW priority, source theme or interview, and implementation status, is to be inserted here as a table. Summary references in the main thesis: \Cref{sec:requirements}, \Cref{sec:eval-traceability}.]}
+\textit{[Placeholder. The full functional requirements register, with each FK-ID, MoSCoW priority, source theme or interview, and implementation status, is to be inserted here as a table. Summary references in the main thesis: \Cref{sec:eval-traceability}.]}
 
 
 \section{Non-Functional Requirements Register (IFK-01 -- IFK-16)}
 \label{app:requirements-nonfunctional}
 
-\textit{[Placeholder. The full non-functional requirements register, with each IFK-ID, target value, and verification approach, is to be inserted here as a table. Summary references in the main thesis: \Cref{sec:requirements}.]}
+\textit{[Placeholder. The full non-functional requirements register, with each IFK-ID, target value, and verification approach, is to be inserted here as a table.]}
 
 
 \section{System Architecture}
 \label{app:architecture}
 
-\textit{[Placeholder. Architecture diagram showing the browser client, the Next.js + tRPC server, the PostgreSQL database, and the three solver subprocesses (greedy heuristic in TypeScript, OR-Tools CP-SAT in Python, Timefold in JVM), with the shared constraint configuration and the multi-tenant \texttt{companyId} boundary. Summary references in the main thesis: \Cref{sec:tech-choice}, \Cref{sec:system-description}.]}
+\textit{[Placeholder. Architecture diagram showing the browser client, the Next.js + tRPC server, the PostgreSQL database, and the three solver subprocesses (greedy heuristic in Python, OR-Tools CP-SAT in Python, Timefold in JVM), with the shared constraint configuration and the multi-tenant \texttt{companyId} boundary. Summary references in the main thesis: \Cref{sec:tech-choice}, \Cref{sec:system-description}.]}
 
 
 \section{Application Screenshots}
 \label{app:screenshots}
 
-\textit{[Placeholder. Screenshots of RP as deployed, showing the planning timeline at \texttt{/ressursplanlegger}, the deviation viewer at \texttt{/avvik}, the dashboard at \texttt{/oversikt}, the drag-and-drop override flow, the time-quality control toggle (fast suggestion vs best-effort plan), and the per-company soft-constraint weight configuration. Summary references in the main thesis: \Cref{sec:system-description}, \Cref{sec:trust-control}.]}
+\textit{[Placeholder. Screenshots of RP as deployed, showing the planning timeline at \texttt{/ressursplanlegger}, the deviation viewer at \texttt{/avvik}, the dashboard at \texttt{/oversikt}, the drag-and-drop override flow, the \texttt{rask}/\texttt{middels}/\texttt{grundig} time-quality control, the chosen-engine summary, and the per-company soft-constraint weight configuration. Summary references in the main thesis: \Cref{sec:system-description}, \Cref{sec:trust-control}.]}
 
 
 \section{Multi-Engine Benchmark Results}
 \label{app:benchmark}
 
-\textit{[Placeholder. Full benchmark results table, with one row per (engine, dataset) pairing, showing scheduled-assignment count and percentage, hard-constraint score, soft-constraint penalty, total lex-tier score, and wall-clock solve time, plus the v0 vs post-rework comparison for the Timefold engine. The reference run is dated 2026-05-02. Summary references in the main thesis: \Cref{sec:eval-benchmark}, \Cref{sec:algorithm}, \Cref{sec:efficiency}.]}
+\textit{[Placeholder. Full benchmark results table for the seed-42 deterministic datasets, showing scheduled-assignment count and percentage, optimality where proved, timeout status, and wall-clock solve time for the reported greedy and OR-Tools CP-SAT runs. Summary references in the main thesis: \Cref{sec:eval-benchmark}, \Cref{sec:algorithm}, \Cref{sec:efficiency}.]}
 
 
 \section{Interview Guide}
@@ -43,10 +43,10 @@ This appendix gathers supporting material referenced from the main chapters: the
 \section{Iteration Timeline}
 \label{app:iterations}
 
-\textit{[Placeholder. Gantt or table of the eight named iterations (schema and timeline scaffolding, single-engine baseline, constraint generalisation, multi-engine selection and benchmarking, HITL interface, real-time deviation detection, plan-time vs plan-quality tradeoff, configurable soft-constraint weights), with sprint boundaries and the dated capability milestones from the project's working notes. Summary references in the main thesis: \Cref{sec:iterations}, \Cref{sec:sprint-summary}.]}
+\textit{[Placeholder. Gantt or table of the six named iterations from \Cref{sec:iterations}: Choice of Technologies, Modelling what the coordinator knows, One solver is not enough, A blank timeline is not Control, From minutes to intervals, Configurable weights for different operational realities. To be paired with the seven two-week sprint boundaries from the dev-log and the dated capability milestones from the project notes. Summary references in the main thesis: \Cref{sec:iterations}, \Cref{sec:sprint-summary}.]}
 
 
 \section{Project Process Artefacts}
 \label{app:process}
 
-\textit{[Placeholder. Supporting process documentation as agreed with the supervisor and Admmit: GitHub milestones for the eight iterations, time-accounting summary by author and task category, decision log highlights, and any meeting notes the authors choose to include. Summary references in the main thesis: \Cref{sec:key-decisions}, \Cref{sec:time-tracking}.]}
+\textit{[Placeholder. Supporting process documentation as agreed with the supervisor and Admmit: project milestones for the six iterations, time-accounting summary by author and task category, decision log highlights, and any meeting notes the authors choose to include.]}

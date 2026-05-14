@@ -67,7 +67,7 @@ SQ2 is the Control side: how can the one-vehicle operator's reflex inspection be
 \textbf{SQ3}: Through which configurable elements can RP serve companies that differ in operational rules, fleet size, and planning horizon, without changes to the code?
 \end{quote}
 
-SQ3 is the Adaptability question: what has to be configurable for RP to fit the ten-driver depot and the multi-branch fleet without code changes? \Cref{sec:adaptability} answers it against the per-company configuration of soft-constraint weights and the planning horizon.
+SQ3 is the Adaptability question: what has to be configurable for RP to fit the ten-driver depot and the multi-branch fleet without code changes? \Cref{sec:adaptability} answers it against company-scoped data, per-company soft-constraint weights, and category-based engine choice.
 
 \begin{table}[h]
 \centering
@@ -90,9 +90,9 @@ SQ3 & Configurable elements that fit different companies          & Adaptability
 \section{Scope and Delimitations}
 \label{sec:scope}
 
-RP turns a list of orders for a given period into a plan that specifies who drives what, in which vehicle, and when. The period is set by the coordinator and ranges from a single day to a week or longer, since the companies the system has to accommodate do not all plan on the same horizon. The plan is produced by an automated solver, which the coordinator also picks: a tight time budget returns a quicker plan suited to the morning rush, a longer budget a more thoroughly searched one suited to the previous evening's planning session. The system holds the information the planning step requires: which drivers are employed and what they are qualified to do, which vehicles the company has and what each can carry, and when employees are working.
+RP turns a list of orders for a given period into a plan that specifies who drives what, in which vehicle, and when. The period is set by the coordinator and ranges from a single day to a week or longer, since the companies the system has to accommodate do not all plan on the same horizon. Before a plan is generated, the coordinator chooses a time-and-quality category: quick, medium, or thorough. The system then chooses the solver engine behind that category based on company, problem size, and run history. The system holds the information the planning step requires: which drivers are employed and what they are qualified to do, which vehicles the company has and what each can carry, and when employees are working.
 
-The priorities the solver weighs are tuned per company through configurable weights in the dashboard: the cost of overtime relative to idle time, the strength of workload balancing, the value of keeping a job within a driver's home region. The same algorithm on the same data returns different plans for two companies, because they have asked it to optimise different things.
+The priorities the solver layer weighs are tuned per company through configurable weights in the dashboard: the cost of overtime relative to idle time, the strength of workload balancing, the value of keeping a job within a driver's home region. The same planning data can therefore return different plans for two companies, because they have asked the system to optimise different things.
 
 The following capabilities are deliberately out of scope, since they came up early in the project and could otherwise be assumed by default:
 
@@ -113,7 +113,7 @@ The thesis is organised as follows:
 
 \begin{itemize}
   \item \textbf{\Cref{chap:theory}} establishes the theoretical and disciplinary background: resource scheduling, human-in-the-loop automation (Bainbridge, Hoff and Bashir, Miller, Lee and See), Transport Management Systems, and Design Science Research.
-  \item \textbf{\Cref{chap:method}} sets out the Design Science Research method as applied through Peffers' six DSRM activities, the eight-iteration construction of RP, and the evaluation framework.
+  \item \textbf{\Cref{chap:method}} sets out the Design Science Research method as applied through Peffers' six DSRM activities, the six-iteration construction of RP, and the evaluation framework.
   \item \textbf{\Cref{chap:findings}} reports what the interviews surfaced, what the artefact delivers against its functional requirements, and how the three optimisation engines compare on the multi-engine benchmark.
   \item \textbf{\Cref{chap:discussion}} interprets the findings under the three anchor concepts, works through adoption and sustainability, and names the twelve hierarchical limitations (L1 through L12) that bound what the thesis can claim.
   \item \textbf{\Cref{chap:conclusion}} answers each sub-question against the body of evidence and outlines future work.
@@ -129,11 +129,10 @@ RP was built in stages, starting from the bachelor task Admmit offered. The task
 \section{Additional Resources}
 \label{sec:additional-resources}
 
-The artefact and the supporting material referenced from the chapters that follow are available as listed below.
+The supporting material referenced from the chapters that follow is listed below.
 
 \begin{itemize}
-  \item \textbf{RP source code.} The full Next.js + tRPC + PostgreSQL platform, the three optimisation engines (greedy heuristic, OR-Tools CP-SAT, Timefold), and the multi-engine benchmark harness are held in a private GitHub repository accessible to the supervisor and to Admmit on request.
-  \item \textbf{Multi-engine benchmark suite.} The three synthetic datasets (small, medium, large), the engine-version snapshots used for reproducibility, and the 2026-05-02 reference run results reported in \Cref{sec:algorithm} live alongside the source code in the project repository.
+  \item \textbf{Multi-engine benchmark material.} The three synthetic dataset sizes (small, medium, large), the reproducibility notes, and the seed-42 benchmark results reported in \Cref{sec:algorithm} are documented in the benchmark appendix material.
   \item \textbf{Requirements registers and traceability matrix.} The full FK-01 through FK-42 functional register, the IFK-01 through IFK-16 non-functional register, and the implementation-and-developer-verified traceability matrix referenced from \Cref{sec:eval-traceability} are reproduced in \Cref{chap:appendix}.
   \item \textbf{Interview audio and transcripts.} The seven recorded calls and the corrected transcripts are stored locally on the project authors' devices, accessible only to the authors and the supervisor under the consultation framing set out in \Cref{sec:data-collection}, and will be deleted after submission and grading.
 \end{itemize}

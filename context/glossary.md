@@ -20,7 +20,7 @@ Improved resource utilization across three concrete dimensions: reduced overtime
 The traffic coordinator's authority to review and override any algorithm-generated assignment, applying the tacit knowledge the algorithm cannot see. Trust calibration (Hoff and Bashir, Lee and See) is the theoretical lens through which Control is read in §5.1.2: the design goal is appropriate trust in the algorithm, which is built through demonstrable, structural override authority rather than through interface polish. Use the term verbatim, capitalised — never substitute "kontroll" alone, "menneskelig overstyring", "human oversight", or "operator supervision". The earlier "inspect, modify, accept, or reject" gloss was retired 2026-05-06; see `context/lessons-learned.md` *Don't list the four Control actions; use a plainer verb instead*. The previous compound form "Trust/control" was retired 2026-05-09 and renamed to **Control**.
 
 **Adaptability**
-Capacity of the system to function meaningfully across companies with materially different operational rules, fleet composition, and assignment criteria. Distinct from "skalerbarhet" (which concerns volume). Expressed technically through configurable soft-constraint weights and per-company assignment rules.
+Capacity of the system to function meaningfully across companies with materially different operational rules, fleet composition, and assignment criteria. Distinct from "skalerbarhet" (which concerns volume). Expressed technically through company-scoped data, configurable soft-constraint weights, and category-based auto-routing.
 
 ---
 
@@ -128,7 +128,7 @@ An IS research stance treating organisational reality as socially constructed an
 The Unified Theory of Acceptance and Use of Technology (Venkatesh et al. 2003) — the canonical IS-adoption model integrating performance expectancy, effort expectancy, social influence, and facilitating conditions across organisational contexts. Used in §5.1.3 ¶1 and §5.2 ¶1 to frame cost / benefit thresholds for adoption that vary across the seven interviewed companies — different fleet sizes, different operational rules, different willingness-to-pay translate into different facilitating conditions. Distinct from the older TAM (Davis 1989), which UTAUT subsumes.
 
 **Multi-tenant variability (configurability)**
-The capability of a single deployed software instance to serve organisations with materially different operational rules through configuration rather than code changes. Theoretical anchor: Mietzner et al. (2009), variability modelling for multi-tenant SaaS. Operationalised in Ressursplanlegger via per-company soft-constraint weights (§3.5.8). The technical mechanism behind the Adaptability anchor — distinct from Adaptability itself, which is the *capacity* the mechanism realises (configurability is the means; Adaptability is the end).
+The capability of a single deployed software instance to serve organisations with materially different operational rules through configuration rather than code changes. Theoretical anchor: Mietzner et al. (2009), variability modelling for multi-tenant SaaS. Operationalised in Ressursplanlegger via per-company soft-constraint weights, company-scoped data, and category-based auto-routing. The technical mechanism behind the Adaptability anchor is distinct from Adaptability itself: configurability and routing are the means; Adaptability is the capacity they realise.
 
 ---
 

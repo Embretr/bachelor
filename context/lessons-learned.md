@@ -425,6 +425,46 @@ Use this to find the rules that touch the section you are writing or reviewing. 
 - **When to apply:** Any Ch 2 paragraph that introduces a theory-anchor concept; selected Ch 3 paragraphs that introduce a methodological choice re-applied in Ch 5 (`MUST TRACE`-style spine load).
 - **Source:** §2.2 round 1 coherence review (2026-05-02).
 
+### Don't end every paragraph with a summary sentence — use closing summaries selectively
+- **Rule:** Not every paragraph needs a closing sentence that restates what it just said. Use a closing summary only when (a) the paragraph just developed a non-obvious argument that benefits from binding, or (b) the paragraph is the last in a section and the closing sentence carries the section's headline message. Spraying summary sentences across every paragraph turns prose into a bullet-pointed restatement of itself instead of an argument the reader can follow on its own.
+  - BEFORE (each paragraph closes with restatement): "...this is what the paragraph just said." / "...and so the paragraph just said this." / "In summary, this paragraph said this."
+  - AFTER: paragraphs end on the sentence that finishes their content; the closing summary appears once, at the section's end, when it earns its place.
+- **Why:** User directive 2026-05-11 on §3.5 review: "ikke skriv oppsummering i siste setning hvert eneste avsnitt, må velge nøye når det er brukt." Repeated closing summaries read as if the writer doubts the reader's ability to follow, which makes the prose patronising and adds visible padding.
+- **When to apply:** Every paragraph in every section. Closing summaries are a deliberate choice, not a default. Forward-handoff sentences (the rule above) are distinct from summary sentences and remain governed by their own rule.
+- **Source:** User directive 2026-05-11, §3.5 review.
+
+### A section is about one thing; do not repeat what other sections already said
+- **Rule:** Each chapter and section names one thing it is about, and only the prose that develops that one thing belongs in it. Information that was already said in an earlier section must not be restated; a cross-reference is the right tool. A reader who has read the previous section twice as a side-effect of reading the next one loses the thread of the argument and the chapter feels longer than it is.
+  - BEFORE: §3.4.1 names the three solver engines (Python greedy, Python CP-SAT, Java Timefold) → §3.4.3 re-introduces "Three families are recognised in the literature: constructive heuristics, constraint programming, and metaheuristics" → §3.5.1 lists "All three engines (greedy heuristic, OR-Tools CP-SAT, Timefold metaheuristic)" again.
+  - AFTER: §3.4.1 introduces the three engines once with their names; §3.4.3 says "the three engines named in §3.4.1" and develops the learning story; §3.5.1 says "each engine" without re-listing.
+- **Why:** Supervisor 2026-05-11 directive: "mye gjentakelse generelt: på tvers av kapitler og i kapitler. et kapittel/seksjon skal handle om en ting." Repeated facts crowd out new information and make a reader feel the chapter is meandering. The thesis is judged on the density of its argument, not on the redundancy of its statements.
+- **When to apply:** Every section, every chapter. When drafting a new section, list the facts the previous sections already established and cite them by section reference rather than restating them. When reviewing, walk every fact stated and check whether it has been stated before; if yes, replace with a cross-reference or cut.
+- **Source:** Supervisor 2026-05-11 (logged in `context/supervisor-log.md`).
+
+### Don't introduce new lists-of-N suddenly; map them to what the reader already holds
+- **Rule:** When the prose introduces a numbered grouping (three anchor concepts, five interview topics, six iterations, four model revisions, three priority tiers, five weights), the reader should be able to tell what kind of grouping it is and how it relates to the other groupings already in play. If §3.3.1 says "five topics" and the reader has just seen "three anchor concepts" in §3.2.2, the writer has to either map the topics to the anchors, or say explicitly that the topics are a methodological device that does not align with the anchors. A list that appears without orientation reads as a new layer the reader has to mentally store alongside the others, and the chapter starts to feel like a catalogue of disconnected lists.
+  - BEFORE: §3.2.2 names three anchor concepts → §3.3.1 names five guide topics → §3.4 names six iterations → §3.5 names three instruments → reader cannot tell which list is at which level.
+  - AFTER: each list either reduces to or maps onto an existing list the reader already holds, or carries an explicit orientation sentence ("the five topics are a methodological device, not aligned with the anchors") before the items appear.
+- **Why:** Supervisor 2026-05-11 directive: "det er mye som dukker opp plutselig og litt forvirrende. feks at intervjuer plutselig har 5 hovedfokus, men før ble det nevnt 3 ankerkonsepter." Lists are visible and memorable; readers track them. Introducing a new list of N without orienting it against the lists they already track is a navigation failure.
+- **When to apply:** Every numbered grouping in every section. Before introducing a list of N, name what the list is doing relative to the lists already in scope. Consolidate where consolidation is possible (a six-item list and a three-item list of subgroups, for example).
+- **Source:** Supervisor 2026-05-11 (logged in `context/supervisor-log.md`).
+
+### Use the minimum number of words for the information; cut everything else
+- **Rule:** The text is judged on word-economy, not on completeness of stylistic flourish. Every sentence either carries information the reader needs or it goes. Phrases like "the framework treats X as", "the price the framework pays for that choice is", "what is also worth noting here is", "in the same way", "for the sake of clarity" usually add no information and can be cut without loss. The plain test: read the sentence with the suspect phrase removed; if the meaning survives, the phrase was decoration.
+  - BEFORE: "Synthetic data was used rather than production data for two concrete reasons, not from methodological preference. First, no transport company has operated the artefact, so production data does not exist for this codebase. Second, the operational data the seven interviewed companies hold falls under the data-protection bounds the consultation framing chose not to cross."
+  - AFTER: "Synthetic data was used because the artefact has not been deployed and no real operational data exists."
+- **Why:** Supervisor 2026-05-11 directive: "det viktigste er å ha minst mulig ord for informasjonen. aldri skriv ting som er unødvendig og kan skrives kortere." The reader has limited attention; every sentence that does not carry information competes with the sentences that do.
+- **When to apply:** Every sentence, every paragraph. After drafting, walk every sentence and ask: what information does this carry? If the answer is "none, but it sounds nice", cut it. Forwarding phrases ("the analysis below shows..."), defensive phrases ("not from methodological preference"), and restatement clauses ("which is to say...") are the most common offenders.
+- **Source:** Supervisor 2026-05-11 (logged in `context/supervisor-log.md`).
+
+### Keep load-bearing technical terms; don't substitute everyday words when the term recurs
+- **Rule:** When a technical term recurs across the thesis (e.g. "functional requirements", "traceability matrix", "Human-in-the-Loop", "Design Science Research"), keep the term itself even if it sounds jargon-y on first use. Substituting an easier everyday word ("checklist", "human-controlled", "research approach") for the first mention forces the reader to learn the term later and creates a mismatch between the introductory prose and the chapters that build on it. The right alternative to substitution is to gloss the term on first use, parenthetically or in the next sentence.
+  - BEFORE: "a checklist runs through the forty-two things the platform was supposed to do"
+  - AFTER: "a traceability matrix runs through the forty-two functional requirements"
+- **Why:** User directive 2026-05-11 on §3.5 review: "functional requirements er nødvendig å skrive fordi det blir brukt flere ganger." A term that recurs in §3.4, §3.5, §4, §5, and §6 must be named consistently from its first introduction.
+- **When to apply:** When deciding whether to simplify a term, check whether the term appears elsewhere in the thesis. If yes (or if it will be referenced by name later), keep the term and gloss it briefly. If no, plainer phrasing is fine.
+- **Source:** User directive 2026-05-11, §3.5 review.
+
 ---
 
 ## How writers should use this file

@@ -1,18 +1,6 @@
 \chapter{Discussion}
 \label{chap:discussion}
 
-% TODO-AUTO-ROUTER (lagt til 2026-05-10): Diskusjonskapitlet bør plassere
-% auto-routeren (§3.4.5 i ch3) i akademisk sammenheng. Designet er strukturelt
-% en portfolio-basert solver-velger (Gomes & Selman, *Algorithm Portfolios*,
-% 2001; SATzilla som empirisk porteføljevelger for SAT-problemer) kombinert med
-% en svært enkel utforsker-eksploiterer-tilnærming (slektskap til
-% multi-armed bandit, jf. Sutton & Barto, *Reinforcement Learning: An
-% Introduction*, kap. 2). Vår eksplor-strategi er forenklet (utforsker bare
-% i cold start, slutter når N≥3), men er åpen for å erstattes med ε-greedy
-% eller UCB i en senere iterasjon. Diskusjonen bør også kontrastere
-% engine-valgs-tilpasning (system-styrt) med per-company weight-konfigurasjon
-% (bruker-styrt) som to ulike Adaptability-leveranser.
-
 RP answers the research question at prototype level: algorithm-assisted planning can take over search and visibility work, but not the coordinator's final judgement. This chapter discusses that division of work, the boundary it creates, the company variation RP has to handle, and the claims the project can defend.
 
 
@@ -28,7 +16,7 @@ The interviews surfaced an asymmetry that shapes the contribution. Utilisation o
 
 This matters because transport planning is usually changed under time pressure. A system that only reports utilisation after the day is planned arrives too late to shape the plan. RP's contribution is to make utilisation and feasibility part of the decision while there is still time to act.
 
-The benchmark adds a narrower technical claim. It shows that the solver layer can generate alternative plans under shared constraints, and that a coordinator can choose between a quick proposal and a search that explores more alternatives depending on the time available. RP can therefore search the planning problem systematically enough to support human judgement.
+The benchmark adds a narrower technical claim. It shows that the solver layer can generate alternative plans under shared constraints, and that the choice of solver matters. OR-Tools CP-SAT schedules more assignments than greedy on the small and medium synthetic instances, but does not finish the large instance within the current 120-second cap. Greedy gives a weaker plan on the reported instances, but remains useful because it returns a plan quickly at larger scale. RP can therefore support human judgement, but its solver layer still has a scaling boundary.
 
 
 \section{Where Automation Stops}
@@ -52,13 +40,13 @@ The search-and-approval split is not specific to transport. The same shape may a
 
 RP becomes useful across companies when local differences can be expressed as settings, not code changes. The interviews show variation in scale, planning horizon, competence needs, route familiarity, and what each company treats as a good plan. A single fixed objective would hide those differences.
 
-The soft-constraint weights are the clearest mechanism. They let a company emphasise continuity, workload balance, priority, transitions, or driver preferences when the solver scores candidate plans. The same assignment data can therefore produce different plans because the company has different planning priorities, not because the system has been rewritten.
+The soft-constraint weights are the clearest user-controlled mechanism. They let a company emphasise continuity, workload balance, priority, transitions, or driver preferences when the solver scores candidate plans. The same assignment data can therefore produce different plans because the company has different planning priorities, not because the system has been rewritten.
 
-This separates RP from less configurable optimisation systems, where changing priorities often means changing the model or its parameters outside the coordinator workflow. In RP, the company changes weights. \textcite{mietzner2009variability} call this kind of design a multi-tenant variability pattern: one deployed instance carries a controlled set of configuration points that distinguish customers without forking the codebase. The variability points in RP are the soft-constraint weights, the solve categories, and the company-scoped data. The engines and the HITL interface are shared.
+This separates RP from less configurable optimisation systems, where changing priorities often means changing the model or its parameters outside the coordinator workflow. In RP, the company changes weights. \textcite{mietzner2009variability} call this kind of design a multi-tenant variability pattern: one deployed instance carries a controlled set of configuration points that distinguish customers without forking the codebase. The variability points in RP are the soft-constraint weights, the solve categories, the company-scoped data, and the company-scoped auto-router history. The engines and the HITL interface are shared.
 
-The solve categories add a second layer of fit. A coordinator should not need to choose a solver engine or a number of seconds. Choosing between \texttt{rask}, \texttt{middels}, and \texttt{grundig} is closer to the planning situation: a rushed morning needs a quick proposal, while next-week planning can spend longer searching. The system can then choose the engine behind that category.
+The solve categories add a system-controlled layer of fit. A coordinator should not need to choose a solver engine or a number of seconds. Choosing between \texttt{rask}, \texttt{middels}, and \texttt{grundig} is closer to the planning situation: a rushed morning needs a quick proposal, while next-week planning can spend longer searching. The auto-router then chooses the engine behind that category from historical performance in the relevant company, size bucket, and category. Cold cells race the category's engine pool; warm cells run the historically strongest engine.
 
-This is the strongest Adaptability claim RP can make. It can support different companies through company-scoped data, configurable planning preferences, and category-based solving. It is not yet evidence that every transport rule can be configured. Hard constraints, local agreements, status workflows, and exception taxonomies would need a second empirical pass before RP could claim that level of fit. Adaptability here is also distinct from scalability: the thesis does not claim RP scales to thousands of drivers, only that it can serve materially different operational rulebooks within its current scope through configuration rather than code.
+This is the strongest Adaptability claim RP can make. It can support different companies through company-scoped data, configurable planning preferences, and category-based solving. It is not yet evidence that every transport rule can be configured. Hard constraints, local agreements, status workflows, and exception taxonomies would need a second empirical pass before RP could claim that level of fit. Adaptability here is also distinct from scalability: the thesis does not claim RP scales to thousands of drivers, only that it can serve materially different operational rulebooks within its current scope through configuration and routing choices rather than code changes.
 
 
 \section{Methodology Reflection}
@@ -83,7 +71,7 @@ The limitations matter because each one blocks a stronger claim. \Cref{tab:limit
 \caption{Limitations register grouped by scope. SQ marks the sub-question each limitation principally bounds.}
 \label{tab:limitations-register}
 \small
-\begin{tabular}{p{0.05\textwidth}p{0.17\textwidth}p{0.6\textwidth}p{0.05\textwidth}}
+\begin{tabular}{p{0.05\textwidth}p{0.17\textwidth}p{0.58\textwidth}p{0.07\textwidth}}
 \toprule
 \textbf{ID} & \textbf{Scope} & \textbf{Statement} & \textbf{SQ} \\
 \midrule
@@ -92,11 +80,11 @@ L2  & Empirical    & Recruitment from Admmit's customer network only            
 L3  & Empirical    & Researcher--developer overlap; consultation framing, not formal study                    & SQ1 \\
 L4  & Empirical    & Interview guide did not exhaustively probe rule differences across companies            & SQ1 \\
 \midrule
-L5  & Validation   & Synthetic benchmarks rather than production data                                         & SQ3 \\
-L6  & Validation   & No real-world deployment                                                                 & SQ3 \\
-L7  & Validation   & No empirical comparison against Timpex, Opter, or internal tools in use                  & SQ3 \\
+L5  & Validation   & Synthetic benchmarks rather than production data                                         & SQ1 \\
+L6  & Validation   & No real-world deployment                                                                 & RQ \\
+L7  & Validation   & No empirical comparison against Timpex, Opter, or internal tools in use                  & SQ1 \\
 L8  & Validation   & No user testing of the override flow with coordinators                                   & SQ2 \\
-L9  & Validation   & Solver evaluation against the project's own benchmarks only                              & SQ3 \\
+L9  & Validation   & Solver evaluation and auto-router history against the project's own data only            & SQ1, SQ3 \\
 \midrule
 L10 & Conceptual   & HITL was an Admmit mandate, not an empirically validated automation level                & SQ2 \\
 L11 & Conceptual   & Single domain: Norwegian transport                                                       & SQ3 \\
@@ -116,7 +104,7 @@ The Sustainability Awareness Framework helps make sense of the effects RP could 
 
 For individual drivers, the same idle-time view that helps coordinators balance work could also be used to pressure single drivers. The approval step helps limit that risk, but it cannot decide how management uses the visibility RP creates. For the wider team, plan-time visibility of workload spread can help prevent the same drivers from carrying too much work, which is a fairness gain current manual planning practice cannot offer.
 
-At the company level, the same visibility can push planning toward filling every gap, even when slack is what keeps a transport day resilient against delays and absences. RP cannot decide where that line goes; the organisation does. Technically, configurable weights and solve categories add long-term cost: each company's choices must be documented and maintained as part of how coordinators plan, not buried in code.
+At the company level, the same visibility can push planning toward filling every gap, even when slack is what keeps a transport day resilient against delays and absences. RP cannot decide where that line goes; the organisation does. Technically, configurable weights, solve categories, and auto-router history add long-term cost: each company's choices and routing evidence must be documented and maintained as part of how coordinators plan, not buried in code.
 
 \Cref{tab:susaf} summarises the effects across the SusAF five dimensions and three orders of effect (immediate, enabling, structural). Cells marked "---" are dimensions where this thesis does not have empirical or analytical grounding to make a claim, not dimensions where no effect exists.
 
@@ -149,4 +137,4 @@ Privacy is part of the same responsibility. Planning requires employee data such
 
 RP should be deployed as a planning layer that sits between incoming assignments and execution, not as a replacement for the order and invoicing systems companies already use. A useful deployment connects RP to those existing systems, so coordinators do not re-enter orders, vehicles, and employees by hand.
 
-Before any deployment claim, a controlled pilot with real planning data is the next step. The pilot should record what the solver proposes, what the coordinator changes, which solve category is used, and how many conflicts remain after review. Until that pilot has run, the product claim should stay narrow: algorithm-assisted planning with coordinator approval, configurable preferences, and visible conflicts. Claims about lower overtime, less idle time, or better workload balance need operational data, not benchmark data.
+Before any deployment claim, a controlled pilot with real planning data is the next step. The pilot should record what the solver proposes, what the coordinator changes, which solve category is used, which engine the auto-router selects, whether the run was cold or warm, and how many conflicts remain after review. Until that pilot has run, the product claim should stay narrow: algorithm-assisted planning with coordinator approval, configurable preferences, category-based engine choice, and visible conflicts. Claims about lower overtime, less idle time, or better workload balance need operational data, not benchmark data.

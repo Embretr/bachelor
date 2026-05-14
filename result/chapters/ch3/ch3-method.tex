@@ -14,7 +14,7 @@ This chapter walks through how the artefact was built and the research that info
     \node[box, below=of a] (b) {Method theory: Design Science Research and Peffers' DSRM};
     \node[box, below=of b] (c) {Interviews and thematic analysis: from raw transcripts to requirements};
     \node[box, below=of c] (d) {Building the artefact: six iterations of construction and learning};
-    \node[box, below=of d] (e) {Evaluation framework: multi-engine benchmark and traceability matrix};
+    \node[box, below=of d] (e) {Evaluation framework: benchmark, run history, and traceability matrix};
     \node[box, below=of e] (f) {Validity and reliability: Malterud's three standards};
     \draw[arrow] (a) -- (b);
     \draw[arrow] (b) -- (c);
@@ -34,10 +34,7 @@ Admmit, a Norwegian software firm serving the transport sector, offered a bachel
 
 Admmit fixed three requirements before any code was written. The platform operates as Human-in-the-Loop (HITL): the algorithm proposes a plan, and the coordinator has the final say on every assignment. The platform is multi-tenant: one installation serves multiple customer companies with each company's data kept apart. And every plan respects working-hours and rest-period rules from the Norwegian Working Environment Act (\textit{Arbeidsmiljøloven}) as hard constraints.
 
-The brief fixed the topic but left the empirical foundation open. Two questions needed answers first: how do Norwegian traffic coordinators actually plan, and which software, if any, do they use today? Neither could be answered from by us. Drawing on Admmit's customer roster, the team ran semi-structured phone calls with traffic coordinators and transport managers over the following month. From then on, the interviews and the artefact-building influenced each other throughout the project.
-
-% Sjekket: temasetninger står alene i hver paragraf, 3 krav er den eneste lista (sentral), ingen em-dash, ingen overkonkret påstand, HITL og multi-tenant glosset inline, hver setning bærer info, fakta verifisert (Admmit, NTNU, RP-navn, 3 krav fra brukeren).
-
+The brief fixed the topic but left the empirical foundation open. Two questions needed answers first: how do Norwegian traffic coordinators actually plan, and which software, if any, do they use today? Neither could be answered from the task brief alone. Drawing on Admmit's customer roster, the team ran semi-structured phone calls with traffic coordinators and transport managers over the following month. From then on, the interviews and the artefact-building influenced each other throughout the project.
 
 \section{Method Theory: Design Science Research}
 \label{sec:dsr-dsrm}
@@ -71,9 +68,9 @@ The methodology used to structure this work is \textcite{peffers2007dsrm}'s Desi
 
 \textbf{Design and development.} The artefact was built in five logical groupings, each described in \Cref{sec:building-artefact}: the data substrate, the solver layer, the human-in-the-loop interface, the plan-time control, and per-company configurability of the soft-constraint weights.
 
-\textbf{Demonstration.} A multi-engine benchmark on three synthetic datasets that span the fleet sizes observed in the interviewed companies. The benchmark protocol is set out in \Cref{sec:evaluation-framework}.
+\textbf{Demonstration.} A multi-engine benchmark on three deterministic synthetic datasets that span the fleet sizes observed in the interviewed companies. The benchmark protocol is set out in \Cref{sec:evaluation-framework}.
 
-\textbf{Evaluation.} RP is evaluated through the multi-engine benchmark and a requirements-traceability matrix that records implementation status for each functional requirement. Both are described in \Cref{sec:evaluation-framework}.
+\textbf{Evaluation.} RP is evaluated through the multi-engine benchmark, the auto-router run history, and a requirements-traceability matrix that records implementation status for each functional requirement. The benchmark validates solver behaviour on fixed synthetic data. The run history validates whether the category-based engine choice has enough evidence to move from a cold race to a warm single-engine choice. The traceability matrix records implementation coverage. All three are described in \Cref{sec:evaluation-framework}.
 
 \textbf{Communication.} The work reaches two audiences. The academic audience receives the bachelor presentation at NTNU and this thesis. The industry audience, Admmit, was kept in the loop through ad hoc meetings at project milestones, demonstrations of working parts of the platform, and a closing presentation. Recommendations for what would have to be in place before production deployment are folded into the discussion (\Cref{chap:discussion}) and future-work sections (\Cref{chap:conclusion}) of this thesis rather than delivered as a separate document.
 
@@ -206,7 +203,7 @@ The scheduling problem in \Cref{sec:scheduling} is NP-hard, so practical systems
 
 The first attempt was a greedy heuristic. Drivers and vehicles were matched to assignments one at a time, in priority order, taking the first feasible combination. This is the fastest of the three families and the easiest to implement, and it produced a plan within seconds on every instance the team threw at it. The plans, though, were not the best plans available. Examining a few of them by eye made the limitation clear: greedy locks in early choices, and a driver allocated to a low-priority assignment in the first few iterations is no longer available for a high-priority assignment that comes up later. The literature predicts this exact failure mode.
 
-A constraint solver solves a different version of the same problem. OR-Tools CP-SAT searches the assignment space systematically with explicit hard and soft constraints, and returns a near-optimal plan within a time budget the team could set explicitly. On the small and medium instances of the benchmark datasets (sizes given in \Cref{sec:evaluation-framework}), CP-SAT returned plans with measurably better soft-constraint scores than greedy in the same time window. On large instances the time budget started to bind: CP-SAT returned the best plan it had found rather than the optimum.
+A constraint solver solves a different version of the same problem. OR-Tools CP-SAT searches the assignment space systematically with explicit hard and soft constraints, and returns a near-optimal or optimal plan within a time budget the team could set explicitly. On the small and medium benchmark instances (sizes given in \Cref{sec:evaluation-framework}), CP-SAT scheduled more assignments than greedy and proved optimality. On the large instance the time budget bound the search: CP-SAT did not finish within the 120-second cap.
 
 A third engine completed the picture. Timefold, a metaheuristic solver, starts with a candidate plan and tries small adjustments, keeping any that produce a better result. It does not prove optimality, but it can keep improving for as long as a time budget allows it to. Adding Timefold gave the artefact one engine from each of the three algorithm families the literature names, and a benchmark architecture in which the three could be compared on identical inputs under identical constraints. The decision was as much research-architectural as it was performance-driven.
 
@@ -228,30 +225,22 @@ One related need surfaced in the interviews but did not make it into this versio
 \subsection{From minutes to intervals}
 \label{sec:plan-time-intervals}
 
-% TODO: Etter kodefiksen bør denne seksjonen oppdateres til faktisk
-% koordinator-språk: rask, middels og grundig. Forklar at koordinator velger
-% tid/kvalitet, mens systemet velger engine via historikkbasert auto-router.
-
 Different planning situations call for different plans. A morning rush after several sick-call-ins needs a plan now; next week's planning can take longer to compute and should be more accurate. The first interface gave the coordinator a slider in seconds, asking them to pick how long the solver should run before returning a plan.
 
 The slider did not work, and the reason was not the design of the slider. A coordinator does not know what twenty seconds buys them in plan quality, or whether twenty seconds is fast or slow for a planning solver in the first place. The number was the wrong unit, and the question (which solver, for how long?) was the wrong question to put in front of a planner.
 
-The current interface offers three intervals: fast, medium, and thorough. Each carries a time cap that fits its label. Fast runs the greedy heuristic only, because at that cap only the heuristic returns a plan in time. Medium and thorough have a choice of engine, and the system makes that choice itself.
+The current interface offers three categories: \texttt{rask}, \texttt{middels}, and \texttt{grundig}. Each category carries both a time cap and an engine pool. \texttt{rask} runs only the greedy heuristic under a five-second cap. \texttt{middels} may use greedy or OR-Tools CP-SAT under a thirty-second cap. \texttt{grundig} may use greedy, OR-Tools CP-SAT, or Timefold under a 120-second cap.
 
-The choice between engines is not static. On the first runs of a new problem size, the system runs every available engine in parallel and keeps the best result. Once it has seen the engines run on this size of problem a few times, it has identified a winner and runs only that one for later requests. The thorough cap in particular suits Timefold from \Cref{sec:solver-layer}, which keeps improving a candidate plan for as long as the cap allows.
+The choice between engines is not static. The auto-router groups requests by company, problem-size bucket, and category. If that cell has fewer than three successful runs for the candidate engines, the system treats it as a cold start: it races the whole pool for that category, logs the completed results, and returns the best completed solution. If the cell has enough history, the system treats it as warm: it selects the engine with the best historical average score in that cell and runs only that engine.
 
 This is a small case of the same pattern that runs through HITL: the coordinator's controls have to use the coordinator's vocabulary. Plan time in seconds and a choice of solver engine were both system-vocabulary controls; three labelled intervals are coordinator-vocabulary controls. The trade-off the coordinator makes is now in their language, and the algorithm choice that follows from it stays inside the system.
 
 \subsection{Configurable weights for different operational realities}
 \label{sec:configurable-weights}
 
-% TODO: Etter kodefiksen bør denne seksjonen styrkes: soft-constraint weights
-% skal beskrives som persistent per-company settings som brukes som default i
-% solve-flowen, ikke bare som en delvis realisert konfigurasjonsmekanisme.
+The interviewed companies do not all want the same kind of plan. Some operate fixed routes that they want to assign to the same drivers each time, prizing continuity over balance. Others rotate workload deliberately to keep no single driver too loaded. Some weight customer priority over driver preference; others reverse it. Adaptability requires that the same solver layer, running on the same data, can produce these materially different plans without code changes.
 
-The interviewed companies do not all want the same kind of plan. Some operate fixed routes that they want to assign to the same drivers each time, prizing continuity over balance. Others rotate workload deliberately to keep no single driver too loaded. Some weight customer priority over driver preference; others reverse it. Adaptability requires that the same algorithm, running on the same data, can produce these materially different plans without code changes.
-
-The mechanism is a small set of weights the coordinator configures per company. Five preferences carry weights that the solver balances against each other when scoring candidate plans:
+The mechanism is a small set of weights stored per company and used as the default in the solve flow. Five preferences carry weights that the solver balances against each other when scoring candidate plans:
 
 \begin{itemize}
   \item Preferring that a driver stays on the vehicle they are normally assigned to.
@@ -267,64 +256,38 @@ The first version of the configuration UI named the weights in optimisation voca
 
 Configurable weights are a partial realisation of Adaptability. The five preferences above can be tuned per company, but the hard constraints (competence match, availability, vehicle suitability, no overlap) are not configurable: they are facts about whether a plan is legally and operationally possible at all. Per-company configuration of harder layers, such as which kinds of constraints a company treats as hard versus soft, or how rest-period definitions vary across union agreements, is named as a gap in \Cref{sec:limitations} and forwarded to future work in \Cref{sec:future-work}.
 
-
-% TODO-AUTO-ROUTER: §3.5 Evaluation Framework må utvides på grunn av auto-router
-% (§3.4.5). Den nåværende seksjonen dekker bare syntetisk benchmark. Auto-routeren
-% genererer en andre evalueringskilde: loggen fra produksjonskjøringer (cold-start
-% races) som måler engine-ytelse på reelle problem-størrelser. Loggen lar oss måle:
-% - Kvalitet: snittskår over tid per kategori
-% - Konsistens: standardavvik på skår innenfor en celle før/etter cold start
-% - Kostnad: total løsningstid per kategori (rask er rask, grundig blir billigere
-%   etter warmup)
-% - Sammenligning mot statisk regel: hvor ofte slo læringen den naive regelen?
-% Begge evalueringskilder må beskrives som distinkte instrumenter i §3.5.
-% TODO: Når solveAuto er wired inn i normal solve-flow, gjør denne TODO-blokken
-% om til vanlig metodeprosa. Beskriv cold start, warm path, size bucket,
-% category og companyId som evaluerbar mekanisme.
-
 \section{Evaluation Framework}
 \label{sec:evaluation-framework}
 
-% TODO: Etter kodefiksen bør Evaluation Framework utvides fra to til tre
-% instrumenter: multi-engine benchmark, requirements traceability og
-% auto-router run history. Avgrens auto-router-loggen som teknisk validering av
-% enginevalg, ikke som bevis på produksjonsgevinst.
-
-The framework that tests RP's claims is asymmetric on purpose. Some claims are tested directly through the multi-engine benchmark; others are accepted as inputs the framework does not itself test, following the position carried through \Cref{sec:solver-layer}. Two such accepted-as-input claims anchor the artefact. The first is that the visibility gap is real, which the seven coordinator interviews surfaced (\Cref{sec:interview-recruitment}). The second is that human-in-the-loop operation is the right operator stance, which Admmit fixed in the project's first week (\Cref{sec:defining-task}). The framework tests something else: through the multi-engine architecture and the benchmark protocol described below, it asks how solver approaches compare under realistic constraint combinations; it does not ask whether the problem is worth solving. The validate-versus-evaluate distinction that bounds these claims is set out under DSR theory in \Cref{sec:dsr} and is not repeated here. The benchmark is a validation instrument in Wieringa's sense (see \Cref{sec:dsr}), applied at the level of solver behaviour.
+The framework that tests RP's claims is asymmetric on purpose. Some claims are tested directly through the multi-engine benchmark, the auto-router run history, and the requirements traceability matrix. Others are accepted as inputs the framework does not itself test, following the position carried through \Cref{sec:solver-layer}. Two such accepted-as-input claims anchor the artefact. The first is that the visibility gap is real, which the seven coordinator interviews surfaced (\Cref{sec:interview-recruitment}). The second is that human-in-the-loop operation is the right operator stance, which Admmit fixed in the project's first week (\Cref{sec:defining-task}). The framework tests something else: whether solver approaches behave differently under the same constraint combinations, whether the auto-router has enough logged evidence to choose one engine instead of racing the full pool, and whether the implemented artefact covers the requirements. It does not ask whether the problem is worth solving. The validate-versus-evaluate distinction that bounds these claims is set out under DSR theory in \Cref{sec:dsr} and is not repeated here.
 
 \subsection{Multi-engine benchmark protocol}
 \label{sec:eval-benchmark}
 
-Three synthetic datasets feed the benchmark, with sizes chosen to span the fleet ranges named in \Cref{sec:interview-recruitment}. The small dataset has five employees, three vehicles, and twenty assignments. It is a sanity-scale instance below the smallest interviewed fleet, on which every engine should finish in well under a second. The medium dataset has twenty employees, ten vehicles, and one hundred assignments. It sits at the small-operator end of the interviewed range (around twenty drivers) and exercises the overlap and workload-balance terms without saturating the search. The large dataset has fifty employees, twenty-five vehicles, and five hundred assignments. It exceeds the largest multi-department fleet observed (around forty-five vehicles) and is a stress-scale instance designed to push CP-SAT toward its sixty-second time budget and probe metaheuristic behaviour. Synthetic data was used rather than production data for two concrete reasons, not from methodological preference. First, no transport company has operated the artefact, so production data does not exist for this codebase. Second, the operational data the seven interviewed companies hold falls under the data-protection bounds the consultation framing in \Cref{sec:ethics} chose not to cross. The price the framework pays for that choice is that benchmark numbers cannot be projected onto real Norwegian-transport operational data without further validation, named as L5 in \Cref{sec:limitations}.
+Three synthetic datasets feed the benchmark, with sizes chosen to span the fleet ranges named in \Cref{sec:interview-recruitment}. The small dataset has five employees, three vehicles, and twenty assignments. It is a sanity-scale instance below the smallest interviewed fleet. The medium dataset has twenty employees, ten vehicles, and one hundred assignments. It sits at the small-operator end of the interviewed range and exercises overlap and workload-balance terms more heavily. The large dataset has fifty employees, twenty-five vehicles, and five hundred assignments. It exceeds the largest multi-department fleet observed and is a stress-scale instance designed to expose where exact search begins to bind. Synthetic data was used rather than production data for two concrete reasons, not from methodological preference. First, no transport company has operated the artefact, so production data does not exist for this codebase. Second, the operational data the seven interviewed companies hold falls under the data-protection bounds the consultation framing in \Cref{sec:ethics} chose not to cross. The price the framework pays for that choice is that benchmark numbers cannot be projected onto real Norwegian-transport operational data without further validation, named as L5 in \Cref{sec:limitations}.
 
-The run protocol is held constant across engines so that the comparison is on solver behaviour rather than on benchmark configuration. Each (engine, dataset) pairing is executed once, producing a single-sample wall-clock figure that the analysis labels honestly as such throughout. All three engines (greedy heuristic, OR-Tools CP-SAT, Timefold metaheuristic) receive the same sixty-second time budget, the same constraint configuration loaded from a shared file, and the same problem JSON. Each returned solution is re-scored using one shared scorer with lex-tier scoring (Norwegian Arbeidsmiljøloven legal constraints, then hard constraints, then soft constraints) so that engine-specific scoring conventions do not contaminate cross-engine comparison. The metrics logged per run are scheduled-assignment count, hard-constraint score, soft-constraint penalty, total lex-tier score, and wall-clock solve time, alongside success or failure with error message. Random seeds are not pinned at the benchmark layer; engine-internal randomness is therefore part of the variation a single sample captures, and is one reason the engine results in \Cref{chap:findings} are read as how-not-whether comparisons rather than as point estimates.
+The run protocol is held constant across engines so that the comparison is on solver behaviour rather than on benchmark configuration. The datasets are generated deterministically with seed 42, and the generator clamps assignment requirements against the available employee and vehicle pools. This keeps the benchmark focused on real resource scarcity and overlapping time windows rather than on impossible requests created by the generator. Each (engine, dataset) pairing is executed once, producing a single-sample wall-clock figure that the analysis labels honestly as such throughout. The engines receive the same problem JSON, the same shared constraint configuration, and the same canonical scorer after the run. The metrics logged per run are scheduled-assignment count and percentage, optimality where the engine can prove it, and wall-clock solve time, alongside success or timeout.
+
+\subsection{Auto-router run history}
+\label{sec:eval-auto-router}
+
+The auto-router run history is a technical validation instrument for engine choice, not evidence of production efficiency. Each routed solve records the company, size bucket, category, engine, success flag, score, scheduled percentage, solve time, and problem size. That log lets the system decide whether a future request in the same cell is still cold, meaning that the category's engine pool should be raced, or warm, meaning that one historically best engine can be selected. Aborted runs are not counted against an engine in this history, because an engine stopped by a sibling's proven-optimal result did not receive a fair attempt.
 
 \subsection{What the framework does not test}
 \label{sec:eval-bounds}
 
-Three further claims sit outside what the framework can support, and each forwards to a specific limitation in \Cref{sec:limitations}. The artefact is not deployed in production, so claims about Efficiency gains under operational time pressure cannot be made from these results: that gap is L6. There is no empirical comparison against Timpex, Opter, or the internal and custom tools the seven interviewed companies use, so claims that RP is better than alternatives in the same market segment are not supported here: that gap is L7. The inspect / modify / accept / reject flow that delivers \textbf{Control} has not been user-tested with traffic coordinators, so claims about its comprehensibility or its behaviour under coordinator workload cannot be made: that gap is L8.
+Three further claims sit outside what the framework can support, and each forwards to a specific limitation in \Cref{sec:limitations}. The artefact is not deployed in production, so claims about Efficiency gains under operational time pressure cannot be made from these results: that gap is L6. There is no empirical comparison against Timpex, Opter, or the internal and custom tools the seven interviewed companies use, so claims that RP is better than alternatives in the same market segment are not supported here: that gap is L7. The review-and-override flow that delivers \textbf{Control} has not been user-tested with traffic coordinators, so claims about its comprehensibility or its behaviour under coordinator workload cannot be made: that gap is L8.
 
 \subsection{Anchor coverage}
 \label{sec:eval-anchor-coverage}
 
-Each of the three anchors is tested to a different extent, and the coverage is asymmetric across them. \textbf{Efficiency} is the most directly tested anchor. The multi-engine benchmark is the validation instrument designed for it, comparing scheduled-assignment count, soft-constraint penalty, and runtime-within-budget across the greedy heuristic, OR-Tools CP-SAT, and Timefold metaheuristic on identical problem instances. \textbf{Adaptability} is tested only indirectly. The requirements traceability matrix records that the per-company configurable weight interface (\Cref{sec:configurable-weights}) is implemented and verified during development, but no benchmark compares the artefact's behaviour across two genuinely different operational rulebooks. \textbf{Control} is also tested only partially. The inspect / modify / accept / reject flow is implemented, but it has not been user-tested with traffic coordinators, and that gap is forwarded to L8 in \Cref{sec:limitations}.
+Each of the three anchors is tested to a different extent, and the coverage is asymmetric across them. \textbf{Efficiency} is the most directly tested anchor. The multi-engine benchmark is the validation instrument designed for it, comparing scheduled-assignment count and runtime across solver approaches on identical problem instances. \textbf{Adaptability} is tested through implementation coverage and routing behaviour. The requirements traceability matrix records that the per-company configurable weight interface (\Cref{sec:configurable-weights}) is implemented and verified during development, and the auto-router run history records whether category-based solving can move from cold races to warm engine choices. No benchmark compares the artefact's behaviour across two genuinely different operational rulebooks. \textbf{Control} is also tested only partially. The review-and-override flow is implemented, but it has not been user-tested with traffic coordinators, and that gap is forwarded to L8 in \Cref{sec:limitations}.
 
 \subsection{Requirements traceability matrix}
 \label{sec:eval-traceability}
 
 The requirements traceability matrix is the coverage check rather than a quality validation. For each functional requirement in the FK-01 to FK-42 range, the matrix records two things: whether it is implemented in the deployed codebase, and whether its behaviour was verified during development. ``Verified during development'' is a narrower claim than passing an automated test suite, and it is the honest one to make: thirty-six of the thirty-seven in-scope functional requirements are implemented and developer-verified, one is partial (FK-30, driving and rest-time status), and the five out-of-scope requirements (FK-38 through FK-42) are documented as future work. The absence of a formal automated test suite is itself a non-functional gap, named as L9 in \Cref{sec:limitations}. The traceability matrix's role is to make coverage visible, not to substitute for the testing that L9 acknowledges is missing.
 
-
-% TODO-AUTO-ROUTER: §3.6 Validity and Reliability må tilføyes en
-% reliability-betraktning om auto-router (§3.4.5). Engine-valget baserer
-% beslutninger på historiske kjøringer, så validiteten av valget avhenger av
-% at historikken ikke er biased og at engine-versjoner ikke har endret seg
-% (modelldrift). Dette er distinkt fra Malterud's tre kriterier for kvalitativ
-% validitet og bør nevnes som en separat reliabilitets-tråd.
-% TODO: Skriv dette som vanlig validity/reliability-tekst etter kodefiksen.
-% Poeng: auto-routerens reliabilitet avhenger av nok historikk per
-% company/category/size bucket, fravær av skjev historikk og stabile
-% engine-versjoner.
 
 \section{Validity and Reliability}
 \label{sec:validity}
@@ -333,6 +296,8 @@ Three standards from \textcite{malterud2001lancet}'s framework for qualitative i
 
 Relevance and validity bound the interview component first. The seven coordinators were a purposive sample matched to the research question, which asks about coordinator experience of the visibility gap rather than its prevalence in Norwegian transport. \textcite[p.~485]{malterud2001lancet} treats purposive sampling as the appropriate strategy for qualitative inquiry. Validity within that sample rests on triangulation across the seven calls: the visibility gap and the operator-vs-owner asymmetry surfaced across companies of different size and system maturity rather than from any single coordinator. The findings transfer in Malterud's bounded sense of applicability within a specified setting rather than to the population at large \parencite[p.~486]{malterud2001lancet}, and the bounds are named as L1 (sample size, brief duration) and L2 (self-selection from Admmit's customer roster) in \Cref{sec:limitations}.
 
-Validity for the system component is narrower. Two instruments carry it, both set out in \Cref{sec:evaluation-framework}: the requirements traceability matrix that records implementation and developer-verified behaviour for each functional requirement, and the multi-engine benchmark that compares the three engines on identical synthetic instances. Together they validate the artefact in Wieringa's sense (predicting how it would behave once deployed) rather than evaluating it in deployment (see \Cref{sec:dsr}). The gaps that bound this validation (no production deployment, no user testing of the override flow, no automated test suite) are forwarded as L6, L8, and L9 in \Cref{sec:limitations}.
+Validity for the system component is narrower. Three instruments carry it, all set out in \Cref{sec:evaluation-framework}: the requirements traceability matrix that records implementation and developer-verified behaviour for each functional requirement, the multi-engine benchmark that compares engines on identical synthetic instances, and the auto-router run history that records the evidence used for category-based engine choice. Together they validate the artefact in Wieringa's sense (predicting how it would behave once deployed) rather than evaluating it in deployment (see \Cref{sec:dsr}). The gaps that bound this validation (no production deployment, no user testing of the override flow, no automated test suite) are forwarded as L6, L8, and L9 in \Cref{sec:limitations}.
+
+The auto-router adds a separate reliability condition. Its warm-path decision is only as reliable as the history in the relevant company, size-bucket, and category cell. A sparse cell stays in cold start; a biased cell can favour the wrong engine; and engine upgrades can make old history less representative. The current implementation keeps the rule simple: at least three successful runs are required before history replaces the cold race. More advanced exploration or time-decay weighting is left to future work.
 
 Reflexivity addresses the researcher configuration directly. The research team and the development team are the same two people, and the interviews were conducted as industry consultation under Admmit's bachelor task brief rather than as formal research (\Cref{sec:ethics}). \textcite[p.~484]{malterud2001lancet} treats preconceptions as separate from bias unless the researcher fails to disclose them. Both configurations are disclosed here, alongside one further methodology note: an Admmit-employed designer contributed early UI sketches at the start of the project, with no role in the interviews, the analysis, or the engineering of the artefact. Whether the disclosures are enough is a question \Cref{sec:limitations} returns to under L3. Both the prior expectation that a visibility gap might exist and the prior commitment to HITL are named in \Cref{sec:defining-task,sec:dsr-dsrm} for the same reason. The researcher--developer overlap and the informal study procedures are forwarded together as L3 in \Cref{sec:limitations}. What the methodology produced is the subject of the next chapter.
