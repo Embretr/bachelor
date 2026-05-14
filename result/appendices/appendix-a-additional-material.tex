@@ -107,7 +107,46 @@ IFK-16 & The four scoring tiers are defined once in the canonical scorer; no eng
 \section{System Architecture}
 \label{app:architecture}
 
-\textit{[Placeholder. Architecture diagram showing the browser client, the Next.js + tRPC server, the PostgreSQL database, and the three solver subprocesses (greedy heuristic in Python, OR-Tools CP-SAT in Python, Timefold in JVM), with the shared constraint configuration and the multi-tenant \texttt{companyId} boundary. Summary references in the main thesis: \Cref{sec:tech-choice}, \Cref{sec:system-description}.]}
+The appendix architecture in \Cref{fig:architecture-appendix} extends the summary view in \Cref{fig:architecture} with three details the Chapter 4 figure leaves implicit: the multi-tenant scope marker that fences every database row and every solver request inside a single \texttt{companyId}; the shared problem-and-solution format that lets the three engines plug in without engine-specific code paths in the rest of the system; and the run-history feedback loop that records every solver run and is read by the auto-router on the next request (\Cref{sec:eval-auto-router}).
+
+\begin{figure}[h]
+  \centering
+  \resizebox{\textwidth}{!}{%
+  \begin{tikzpicture}[
+    node distance=0.6cm,
+    box/.style={rectangle, draw, rounded corners, align=center, minimum height=0.85cm, font=\small, fill=blue!4},
+    wide/.style={box, minimum width=12cm},
+    server/.style={box, minimum width=12cm, fill=blue!6},
+    solver/.style={box, minimum width=3.4cm, fill=orange!7},
+    db/.style={box, minimum width=4.2cm, fill=green!6},
+    fmt/.style={box, minimum width=4.6cm, fill=orange!4},
+    arrow/.style={-Stealth, thick},
+    feedback/.style={-Stealth, thick, dashed}
+  ]
+    \node[wide] (browser) {Browser client\\\footnotesize coordinator timeline, deviation viewer, dashboard};
+    \node[server, below=of browser] (server) {Web application (Next.js + tRPC)\\\footnotesize coordinator screens, business logic, auto-router};
+    \node[db, below=1.1cm of server, xshift=-3.8cm] (db) {PostgreSQL\\\footnotesize multi-tenant: \texttt{companyId} on every row};
+    \node[fmt, below=1.1cm of server, xshift=3.2cm] (fmt) {Solver registry\\\footnotesize shared problem and solution format};
+    \node[solver, below=1.0cm of fmt, xshift=-3.7cm] (greedy) {Greedy heuristic\\\footnotesize Python subprocess};
+    \node[solver, below=1.0cm of fmt] (ortools) {OR-Tools CP-SAT\\\footnotesize Python subprocess};
+    \node[solver, below=1.0cm of fmt, xshift=3.7cm] (timefold) {Timefold metaheuristic\\\footnotesize JVM subprocess};
+
+    \draw[arrow] (browser) -- (server);
+    \draw[arrow] (server) -- (db);
+    \draw[arrow] (server) -- (fmt);
+    \draw[arrow] (fmt) -- (greedy);
+    \draw[arrow] (fmt) -- (ortools);
+    \draw[arrow] (fmt) -- (timefold);
+
+    \draw[feedback] (greedy.east) .. controls +(1.2,-0.6) and +(-0.6,-1.4) .. node[right, font=\footnotesize, pos=0.85] {run history} (fmt.south);
+    \draw[feedback] (timefold.west) .. controls +(-1.2,-0.6) and +(0.6,-1.4) .. (fmt.south);
+
+    \node[draw, dotted, thick, fit={(db) (fmt) (greedy) (ortools) (timefold)}, inner sep=0.45cm, label={[font=\footnotesize, anchor=south west]south west:scoped by \texttt{companyId}}] {};
+  \end{tikzpicture}%
+  }
+  \caption{Appendix architecture. The browser client talks to a single Next.js + tRPC web application that owns the coordinator screens, business logic, and auto-router. PostgreSQL stores company-scoped data; every row carries a \texttt{companyId}, and every server-side query is scoped against it. The solver registry holds one shared problem-and-solution format that all three engines accept and return. The three engines run as independent subprocesses with their own runtimes. Dashed arrows are the run-history feedback path that the auto-router reads when choosing an engine on the next request. The dotted boundary marks the multi-tenant scope: nothing inside it is reachable without a \texttt{companyId}.}
+  \label{fig:architecture-appendix}
+\end{figure}
 
 
 \section{Application Screenshots}
